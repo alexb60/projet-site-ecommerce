@@ -28,9 +28,9 @@ class ViewCategorie
                 <th scope="row"><?= $categorie['id'] ?></th>
                 <td><?= $categorie['nom'] ?></td>
                 <td>
-                  <a href="#" class="btn btn-primary">Voir</a>
+                  <a href="voir.php?id=<?= $categorie['id'] ?>" class="btn btn-primary">Voir</a>
                   <a href="#" class="btn btn-warning">Modifier</a>
-                  <a href="#" class="btn btn-danger">Supprimer</a>
+                  <a href="supp.php?id=<?= $categorie['id'] ?>" class="btn btn-danger">Supprimer</a>
                 </td>
               </tr>
             <?php
@@ -50,6 +50,26 @@ class ViewCategorie
   <?php
   }
 
+  public static function voirCategorie($id)
+  {
+    $categories = new ModelCategorie();
+    $categorie = $categories->voirCategorie($id);
+  ?>
+    <div>
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><?= $categorie['id'] . " : " . $categorie['nom']; ?> </h5>
+
+          <a href="modif.php?id=<?= $categorie['id'] ?>" class="btn btn-info">Modifier</a>
+          <a href="supp.php?id=<?= $categorie['id'] ?>" class="btn btn-danger">Supprimer</a><br><br>
+          <a href="liste.php" class="btn btn-primary">
+            < Retour</a>
+        </div>
+      </div>
+    </div>
+  <?php
+  }
+
   public static function ajoutCategorie()
   {
   ?>
@@ -60,6 +80,24 @@ class ViewCategorie
       </div>
 
       <button type="submit" class="btn btn-primary" name="ajout" id="ajout">Ajouter</button>
+      <button type="reset" class="btn btn-danger">Réinitialiser</button>
+    </form>
+  <?php
+  }
+
+  public static function modifCategorie($id)
+  {
+    $categories = new ModelCategorie();
+    $categorie = $categories->voirCategorie($id);
+  ?>
+    <form action="modif.php" method="post" class="col-md-6 offset-md-3">
+      <input type="hidden" name="id" class="form-control" id="id" value="<?= $categorie['id']; ?>">
+      <div class="form-group">
+        <label for="nom">Nom :</label>
+        <input type="text" name="nom" id="nom" class="form-control" value="<?= $categorie['nom']; ?>">
+      </div>
+
+      <button type="submit" class="btn btn-primary" name="modif" id="modif">Modifier</button>
       <button type="reset" class="btn btn-danger">Réinitialiser</button>
     </form>
 <?php

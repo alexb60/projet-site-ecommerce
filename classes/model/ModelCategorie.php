@@ -18,10 +18,23 @@ class ModelCategorie
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-        SELECT * FROM categorie
-        ");
+    SELECT * FROM categorie
+    ");
     $requete->execute();
     return $requete->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  // FONCTION PERMETTANT DE VOIR LES DÉTAILS D'UNE CATÉGORIE
+  public function voirCategorie($id)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT * FROM categorie WHERE id=:id;
+    ");
+    $requete->execute([
+      ':id' => $id,
+    ]);
+    return $requete->fetch(PDO::FETCH_ASSOC);
   }
 
   // FONCTION PERMETTANT D'AJOUTER UNE CATÉGORIE
@@ -33,6 +46,31 @@ class ModelCategorie
     ");
     return $requete->execute([
       ':nom' => $nom,
+    ]);
+  }
+
+  // FONCTION PERMETTANT DE SUPPRIMER UNE CATÉGORIE
+  public function suppCategorie($id)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    DELETE FROM categorie WHERE id=:id;
+    ");
+    return $requete->execute([
+      ':id' => $id,
+    ]);
+  }
+
+  // FONCTION PERMETTANT DE MODIFIER UNE CATÉGORIE
+  public function modifCategorie($id, $nom)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    UPDATE categorie SET nom=:nom WHERE id=:id;
+    ");
+    return $requete->execute([
+      ':id' => $id,
+      ':nom' => $nom
     ]);
   }
 
