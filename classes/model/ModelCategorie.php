@@ -13,7 +13,7 @@ class ModelCategorie
     $this->nom = $nom;
   }
 
-  // FONCTION LISTANT LES CATÉGORIES
+  // REQUÊTE SQL PRÉPARÉE LISTANT LES CATÉGORIES
   public function listeCategorie()
   {
     $idcon = connexion();
@@ -24,7 +24,7 @@ class ModelCategorie
     return $requete->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  // FONCTION PERMETTANT DE VOIR LES DÉTAILS D'UNE CATÉGORIE
+  // REQUÊTE SQL PRÉPARÉE PERMETTANT DE VOIR LES DÉTAILS D'UNE CATÉGORIE
   public function voirCategorie($id)
   {
     $idcon = connexion();
@@ -37,7 +37,7 @@ class ModelCategorie
     return $requete->fetch(PDO::FETCH_ASSOC);
   }
 
-  // FONCTION PERMETTANT D'AJOUTER UNE CATÉGORIE
+  // REQUÊTE SQL PRÉPARÉE PERMETTANT D'AJOUTER UNE CATÉGORIE
   public function ajoutCategorie($nom)
   {
     $idcon = connexion();
@@ -49,7 +49,7 @@ class ModelCategorie
     ]);
   }
 
-  // FONCTION PERMETTANT DE SUPPRIMER UNE CATÉGORIE
+  // REQUÊTE SQL PRÉPARÉE PERMETTANT DE SUPPRIMER UNE CATÉGORIE
   public function suppCategorie($id)
   {
     $idcon = connexion();
@@ -61,7 +61,7 @@ class ModelCategorie
     ]);
   }
 
-  // FONCTION PERMETTANT DE MODIFIER UNE CATÉGORIE
+  // REQUÊTE SQL PRÉPARÉE PERMETTANT DE MODIFIER UNE CATÉGORIE
   public function modifCategorie($id, $nom)
   {
     $idcon = connexion();
