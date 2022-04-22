@@ -78,7 +78,7 @@ class ViewMarque
                 </div>
               </div>
               <div class="col-md-6">
-                <img src="<?= $marque['logo'] ?>" alt="Logo de la marque <?= $marque['nom'] ?>">
+                <img src="../../../images/marque/<?= $marque['logo'] ?>" alt="Logo de la marque <?= $marque['nom'] ?>">
               </div>
             </div>
           </div>
@@ -100,10 +100,14 @@ class ViewMarque
       </div>
       <div class="row">
         <div class="col-md-12">
-          <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="col-md-6 offset-md-3">
+          <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
             <div class="form-group">
               <label for="nom">Nom :</label>
               <input type="text" name="nom" id="nom" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="logo">Logo :</label>
+              <input type="file" name="logo" id="logo" class="form-control-file">
             </div>
 
             <button type="submit" class="btn btn-primary" name="ajout" id="ajout">Ajouter</button>

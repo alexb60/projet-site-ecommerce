@@ -48,7 +48,7 @@ class ModelMarque
     ");
     return $requete->execute([
       ':nom' => $nom,
-      ':logo' => $logo
+      ':logo' => $logo,
     ]);
   }
 

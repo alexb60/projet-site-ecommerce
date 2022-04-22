@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
   <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
   <link rel="stylesheet" href="../../../../css/admin.css">
-  <style>
+  <!-- <style>
     .erreurInput {
       border: 2px solid red;
     }
@@ -17,7 +17,7 @@
     .erreurMessage {
       color: red;
     }
-  </style>
+  </style> -->
 </head>
 
 <body>
@@ -26,26 +26,21 @@
   require_once "../../../model/ModelClient.php";
 
   if (isset($_POST['ajout'])) {
-    var_dump($_POST);
     $pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
-    var_dump($_POST);
     $user = new ModelClient();
-    var_dump($_POST['nom']);
-    if ($user->inscription($_POST['nom'], $_POST['prenom'], $_POST['mail'], $pass, $_POST['adresse'], $_POST['ville'], $_POST['code_post'], $_POST['tel'])) {
+    if ($user->ajoutClient($_POST['nom'], $_POST['prenom'], $_POST['mail'], $pass)) {
   ?>
-      <h1>Inscription faite avec succes </h1>
-      <a href="connexion-user.php">Connexion</a>
+      <h1>Inscription réalisée avec succès</h1>
+      <a href="connexion-client.php">Connexion</a>
     <?php
-      var_dump($user->inscription($_POST['nom'], $_POST['prenom'], $_POST['mail'], $pass, $_POST['adresse'], $_POST['ville'], $_POST['code_post'], $_POST['tel']));
     } else {
     ?>
-      <h1> Echec de l 'inscription </h1>
-      <a href="inscription.php"> Retour </a>
+      <h1>Échec de l'inscription </h1>
+      <a href="inscription.php">← Retour</a>
   <?php
-      var_dump($user->inscription($_POST['nom'], $_POST['prenom'], $_POST['mail'], $pass, $_POST['adresse'], $_POST['ville'], $_POST['code_post'], $_POST['tel']));
     }
   } else {
-    ViewClient::inscription();
+    ViewClient::ajoutClient();
   }
   ?>
   <script src="../../../../js/jquery.min.js"></script>

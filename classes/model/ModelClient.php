@@ -3,7 +3,7 @@ require_once "connexion.php";
 
 class ModelClient
 {
-  private $id;
+  /*private $id;
   private $nom;
   private $prenom;
   private $mail;
@@ -27,27 +27,73 @@ class ModelClient
     $this->code_post = $code_post;
     $this->tel = $tel;
     $this->token = $token;
-  }
+  }*/
 
   // REQUÊTE SQL PRÉPARÉE PERMETTANT D'AJOUTER UN CLIENT
-  public function inscription($nom, $prenom, $mail, $pass, $adresse, $ville, $code_post, $tel)
+  public function ajoutClient($nom, $prenom, $mail, $pass)
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    INSERT INTO client VALUES (null, :nom, :prenom, :mail, :pass, :adresse, :ville, :code_post, :tel, null)
+    INSERT INTO client (id, nom, prenom, mail, pass) VALUES (null, :nom, :prenom, :mail, :pass)
     ");
     return $requete->execute([
       ':nom' => $nom,
       ':prenom' => $prenom,
       ':mail' => $mail,
       ':pass' => $pass,
-      ':adresse' => $adresse,
-      ':ville' => $ville,
-      ':code_post' => $code_post,
-      ':tel' => $tel,
     ]);
   }
 
+  // REQUÊTE SQL PRÉPARÉE PERMETTANT DE VOIR LES INFORMATIONS D'UN CLIENT
+  public function voirClient($id)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT * FROM client WHERRE id = :id;
+    ");
+
+    $requete->execute([
+      ':id' => $id,
+    ]);
+    return $requete->fetch(PDO::FETCH_ASSOC);
+  }
+
+  // REQUÊTE SQL PRÉPARÉE PERMETTANT AU CLIENT DE SE CONNECTER
+  public function connexionClient($mail)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT * FROM client WHERE mail=:mail
+    ");
+
+    $requete->execute([
+      ':mail' => $mail,
+    ]);
+    return $requete->fetch(PDO::FETCH_ASSOC);
+  }
+
+  // REQUÊTE SQL PRÉPARÉE PERMETTANT AU CLIENT DE MODIFIER SES INFORMATIONS
+  public function modifClient($id, $nom, $prenom, $mail, $pass, $tel, $adresse, $ville, $code_post)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    UPDATE client SET nom = :nom, prenom = :prenom, mail = :mail, pass = :pass, tel = :tel, adresse = :adresse, ville = :ville, code_post = :code_post WHERE id = :id;
+    ");
+
+    return $requete->execute([
+      ':id' => $id,
+      ':nom' => $nom,
+      ':prenom' => $prenom,
+      ':mail' => $mail,
+      ':pass' => $pass,
+      ':tel' => $tel,
+      ':adresse' => $adresse,
+      ':ville' => $ville,
+      ':code_post' => $code_post,
+    ]);
+  }
+
+  /*
   // GETTERS ET SETTERS
   public function getId()
   {
@@ -138,5 +184,5 @@ class ModelClient
   {
     $this->token = $token;
     return $this;
-  }
+  }*/
 }
