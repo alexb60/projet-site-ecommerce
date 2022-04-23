@@ -8,7 +8,6 @@ function connexion()
   $dbname = "commerce";
 
   try {
-    echo 'test de connexion';
     $idcon = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
     return $idcon;
   } catch (PDOException $e) {

@@ -4,7 +4,8 @@ session_start();
 if (isset($_SESSION['id'])) {
   $salutation = "<h2>Bonjour " . $_SESSION['prenom'] . " " . $_SESSION['nom'] . "<h2>";
   $salutation .= "<a class='btn btn-warning' href='modifClient.php?id=".$_SESSION['id']."'>Modifier mon profil</a> ";
-  $salutation .= '<a class="btn btn-danger" href="deconnexion.php">Déconnexion</a>';
+  $salutation .= '<a class="btn btn-danger" href="deconnexion.php">Déconnexion</a> ';
+  $salutation .= '<a class="btn btn-danger" href="supp.php">Supprimer mon compte</a>';
 } else {
   header('Location: connexion-client.php');
   exit;

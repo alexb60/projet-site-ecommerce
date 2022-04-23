@@ -18,40 +18,26 @@ class ViewClient
           <form method="post" action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
             <div class="form-group">
               <label for="nom">Nom :</label>
-              <input type="text" name="nom" id="nom" class="form-control">
+              <input type="text" name="nom" id="nom" class="form-control" aria-describedby="nomHelp" data-type="nom" data-message="Le format du nom n'est pas correct">
+              <small class="form-text text-muted" id="nomHelp"></small>
             </div>
             <div class="form-group">
               <label for="prenom">Prénom :</label>
-              <input type="text" name="prenom" id="prenom" class="form-control">
+              <input type="text" name="prenom" id="prenom" class="form-control" aria-describedby="prenomHelp" data-type="prenom" data-message="Le format du prénom n'est pas correct">
+              <small class="form-text text-muted" id="prenomHelp"></small>
             </div>
             <div class="form-group">
               <label for="mail">Adresse mail :</label>
-              <input type="email" name="mail" id="mail" class="form-control">
+              <input type="email" name="mail" id="mail" class="form-control" aria-describedby="mailHelp" data-type="mail" data-message="Le format de l'adresse mail n'est pas correct">
+              <small class="form-text text-muted" id="mailHelp"></small>
             </div>
             <div class="form-group">
               <label for="pass">Mot de passe :</label>
-              <input type="password" name="pass" id="pass" class="form-control">
+              <input type="password" name="pass" id="pass" class="form-control" aria-describedby="passHelp" data-type="pass" data-message="Le mot de passe doit contenir au minimum 8 caractères dont au moins une majuscule, un chiffre et un caractère spécial">
+              <small class="form-text text-muted" id="passHelp"></small>
             </div>
-            <!-- <div class="form-group">
-              <label for="tel">Téléphone :</label>
-              <input type="tel" name="tel" id="tel" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="mail">Adresse postale :</label>
-              <input type="text" name="adresse" id="adresse" class="form-control">
-            </div>
-            <div class="form-row">
-              <div class="col-md-4">
-                <label for="code_post">Code postal :</label>
-                <input type="text" name="code_post" id="code_post" class="form-control">
-              </div>
-              <div class="col-md-8">
-                <label for="ville">Ville :</label>
-                <input type="text" name="ville" id="ville" class="form-control">
-              </div>
-            </div> -->
             <br />
-            <button type="submit" name="ajout" class="btn btn-primary">Valider</button>
+            <button type="submit" name="ajout" id="ajout" class="btn btn-primary">Valider</button>
             <button type="reset" name="annuler" class="btn btn-danger">Annuler</button>
           </form>
         </div>

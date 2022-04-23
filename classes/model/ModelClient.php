@@ -93,6 +93,18 @@ class ModelClient
     ]);
   }
 
+  // REQUÊTE SQL PRÉPARÉE PERMETTANT AU CLIENT DE SUPPRIMER SON COMPTE
+  public function suppClient($id)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    DELETE FROM client WHERE id=:id;
+    ");
+    return $requete->execute([
+      ':id' => $id,
+    ]);
+  }
+
   /*
   // GETTERS ET SETTERS
   public function getId()
