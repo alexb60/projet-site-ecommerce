@@ -97,7 +97,8 @@ class ViewCategorie
           <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="col-md-6 offset-md-3">
             <div class="form-group">
               <label for="nom">Nom :</label>
-              <input type="text" name="nom" id="nom" class="form-control" required>
+              <input type="text" name="nom" id="nom" class="form-control" aria-describedby="nomHelp" data-type="nom" data-message="Le format du nom n'est pas correct">
+              <small class="form-text text-muted" id="nomHelp"></small>
             </div>
 
             <button type="submit" class="btn btn-primary" name="ajout" id="ajout">Ajouter</button>

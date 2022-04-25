@@ -46,8 +46,6 @@ if (isset($_POST['connexion'])) {
   <?php
   ViewClient::connexion();
 }
-
-
   ?>
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>

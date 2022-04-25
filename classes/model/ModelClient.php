@@ -3,7 +3,7 @@ require_once "connexion.php";
 
 class ModelClient
 {
-  /*private $id;
+  private $id;
   private $nom;
   private $prenom;
   private $mail;
@@ -27,7 +27,7 @@ class ModelClient
     $this->code_post = $code_post;
     $this->tel = $tel;
     $this->token = $token;
-  }*/
+  }
 
   // REQUÊTE SQL PRÉPARÉE PERMETTANT D'AJOUTER UN CLIENT
   public function ajoutClient($nom, $prenom, $mail, $pass)
@@ -49,9 +49,8 @@ class ModelClient
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    SELECT * FROM client WHERRE id = :id;
+    SELECT * FROM client WHERRE id=:id;
     ");
-
     $requete->execute([
       ':id' => $id,
     ]);
@@ -77,7 +76,7 @@ class ModelClient
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    UPDATE client SET nom = :nom, prenom = :prenom, mail = :mail, pass = :pass, tel = :tel, adresse = :adresse, ville = :ville, code_post = :code_post WHERE id = :id;
+    UPDATE client SET nom=:nom, prenom=:prenom, mail=:mail, pass=:pass, tel=:tel, adresse=:adresse, ville=:ville, code_post=:code_post WHERE id=:id;
     ");
 
     return $requete->execute([
@@ -105,7 +104,7 @@ class ModelClient
     ]);
   }
 
-  /*
+
   // GETTERS ET SETTERS
   public function getId()
   {
@@ -196,5 +195,5 @@ class ModelClient
   {
     $this->token = $token;
     return $this;
-  }*/
+  }
 }

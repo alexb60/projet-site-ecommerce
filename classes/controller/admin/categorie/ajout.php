@@ -15,26 +15,37 @@
   <?php
   require_once "../../../view/admin/ViewCategorie.php";
   require_once "../../../view/admin/ViewTemplate.php";
+  require_once "../../../view/admin/utils.php";
   require_once "../../../model/ModelCategorie.php";
 
   ViewTemplate::menu();
 
   if (isset($_POST['ajout'])) {
-    $categorie = new ModelCategorie();
-    if ($categorie->ajoutCategorie($_POST['nom'])) {
-      ViewTemplate::alert("success", "Catégorie ajoutée avec succès", "liste.php");
+    $donnees = [$_POST['nom']];
+    $types = ["nom"];
+    $data = Utils::valider($donnees, $types);
+
+    if ($data) {
+      $categorie = new ModelCategorie();
+      if ($categorie->ajoutCategorie($_POST['nom'])) {
+        ViewTemplate::alert("success", "Catégorie ajoutée avec succès", "liste.php");
+      } else {
+        ViewTemplate::alert("danger", "Erreur d'ajout", "ajout.php");
+      }
     } else {
-      ViewTemplate::alert("danger", "Erreur d'ajout", "ajout.php");
+      ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
     }
   } else {
     ViewCategorie::ajoutCategorie();
   }
+
 
   ViewTemplate::footer();
   ?>
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>
   <script src="../../../../js/font-awesome.all.min.js"></script>
+  <!-- <script src="../../../../js/validation-form.js"></script> -->
 </body>
 
 </html>
