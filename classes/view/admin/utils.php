@@ -1,7 +1,7 @@
 <?php
 class Utils
 {
-  public static function upload($extensions, $fichier)
+  public static function upload($extensions, $dossier, $fichier)
   {
     // ctrl sur le nom ==> regex (pas de caract speciaux)
     // ctrl sur les extensions autorisees
@@ -23,11 +23,11 @@ class Utils
     }
 
     if (!in_array($file_ext, $extensions)) {
-      $errors .= "extension non autorisée. <br/>";
+      $errors .= "Extension non autorisée. <br/>";
     }
 
     if ($file_size > 3000000) {
-      $errors .= "taille du fichier ne doit pas dépasser 3 Mo. <br/>";
+      $errors .= "La taille du fichier ne doit pas dépasser 3 Mo. <br/>";
     }
 
     $file_name = substr(md5($fichier['name']), 10) . ".$file_ext";
@@ -37,15 +37,15 @@ class Utils
     }
 
     if ($errors === "") {
-      if (move_uploaded_file($file_tmp,  "images/" . $file_name)) {
+      if (move_uploaded_file($file_tmp,  "../../../../images/" . $dossier . "/" . $file_name)) {
         $uploadOk = true;
         return ["uploadOk" => $uploadOk, "file_name" => $file_name, "errors" => $errors];
       } else {
-        $errors .= "Echec de l'upload. <br/>";
+        $errors .= "Échec de l'ajout. <br/>";
       }
     }
 
-    return ["uploadOk" => false, "file_name" => "", "errors" => "Aucun fichier n'est uploadé.<br>$errors"];
+    return ["uploadOk" => false, "file_name" => "", "errors" => "Aucun fichier n'est ajouté.<br>$errors"];
   }
 
   // validation pour une seule expression

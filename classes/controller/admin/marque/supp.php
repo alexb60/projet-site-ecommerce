@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ajout d'une marque</title>
+  <title>Suppression d'une catégorie</title>
   <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
   <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
   <link rel="stylesheet" href="../../../../css/admin.css">
@@ -15,29 +15,27 @@
   <?php
   require_once "../../../view/admin/ViewMarque.php";
   require_once "../../../view/admin/ViewTemplate.php";
-  require_once "../../../view/admin/utils.php";
   require_once "../../../model/ModelMarque.php";
 
   ViewTemplate::menu();
-  if (isset($_POST['ajout'])) {
-    $extensions = ["jpg", "jpeg", "png", "gif"];
-    $upload = Utils::upload($extensions, "marque", $_FILES['logo']);
-    $modelMarque = new ModelMarque();
 
-    if ($upload['uploadOk']) {
-      if ($modelMarque->ajoutMarque($_POST['nom'], $upload['file_name'])) {
-        ViewTemplate::alert("success", "La marque a été ajoutée avec succès", "liste.php");
+  if (isset($_GET['id'])) {
+    $modelMarque = new ModelMarque();
+    if ($modelMarque->voirMarque($_GET['id'])) {
+      if ($modelMarque->suppMarque($_GET['id'])) {
+        ViewTemplate::alert("success", "Marque supprimée avec succès", "liste.php");
       } else {
-        ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
+        ViewTemplate::alert("danger", "Échec de la suppression", "liste.php");
       }
     } else {
-      ViewTemplate::alert("danger", $upload['errors'], "ajout.php");
+      ViewTemplate::alert("danger", "La marque n'existe pas", "liste.php");
     }
   } else {
-    ViewMarque::ajoutMarque();
+    ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php");
   }
 
   ViewTemplate::footer();
+
   ?>
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>

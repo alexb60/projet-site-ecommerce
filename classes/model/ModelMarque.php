@@ -52,6 +52,32 @@ class ModelMarque
     ]);
   }
 
+  // REQUÊTE SQL PRÉPARÉE PERMETTANT DE SUPPRIMER UNE MARQUE
+  public function suppMarque($id)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    DELETE FROM marque WHERE id=:id;
+    ");
+    return $requete->execute([
+      ':id' => $id,
+    ]);
+  }
+
+  // REQUÊTE SQL PRÉPARÉE PERMETTANT DE MODIFIER UNE CATÉGORIE
+  public function modifMarque($id, $nom, $logo)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    UPDATE marque SET nom=:nom, logo=:logo WHERE id=:id;
+    ");
+    return $requete->execute([
+      ':id' => $id,
+      ':nom' => $nom,
+      ':logo' => $logo
+    ]);
+  }
+
   // GETTERS ET SETTERS
   public function getId()
   {

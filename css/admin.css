@@ -5,3 +5,7 @@
 .erreurMessage {
   color: red !important;
 }
+
+.image-logo {
+  width: 50% !important;
+}

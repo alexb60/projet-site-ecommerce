@@ -19,16 +19,16 @@
 
   ViewTemplate::menu();
 
-  $categorie = new ModelCategorie();
+  $modelCategorie = new ModelCategorie();
   if (isset($_GET['id'])) {
-    if ($categorie->voirCategorie($_GET['id'])) {
+    if ($modelCategorie->voirCategorie($_GET['id'])) {
       ViewCategorie::modifCategorie($_GET['id']);
     } else {
       ViewTemplate::alert("danger", "La catégorie n'existe pas", "liste.php");
     }
   } else {
-    if (isset($_POST['id']) && $categorie->voirCategorie($_POST['id'])) {
-      if ($categorie->modifCategorie($_POST['id'], $_POST['nom'])) {
+    if (isset($_POST['id']) && $modelCategorie->voirCategorie($_POST['id'])) {
+      if ($modelCategorie->modifCategorie($_POST['id'], $_POST['nom'])) {
         ViewTemplate::alert("success", "La catégorie a été modifiée avec succès", "liste.php");
       } else {
         ViewTemplate::alert("danger", "Échec de la modification", "liste.php");

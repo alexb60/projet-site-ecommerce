@@ -49,7 +49,7 @@ class ModelClient
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    SELECT * FROM client WHERRE id=:id;
+    SELECT * FROM client WHERE id=:id;
     ");
     $requete->execute([
       ':id' => $id,
@@ -72,23 +72,21 @@ class ModelClient
   }
 
   // REQUÊTE SQL PRÉPARÉE PERMETTANT AU CLIENT DE MODIFIER SES INFORMATIONS
-  public function modifClient($id, $nom, $prenom, $mail, $pass, $tel, $adresse, $ville, $code_post)
+  public function modifClient($id, $nom, $prenom, $mail, $tel, $adresse, $ville, $code_post)
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    UPDATE client SET nom=:nom, prenom=:prenom, mail=:mail, pass=:pass, tel=:tel, adresse=:adresse, ville=:ville, code_post=:code_post WHERE id=:id;
+    UPDATE client SET nom=:nom, prenom=:prenom, mail=:mail, tel=:tel, adresse=:adresse, ville=:ville, code_post=:code_post WHERE id=:id;
     ");
-
     return $requete->execute([
       ':id' => $id,
       ':nom' => $nom,
       ':prenom' => $prenom,
       ':mail' => $mail,
-      ':pass' => $pass,
       ':tel' => $tel,
       ':adresse' => $adresse,
       ':ville' => $ville,
-      ':code_post' => $code_post,
+      ':code_post' => $code_post
     ]);
   }
 

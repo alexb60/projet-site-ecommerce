@@ -14,41 +14,57 @@ class ViewCategorie
       <?php
       if (count($liste) > 0) {
       ?>
-        <h2 class="mb-4">Liste des catégories</h2>
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Nom</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-            foreach ($liste as $categorie) {
-            ?>
-              <tr>
-                <th scope="row"><?= $categorie['id'] ?></th>
-                <td><?= $categorie['nom'] ?></td>
-                <td>
-                  <a href="voir.php?id=<?= $categorie['id'] ?>" class="btn btn-primary">Voir</a>
-                  <a href="modif.php?id=<?= $categorie['id'] ?>" class="btn btn-warning">Modifier</a>
-                  <a href="supp.php?id=<?= $categorie['id'] ?>" class="btn btn-danger">Supprimer</a>
-                </td>
-              </tr>
-            <?php
-            }
-            ?>
-          </tbody>
-        </table>
+        <div class="row">
+          <div class="col-md-6">
+            <h2 class="mb-4">Liste des catégories</h2>
+          </div>
+          <div class="col-md-6 d-flex justify-content-end align-items-center">
+            <a href="ajout.php" class="btn btn-outline-success">Ajouter une catégorie</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                foreach ($liste as $categorie) {
+                ?>
+                  <tr>
+                    <th scope="row"><?= $categorie['id'] ?></th>
+                    <td><?= $categorie['nom'] ?></td>
+                    <td>
+                      <a href="voir.php?id=<?= $categorie['id'] ?>" class="btn btn-primary">Voir</a>
+                      <a href="modif.php?id=<?= $categorie['id'] ?>" class="btn btn-warning">Modifier</a>
+                      <a href="supp.php?id=<?= $categorie['id'] ?>" class="btn btn-danger">Supprimer</a>
+                    </td>
+                  </tr>
+                <?php
+                }
+                ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
       <?php
       } else {
       ?>
-        <div class="alert alert-danger" role="alert">
-          Aucune catégorie n'existe dans la liste.
+        <div class="row">
+          <div class="col-md-12">
+            <div class="alert alert-danger" role="alert">
+              Aucune catégorie n'existe dans la liste.
+            </div>
+          </div>
         </div>
       <?php
-      } ?>
+      }
+      ?>
     </div>
   <?php
   }
@@ -56,8 +72,8 @@ class ViewCategorie
   // FONCTION PERMETTANT DE VOIR LES DÉTAILS D'UNE CATÉGORIE
   public static function voirCategorie($id)
   {
-    $categories = new ModelCategorie();
-    $categorie = $categories->voirCategorie($id);
+    $modelCategorie = new ModelCategorie();
+    $categorie = $modelCategorie->voirCategorie($id);
   ?>
     <div class="container">
       <div class="row mb-4">
@@ -113,8 +129,8 @@ class ViewCategorie
   // FONCTION PERMETTANT DE MODIFIER UNE CATÉGORIE
   public static function modifCategorie($id)
   {
-    $categories = new ModelCategorie();
-    $categorie = $categories->voirCategorie($id);
+    $modelCategorie = new ModelCategorie();
+    $categorie = $modelCategorie->voirCategorie($id);
   ?>
     <div class="container">
       <div class="row mb-4">
@@ -128,7 +144,8 @@ class ViewCategorie
             <input type="hidden" name="id" class="form-control" id="id" value="<?= $categorie['id']; ?>">
             <div class="form-group">
               <label for="nom">Nom :</label>
-              <input type="text" name="nom" id="nom" class="form-control" value="<?= $categorie['nom']; ?>" required>
+              <input type="text" name="nom" id="nom" class="form-control" value="<?= $categorie['nom']; ?>" aria-describedby="nomHelp" data-type="nom" data-message="Le format du nom n'est pas correct">
+              <small class="form-text text-muted" id="nomHelp"></small>
             </div>
 
             <button type="submit" class="btn btn-primary" name="modif" id="modif">Modifier</button>

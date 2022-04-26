@@ -20,9 +20,9 @@
   ViewTemplate::menu();
 
   if (isset($_GET['id'])) {
-    $categorie = new ModelCategorie();
-    if ($categorie->voirCategorie($_GET['id'])) {
-      if ($categorie->suppCategorie($_GET['id'])) {
+    $modelCategorie = new ModelCategorie();
+    if ($modelCategorie->voirCategorie($_GET['id'])) {
+      if ($modelCategorie->suppCategorie($_GET['id'])) {
         ViewTemplate::alert("success", "Catégorie supprimée avec succès", "liste.php");
       } else {
         ViewTemplate::alert("danger", "Échec de la suppression", "liste.php");

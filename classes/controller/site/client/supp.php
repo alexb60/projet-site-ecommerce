@@ -13,6 +13,8 @@ if (isset($_SESSION['id'])) {
   } else {
     $message = ["danger", "Échec de la suppression", "accueil.php"];
   }
+} else {
+  $message = ["danger", "Le profil n'existe pas", "accueil.php"];
 }
 ?>
 
