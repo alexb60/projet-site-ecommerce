@@ -1,7 +1,7 @@
 <?php
 require_once "connexion.php";
 
-class ModelMarque
+class ModelTransporteur
 {
   private $id;
   private $nom;
@@ -15,23 +15,23 @@ class ModelMarque
     $this->logo = $logo;
   }
 
-  // REQUÊTE SQL PRÉPARÉE LISTANT LES MARQUES
-  public function listeMarque()
+  // REQUÊTE SQL PRÉPARÉE LISTANT LES TRANSPORTEURS
+  public function listeTransporteur()
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    SELECT * FROM marque
+    SELECT * FROM transporteur
     ");
     $requete->execute();
     return $requete->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  // REQUÊTE SQL PRÉPARÉE PERMETTANT DE VOIR LES DÉTAILS D'UNE MARQUE
-  public function voirMarque($id)
+  // REQUÊTE SQL PRÉPARÉE PERMETTANT DE VOIR LES DÉTAILS D'UN TRANSPORTEUR
+  public function voirTransporteur($id)
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    SELECT * FROM marque WHERE id=:id;
+    SELECT * FROM transporteur WHERE id=:id;
     ");
     $requete->execute([
       ':id' => $id,
@@ -39,12 +39,12 @@ class ModelMarque
     return $requete->fetch(PDO::FETCH_ASSOC);
   }
 
-  // REQUÊTE SQL PRÉPARÉE PERMETTANT D'AJOUTER UNE MARQUE
-  public function ajoutMarque($nom, $logo)
+  // REQUÊTE SQL PRÉPARÉE PERMETTANT D'AJOUTER UN TRANSPORTEUR
+  public function ajoutTransporteur($nom, $logo)
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    INSERT INTO marque VALUES (null, :nom, :logo);
+    INSERT INTO transporteur VALUES (null, :nom, :logo);
     ");
     return $requete->execute([
       ':nom' => $nom,
@@ -52,24 +52,24 @@ class ModelMarque
     ]);
   }
 
-  // REQUÊTE SQL PRÉPARÉE PERMETTANT DE SUPPRIMER UNE MARQUE
-  public function suppMarque($id)
+  // REQUÊTE SQL PRÉPARÉE PERMETTANT DE SUPPRIMER UN TRANSPORTEUR
+  public function suppTransporteur($id)
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    DELETE FROM marque WHERE id=:id;
+    DELETE FROM transporteur WHERE id=:id;
     ");
     return $requete->execute([
       ':id' => $id,
     ]);
   }
 
-  // REQUÊTE SQL PRÉPARÉE PERMETTANT DE MODIFIER UNE MARQUE
-  public function modifMarque($id, $nom, $logo)
+  // REQUÊTE SQL PRÉPARÉE PERMETTANT DE MODIFIER UN TRANSPORTEUR
+  public function modifTransporteur($id, $nom, $logo)
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    UPDATE marque SET nom=:nom, logo=:logo WHERE id=:id;
+    UPDATE transporteur SET nom=:nom, logo=:logo WHERE id=:id;
     ");
     return $requete->execute([
       ':id' => $id,

@@ -4,7 +4,7 @@ require_once 'C:/wamp64/www/projet/classes/model/ModelCategorie.php';
 class ViewCategorie
 {
 
-  // FONCTION PERMETTANT DE LISTER LES CATÉGORIES
+  // FONCTION AFFICHANT LA LISTE DES CATÉGORIES
   public static function listeCategorie()
   {
     $categorie = new ModelCategorie();
@@ -69,7 +69,7 @@ class ViewCategorie
   <?php
   }
 
-  // FONCTION PERMETTANT DE VOIR LES DÉTAILS D'UNE CATÉGORIE
+  // FONCTION AFFICHANT LES DÉTAILS D'UNE CATÉGORIE
   public static function voirCategorie($id)
   {
     $modelCategorie = new ModelCategorie();
@@ -87,9 +87,9 @@ class ViewCategorie
             <div class="card-body">
               <h5 class="card-title"><?= $categorie['id'] . " - " . $categorie['nom']; ?> </h5>
               <p class="card-text"></p>
-              <a href="modif.php?id=<?= $categorie['id'] ?>" class="btn btn-warning">Modifier</a>
-              <a href="supp.php?id=<?= $categorie['id'] ?>" class="btn btn-danger">Supprimer</a><br><br>
               <a href="liste.php" class="btn btn-primary">← Retour</a>
+              <a href="modif.php?id=<?= $categorie['id'] ?>" class="btn btn-warning">Modifier</a>
+              <a href="supp.php?id=<?= $categorie['id'] ?>" class="btn btn-danger">Supprimer</a>
             </div>
           </div>
         </div>
@@ -98,7 +98,7 @@ class ViewCategorie
   <?php
   }
 
-  // FONCTION PERMETTANT D'AJOUTER UNE CATÉGORIE
+  // FONCTION AFFICHANT LE FORMULAIRE D'AJOUT D'UNE CATÉGORIE
   public static function ajoutCategorie()
   {
   ?>
@@ -126,7 +126,7 @@ class ViewCategorie
   <?php
   }
 
-  // FONCTION PERMETTANT DE MODIFIER UNE CATÉGORIE
+  // FONCTION AFFICHANT LE FORMULAIRE DE MODIFICATION D'UNE CATÉGORIE
   public static function modifCategorie($id)
   {
     $modelCategorie = new ModelCategorie();
@@ -148,12 +148,13 @@ class ViewCategorie
               <small class="form-text text-muted" id="nomHelp"></small>
             </div>
 
-            <button type="submit" class="btn btn-primary" name="modif" id="modif">Modifier</button>
+            <button type="submit" class="btn btn-success" name="modif" id="modif">Modifier</button>
             <button type="reset" class="btn btn-danger">Réinitialiser</button>
           </form>
+          <br />
+          <a class="btn btn-primary" href="liste.php">← Retour</a>
         </div>
       </div>
-
     </div>
 <?php
   }

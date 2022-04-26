@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ajout d'une marque</title>
+  <title>Ajout d'un transporteur</title>
   <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
   <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
   <link rel="stylesheet" href="../../../../css/admin.css">
@@ -13,10 +13,10 @@
 
 <body>
   <?php
-  require_once "../../../view/admin/ViewMarque.php";
+  require_once "../../../view/admin/ViewTransporteur.php";
   require_once "../../../view/admin/ViewTemplate.php";
   require_once "../../../view/admin/utils.php";
-  require_once "../../../model/ModelMarque.php";
+  require_once "../../../model/ModelTransporteur.php";
 
   ViewTemplate::menu();
   if (isset($_POST['ajout'])) {
@@ -26,12 +26,12 @@
 
     if ($data) {
       $extensions = ["jpg", "jpeg", "png", "gif"];
-      $upload = Utils::upload($extensions, "marque", $_FILES['logo']);
-      $modelMarque = new ModelMarque();
+      $upload = Utils::upload($extensions, "transporteur", $_FILES['logo']);
+      $modelTransporteur = new ModelTransporteur();
 
       if ($upload['uploadOk']) {
-        if ($modelMarque->ajoutMarque($_POST['nom'], $upload['file_name'])) {
-          ViewTemplate::alert("success", "La marque a été ajoutée avec succès", "liste.php");
+        if ($modelTransporteur->ajoutTransporteur($_POST['nom'], $upload['file_name'])) {
+          ViewTemplate::alert("success", "Le transporteur a été ajouté avec succès", "liste.php");
         } else {
           ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
         }
@@ -42,7 +42,7 @@
       ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
     }
   } else {
-    ViewMarque::ajoutMarque();
+    ViewTransporteur::ajoutTransporteur();
   }
 
   ViewTemplate::footer();

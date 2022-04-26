@@ -46,14 +46,16 @@ class ViewTemplate
                 <a class="dropdown-item" href="../marque/ajout.php">Ajouter une marque</a>
               </div>
             </li>
-            <li class="nav-item">
-              <a class="nav-link disabled">Disabled</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="marque" role="button" data-toggle="dropdown" aria-expanded="false">
+                Transporteurs
+              </a>
+              <div class="dropdown-menu" aria-labelledby="marque">
+                <a class="dropdown-item" href="../transporteur/liste.php">Liste des transporteurs</a>
+                <a class="dropdown-item" href="../transporteur/ajout.php">Ajouter un transporteur</a>
+              </div>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
         </div>
       </div>
     </nav>
