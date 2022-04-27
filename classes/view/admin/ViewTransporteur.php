@@ -127,8 +127,8 @@ class ViewTransporteur
               <input type="file" name="logo" id="logo" class="form-control-file">
             </div>
 
-            <button type="submit" class="btn btn-primary" name="ajout" id="ajout">Ajouter</button>
-            <button type="reset" class="btn btn-danger">Réinitialiser</button>
+            <input type="submit" class="btn btn-primary" name="ajout" id="ajout">
+            <input type="reset" class="btn btn-danger">
           </form>
         </div>
       </div>
