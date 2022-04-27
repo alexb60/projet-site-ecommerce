@@ -198,6 +198,102 @@ class ViewProduit
         </div>
       </div>
     </div>
+  <?php
+  }
+
+  // FONCTION AFFICHANT LE FORMULAIRE DE MODIFICATION D'UN PRODUIT
+  public static function modifProduit($id)
+  {
+    $modelProduit = new ModelProduit();
+    $produit = $modelProduit->voirProduit($id);
+
+    // POUR INCLURE LES MARQUES
+    $modelMarque = new ModelMarque();
+    $listeMarque = $modelMarque->listeMarque();
+
+    // POUR INCLURE LES CATÉGORIES
+    $modelCategorie = new ModelCategorie();
+    $listeCategorie = $modelCategorie->listeCategorie();
+  ?>
+    <div class="container">
+      <div class="row mb-4">
+        <div class="col-md-12">
+          <h2>Modification du produit <?= $produit['nom'] ?></h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <form action="modif.php" method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
+            <input type="hidden" name="id" id="id" class="form-control" value="<?= $produit['id'] ?>">
+            <div class="form-group">
+              <label for="nom">Nom :</label>
+              <input type="text" name="nom" id="nom" class="form-control" value="<?= $produit['nom'] ?>" aria-describedby="nomHelp" data-type="nom" data-message="Le format du nom n'est pas correct">
+              <small class="form-text text-muted" id="nomHelp"></small>
+            </div>
+            <div class="form-group">
+              <label for="ref">Référence :</label>
+              <input type="text" name="ref" id="ref" class="form-control" value="<?= $produit['ref'] ?>" aria-describedby="refHelp" data-type="ref" data-message="Le format de la référence n'est pas correct">
+              <small class="form-text text-muted" id="refHelp"></small>
+            </div>
+            <div class="form-group">
+              <label for="description">Description :</label>
+              <textarea name="description" id="description" class="form-control" cols="30" rows="4"><?= $produit['description'] ?></textarea>
+            </div>
+            <div class="form-group">
+              <label for="quantite">Quantité :</label>
+              <input type="number" name="quantite" id="quantite" class="form-control" value="<?= $produit['quantite'] ?>" aria-describedby="quantiteHelp" data-type="quantite" data-message="La quantité doit être un nombre entier">
+              <small class="form-text text-muted" id="quantiteHelp"></small>
+            </div>
+            <div class="form-group">
+              <label for="prix">Prix :</label>
+              <input type="text" name="prix" id="prix" class="form-control" value="<?= $produit['prix'] ?>" aria-describedby="prixHelp" data-type="prix" data-message="Le prix doit être au format : 0.00">
+              <small class="form-text text-muted" id="prixHelp"></small>
+            </div>
+            <div class="form-group">
+              <label for="marque">Marque :</label>
+              <select name="marque" id="marque" class="form-control">
+                <option disabled value="">Choisir une marque...</option>
+                <?php
+                foreach ($listeMarque as $marque) {
+                ?>
+                  <option value="<?= $marque['id'] ?>" <?php
+                                                        if ($marque['id'] == $produit['id_marque']) {
+                                                          echo "selected";
+                                                        }
+                                                        ?>><?= $marque['nom'] ?></option>
+                <?php
+                }
+                ?>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="categorie">Catégorie :</label>
+              <select name="categorie" id="categorie" class="form-control">
+                <option selected disabled value="">Choisir une catégorie...</option>
+                <?php
+                foreach ($listeCategorie as $categorie) {
+                ?>
+                  <option value="<?= $categorie['id'] ?>" <?php
+                                                          if ($categorie['id'] == $produit['id_categorie']) {
+                                                            echo "selected";
+                                                          }
+                                                          ?>><?= $categorie['nom'] ?></option>
+                <?php
+                }
+                ?>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="photo">Photo du produit :</label>
+              <input type="file" name="photo" id="photo" class="form-control-file" value="<?= $produit['photo'] ?>">
+            </div>
+            <br />
+            <input type="submit" class="btn btn-primary" name="ajout" id="valider">
+            <input type="reset" class="btn btn-danger">
+          </form>
+        </div>
+      </div>
+    </div>
 <?php
   }
 }

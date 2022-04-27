@@ -83,6 +83,26 @@ class ModelProduit
     ]);
   }
 
+  // REQUÊTE SQL PRÉPARÉE PERMETTANT DE MODIFIER UN PRODUIT
+  public function modifProduit($id, $nom, $ref, $description, $quantite, $prix, $photo, $id_categorie, $id_marque)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    UPDATE produit SET nom=:nom, ref=:ref, description=:description, quantite=:quantite, prix=:prix, photo=:photo, id_categorie=:id_categorie, id_marque=:id_marque WHERE id=:id
+    ");
+    return $requete->execute([
+      ':id' => $id,
+      ':nom' => $nom,
+      ':ref' => $ref,
+      ':description' => $description,
+      ':quantite' => $quantite,
+      ':prix' => $prix,
+      ':photo' => $photo,
+      ':id_categorie' => $id_categorie,
+      ':id_marque' => $id_marque
+    ]);
+  }
+
   // GETTERS ET SETTERS
   public function getId()
   {
