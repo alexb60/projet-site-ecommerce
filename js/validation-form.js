@@ -1,14 +1,18 @@
 $(document).on("click", "#valider", function (e) {
   e.preventDefault();
   let regexListe = {
-    nom: /^[\p{L}\s]{2,}$/u,
-    prenom: /^[\p{L}\s]{2,}$/u,
+    nom: /^[\p{L}\s\-]{1,}$/u,
+    prenom: /^[\p{L}\s\-]{2,}$/u,
     mail: /^[a-zA-Z\d\.\_\-\p{L}]+@[a-zA-Z]+\.[a-z]{2,}$/,
     pass: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
     adresse: /^[\w\-\s]{5,}$/,
     code_post: /^((0[1-9])|([1-8]\d|9[0-578]))\d{3}$/,
     ville: /^[\p{L}\s\-]{1,}$/u,
     tel: /^[\d]{10,}$/,
+    prix: /^\d{1,}(\.\d{2}){0,1}$/,
+    ref: /^[a-zA-Z0-9]{1,}$/,
+    quantite: /^\d{1,}$/,
+    description: /^[\p{L}\s\-\d]{1,}$/u,
   };
 
   $("small").text("");

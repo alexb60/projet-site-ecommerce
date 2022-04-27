@@ -14,7 +14,6 @@ class ViewTemplate
       }
       ?>
     </div>
-
 <?php
 
   }
