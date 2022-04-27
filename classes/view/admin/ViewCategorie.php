@@ -117,7 +117,7 @@ class ViewCategorie
               <small class="form-text text-muted" id="nomHelp"></small>
             </div>
 
-            <button type="submit" class="btn btn-primary" name="ajout" id="ajout">Ajouter</button>
+            <button type="submit" class="btn btn-primary" name="ajout" id="valider">Ajouter</button>
             <button type="reset" class="btn btn-danger">Réinitialiser</button>
           </form>
         </div>
@@ -140,7 +140,7 @@ class ViewCategorie
       </div>
       <div class="row">
         <div class="col-md-12">
-          <form action="modif.php" method="post" class="col-md-6 offset-md-3">
+          <form action="modif.php" method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
             <input type="hidden" name="id" class="form-control" id="id" value="<?= $categorie['id']; ?>">
             <div class="form-group">
               <label for="nom">Nom :</label>
@@ -148,7 +148,7 @@ class ViewCategorie
               <small class="form-text text-muted" id="nomHelp"></small>
             </div>
 
-            <button type="submit" class="btn btn-success" name="modif" id="modif">Modifier</button>
+            <button type="submit" class="btn btn-success" name="modif" id="valider">Modifier</button>
             <button type="reset" class="btn btn-danger">Réinitialiser</button>
           </form>
           <br />

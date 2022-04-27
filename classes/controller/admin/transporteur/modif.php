@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modification d'une marque</title>
+  <title>Modification d'un transporteur</title>
   <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
   <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
   <link rel="stylesheet" href="../../../../css/admin.css">
@@ -13,41 +13,40 @@
 
 <body>
   <?php
-  require_once "../../../view/admin/ViewMarque.php";
+  require_once "../../../view/admin/ViewTransporteur.php";
   require_once "../../../view/admin/ViewTemplate.php";
   require_once "../../../view/admin/utils.php";
-  require_once "../../../model/ModelMarque.php";
+  require_once "../../../model/ModelTransporteur.php";
 
   ViewTemplate::menu();
 
-  $modelMarque = new ModelMarque();
+  $modelTransporteur = new ModelTransporteur();
   if (isset($_GET['id'])) {
-    if ($modelMarque->voirMarque($_GET['id'])) {
-      ViewMarque::modifMarque($_GET['id']);
+    if ($modelTransporteur->voirTransporteur($_GET['id'])) {
+      ViewTransporteur::modifTransporteur($_GET['id']);
     } else {
-      ViewTemplate::alert("danger", "La marque n'existe pas", "liste.php");
+      ViewTemplate::alert("danger", "Le transporteur n'existe pas", "liste.php");
     }
   } else {
-    if (isset($_POST['id']) && $modelMarque->voirMarque($_POST['id'])) {
+    $donnees = [$_POST['nom']];
+    $types = ["nom"];
+    $data = Utils::valider($donnees, $types);
 
-      $donnees = [$_POST['nom']];
-      $types = ["nom"];
-      $data = Utils::valider($donnees, $types);
-
-      if ($data) {
+    if ($data) {
+      if (isset($_POST['id']) && $modelTransporteur->voirTransporteur($_POST['id'])) {
         $extensions = ["jpg", "jpeg", "png", "gif"];
-        $upload = Utils::upload($extensions, "marque", $_FILES['logo']);
+        $upload = Utils::upload($extensions, "transporteur", $_FILES['logo']);
 
         if ($_FILES['logo']['size'] === 0) { // SI PAS DE FICHIER ENVOYÉ
-          $fichier = $modelMarque->voirMarque($_POST['id'])['logo']; // RÉCUPÉRATION DU NOM DU FICHIER DÉJÀ PRÉSENT EN BASE
-          if ($modelMarque->modifMarque($_POST['id'], $_POST['nom'], $fichier)) {
-            ViewTemplate::alert("success", "La marque a été modifiée avec succès", "liste.php");
+          $fichier = $modelTransporteur->voirTransporteur($_POST['id'])['logo']; // RÉCUPÉRATION DU NOM DU FICHIER DÉJÀ PRÉSENT EN BASE
+          if ($modelTransporteur->modifTransporteur($_POST['id'], $_POST['nom'], $fichier)) {
+            ViewTemplate::alert("success", "Le transporteur a été modifié avec succès", "liste.php");
           } else {
-            ViewTemplate::alert("danger", "Erreur de modification sans fichier", "liste.php");
+            ViewTemplate::alert("danger", "Erreur de modification", "liste.php");
           }
         } elseif ($upload['uploadOk']) { // SINON SI FICHIER ENVOYÉ
-          if ($modelMarque->modifMarque($_POST['id'], $_POST['nom'], $upload['file_name'])) {
-            ViewTemplate::alert("success", "La marque a été modifiée avec succès", "liste.php");
+          if ($modelTransporteur->modifTransporteur($_POST['id'], $_POST['nom'], $upload['file_name'])) {
+            ViewTemplate::alert("success", "Le transporteur a été modifié avec succès", "liste.php");
           } else {
             ViewTemplate::alert("danger", "Erreur de modification", "liste.php");
           }

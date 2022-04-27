@@ -37,7 +37,7 @@ class ViewClient
               <small class="form-text text-muted" id="passHelp"></small>
             </div>
             <br />
-            <button type="submit" name="ajout" id="ajout" class="btn btn-primary">Valider</button>
+            <button type="submit" name="ajout" id="valider" class="btn btn-primary">Valider</button>
             <button type="reset" name="annuler" class="btn btn-danger">Annuler</button>
           </form>
         </div>
@@ -160,7 +160,7 @@ class ViewClient
               </div>
             </div>
             <br />
-            <input type="submit" name="modif" id="modif" class="btn btn-success">
+            <input type="submit" name="modif" id="valider" class="btn btn-success">
             <input type="reset" class="btn btn-danger">
           </form>
           <br />

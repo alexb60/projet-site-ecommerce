@@ -127,7 +127,7 @@ class ViewTransporteur
               <input type="file" name="logo" id="logo" class="form-control-file">
             </div>
 
-            <input type="submit" class="btn btn-primary" name="ajout" id="ajout">
+            <input type="submit" class="btn btn-primary" name="ajout" id="valider">
             <input type="reset" class="btn btn-danger">
           </form>
         </div>
@@ -150,7 +150,7 @@ class ViewTransporteur
       </div>
       <div class="row">
         <div class="col-md-12">
-          <form action="modif.php" method="post" class="col-md-6 offset-md-3">
+          <form action="modif.php" method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
             <input type="hidden" name="id" class="form-control" id="id" value="<?= $transporteur['id'] ?>">
             <div class="form-group">
               <label for="nom">Nom :</label>
@@ -162,7 +162,7 @@ class ViewTransporteur
               <input type="file" name="logo" id="logo" class="form-control-file" value="<?= $transporteur['logo'] ?>">
             </div>
 
-            <button type="submit" class="btn btn-success" name="modif" id="modif">Modifier</button>
+            <button type="submit" class="btn btn-success" name="modif" id="valider">Modifier</button>
             <button type="reset" class="btn btn-danger">Réinitialiser</button>
           </form>
           <br />

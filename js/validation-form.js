@@ -1,4 +1,4 @@
-$(document).on("click", "#ajout", function (e) {
+$(document).on("click", "#valider", function (e) {
   e.preventDefault();
   let regexListe = {
     nom: /^[\p{L}\s]{2,}$/u,
