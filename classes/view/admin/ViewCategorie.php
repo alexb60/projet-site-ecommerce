@@ -18,7 +18,7 @@ class ViewCategorie
           <div class="col-md-6">
             <h2 class="mb-4">Liste des catégories</h2>
           </div>
-          <div class="col-md-6 d-flex justify-content-end align-items-center">
+          <div class="col-md-6 d-flex justify-content-end align-items-start">
             <a href="ajout.php" class="btn btn-outline-success">Ajouter une catégorie</a>
           </div>
         </div>

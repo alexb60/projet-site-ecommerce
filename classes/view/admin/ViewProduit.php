@@ -6,73 +6,51 @@ require_once 'C:/wamp64/www/projet/classes/model/ModelCategorie.php';
 class ViewProduit
 {
   // FONCTION AFFICHANT LA LISTE DES PRODUITS
-  public static function listeProduit()
+  public static function listeProduit($premier, $parPage)
   {
     $produit = new ModelProduit();
-    $liste = $produit->listeProduit();
-?>
-    <div class="container">
-      <?php
-      if (count($liste) > 0) { ?>
-        <div class="row">
-          <div class="col-md-6">
-            <h2 class="mb-4">Liste des produits</h2>
-          </div>
-          <div class="col-md-6 d-flex justify-content-end align-items-center">
-            <a href="ajout.php" class="btn btn-outline-success">Ajouter un produit</a>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Nom</th>
-                  <th scope="col">Catégorie</th>
-                  <th scope="col">Marque</th>
-                  <th scope="col">Réf.</th>
-                  <th scope="col">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                foreach ($liste as $produit) {
-                ?>
-                  <tr>
-                    <th scope="row"><?= $produit['id'] ?></th>
-                    <td><?= $produit['nom'] ?></td>
-                    <td><?= $produit['nom_categorie'] ?></td>
-                    <td><?= $produit['nom_marque'] ?></td>
-                    <td><?= $produit['ref'] ?></td>
-                    <td>
-                      <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary">Voir</a>
-                      <a href="modif.php?id=<?= $produit['id'] ?>" class="btn btn-warning">Modifier</a>
-                      <a href="supp.php?id=<?= $produit['id'] ?>" class="btn btn-danger">Supprimer</a>
-                    </td>
-                  </tr>
-                <?php
-                }
-                ?>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      <?php
-      } else {
-      ?>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="alert alert-danger" role="alert">
-              Aucun produit n'existe dans la liste.
-            </div>
-          </div>
-        </div>
-      <?php
-      }
-      ?>
-    </div>
-  <?php
+    $liste = $produit->listeProduit($premier, $parPage);
+    if (count($liste) > 0) { ?>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Catégorie</th>
+            <th scope="col">Marque</th>
+            <th scope="col">Réf.</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          foreach ($liste as $produit) {
+          ?>
+            <tr>
+              <th scope="row"><?= $produit['id'] ?></th>
+              <td><?= $produit['nom'] ?></td>
+              <td><?= $produit['nom_categorie'] ?></td>
+              <td><?= $produit['nom_marque'] ?></td>
+              <td><?= $produit['ref'] ?></td>
+              <td>
+                <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary">Voir</a>
+                <a href="modif.php?id=<?= $produit['id'] ?>" class="btn btn-warning">Modifier</a>
+                <a href="supp.php?id=<?= $produit['id'] ?>" class="btn btn-danger">Supprimer</a>
+              </td>
+            </tr>
+          <?php
+          }
+          ?>
+        </tbody>
+      </table>
+    <?php
+    } else {
+    ?>
+      <div class="alert alert-danger" role="alert">
+        Aucun produit n'existe dans la liste.
+      </div>
+    <?php
+    }
   }
 
   // FONCTION AFFICHANT LES DÉTAILS D'UN PRODUIT
@@ -80,7 +58,7 @@ class ViewProduit
   {
     $modelProduit = new ModelProduit();
     $produit = $modelProduit->voirProduit($id);
-  ?>
+    ?>
     <div class="container">
       <div class="row mb-4">
         <div class="col-md-12">
@@ -256,11 +234,7 @@ class ViewProduit
                 <?php
                 foreach ($listeMarque as $marque) {
                 ?>
-                  <option value="<?= $marque['id'] ?>" <?php
-                                                        if ($marque['id'] == $produit['id_marque']) {
-                                                          echo "selected";
-                                                        }
-                                                        ?>><?= $marque['nom'] ?></option>
+                  <option value="<?= $marque['id'] ?>" <?= ($marque['id'] == $produit['id_marque']) ? "selected" : "" ?>><?= $marque['nom'] ?></option>
                 <?php
                 }
                 ?>
@@ -269,15 +243,11 @@ class ViewProduit
             <div class="form-group">
               <label for="categorie">Catégorie :</label>
               <select name="categorie" id="categorie" class="form-control">
-                <option selected disabled value="">Choisir une catégorie...</option>
+                <option disabled value="">Choisir une catégorie...</option>
                 <?php
                 foreach ($listeCategorie as $categorie) {
                 ?>
-                  <option value="<?= $categorie['id'] ?>" <?php
-                                                          if ($categorie['id'] == $produit['id_categorie']) {
-                                                            echo "selected";
-                                                          }
-                                                          ?>><?= $categorie['nom'] ?></option>
+                  <option value="<?= $categorie['id'] ?>" <?= ($categorie['id'] == $produit['id_categorie']) ? "selected" : "" ?>><?= $categorie['nom'] ?></option>
                 <?php
                 }
                 ?>

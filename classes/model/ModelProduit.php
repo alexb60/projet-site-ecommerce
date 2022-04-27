@@ -28,13 +28,26 @@ class ModelProduit
     $this->id_marque = $id_marque;
   }
 
-  // REQUÊTE SQL PRÉPARÉE LISTANT LES PRODUITS
-  public function listeProduit()
+  // REQUÊTE SQL PRÉPARÉE COMPTANT LE NOMBRE DE PRODUITS DANS LA TABLE PRODUIT
+  public function compteProduit()
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    SELECT P.*, C.nom nom_categorie, M.nom nom_marque FROM produit P INNER JOIN categorie C ON P.id_categorie = C.id INNER JOIN marque M ON P.id_marque = M.id;
+    SELECT COUNT(*) AS nb_produits FROM produit
     ");
+    $requete->execute();
+    return $requete->fetch(PDO::FETCH_ASSOC);
+  }
+
+  // REQUÊTE SQL PRÉPARÉE LISTANT LES PRODUITS
+  public function listeProduit($premier, $parPage)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT P.*, C.nom nom_categorie, M.nom nom_marque FROM produit P INNER JOIN categorie C ON P.id_categorie = C.id INNER JOIN marque M ON P.id_marque = M.id LIMIT :premier, :parPage;
+    ");
+    $requete->bindValue(':premier', $premier, PDO::PARAM_INT);
+    $requete->bindValue(':parPage', $parPage, PDO::PARAM_INT);
     $requete->execute();
     return $requete->fetchAll(PDO::FETCH_ASSOC);
   }

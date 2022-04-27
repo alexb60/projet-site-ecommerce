@@ -17,7 +17,7 @@ class ViewMarque
           <div class="col-md-6">
             <h2 class="mb-4">Liste des marques</h2>
           </div>
-          <div class="col-md-6 d-flex justify-content-end align-items-center">
+          <div class="col-md-6 d-flex justify-content-end align-items-start">
             <a href="ajout.php" class="btn btn-outline-success">Ajouter une marque</a>
           </div>
         </div>
