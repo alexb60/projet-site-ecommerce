@@ -1,12 +1,11 @@
 <?php
 session_start();
 
+require_once "../../../view/site/ViewTemplate.php";
+
 if (isset($_SESSION['id'])) {
   $salutation = "<h2>Bonjour " . $_SESSION['prenom'] . " " . $_SESSION['nom'] . "<h2>";
-  $salutation .= '<a class="btn btn-primary" href="voirClient.php">Voir mon profil</a> ';
-  $salutation .= '<a class="btn btn-warning" href="modifClient.php">Modifier mon profil</a> ';
-  $salutation .= '<a class="btn btn-danger" href="deconnexion.php">Déconnexion</a> ';
-  $salutation .= '<a class="btn btn-dark" href="supp.php">Supprimer mon compte</a>';
+  ViewTemplate::headerConnecte();
 } else {
   header('Location: connexion-client.php');
   exit;
@@ -31,6 +30,7 @@ if (isset($_SESSION['id'])) {
   <br />
   <?php
   echo $salutation;
+  ViewTemplate::footer();
   ?>
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>

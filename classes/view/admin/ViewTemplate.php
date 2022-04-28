@@ -34,7 +34,6 @@ class ViewTemplate
                 </a>
                 <div class="dropdown-menu" aria-labelledby="produit">
                   <a class="dropdown-item" href="../produit/liste.php?page=1">Liste des produits</a>
-                  <a class="dropdown-item" href="../produit/liste_NP.php">Liste des produits non paginée</a>
                   <a class="dropdown-item" href="../produit/ajout.php">Ajouter un produit</a>
                 </div>
               </li>

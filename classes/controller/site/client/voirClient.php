@@ -6,10 +6,12 @@ require_once "../../../view/site/ViewTemplate.php";
 require_once "../../../model/ModelClient.php";
 
 if (isset($_SESSION['id'])) {
+  ViewTemplate::headerConnecte();
   ViewClient::voirClient($_SESSION['id']);
 } else {
   ViewTemplate::alert("danger", "Erreur, le profil n'existe pas", "accueil.php");
 }
+ViewTemplate::footer();
 ?>
 <!DOCTYPE html>
 <html lang="fr">

@@ -1,3 +1,17 @@
+<?php
+session_start();
+
+require_once "../../../view/site/ViewProduit.php";
+require_once "../../../view/site/ViewTemplate.php";
+require_once "../../../model/ModelProduit.php";
+
+if (isset($_SESSION['id'])) {
+  ViewTemplate::headerConnecte();
+} else {
+  ViewTemplate::headerInvite();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -13,11 +27,7 @@
 
 <body>
   <?php
-  require_once "../../../view/admin/ViewProduit.php";
-  require_once "../../../view/admin/ViewTemplate.php";
-  require_once "../../../model/ModelProduit.php";
 
-  ViewTemplate::menu();
 
   // PAGINATION
   if (isset($_GET['page']) && !empty($_GET['page'])) {
@@ -41,7 +51,6 @@
         <h2 class="mb-4">Liste des produits</h2>
       </div>
       <div class="col-md-6 d-flex justify-content-end align-items-start">
-        <a href="ajout.php" class="btn btn-outline-success">Ajouter un produit</a>
       </div>
     </div>
     <div class="row">

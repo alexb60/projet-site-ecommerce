@@ -1,23 +1,14 @@
 <?php
 session_start();
 
-require_once "../../../view/site/ViewClient.php";
+require_once "../../../view/site/ViewProduit.php";
 require_once "../../../view/site/ViewTemplate.php";
-require_once "../../../model/ModelClient.php";
+require_once "../../../model/ModelProduit.php";
 
 if (isset($_SESSION['id'])) {
-  $client = new ModelClient();
-  if ($client->suppClient($_SESSION['id'])) {
-    session_destroy();
-    ViewTemplate::headerInvite();
-    $message = ["success", "Compte supprimé avec succès", "inscription.php"];
-  } else {
-    ViewTemplate::headerConnecte();
-    $message = ["danger", "Échec de la suppression", "accueil.php"];
-  }
+  ViewTemplate::headerConnecte();
 } else {
   ViewTemplate::headerInvite();
-  $message = ["danger", "Le profil n'existe pas", "accueil.php"];
 }
 ?>
 
@@ -28,16 +19,18 @@ if (isset($_SESSION['id'])) {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Suppression du compte client</title>
+  <title>Détails d'un produit</title>
   <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
   <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/site.css">
+  <link rel="stylesheet" href="../../../../css/admin.css">
 </head>
 
 <body>
   <?php
-  ViewTemplate::alert($message[0], $message[1], $message[2]);
+
+  ViewProduit::voirProduit($_GET['id']);
   ViewTemplate::footer();
+
   ?>
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>

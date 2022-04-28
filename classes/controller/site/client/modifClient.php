@@ -21,6 +21,8 @@ require_once "../../../model/ModelClient.php";
 
 <body>
   <?php
+  ViewTemplate::headerConnecte();
+
   $modelClient = new ModelClient();
   if (isset($_SESSION['id'])) {
     if ($modelClient->voirClient($_SESSION['id'])) {
@@ -47,6 +49,8 @@ require_once "../../../model/ModelClient.php";
       ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "accueil.php");
     }
   }
+
+  ViewTemplate::footer();
   ?>
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>

@@ -2,7 +2,10 @@
 session_start();
 
 require_once "../../../view/site/ViewClient.php";
+require_once "../../../view/site/ViewTemplate.php";
 require_once "../../../model/ModelClient.php";
+
+ViewTemplate::headerInvite();
 
 if (isset($_SESSION['id']) && $_SESSION['role'] === 'admin') {
   header('Location: admin.php');
@@ -45,6 +48,7 @@ if (isset($_POST['connexion'])) {
   <body>
   <?php
   ViewClient::connexion();
+  ViewTemplate::footer();
 }
   ?>
   <script src="../../../../js/jquery.min.js"></script>

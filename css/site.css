@@ -5,3 +5,12 @@
 .erreurMessage {
   color: red !important;
 }
+
+.btn-deco:hover {
+  background-color: #dc3545 !important;
+  color: white;
+}
+
+.btn-modif:hover {
+  background-color: #ffc104 !important;
+}

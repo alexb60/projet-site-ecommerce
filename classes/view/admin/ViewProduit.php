@@ -81,7 +81,7 @@ class ViewProduit
                   <p><span class="font-weight-bold">Prix :</span><br /><?= $produit['prix'] ?> €<br /></p>
                   <p><span class="font-weight-bold">Quantité en stock :</span><br /><?= $produit['quantite'] ?><br /></p>
                   </p>
-                  <a href="liste.php" class="btn btn-primary">← Retour</a>
+                  <a href="liste.php?page=1" class="btn btn-primary">← Retour</a>
                   <a href="modif.php?id=<?= $produit['id'] ?>" class="btn btn-warning">Modifier</a>
                   <a href="supp.php?id=<?= $produit['id'] ?>" class="btn btn-danger">Supprimer</a>
                 </div>
