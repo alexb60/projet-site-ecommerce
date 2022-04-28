@@ -3,7 +3,7 @@ session_start();
 require_once "../../../view/site/ViewProduit.php";
 require_once "../../../view/site/ViewTemplate.php";
 require_once "../../../model/ModelProduit.php";
-require_once "panier.php";
+require_once "../panier/panier.php";
 
 $modelProduit = new ModelProduit();
 if (isset($_SESSION['id'])) {
@@ -71,7 +71,7 @@ if (isset($_SESSION['id'])) {
                 <td><?= $_SESSION['panier']['quantite'][$i] ?></td>
                 <td><?= (float)$_SESSION['panier']['prix'][$i] * (int)$_SESSION['panier']['quantite'][$i] ?> €</td>
                 <td>
-                  <a href="voir.php?id=<?= $_SESSION['panier']['id'][$i] ?>" class="btn btn-primary">Modifier la quantité</a>
+                  <a href="../produit/voir.php?id=<?= $_SESSION['panier']['id'][$i] ?>" class="btn btn-primary">Modifier la quantité</a>
                   <a href="supprProduitPanier.php?id=<?= $produit['id'] ?>" class="btn btn-danger">Retirer du panier</a>
                 </td>
               </tr>
@@ -105,7 +105,7 @@ if (isset($_SESSION['id'])) {
   </div>
   <div class="row">
     <div class="col-md-12 d-flex justify-content-end">
-      <button class="btn btn-success">Payer</button>
+      <a href="finaliser.php" class="btn btn-success">Finaliser ma commande</a>
       &nbsp;&nbsp;
       <a href="viderPanier.php" class="btn btn-danger">Vider le panier</a>
     </div>
@@ -120,13 +120,12 @@ if (isset($_SESSION['id'])) {
 ?>
   </div>
   </div>
-
+  <?php
+  ViewTemplate::footer();
+  ?>
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>
   <script src="../../../../js/font-awesome.all.min.js"></script>
 </body>
-<?php
-ViewTemplate::footer();
-?>
 
 </html>

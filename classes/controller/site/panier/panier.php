@@ -151,6 +151,12 @@ function verrouPanier()
   $_SESSION['panier']['verrou'] = true;
 }
 
+// DÉVEROUILLAGE DU PANIER POUR LE RETOUR EN ARRIÈRE
+function deverrouillagePanier()
+{
+  $_SESSION['panier']['verrou'] = false;
+}
+
 // SUPPRESSION DU PANIER
 function supprimerPanier()
 {

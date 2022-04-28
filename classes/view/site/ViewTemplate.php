@@ -34,16 +34,18 @@ class ViewTemplate
               <li class="nav-item"><a href="../produit/liste.php?page=1" class="nav-link">Liste des produits</a></li>
             </ul>
             <ul class="navbar-nav ml-auto d-flex justify-content-end">
-              <li class="nav-item"><a href="../produit/voirPanier.php" class="nav-link">Mon panier</a></li>
+              <li class="nav-item"><a href="../panier/voirPanier.php" class="nav-link">Mon panier</a></li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="produit" role="button" data-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="compte" role="button" data-toggle="dropdown" aria-expanded="false">
                   Mon compte
                 </a>
-                <div class="dropdown-menu" aria-labelledby="produit">
+                <div class="dropdown-menu" aria-labelledby="compte">
                   <a class="dropdown-item" href="../client/accueil.php">Accueil Mon Espace</a>
                   <a class="dropdown-item" href="../client/voirClient.php">Mon profil</a>
+                  <a class="dropdown-item" href="#">Mes commandes</a>
                   <a class="dropdown-item btn-modif" href="../client/modifClient.php">Modifier mon profil</a>
                   <a class="dropdown-item btn-deco" href="../client/deconnexion.php">Déconnexion</a>
+                </div>
               </li>
             </ul>
           </div>

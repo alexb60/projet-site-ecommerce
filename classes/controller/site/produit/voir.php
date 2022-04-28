@@ -4,7 +4,7 @@ session_start();
 require_once "../../../view/site/ViewProduit.php";
 require_once "../../../view/site/ViewTemplate.php";
 require_once "../../../model/ModelProduit.php";
-require_once "panier.php";
+require_once "../panier/panier.php";
 
 if (isset($_SESSION['id'])) {
   ViewTemplate::headerConnecte();
