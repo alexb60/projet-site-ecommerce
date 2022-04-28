@@ -5,7 +5,7 @@ class ViewTemplate
   public static function alert($type, $message, $lien = null)
   {
 ?>
-    <div class="container alert  alert-<?= $type ?>" role="alert">
+    <div class="container alert alert-<?= $type ?>" role="alert">
       <?= $message ?> <br />
       <?php
       if ($lien) {  ?>
@@ -34,6 +34,7 @@ class ViewTemplate
               <li class="nav-item"><a href="../produit/liste.php?page=1" class="nav-link">Liste des produits</a></li>
             </ul>
             <ul class="navbar-nav ml-auto d-flex justify-content-end">
+              <li class="nav-item"><a href="../produit/voirPanier.php" class="nav-link">Mon panier</a></li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="produit" role="button" data-toggle="dropdown" aria-expanded="false">
                   Mon compte
@@ -65,7 +66,7 @@ class ViewTemplate
           </button>
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav">
+            <ul class="navbar-nav">
               <li class="nav-item"><a href="../produit/liste.php?page=1" class="nav-link">Liste des produits</a></li>
             </ul>
             <ul class="navbar-nav ml-auto d-flex justify-content-end">

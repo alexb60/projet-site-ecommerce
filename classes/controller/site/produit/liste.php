@@ -22,7 +22,7 @@ if (isset($_SESSION['id'])) {
   <title>Liste des produits</title>
   <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
   <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/admin.css">
+  <link rel="stylesheet" href="../../../../css/site.css">
 </head>
 
 <body>

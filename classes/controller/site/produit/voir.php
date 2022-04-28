@@ -4,12 +4,20 @@ session_start();
 require_once "../../../view/site/ViewProduit.php";
 require_once "../../../view/site/ViewTemplate.php";
 require_once "../../../model/ModelProduit.php";
+require_once "panier.php";
 
 if (isset($_SESSION['id'])) {
   ViewTemplate::headerConnecte();
 } else {
   ViewTemplate::headerInvite();
 }
+
+ViewProduit::voirProduit($_GET['id']);
+if (isset($_POST['id'])) {
+  ajoutPanier($_POST['id'], $_POST['quantite'], $_POST['prix']);
+}
+ViewTemplate::footer();
+
 ?>
 
 <!DOCTYPE html>
@@ -22,14 +30,11 @@ if (isset($_SESSION['id'])) {
   <title>Détails d'un produit</title>
   <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
   <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/admin.css">
+  <link rel="stylesheet" href="../../../../css/site.css">
 </head>
 
 <body>
   <?php
-
-  ViewProduit::voirProduit($_GET['id']);
-  ViewTemplate::footer();
 
   ?>
   <script src="../../../../js/jquery.min.js"></script>

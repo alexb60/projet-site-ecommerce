@@ -14,3 +14,12 @@
 .btn-modif:hover {
   background-color: #ffc104 !important;
 }
+
+.photo-produit {
+  width: 40% !important;
+  margin: 5% !important;
+}
+
+.input-reduit {
+  padding-left: 0% !important;
+}

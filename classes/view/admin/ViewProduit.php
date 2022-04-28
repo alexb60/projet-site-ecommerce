@@ -18,7 +18,8 @@ class ViewProduit
             <th scope="col">Nom</th>
             <th scope="col">Catégorie</th>
             <th scope="col">Marque</th>
-            <th scope="col">Réf.</th>
+            <th scope="col">Réf.</th> 
+            <th scope="col">Stock</th> 
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -32,6 +33,7 @@ class ViewProduit
               <td><?= $produit['nom_categorie'] ?></td>
               <td><?= $produit['nom_marque'] ?></td>
               <td><?= $produit['ref'] ?></td>
+              <td><?= $produit['quantite'] ?></td>
               <td>
                 <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary">Voir</a>
                 <a href="modif.php?id=<?= $produit['id'] ?>" class="btn btn-warning">Modifier</a>
