@@ -23,7 +23,7 @@ class ViewPanier
                 <option selected disabled value="">Choisissez un mode de livraison</option>
                 <option value="domicile">Livraison à votre domicile</option>
                 <option value="bureau de poste">Livraison au bureau de poste</option>
-                <option value="relais">Livraison en point relais</option>
+                <option value="point relais">Livraison en point relais</option>
               </select>
               <small id="modeHelp" class="form-text text-muted"></small>
             </div>
@@ -53,18 +53,20 @@ class ViewPanier
   public static function paiement()
   {
   ?>
-    <div class="row mb-4">
-      <div class="col-md-12">
-        <h2>Paiement</h2>
+    <div class="container">
+      <div class="row mb-4">
+        <div class="col-md-12">
+          <h2>Paiement</h2>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post" class="col-md-6 offset-md-3">
-          <input type="hidden" name="etat" id="etat" class="form-control" value="Payée">
-          <button type="submit" name="valider" id="valider" class="btn btn-success btn-lg btn-block">Payer</button>
-        </form>
-        <a href="debloquePanier.php" class="btn btn-primary">← Retour au panier</a>
+      <div class="row">
+        <div class="col-md-12">
+          <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post" class="col-md-6 offset-md-3">
+            <input type="hidden" name="etat" id="etat" class="form-control" value="Payée">
+            <button type="submit" name="valider" id="valider" class="btn btn-success btn-lg btn-block">Payer</button>
+          </form>
+          <a href="debloquePanier.php" class="btn btn-primary">← Retour au panier</a>
+        </div>
       </div>
     </div>
 <?php

@@ -1,18 +1,13 @@
 <?php
-require_once 'C:/wamp64/www/projet/classes/model/ModelProduit.php';
-require_once 'C:/wamp64/www/projet/classes/model/ModelMarque.php';
-require_once 'C:/wamp64/www/projet/classes/model/ModelCategorie.php';
-require_once 'C:/wamp64/www/projet/classes/model/ModelTransporteur.php';
 require_once 'C:/wamp64/www/projet/classes/model/ModelCommande.php';
-require_once 'C:/wamp64/www/projet/classes/model/ModelClient.php';
 
 class ViewCommande
 {
   // FONCTION AFFICHANT LA LISTE DES CATÉGORIES
-  public static function listeCommandeClient($id_client)
+  public static function listeCommande($premier, $parPage)
   {
     $commandes = new ModelCommande();
-    $liste = $commandes->listeCommandeClient($id_client);
+    $liste = $commandes->listeCommande($premier, $parPage);
 ?>
     <?php
     if (count($liste) > 0) {
@@ -21,10 +16,10 @@ class ViewCommande
         <thead>
           <tr>
             <th scope="col">N° Commande</th>
+            <th scope="col">N° Client</th>
             <th scope="col">Date</th>
             <th scope="col">État</th>
             <th scope="col">Montant</th>
-            <th scope="col">Lieu de livraison</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -34,12 +29,13 @@ class ViewCommande
           ?>
             <tr>
               <th scope="row"><?= $commande['id'] ?></th>
+              <td><?= $commande['id_client'] ?></td>
               <td><?= $commande['date'] ?></td>
-              <td><?= ucfirst($commande['etat'])  ?></td>
+              <td><?= $commande['etat'] ?></td>
               <td><?= $commande['montant'] ?> €</td>
-              <td><?= ucfirst($commande['mode']) ?></td>
               <td>
-                <a href="voirDetails.php?id_com=<?= $commande['id'] ?>" class="btn btn-primary">Voir les détails</a>
+                <a href="voirDetails.php?id_com=<?= $commande['id'] ?>&id_cli=<?= $commande['id_client'] ?>" class="btn btn-primary">Voir les détails</a>
+                <a href="modifEtat.php?id=<?= $commande['id'] ?>" class="btn btn-warning">Modifier l'état</a>
               </td>
             </tr>
           <?php
@@ -57,17 +53,18 @@ class ViewCommande
     }
   }
 
-  public static function voirDetailsClient($id_commande)
+  public static function voirDetails($id_commande)
   {
     $modelCommande = new ModelCommande();
     $listeDetails = $modelCommande->voirDetails($id_commande);
     $commande = $modelCommande->voirCommande($_GET['id_com']);
 
     $modelClient = new ModelClient();
-    $client = $modelClient->voirClient($_SESSION['id']);
+    $client = $modelClient->voirClient($_GET['id_cli']);
 
     $modelTransporteur = new ModelTransporteur();
     $transporteur = $modelTransporteur->voirTransporteur($commande['id_transporteur']);
+
     ?>
     <div class="container">
       <div class="row mb-4">
@@ -78,7 +75,7 @@ class ViewCommande
       <div class="row">
         <div class="col-md-12">
           <p>
-            <span class="font-weight-bold">N° client : </span><?= $_SESSION['id'] ?><br />
+            <span class="font-weight-bold">N° client : </span><?= $_GET['id_cli'] ?><br />
             <span class="font-weight-bold">Nom du client : </span><?= $client['prenom'] . " " . $client['nom'] ?><br />
             <span class="font-weight-bold">Date de commande : </span><?= $commande['date'] ?><br />
             <span class="font-weight-bold">État : </span><?= $commande['etat'] ?><br />
@@ -154,7 +151,8 @@ class ViewCommande
           <?php
           }
           ?>
-          <a href="listeCommandeClient.php" class="btn btn-primary">← Retour à la liste des commandes</a>
+          <a href="listeCommande.php?page=1" class="btn btn-primary">← Retour à la liste des commandes</a>
+          <a href="#" class="btn btn-warning">Modifier l'état</a>
         </div>
       </div>
     </div>

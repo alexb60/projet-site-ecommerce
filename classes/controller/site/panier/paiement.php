@@ -24,8 +24,9 @@ if (isset($_SESSION['panier']) && isset($_SESSION['envoi'])) {
 
     $nbProduits = count($_SESSION['panier']['id']); // STOCKAGE DU NOMBRE DE PRODUITS DIFFÉRENTS
     date_default_timezone_set('Europe/Paris'); // LA DATE ET L'HEURE SERONT BASÉ CELLE DE PARIS EN FRANCE
+    $montantTotal = montantPanier();
 
-    $dernierId = $modelCommande->creerCommande(date("d-m-y H:i:s"), $_POST['etat'], $_SESSION['envoi']['mode'][0], $_SESSION['id'], $_SESSION['envoi']['idTransporteur'][0]);
+    $dernierId = $modelCommande->creerCommande(date("Y-m-d H:i:s"), $_POST['etat'], $_SESSION['envoi']['mode'][0], $montantTotal, $_SESSION['id'], $_SESSION['envoi']['idTransporteur'][0]);
     for ($i = 0; $i < $nbProduits; $i++) {
       $modelCommande->ajoutDetailsCommande($dernierId, $_SESSION['panier']['id'][$i], $_SESSION['panier']['prix'][$i], $_SESSION['panier']['quantite'][$i]);
       $modelCommande->majStock($_SESSION['panier']['id'][$i], $_SESSION['panier']['quantite'][$i]);

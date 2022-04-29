@@ -42,7 +42,7 @@ class ViewTemplate
                 <div class="dropdown-menu" aria-labelledby="compte">
                   <a class="dropdown-item" href="../client/accueil.php">Accueil Mon Espace</a>
                   <a class="dropdown-item" href="../client/voirClient.php">Mon profil</a>
-                  <a class="dropdown-item" href="#">Mes commandes</a>
+                  <a class="dropdown-item" href="../commande/listeCommandeClient.php?page=1">Mes commandes</a>
                   <a class="dropdown-item btn-modif" href="../client/modifClient.php">Modifier mon profil</a>
                   <a class="dropdown-item btn-deco" href="../client/deconnexion.php">Déconnexion</a>
                 </div>
