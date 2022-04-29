@@ -82,7 +82,7 @@ class ViewProduit
                     <div class="form-group">
                       <label for="quantite"><span class="font-weight-bold">Quantité :</span></label>
                       <div class="col-3 input-reduit">
-                        <input type="number" name="quantite" id="quantite" class="form-control" min="1" max="<?= $produit['quantite'] ?>" value="1" <?= (isset($_SESSION['id'])) ? "" : "disabled" ?>>
+                        <input type="number" name="quantite" id="quantite" class="form-control" min="<?= ($produit['quantite'] == 0) ? "0" : "1" ?>" max="<?= $produit['quantite'] ?>" value="<?= ($produit['quantite'] == 0) ? "0" : "1" ?>" <?= (isset($_SESSION['id'])) ? "" : "disabled" ?>>
                       </div>
                     </div>
                     <input type="hidden" name="prix" id="prix" class="form-control" value="<?= $produit['prix'] ?>">

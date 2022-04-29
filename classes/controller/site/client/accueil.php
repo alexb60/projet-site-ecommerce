@@ -4,7 +4,7 @@ session_start();
 require_once "../../../view/site/ViewTemplate.php";
 
 if (isset($_SESSION['id'])) {
-  $salutation = "<h2>Bonjour " . $_SESSION['prenom'] . " " . $_SESSION['nom'] . "<h2>";
+  $salutation = "Bonjour " . $_SESSION['prenom'] . " " . $_SESSION['nom'];
   ViewTemplate::headerConnecte();
 } else {
   header('Location: connexion-client.php');
@@ -26,10 +26,10 @@ if (isset($_SESSION['id'])) {
 </head>
 
 <body>
-  <h1>Page d'accueil</h1>
-  <br />
+  <div class="container">
+    <h1><?php echo $salutation; ?></h1>
+  </div>
   <?php
-  echo $salutation;
   ViewTemplate::footer();
   ?>
   <script src="../../../../js/jquery.min.js"></script>

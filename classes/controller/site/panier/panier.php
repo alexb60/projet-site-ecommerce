@@ -177,7 +177,7 @@ function envoi($mode, $transporteur)
   $envoi = false;
   // SI ENVOI DÉJÀ EXISTANT...
   if (isset($_SESSION['envoi'])) {
-    supprEnvoi();
+    supprimerEnvoi();
     envoi($mode, $transporteur);
   } else {
     creerEnvoi();
@@ -189,7 +189,7 @@ function envoi($mode, $transporteur)
 }
 
 // SUPPRESSION DU MODE D'ENVOI
-function supprEnvoi()
+function supprimerEnvoi()
 {
   unset($_SESSION['envoi']);
 }

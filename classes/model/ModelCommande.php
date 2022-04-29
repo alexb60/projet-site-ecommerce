@@ -35,12 +35,6 @@ class ModelCommande
       ':id_client' => $id_client,
       ':id_transporteur' => $id_transporteur,
     ]);
-  }
-
-  // RÉCUPÉRATION DU DERNIER ID DE LA TABLE COMMANDE
-  public function dernierIdCommande()
-  {
-    $idcon = connexion();
     return $idcon->lastInsertId();
   }
 
@@ -56,6 +50,19 @@ class ModelCommande
       ':id_produit' => $id_produit,
       ':prix' => $prix,
       ':quantite' => $quantite,
+    ]);
+  }
+
+  // REQUÊTE SQL PRÉPARÉE PERMETTANT DE METTRE À JOUR LE STOCK
+  public function majStock($id_produit, $qte)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    UPDATE produit SET quantite=(quantite-:qte) WHERE id=:id_produit
+    ");
+    $requete->execute([
+      ':qte' => $qte,
+      ':id_produit' => $id_produit,
     ]);
   }
 

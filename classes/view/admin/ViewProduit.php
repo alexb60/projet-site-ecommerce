@@ -18,8 +18,8 @@ class ViewProduit
             <th scope="col">Nom</th>
             <th scope="col">Catégorie</th>
             <th scope="col">Marque</th>
-            <th scope="col">Réf.</th> 
-            <th scope="col">Stock</th> 
+            <th scope="col">Réf.</th>
+            <th scope="col">Stock</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -133,7 +133,7 @@ class ViewProduit
             </div>
             <div class="form-group">
               <label for="quantite">Quantité :</label>
-              <input type="number" name="quantite" id="quantite" class="form-control" aria-describedby="quantiteHelp" data-type="quantite" data-message="La quantité doit être un nombre entier">
+              <input type="number" name="quantite" id="quantite" min="0" class="form-control" aria-describedby="quantiteHelp" data-type="quantite" data-message="La quantité doit être un nombre entier">
               <small class="form-text text-muted" id="quantiteHelp"></small>
             </div>
             <div class="form-group">
@@ -221,7 +221,7 @@ class ViewProduit
             </div>
             <div class="form-group">
               <label for="quantite">Quantité :</label>
-              <input type="number" name="quantite" id="quantite" class="form-control" value="<?= $produit['quantite'] ?>" aria-describedby="quantiteHelp" data-type="quantite" data-message="La quantité doit être un nombre entier">
+              <input type="number" name="quantite" id="quantite" min="0" class="form-control" value="<?= $produit['quantite'] ?>" aria-describedby="quantiteHelp" data-type="quantite" data-message="La quantité doit être un nombre entier">
               <small class="form-text text-muted" id="quantiteHelp"></small>
             </div>
             <div class="form-group">
