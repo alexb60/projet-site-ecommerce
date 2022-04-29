@@ -162,3 +162,34 @@ function supprimerPanier()
 {
   unset($_SESSION['panier']);
 }
+
+// CREATION DU MODE D'ENVOI
+function creerEnvoi()
+{
+  $_SESSION['envoi'] = array();
+  $_SESSION['envoi']['mode'] = array();
+  $_SESSION['envoi']['idTransporteur'] = array();
+}
+
+// AJOUT DU MODE D'ENVOI
+function envoi($mode, $transporteur)
+{
+  $envoi = false;
+  // SI ENVOI DÉJÀ EXISTANT...
+  if (isset($_SESSION['envoi'])) {
+    supprEnvoi();
+    envoi($mode, $transporteur);
+  } else {
+    creerEnvoi();
+    array_push($_SESSION['envoi']['mode'], $mode);
+    array_push($_SESSION['envoi']['idTransporteur'], $transporteur);
+    $envoi = true;
+  }
+  return $envoi;
+}
+
+// SUPPRESSION DU MODE D'ENVOI
+function supprEnvoi()
+{
+  unset($_SESSION['envoi']);
+}

@@ -21,7 +21,7 @@ $(document).on("click", "#valider", function (e) {
   let formElements = $("form")[0];
 
   for (let i = 0; i < formElements.length - 2; i++) {
-    if ($(formElements[i]).attr("type") === "password") {
+    if ($(formElements[i]).attr("type") === "password") { // TRAITEMENT DU CHAMP PASSWORD
       $("#pass").removeClass("erreurInput");
 
       const pattern = regexListe["pass"];
@@ -29,6 +29,17 @@ $(document).on("click", "#valider", function (e) {
       if (pattern.test(formElements[i].value) === false) {
         erreur = true;
         $("#pass").addClass("erreurInput");
+        $("#" + $(formElements[i]).attr("aria-describedby")).html(
+          `<p class="erreurMessage">${$(formElements[i]).attr("data-message")}</p>`
+        );
+      }
+    } else if ($(formElements[i]).prop("tagName").toLowerCase() === "select") { // TRAITEMENT DU SELECT
+      $(formElements[i]).removeClass("erreurInput");
+      //$(formElements[i]).next().html("");
+
+      if (formElements[i].value === "") {
+        erreur = true;
+        $(formElements[i]).addClass("erreurInput");
         $("#" + $(formElements[i]).attr("aria-describedby")).html(
           `<p class="erreurMessage">${$(formElements[i]).attr("data-message")}</p>`
         );
@@ -50,6 +61,6 @@ $(document).on("click", "#valider", function (e) {
     }
   }
   if (!erreur) {
-    $("form").submit();
+    $("form")[0].submit();
   }
 });

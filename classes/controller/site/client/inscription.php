@@ -19,8 +19,7 @@
   require_once "../../../model/ModelClient.php";
 
   ViewTemplate::headerInvite();
-
-  if (isset($_POST['ajout'])) {
+  if (isset($_POST['nom'])) {
     $donnees = [$_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['pass']];
     $types = ["nom", "prenom", "email", "pass"];
     $data = Utils::valider($donnees, $types);
@@ -53,7 +52,7 @@
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>
   <script src="../../../../js/font-awesome.all.min.js"></script>
-  <!-- <script src="../../../../js/validation-form.js"></script> -->
+  <script src="../../../../js/validation-form.js"></script>
 </body>
 
 </html>
