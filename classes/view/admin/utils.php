@@ -17,7 +17,7 @@ class Utils
     $uploadOk = false; // par defaut false avant que je fasse les controles
     $errors = ""; // chaine contient les messages d'erreurs s'il y en a
 
-    $pattern = "/^[\p{L}\w\s\-\.]{3,}$/";
+    $pattern = "/^[\p{L}\w\s\-\.\(\)\_]{3,}$/";
     if (!preg_match($pattern, $file_name)) {
       $errors .= "Nom de fichier non valide. <br/>";
     }

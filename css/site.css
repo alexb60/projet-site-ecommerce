@@ -23,3 +23,53 @@
 .input-reduit {
   padding-left: 0% !important;
 }
+
+footer {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.bg-header,
+.bg-footer {
+  background-color: #090031 !important;
+}
+
+.no-style-footer {
+  text-decoration: none !important;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.no-style-footer:hover {
+  color: orangered !important;
+}
+
+.btn-orng {
+  color: orangered !important;
+  border-color: orangered !important;
+}
+
+.btn-orng:hover {
+  color: white !important;
+  border-color: orangered !important;
+  background-color: orangered !important;
+}
+
+.btn-orng:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 69, 0, 0.5) !important;
+}
+
+.btn-orng:active {
+  background-color: orangered !important;
+  color: white !important;
+}
+
+.recherche {
+  width: 25rem !important;
+}
+
+.image-card {
+  width: 75% !important;
+}
+
+.card-cache {
+  visibility: hidden !important;
+}

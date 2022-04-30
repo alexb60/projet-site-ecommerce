@@ -29,9 +29,7 @@ if (isset($_POST['connexion'])) {
     echo "Echec d'authentification";
   }
 } else {
-
 ?>
-
   <!DOCTYPE html>
   <html lang="fr">
 
@@ -42,7 +40,7 @@ if (isset($_POST['connexion'])) {
     <title>Connexion espace client</title>
     <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
     <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-    <link rel="stylesheet" href="../../../../css/admin.css">
+    <link rel="stylesheet" href="../../../../css/site.css">
   </head>
 
   <body>

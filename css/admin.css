@@ -15,3 +15,21 @@
   width: 35% !important;
   margin: 5% !important;
 }
+
+.bg-header,
+.bg-footer {
+  background-color: #090031 !important;
+}
+
+footer {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.no-style-footer {
+  text-decoration: none !important;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.no-style-footer:hover {
+  color: orangered !important;
+}

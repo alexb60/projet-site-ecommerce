@@ -39,12 +39,12 @@ class ModelProduit
     return $requete->fetch(PDO::FETCH_ASSOC);
   }
 
-  // REQUÊTE SQL PRÉPARÉE LISTANT LES PRODUITS
+  // REQUÊTE SQL PRÉPARÉE LISTANT LES PRODUITS AVEC PAGINATION
   public function listeProduit($premier, $parPage)
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    SELECT P.*, C.nom nom_categorie, M.nom nom_marque FROM produit P INNER JOIN categorie C ON P.id_categorie = C.id INNER JOIN marque M ON P.id_marque = M.id LIMIT :premier, :parPage;
+    SELECT P.*, C.nom nom_categorie, M.nom nom_marque FROM produit P INNER JOIN categorie C ON P.id_categorie = C.id INNER JOIN marque M ON P.id_marque = M.id ORDER BY P.id ASC LIMIT :premier, :parPage;
     ");
     $requete->bindValue(':premier', $premier, PDO::PARAM_INT);
     $requete->bindValue(':parPage', $parPage, PDO::PARAM_INT);
@@ -114,6 +114,30 @@ class ModelProduit
       ':id_categorie' => $id_categorie,
       ':id_marque' => $id_marque
     ]);
+  }
+
+  // REQUÊTE SQL PRÉPARÉE PERMETTANT DE LISTER LES 9 DERNIERS PRODUITS DE LA TABLE produit
+  public function derniersProduit()
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT P.*, C.nom nom_categorie FROM produit P INNER JOIN categorie C ON P.id_categorie = C.id ORDER BY P.id DESC LIMIT 8
+    ");
+    $requete->execute();
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  // REQUÊTE SQL PRÉPARÉE LISTANT LES PRODUITS SELON LA CATÉGORIE
+  public function produitParCategorie($id_categorie)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT P.* FROM produit P INNER JOIN categorie C ON P.id_categorie = C.id WHERE id_categorie=:id_categorie ORDER BY P.id ASC;
+    ");
+    $requete->execute([
+      ':id_categorie' => $id_categorie,
+    ]);
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
   }
 
   // GETTERS ET SETTERS

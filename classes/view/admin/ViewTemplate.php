@@ -19,9 +19,9 @@ class ViewTemplate
   {
   ?>
     <header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-header mb-5">
         <div class="container">
-          <a class="navbar-brand" href="#">Navbar</a>
+          <a class="navbar-brand" href="#">Admin</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -79,9 +79,9 @@ class ViewTemplate
   {
   ?>
     <br />
-    <footer class="footer bg-dark mt-auto py-3 text-center text-light h3">
+    <footer class="footer bg-dark bg-footer mt-auto py-4 text-center h6">
       <div class="container">
-        copyright &copy; <?= date("Y") ?>
+        &copy; <?= date("Y") ?> - <a href="../../site/index.php" class="no-style-footer">Site client</a>
       </div>
     </footer>
 <?php

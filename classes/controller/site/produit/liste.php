@@ -45,12 +45,9 @@ if (isset($_SESSION['id'])) {
 
   ?>
   <div class="container">
-
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-12">
         <h2 class="mb-4">Liste des produits</h2>
-      </div>
-      <div class="col-md-6 d-flex justify-content-end align-items-start">
       </div>
     </div>
     <div class="row">
