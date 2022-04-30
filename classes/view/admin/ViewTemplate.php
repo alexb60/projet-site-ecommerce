@@ -64,6 +64,15 @@ class ViewTemplate
                   <a class="dropdown-item" href="../transporteur/ajout.php">Ajouter un transporteur</a>
                 </div>
               </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="role" role="button" data-toggle="dropdown" aria-expanded="false">
+                  Rôles
+                </a>
+                <div class="dropdown-menu" aria-labelledby="role">
+                  <a class="dropdown-item" href="../role/liste.php">Liste des rôles</a>
+                  <a class="dropdown-item" href="../role/ajout.php">Ajouter un rôle</a>
+                </div>
+              </li>
               <li class="nav-item">
                 <a class="nav-link" href="../commande/listeCommande.php?page=1">Commandes</a>
               </li>
