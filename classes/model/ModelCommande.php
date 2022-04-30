@@ -135,7 +135,18 @@ WHERE C.id=:id_commande;
     return $requete->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  // REQUÊTE SQL PRÉPARÉE PERMETTANT DE LISTER LE DÉTAIL D'UNE COMMANDE
+  // REQUÊTE SQL PRÉPARÉE PERMETTANT DE MODIFIER L'ÉTAT D'UNE COMMANDE
+  public function modifEtat($id_commande, $etat)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    UPDATE commande SET etat=:etat WHERE id=:id_commande;
+    ");
+    $requete->execute([
+      ':id_commande' => $id_commande,
+      ':etat' => $etat,
+    ]);
+  }
 
   // GETTERS ET SETTERS
   public function getId()

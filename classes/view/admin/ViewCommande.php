@@ -152,7 +152,46 @@ class ViewCommande
           }
           ?>
           <a href="listeCommande.php?page=1" class="btn btn-primary">← Retour à la liste des commandes</a>
-          <a href="#" class="btn btn-warning">Modifier l'état</a>
+          <a href="modifEtat.php?id=<?= $_GET['id_com'] ?>" class="btn btn-warning">Modifier l'état</a>
+        </div>
+      </div>
+    </div>
+  <?php
+  }
+
+  public static function modifEtat($id_commande)
+  {
+    $modelCommande = new ModelCommande();
+    $commande = $modelCommande->voirCommande($id_commande);
+
+  ?>
+    <div class="container">
+      <div class="row mb-4">
+        <div class="col-md-12">
+          <h2>Modification de l'état de la commande n°<?= $commande['id'] ?></h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <form action="modifEtat.php" method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
+            <input type="hidden" name="id" id="id" value="<?= $commande['id'] ?>">
+            <div class="form-group">
+              <label for="etat">État de la commande :</label>
+              <select name="etat" id="etat" class="form-control" aria-describedby="etatHelp" data-type="etatSelect" data-message="Veuillez choisir un état.">
+                <option value="" selected disabled>Choisissez un état</option>
+                <option value="Payée" <?= ($commande['etat'] == "Payée") ? "selected" : "" ?>>Payée</option>
+                <option value="En préparation" <?= ($commande['etat'] == "En préparation") ? "selected" : "" ?>>En préparation</option>
+                <option value="Expédiée" <?= ($commande['etat'] == "Expédiée") ? "selected" : "" ?>>Expédiée</option>
+                <option value="Livrée" <?= ($commande['etat'] == "Livrée") ? "selected" : "" ?>>Livrée</option>
+              </select>
+              <small id="etatHelp" class="form-text text-muted"></small>
+            </div>
+
+            <input type="submit" id="valider" class="btn btn-success">
+            <input type="reset" class="btn btn-danger">
+          </form>
+          <br />
+          <a href="listeCommande.php?page=1" class="btn btn-primary">← Retour à la liste des commandes</a>
         </div>
       </div>
     </div>

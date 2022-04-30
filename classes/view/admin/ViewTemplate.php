@@ -64,13 +64,8 @@ class ViewTemplate
                   <a class="dropdown-item" href="../transporteur/ajout.php">Ajouter un transporteur</a>
                 </div>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="commande" role="button" data-toggle="dropdown" aria-expanded="false">
-                  Commandes
-                </a>
-                <div class="dropdown-menu" aria-labelledby="commande">
-                  <a class="dropdown-item" href="../commande/listeCommande.php?page=1">Liste des commandes</a>
-                </div>
+              <li class="nav-item">
+                <a class="nav-link" href="../commande/listeCommande.php?page=1">Commandes</a>
               </li>
             </ul>
           </div>
