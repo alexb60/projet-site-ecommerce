@@ -15,6 +15,7 @@ class ViewTemplate
     </div>
   <?php
   }
+
   public static function menu()
   {
   ?>
@@ -76,6 +77,35 @@ class ViewTemplate
               <li class="nav-item">
                 <a class="nav-link" href="../commande/listeCommande.php?page=1">Commandes</a>
               </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+              <li><a href="../employe/modifEmploye.php" class="btn btn-outline-warning">Modifier mon profil</a></li>
+              <li>&nbsp;&nbsp;</li>
+              <li><a href="../employe/deconnexion.php" class="btn btn-outline-danger">Déconnexion</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+  <?php
+  }
+
+  public static function headerInvite()
+  {
+  ?>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-header mb-5">
+        <div class="container">
+          <a class="navbar-brand" href="#">Admin</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li><a href="../../site/produit/index.php" class="btn btn-outline-light">Retour sur le site client</a></li>
+              <li>&nbsp;&nbsp;</li>
+              <li><a href="../employe/connexion-employe.php" class="btn btn-outline-success btn-orng">Se connecter</a></li>
             </ul>
           </div>
         </div>

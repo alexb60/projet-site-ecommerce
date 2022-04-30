@@ -97,7 +97,7 @@ class ViewTemplate
     <br />
     <footer class="footer bg-dark bg-footer mt-auto py-4 text-center h6">
       <div class="container">
-        &copy; <?= date("Y") ?> - <a href="contact.php" class="no-style-footer">Contact</a> - <a href="" class="no-style-footer">Mentions légales</a> - <a href="" class="no-style-footer">Conditions générales de vente (CGV)</a> - <a href="connexion-admin.php" class="no-style-footer">Espace employé</a>
+        &copy; <?= date("Y") ?> - <a href="contact.php" class="no-style-footer">Contact</a> - <a href="" class="no-style-footer">Mentions légales</a> - <a href="" class="no-style-footer">Conditions générales de vente (CGV)</a> - <a href="../../admin/employe/connexion-employe.php" class="no-style-footer">Espace employé</a>
       </div>
     </footer>
 <?php

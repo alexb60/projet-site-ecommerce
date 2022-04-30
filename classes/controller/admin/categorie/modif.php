@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+require_once "../../../view/admin/ViewCategorie.php";
+require_once "../../../view/admin/ViewTemplate.php";
+require_once "../../../model/ModelCategorie.php";
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -13,33 +21,32 @@
 
 <body>
   <?php
-  require_once "../../../view/admin/ViewCategorie.php";
-  require_once "../../../view/admin/ViewTemplate.php";
-  require_once "../../../model/ModelCategorie.php";
+  if (isset($_SESSION['id_employe'])) {
+    ViewTemplate::menu();
 
-  ViewTemplate::menu();
-
-  $modelCategorie = new ModelCategorie();
-  if (isset($_GET['id'])) {
-    if ($modelCategorie->voirCategorie($_GET['id'])) {
-      ViewCategorie::modifCategorie($_GET['id']);
-    } else {
-      ViewTemplate::alert("danger", "La catégorie n'existe pas", "liste.php");
-    }
-  } else {
-    if (isset($_POST['id']) && $modelCategorie->voirCategorie($_POST['id'])) {
-      if ($modelCategorie->modifCategorie($_POST['id'], $_POST['nom'])) {
-        ViewTemplate::alert("success", "La catégorie a été modifiée avec succès", "liste.php");
+    $modelCategorie = new ModelCategorie();
+    if (isset($_GET['id'])) {
+      if ($modelCategorie->voirCategorie($_GET['id'])) {
+        ViewCategorie::modifCategorie($_GET['id']);
       } else {
-        ViewTemplate::alert("danger", "Échec de la modification", "liste.php");
+        ViewTemplate::alert("danger", "La catégorie n'existe pas", "liste.php");
       }
     } else {
-      ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php");
+      if (isset($_POST['id']) && $modelCategorie->voirCategorie($_POST['id'])) {
+        if ($modelCategorie->modifCategorie($_POST['id'], $_POST['nom'])) {
+          ViewTemplate::alert("success", "La catégorie a été modifiée avec succès", "liste.php");
+        } else {
+          ViewTemplate::alert("danger", "Échec de la modification", "liste.php");
+        }
+      } else {
+        ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php");
+      }
     }
+  } else {
+    ViewTemplate::headerInvite();
+    ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
   }
-
   ViewTemplate::footer();
-
   ?>
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>

@@ -58,7 +58,7 @@ class Utils
     $tabRegex = [
       "non" => "//",
       "test" => '/[\w]123/',
-      "nom" => "/^[\p{L}\s\-]{2,}$/u",
+      "nom" => "/^[\p{L}\s\-]{1,}$/u",
       "prenom" => "/^[\p{L}\s\-]{2,}$/u",
       "tel" => "/^[\+]?[0-9]{10}$/",
       "photo" => "/^[\w\s\-\.]{1,22}(.jpg|.jpeg|.png|.gif)$/",
@@ -66,7 +66,12 @@ class Utils
       "pass" => "/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/",
       "adresse" => "/^[\w\-\s]{5,}$/",
       "ville" => "/^[\p{L}\s\-]{1,}$/u",
-      "code_post" => "/^((0[1-9])|([1-8]\d|9[0-578]))\d{3}$/"
+      "code_post" => "/^((0[1-9])|([1-8]\d|9[0-578]))\d{3}$/",
+      "prix" => "/^\d{1,}(\.\d{2}){0,1}$/",
+      "ref" => "/^[a-zA-Z0-9]{1,}$/",
+      "quantite" => "/^\d{1,}$/",
+      "description" => "/^[\p{L}\s\-\d]{1,}$/u",
+      "nomProduit" => "/^[\p{L}\s\-\d\.\,]{1,}$/u"
     ];
 
     //https://www.php.net/manual/fr/filter.filters.validate.php

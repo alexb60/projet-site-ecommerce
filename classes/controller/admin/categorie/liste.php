@@ -1,3 +1,9 @@
+<?php
+session_start();
+require_once "../../../view/admin/ViewCategorie.php";
+require_once "../../../view/admin/ViewTemplate.php";
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -13,10 +19,14 @@
 
 <body>
   <?php
-  require_once "../../../view/admin/ViewCategorie.php";
-  require_once "../../../view/admin/ViewTemplate.php";
-  ViewTemplate::menu();
-  ViewCategorie::listeCategorie();
+
+  if (isset($_SESSION['id_employe'])) {
+    ViewTemplate::menu();
+    ViewCategorie::listeCategorie();
+  } else {
+    ViewTemplate::headerInvite();
+    ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
+  }
   ViewTemplate::footer();
   ?>
   <script src="../../../../js/jquery.min.js"></script>

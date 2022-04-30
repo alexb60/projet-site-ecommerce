@@ -1,9 +1,15 @@
 <?php
 session_start();
 
-require_once "../../../view/admin/ViewCategorie.php";
 require_once "../../../view/admin/ViewTemplate.php";
-require_once "../../../model/ModelCategorie.php";
+
+if (isset($_SESSION['id_employe'])) {
+  $salutation = "Bonjour " . $_SESSION['prenom'] . " " . $_SESSION['nom'] . " et bienvenue sur l'espace employé";
+  ViewTemplate::menu();
+} else {
+  header('Location: connexion-employe.php');
+  exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -13,21 +19,17 @@ require_once "../../../model/ModelCategorie.php";
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Détails d'une catégorie</title>
+  <title>Accueil espace employé</title>
   <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
   <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
   <link rel="stylesheet" href="../../../../css/admin.css">
 </head>
 
 <body>
+  <div class="container">
+    <h1><?php echo $salutation; ?></h1>
+  </div>
   <?php
-  if (isset($_SESSION['id_employe'])) {
-    ViewTemplate::menu();
-    ViewCategorie::voirCategorie($_GET['id']);
-  } else {
-    ViewTemplate::headerInvite();
-    ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
-  }
   ViewTemplate::footer();
   ?>
   <script src="../../../../js/jquery.min.js"></script>

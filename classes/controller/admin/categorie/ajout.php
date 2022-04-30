@@ -1,3 +1,11 @@
+<?php
+session_start();
+require_once "../../../view/admin/ViewCategorie.php";
+require_once "../../../view/admin/ViewTemplate.php";
+require_once "../../../view/admin/utils.php";
+require_once "../../../model/ModelCategorie.php";
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -13,32 +21,30 @@
 
 <body>
   <?php
-  require_once "../../../view/admin/ViewCategorie.php";
-  require_once "../../../view/admin/ViewTemplate.php";
-  require_once "../../../view/admin/utils.php";
-  require_once "../../../model/ModelCategorie.php";
+  if (isset($_SESSION['id_employe'])) {
+    ViewTemplate::menu();
+    if (isset($_POST['ajout'])) {
+      $donnees = [$_POST['nom']];
+      $types = ["nom"];
+      $data = Utils::valider($donnees, $types);
 
-  ViewTemplate::menu();
-
-  if (isset($_POST['ajout'])) {
-    $donnees = [$_POST['nom']];
-    $types = ["nom"];
-    $data = Utils::valider($donnees, $types);
-
-    if ($data) {
-      $categorie = new ModelCategorie();
-      if ($categorie->ajoutCategorie($_POST['nom'])) {
-        ViewTemplate::alert("success", "Catégorie ajoutée avec succès", "liste.php");
+      if ($data) {
+        $categorie = new ModelCategorie();
+        if ($categorie->ajoutCategorie($_POST['nom'])) {
+          ViewTemplate::alert("success", "Catégorie ajoutée avec succès", "liste.php");
+        } else {
+          ViewTemplate::alert("danger", "Erreur d'ajout", "ajout.php");
+        }
       } else {
-        ViewTemplate::alert("danger", "Erreur d'ajout", "ajout.php");
+        ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
       }
     } else {
-      ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
+      ViewCategorie::ajoutCategorie();
     }
   } else {
-    ViewCategorie::ajoutCategorie();
+    ViewTemplate::headerInvite();
+    ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
   }
-
 
   ViewTemplate::footer();
   ?>
