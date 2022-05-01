@@ -1,3 +1,9 @@
+<?php
+session_start();
+require_once "../../../view/admin/ViewRole.php";
+require_once "../../../view/admin/ViewTemplate.php";
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -13,10 +19,19 @@
 
 <body>
   <?php
-  require_once "../../../view/admin/ViewRole.php";
-  require_once "../../../view/admin/ViewTemplate.php";
-  ViewTemplate::menu();
-  ViewRole::listeRole();
+  if (isset($_SESSION['id_employe'])) {
+    ViewTemplate::menu();
+    ViewRole::listeRole();
+  } else {
+    ViewTemplate::headerInvite();
+  ?>
+    <div class="container">
+      <?php
+      ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
+      ?>
+    </div>
+  <?php
+  }
   ViewTemplate::footer();
   ?>
   <script src="../../../../js/jquery.min.js"></script>

@@ -1,3 +1,11 @@
+<?php
+session_start();
+require_once "../../../view/admin/ViewRole.php";
+require_once "../../../view/admin/ViewTemplate.php";
+require_once "../../../view/admin/utils.php";
+require_once "../../../model/ModelRole.php";
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -13,33 +21,37 @@
 
 <body>
   <?php
-  require_once "../../../view/admin/ViewRole.php";
-  require_once "../../../view/admin/ViewTemplate.php";
-  require_once "../../../view/admin/utils.php";
-  require_once "../../../model/ModelRole.php";
+  if (isset($_SESSION['id_employe'])) {
+    ViewTemplate::menu();
 
-  ViewTemplate::menu();
+    if (isset($_POST['nom'])) {
+      $donnees = [$_POST['nom']];
+      $types = ["nom"];
+      $data = Utils::valider($donnees, $types);
 
-  if (isset($_POST['nom'])) {
-    $donnees = [$_POST['nom']];
-    $types = ["nom"];
-    $data = Utils::valider($donnees, $types);
-
-    if ($data) {
-      $role = new ModelRole();
-      if ($role->ajoutRole($_POST['nom'])) {
-        ViewTemplate::alert("success", "Rôle ajouté avec succès", "liste.php");
+      if ($data) {
+        $role = new ModelRole();
+        if ($role->ajoutRole($_POST['nom'])) {
+          ViewTemplate::alert("success", "Rôle ajouté avec succès", "liste.php");
+        } else {
+          ViewTemplate::alert("danger", "Erreur d'ajout", "ajout.php");
+        }
       } else {
-        ViewTemplate::alert("danger", "Erreur d'ajout", "ajout.php");
+        ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
       }
     } else {
-      ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
+      ViewRole::ajoutRole();
     }
   } else {
-    ViewRole::ajoutRole();
+    ViewTemplate::headerInvite();
+  ?>
+    <div class="container">
+      <?php
+      ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
+      ?>
+    </div>
+  <?php
   }
-
-
   ViewTemplate::footer();
   ?>
   <script src="../../../../js/jquery.min.js"></script>

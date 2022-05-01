@@ -1,3 +1,10 @@
+<?php
+session_start();
+require_once "../../../view/admin/ViewRole.php";
+require_once "../../../view/admin/ViewTemplate.php";
+require_once "../../../model/ModelRole.php";
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -13,29 +20,34 @@
 
 <body>
   <?php
-  require_once "../../../view/admin/ViewRole.php";
-  require_once "../../../view/admin/ViewTemplate.php";
-  require_once "../../../model/ModelRole.php";
+  if (isset($_SESSION['id_employe'])) {
+    ViewTemplate::menu();
 
-  ViewTemplate::menu();
-
-  if (isset($_GET['id'])) {
-    $modelRole = new ModelRole();
-    if ($modelRole->voirRole($_GET['id'])) {
-      if ($modelRole->suppRole($_GET['id'])) {
-        ViewTemplate::alert("success", "Rôle supprimé avec succès", "liste.php");
+    if (isset($_GET['id'])) {
+      $modelRole = new ModelRole();
+      if ($modelRole->voirRole($_GET['id'])) {
+        if ($modelRole->suppRole($_GET['id'])) {
+          ViewTemplate::alert("success", "Rôle supprimé avec succès", "liste.php");
+        } else {
+          ViewTemplate::alert("danger", "Échec de la suppression", "liste.php");
+        }
       } else {
-        ViewTemplate::alert("danger", "Échec de la suppression", "liste.php");
+        ViewTemplate::alert("danger", "La catégorie n'existe pas", "liste.php");
       }
     } else {
-      ViewTemplate::alert("danger", "La catégorie n'existe pas", "liste.php");
+      ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php");
     }
   } else {
-    ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php");
+    ViewTemplate::headerInvite();
+  ?>
+    <div class="container">
+      <?php
+      ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
+      ?>
+    </div>
+  <?php
   }
-
   ViewTemplate::footer();
-
   ?>
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>

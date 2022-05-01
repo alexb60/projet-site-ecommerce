@@ -1,3 +1,10 @@
+<?php
+session_start();
+require_once "../../../view/admin/ViewRole.php";
+require_once "../../../view/admin/ViewTemplate.php";
+require_once "../../../model/ModelRole.php";
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -13,33 +20,38 @@
 
 <body>
   <?php
-  require_once "../../../view/admin/ViewRole.php";
-  require_once "../../../view/admin/ViewTemplate.php";
-  require_once "../../../model/ModelRole.php";
+  if (isset($_SESSION['id_employe'])) {
+    ViewTemplate::menu();
 
-  ViewTemplate::menu();
-
-  $modelRole = new ModelRole();
-  if (isset($_GET['id'])) {
-    if ($modelRole->voirRole($_GET['id'])) {
-      ViewRole::modifRole($_GET['id']);
-    } else {
-      ViewTemplate::alert("danger", "Le rôle n'existe pas", "liste.php");
-    }
-  } else {
-    if (isset($_POST['id']) && $modelRole->voirRole($_POST['id'])) {
-      if ($modelRole->modifRole($_POST['id'], $_POST['nom'])) {
-        ViewTemplate::alert("success", "Le rôle a été modifié avec succès", "liste.php");
+    $modelRole = new ModelRole();
+    if (isset($_GET['id'])) {
+      if ($modelRole->voirRole($_GET['id'])) {
+        ViewRole::modifRole($_GET['id']);
       } else {
-        ViewTemplate::alert("danger", "Échec de la modification", "liste.php");
+        ViewTemplate::alert("danger", "Le rôle n'existe pas", "liste.php");
       }
     } else {
-      ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php");
+      if (isset($_POST['id']) && $modelRole->voirRole($_POST['id'])) {
+        if ($modelRole->modifRole($_POST['id'], $_POST['nom'])) {
+          ViewTemplate::alert("success", "Le rôle a été modifié avec succès", "liste.php");
+        } else {
+          ViewTemplate::alert("danger", "Échec de la modification", "liste.php");
+        }
+      } else {
+        ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php");
+      }
     }
+  } else {
+    ViewTemplate::headerInvite();
+  ?>
+    <div class="container">
+      <?php
+      ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
+      ?>
+    </div>
+  <?php
   }
-
   ViewTemplate::footer();
-
   ?>
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>

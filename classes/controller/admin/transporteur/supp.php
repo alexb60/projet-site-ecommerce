@@ -1,3 +1,10 @@
+<?php
+session_start();
+require_once "../../../view/admin/ViewTransporteur.php";
+require_once "../../../view/admin/ViewTemplate.php";
+require_once "../../../model/ModelTransporteur.php";
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -13,29 +20,34 @@
 
 <body>
   <?php
-  require_once "../../../view/admin/ViewTransporteur.php";
-  require_once "../../../view/admin/ViewTemplate.php";
-  require_once "../../../model/ModelTransporteur.php";
+  if (isset($_SESSION['id_employe'])) {
+    ViewTemplate::menu();
 
-  ViewTemplate::menu();
-
-  if (isset($_GET['id'])) {
-    $modelTransporteur = new ModelTransporteur();
-    if ($modelTransporteur->voirTransporteur($_GET['id'])) {
-      if ($modelTransporteur->suppTransporteur($_GET['id'])) {
-        ViewTemplate::alert("success", "Transporteur supprimé avec succès", "liste.php");
+    if (isset($_GET['id'])) {
+      $modelTransporteur = new ModelTransporteur();
+      if ($modelTransporteur->voirTransporteur($_GET['id'])) {
+        if ($modelTransporteur->suppTransporteur($_GET['id'])) {
+          ViewTemplate::alert("success", "Transporteur supprimé avec succès", "liste.php");
+        } else {
+          ViewTemplate::alert("danger", "Échec de la suppression", "liste.php");
+        }
       } else {
-        ViewTemplate::alert("danger", "Échec de la suppression", "liste.php");
+        ViewTemplate::alert("danger", "Le transporteur n'existe pas", "liste.php");
       }
     } else {
-      ViewTemplate::alert("danger", "Le transporteur n'existe pas", "liste.php");
+      ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php");
     }
   } else {
-    ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php");
+    ViewTemplate::headerInvite();
+  ?>
+    <div class="container">
+      <?php
+      ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
+      ?>
+    </div>
+  <?php
   }
-
   ViewTemplate::footer();
-
   ?>
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>

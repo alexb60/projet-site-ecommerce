@@ -1,3 +1,11 @@
+<?php
+session_start();
+require_once "../../../view/admin/ViewTransporteur.php";
+require_once "../../../view/admin/ViewTemplate.php";
+require_once "../../../view/admin/utils.php";
+require_once "../../../model/ModelTransporteur.php";
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -13,38 +21,43 @@
 
 <body>
   <?php
-  require_once "../../../view/admin/ViewTransporteur.php";
-  require_once "../../../view/admin/ViewTemplate.php";
-  require_once "../../../view/admin/utils.php";
-  require_once "../../../model/ModelTransporteur.php";
+  if (isset($_SESSION['id_employe'])) {
+    ViewTemplate::menu();
+    if (isset($_POST['ajout'])) {
+      $donnees = [$_POST['nom']];
+      $types = ["nom"];
+      $data = Utils::valider($donnees, $types);
 
-  ViewTemplate::menu();
-  if (isset($_POST['ajout'])) {
-    $donnees = [$_POST['nom']];
-    $types = ["nom"];
-    $data = Utils::valider($donnees, $types);
+      if ($data) {
+        $extensions = ["jpg", "jpeg", "png", "gif"];
+        $upload = Utils::upload($extensions, "transporteur", $_FILES['logo']);
+        $modelTransporteur = new ModelTransporteur();
 
-    if ($data) {
-      $extensions = ["jpg", "jpeg", "png", "gif"];
-      $upload = Utils::upload($extensions, "transporteur", $_FILES['logo']);
-      $modelTransporteur = new ModelTransporteur();
-
-      if ($upload['uploadOk']) {
-        if ($modelTransporteur->ajoutTransporteur($_POST['nom'], $upload['file_name'])) {
-          ViewTemplate::alert("success", "Le transporteur a été ajouté avec succès", "liste.php");
+        if ($upload['uploadOk']) {
+          if ($modelTransporteur->ajoutTransporteur($_POST['nom'], $upload['file_name'])) {
+            ViewTemplate::alert("success", "Le transporteur a été ajouté avec succès", "liste.php");
+          } else {
+            ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
+          }
         } else {
-          ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
+          ViewTemplate::alert("danger", $upload['errors'], "ajout.php");
         }
       } else {
-        ViewTemplate::alert("danger", $upload['errors'], "ajout.php");
+        ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
       }
     } else {
-      ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
+      ViewTransporteur::ajoutTransporteur();
     }
   } else {
-    ViewTransporteur::ajoutTransporteur();
+    ViewTemplate::headerInvite();
+  ?>
+    <div class="container">
+      <?php
+      ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
+      ?>
+    </div>
+  <?php
   }
-
   ViewTemplate::footer();
   ?>
   <script src="../../../../js/jquery.min.js"></script>
