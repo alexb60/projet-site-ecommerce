@@ -70,7 +70,7 @@ class Utils
       "prix" => "/^\d{1,}(\.\d{2}){0,1}$/",
       "ref" => "/^[a-zA-Z0-9]{1,}$/",
       "quantite" => "/^\d{1,}$/",
-      "description" => "/^[\p{L}\s\-\d]{1,}$/u",
+      "description" => "/^[\p{L}\s\-\d\?\!\;\,\.\_]{1,}$/u",
       "nomProduit" => "/^[\p{L}\s\-\d\.\,]{1,}$/u"
     ];
 

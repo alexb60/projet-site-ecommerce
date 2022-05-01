@@ -21,7 +21,7 @@ class ViewTemplate
   ?>
     <header>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-header mb-5">
-        <div class="container">
+        <div class="container mx-auto">
           <a class="navbar-brand" href="../employe/accueil.php">Admin</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -80,9 +80,12 @@ class ViewTemplate
               <li class="nav-item">
                 <a class="nav-link" href="../client/liste.php?page=1">Clients</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../message/liste.php?page=1">Messages</a>
+              </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-              <li><a href="../employe/modifEmploye.php" class="btn btn-outline-warning">Modifier mon profil</a></li>
+              <li><a href="../employe/modifEmploye.php" class="btn btn-outline-warning">Éditer mon profil</a></li>
               <li>&nbsp;&nbsp;</li>
               <li><a href="../employe/deconnexion.php" class="btn btn-outline-danger">Déconnexion</a></li>
             </ul>

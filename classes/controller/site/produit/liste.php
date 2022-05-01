@@ -27,8 +27,6 @@ if (isset($_SESSION['id'])) {
 
 <body>
   <?php
-
-
   // PAGINATION
   if (isset($_GET['page']) && !empty($_GET['page'])) {
     $currentPage = (int) strip_tags($_GET['page']);
@@ -38,10 +36,10 @@ if (isset($_SESSION['id'])) {
 
   $modelProduit = new ModelProduit();
   $nbProduits = (int) $modelProduit->compteProduit()['nb_produits']; // STOCKAGE DU NOMBRE DE PRODUITS PASSÉ EN INT DANS $nbProduits
-  $parPage = 15; // NOMBRE D'ARTICLES PAR PAGE VOULU
+  $parPage = 15; // NOMBRE DE PRODUITS PAR PAGE VOULU
 
   $pages = ceil($nbProduits / $parPage); // CALCUL DU NOMBRE DE PAGE NÉCESSAIRE ARRONDI À L'ENTIER SUPÉRIEUR
-  $premier = ($currentPage * $parPage) - $parPage; // CALCUL DU 1ER ARTICLE DE LA PAGE
+  $premier = ($currentPage * $parPage) - $parPage; // CALCUL DU 1ER PRODUIT DE LA PAGE
 
   ?>
   <div class="container">

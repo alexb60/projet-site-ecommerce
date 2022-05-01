@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once "../../../view/admin/ViewClient.php";
+require_once "../../../view/admin/ViewMessage.php";
 require_once "../../../view/admin/ViewTemplate.php";
-require_once "../../../model/ModelClient.php";
+require_once "../../../model/ModelMessage.php";
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +12,7 @@ require_once "../../../model/ModelClient.php";
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Liste des clients</title>
+  <title>Liste des messages reçus</title>
   <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
   <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
   <link rel="stylesheet" href="../../../../css/admin.css">
@@ -30,24 +30,25 @@ require_once "../../../model/ModelClient.php";
       $currentPage = 1;
     }
 
-    $modelClient = new ModelClient();
-    $nbClients = (int) $modelClient->compteClient()['nb_clients']; // STOCKAGE DU NOMBRE DE CLIENTS PASSÉ EN INT DANS $nbClients
-    $parPage = 10; // NOMBRE DE COMMANDES PAR PAGE VOULU
+    $modelMessage = new ModelMessage();
+    $nbMessages = (int) $modelMessage->compteMessage()['nb_messages_client']; // STOCKAGE DU NOMBRE DE MESSAGES PASSÉ EN INT DANS $nbMessages
+    $parPage = 15; // NOMBRE DE MESSAGES PAR PAGE VOULU
 
-    $pages = ceil($nbClients / $parPage); // CALCUL DU NOMBRE DE PAGE NÉCESSAIRE ARRONDI À L'ENTIER SUPÉRIEUR
-    $premier = ($currentPage * $parPage) - $parPage; // CALCUL DU 1ER CLIENT DE LA PAGE
+    $pages = ceil($nbMessages / $parPage); // CALCUL DU NOMBRE DE PAGE NÉCESSAIRE ARRONDI À L'ENTIER SUPÉRIEUR
+    $premier = ($currentPage * $parPage) - $parPage; // CALCUL DU 1ER MESSAGE DE LA PAGE
 
   ?>
     <div class="container">
+
       <div class="row">
-        <div class="col-md-12">
-          <h2 class="mb-4">Liste des clients</h2>
+        <div class="col-md-6">
+          <h2 class="mb-4">Liste des messages reçus</h2>
         </div>
       </div>
       <div class="row">
         <div class="col-md-12">
           <?php
-          ViewClient::listeClient($premier, $parPage);
+          ViewMessage::listeMessageClient($premier, $parPage);
           ?>
           <nav>
             <ul class="pagination justify-content-center">
@@ -70,10 +71,16 @@ require_once "../../../model/ModelClient.php";
         </div>
       </div>
     </div>
-    <?php
+  <?php
   } else {
     ViewTemplate::headerInvite();
-    ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
+  ?>
+    <div class="container">
+      <?php
+      ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
+      ?>
+    </div>
+  <?php
   }
   ViewTemplate::footer();
   ?>

@@ -101,133 +101,180 @@ class ViewProduit
         </div>
       </div>
     </div>
-  <?php
+    <?php
   }
 
-  public static function derniersProduit()
+  // FONCTION AFFICHANT LES RÉSULTATS DE LA RECHERCHE
+  public static function recherche($recherche)
   {
     $produit = new ModelProduit();
-    $liste = $produit->derniersProduit();
-  ?>
-    <h2 class="mb-4">Nouveaux produits</h2>
-    <div id="carouselDerniersProduits" class="carousel slide" data-ride="carousel">
-      <div class="carousel-inner">
-        <?php
-        for ($j = 0; $j < 3; $j++) {
-          if ($j == 0) {
-        ?>
-            <div class="carousel-item active">
-              <div class="card-deck">
-              <?php
-            } else {
-              ?>
-                <div class="carousel-item">
+    $liste = $produit->recherche($recherche);
+    var_dump($liste);
+    if (count($liste) > 0) { ?>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Catégorie</th>
+            <th scope="col">Marque</th>
+            <th scope="col">Prix</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          foreach ($liste as $produit) {
+          ?>
+            <tr>
+              <th scope="row"><?= $produit['id'] ?></th>
+              <td><?= $produit['nom'] ?></td>
+              <td><?= $produit['nom_categorie'] ?></td>
+              <td><?= $produit['nom_marque'] ?></td>
+              <td><?= $produit['prix'] ?></td>
+              <td>
+                <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary">Voir</a>
+              </td>
+            </tr>
+          <?php
+          }
+          ?>
+        </tbody>
+      </table>
+    <?php
+    } else {
+    ?>
+      <div class="alert alert-danger" role="alert">
+        Aucun résultat trouvé.
+      </div>
+      <?php
+    }
+  }
+
+  public static function produitParCategorie()
+  {
+    $modelProduit = new ModelProduit();
+
+    $modelCategorie = new ModelCategorie();
+    $listeCategorie = $modelCategorie->listeCategorie();
+
+    foreach ($listeCategorie as $categorie) {
+      $produit = $modelProduit->produitParCategorie($categorie['id']);
+      $nbProduit = count($produit); // STOCKAGE DU NOMBRE DE PRODUITS
+
+      if (ceil($nbProduit / 3) > 3) {
+        $slide = 3;
+      } else {
+        $slide = ceil($nbProduit / 3);
+      }
+
+      if ($nbProduit > 0) {
+      ?>
+        <h2 class="my-4">Dans la catégorie <?= $categorie['nom'] ?></h2>
+        <div id="carouselDerniersProduits" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <?php
+            for ($j = 0; $j < $slide; $j++) {
+              if ($j == 0) {
+            ?>
+                <div class="carousel-item active">
                   <div class="card-deck">
-                    <?php
-                  }
-                  for ($i = ($j * 3); $i < (($j + 1) * 3); $i++) {
-                    if (isset($liste[$i]['id'])) {
-                    ?>
-                      <div class="card">
-                        <img src="../../../../images/produit/<?= $liste[$i]['photo'] ?>" alt='Photo du produit "<?= $liste[$i]['nom'] ?>"' class="d-block mx-auto w-100 image-card">
-                        <div class="card-body">
-                          <h5 class="card-title"><?= $liste[$i]['nom'] ?></h5>
-                          <p class="card-text"><?= $liste[$i]['description'] ?></p>
-                          <h4 class="card-text text-right"><?= $liste[$i]['prix'] ?> €</h4>
-                          <a href="voir.php?id=<?= $liste[$i]['id'] ?>" class="btn btn-primary">Voir les détails</a>
-                        </div>
-                      </div>
-                    <?php
-                    } else {
-                    ?>
-                      <div class="card card-cache"></div>
                   <?php
-                    }
-                  }
+                } else {
+                  ?>
+                    <div class="carousel-item">
+                      <div class="card-deck">
+                        <?php
+                      }
+                      for ($i = ($j * 3); $i < (($j + 1) * 3); $i++) {
+                        if (isset($produit[$i]['id'])) {
+                        ?>
+                          <div class="card">
+                            <img src="../../../../images/produit/<?= $produit[$i]['photo'] ?>" alt='Photo du produit "<?= $produit[$i]['nom'] ?>"' class="d-block mx-auto w-100 image-card">
+                            <div class="card-body">
+                              <h5 class="card-title"><?= $produit[$i]['nom'] ?></h5>
+                              <p class="card-text"><?= $produit[$i]['description'] ?></p>
+                              <h4 class="card-text text-right"><?= $produit[$i]['prix'] ?> €</h4>
+                              <a href="voir.php?id=<?= $produit[$i]['id'] ?>" class="btn btn-primary">Voir les détails</a>
+                            </div>
+                          </div>
+                        <?php
+                        } else {
+                        ?>
+                          <div class="card card-cache"></div>
+                      <?php
+                        }
+                      }
+                      ?>
+                      </div>
+                    </div>
+                  <?php
+                }
+
                   ?>
                   </div>
                 </div>
+                <br />
               <?php
-            }
+            } else {
               ?>
-              </div>
-            </div>
-            <br />
-            <?php
-          }
-
-          public static function produitParCategorie()
-          {
-            $modelProduit = new ModelProduit();
-
-            $modelCategorie = new ModelCategorie();
-            $listeCategorie = $modelCategorie->listeCategorie();
-
-            foreach ($listeCategorie as $categorie) {
-              $produit = $modelProduit->produitParCategorie($categorie['id']);
-              $nbProduit = count($produit); // STOCKAGE DU NOMBRE DE PRODUITS
-
-              if (ceil($nbProduit / 3) > 3) {
-                $slide = 3;
-              } else {
-                $slide = ceil($nbProduit / 3);
-              }
-
-              if ($nbProduit > 0) {
-            ?>
                 <h2 class="my-4">Dans la catégorie <?= $categorie['nom'] ?></h2>
-                <div id="carouselDerniersProduits" class="carousel slide" data-ride="carousel">
-                  <div class="carousel-inner">
-                    <?php
-                    for ($j = 0; $j < $slide; $j++) {
-                      if ($j == 0) {
-                    ?>
-                        <div class="carousel-item active">
-                          <div class="card-deck">
-                          <?php
-                        } else {
-                          ?>
-                            <div class="carousel-item">
-                              <div class="card-deck">
-                                <?php
-                              }
-                              for ($i = ($j * 3); $i < (($j + 1) * 3); $i++) {
-                                if (isset($produit[$i]['id'])) {
-                                ?>
-                                  <div class="card">
-                                    <img src="../../../../images/produit/<?= $produit[$i]['photo'] ?>" alt='Photo du produit "<?= $produit[$i]['nom'] ?>"' class="d-block mx-auto w-100 image-card">
-                                    <div class="card-body">
-                                      <h5 class="card-title"><?= $produit[$i]['nom'] ?></h5>
-                                      <p class="card-text"><?= $produit[$i]['description'] ?></p>
-                                      <h4 class="card-text text-right"><?= $produit[$i]['prix'] ?> €</h4>
-                                      <a href="voir.php?id=<?= $produit[$i]['id'] ?>" class="btn btn-primary">Voir les détails</a>
-                                    </div>
-                                  </div>
-                                <?php
-                                } else {
-                                ?>
-                                  <div class="card card-cache"></div>
-                              <?php
-                                }
-                              }
-                              ?>
-                              </div>
-                            </div>
-                          <?php
-                        }
+                <div class="alert alert-danger">Aucun produit dans cette catégorie.</div>
+                <br />
+            <?php
+            }
+          }
+        }
 
-                          ?>
-                          </div>
-                        </div>
-                        <br />
+        public static function derniersProduit()
+        {
+          $produit = new ModelProduit();
+          $liste = $produit->derniersProduit();
+            ?>
+            <h2 class="mb-4">Nouveaux produits</h2>
+            <div id="carouselDerniersProduits" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <?php
+                for ($j = 0; $j < 3; $j++) {
+                  if ($j == 0) {
+                ?>
+                    <div class="carousel-item active">
+                      <div class="card-deck">
                       <?php
                     } else {
                       ?>
-                        <h2 class="my-4">Dans la catégorie <?= $categorie['nom'] ?></h2>
-                        <div class="alert alert-danger">Aucun produit dans cette catégorie.</div>
-                        <br />
-                <?php
+                        <div class="carousel-item">
+                          <div class="card-deck">
+                            <?php
+                          }
+                          for ($i = ($j * 3); $i < (($j + 1) * 3); $i++) {
+                            if (isset($liste[$i]['id'])) {
+                            ?>
+                              <div class="card">
+                                <img src="../../../../images/produit/<?= $liste[$i]['photo'] ?>" alt='Photo du produit "<?= $liste[$i]['nom'] ?>"' class="d-block mx-auto w-100 image-card">
+                                <div class="card-body">
+                                  <h5 class="card-title"><?= $liste[$i]['nom'] ?></h5>
+                                  <p class="card-text"><?= $liste[$i]['description'] ?></p>
+                                  <h4 class="card-text text-right"><?= $liste[$i]['prix'] ?> €</h4>
+                                  <a href="voir.php?id=<?= $liste[$i]['id'] ?>" class="btn btn-primary">Voir les détails</a>
+                                </div>
+                              </div>
+                            <?php
+                            } else {
+                            ?>
+                              <div class="card card-cache"></div>
+                          <?php
+                            }
+                          }
+                          ?>
+                          </div>
+                        </div>
+                      <?php
                     }
-                  }
-                }
+                      ?>
+                      </div>
+                    </div>
+                    <br />
+                <?php
               }
+            }

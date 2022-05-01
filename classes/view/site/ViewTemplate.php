@@ -33,8 +33,8 @@ class ViewTemplate
             <ul class="navbar-nav">
               <li class="nav-item"><a href="../produit/liste.php?page=1" class="nav-link">Liste des produits</a></li>
             </ul>
-            <form class="form-inline align-center mx-auto my-lg-0">
-              <input class="form-control mr-sm-2 recherche" type="search" placeholder="Chercher un produit" aria-label="Search">
+            <form action="../produit/recherche.php" method="post" class="form-inline align-center mx-auto my-lg-0">
+              <input class="form-control mr-sm-2 recherche" type="text" name="recherche" placeholder="Chercher un produit" aria-label="Search" id="recherche">
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Chercher</button>
             </form>
             <ul class="navbar-nav ml-auto d-flex justify-content-end">
@@ -48,6 +48,7 @@ class ViewTemplate
                   <a class="dropdown-item" href="../client/voirClient.php">Mon profil</a>
                   <a class="dropdown-item" href="../commande/listeCommandeClient.php?page=1">Mes commandes</a>
                   <a class="dropdown-item btn-modif" href="../client/modifClient.php">Modifier mon profil</a>
+                  <a class="dropdown-item" href="../message/contact.php">Contact</a>
                   <a class="dropdown-item btn-deco" href="../client/deconnexion.php">Déconnexion</a>
                 </div>
               </li>
@@ -75,8 +76,8 @@ class ViewTemplate
             <ul class="navbar-nav mr-auto">
               <li class="nav-item"><a href="../produit/liste.php?page=1" class="nav-link">Liste des produits</a></li>
             </ul>
-            <form class="form-inline align-center mx-auto my-lg-0">
-              <input class="form-control mr-sm-2 recherche" type="search" placeholder="Chercher un produit" aria-label="Search">
+            <form action="../produit/recherche.php" method="post" class="form-inline align-center mx-auto my-lg-0">
+              <input class="form-control mr-sm-2 recherche" type="text" placeholder="Chercher un produit" name="recherche" aria-label="Search" id="recherche">
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Chercher</button>
             </form>
             <ul class="navbar-nav ml-auto d-flex justify-content-end">
@@ -97,7 +98,7 @@ class ViewTemplate
     <br />
     <footer class="footer bg-dark bg-footer mt-auto py-4 text-center h6">
       <div class="container">
-        &copy; <?= date("Y") ?> - <a href="contact.php" class="no-style-footer">Contact</a> - <a href="" class="no-style-footer">Mentions légales</a> - <a href="" class="no-style-footer">Conditions générales de vente (CGV)</a> - <a href="../../admin/employe/connexion-employe.php" class="no-style-footer">Espace employé</a>
+        &copy; <?= date("Y") ?> - <a href="../message/contact.php" class="no-style-footer">Contact</a> - <a href="" class="no-style-footer">Mentions légales</a> - <a href="" class="no-style-footer">Conditions générales de vente (CGV)</a> - <a href="../../admin/employe/connexion-employe.php" class="no-style-footer">Espace employé</a>
       </div>
     </footer>
 <?php

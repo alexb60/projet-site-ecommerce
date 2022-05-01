@@ -140,6 +140,23 @@ class ModelProduit
     return $requete->fetchAll(PDO::FETCH_ASSOC);
   }
 
+  // REQUÊTE SQL PRÉPARÉE RECHERCHANT UN PRODUIT PEU IMPORTE SON NOM, SA MARQUE OU SA CATÉGORIE
+  public function recherche($recherche)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT P.*, C.nom nom_categorie, M.nom nom_marque FROM produit P
+INNER JOIN categorie C ON P.id_categorie = C.id
+INNER JOIN marque M ON P.id_marque = M.id
+WHERE P.nom LIKE '%:recherche%';
+    ");
+    $requete->bindParam(':recherche', $recherche, PDO::PARAM_STR);
+    $requete->execute();
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
+  }
+/*[
+      ':recherche' => $recherche,
+    ]*/
   // GETTERS ET SETTERS
   public function getId()
   {

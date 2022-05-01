@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `marque` (
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE IF NOT EXISTS `message` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `type` varchar(10) NOT NULL,
+  `type` varchar(50) NOT NULL,
   `message` text NOT NULL,
   `precedent_id` int(10) DEFAULT NULL,
   `id_client` int(11) DEFAULT NULL,
