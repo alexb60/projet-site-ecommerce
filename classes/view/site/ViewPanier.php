@@ -50,6 +50,7 @@ class ViewPanier
     </div>
   <?php
   }
+
   public static function paiement()
   {
   ?>

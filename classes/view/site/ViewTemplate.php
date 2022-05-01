@@ -82,7 +82,7 @@ class ViewTemplate
             <ul class="navbar-nav ml-auto d-flex justify-content-end">
               <li><a href="../client/inscription.php" class="btn btn-outline-primary">S'inscrire</a></li>
               <li>&nbsp;&nbsp;</li>
-              <li><a href="../client/connexion-client.php" class="btn btn-outline-success btn-orng">Se connecter</a></li>
+              <li><a href="../client/connexion-client.php" class="btn btn-outline-success btn-outline-orange">Se connecter</a></li>
             </ul>
           </div>
         </div>

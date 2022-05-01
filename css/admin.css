@@ -34,22 +34,46 @@ footer {
   color: orangered !important;
 }
 
-.btn-orng {
+/* BOUTON ORANGE */
+.btn-orange {
+  color: white !important;
+  background: orangered !important;
+  border-color: orangered !important;
+}
+
+.btn-orange:hover {
+  color: white !important;
+  border-color: #be3300 !important;
+  background-color: #dd3f05 !important;
+}
+
+.btn-orange:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 69, 0, 0.5) !important;
+}
+
+.btn-orange:active {
+  background-color: #be3300 !important;
+  border-color: #dd3f05 !important;
+  color: white !important;
+}
+
+/* BOUTON OUTLINE ORANGE */
+.btn-outline-orange {
   color: orangered !important;
   border-color: orangered !important;
 }
 
-.btn-orng:hover {
+.btn-outline-orange:hover {
   color: white !important;
   border-color: orangered !important;
   background-color: orangered !important;
 }
 
-.btn-orng:focus {
+.btn-outline-orange:focus {
   box-shadow: 0 0 0 0.2rem rgba(255, 69, 0, 0.5) !important;
 }
 
-.btn-orng:active {
+.btn-outline-orange:active {
   background-color: orangered !important;
   color: white !important;
 }

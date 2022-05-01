@@ -29,19 +29,26 @@
       $user = new ModelClient();
       if ($user->ajoutClient($_POST['nom'], $_POST['prenom'], $_POST['mail'], $pass) && $data) {
   ?>
-        <h1>Inscription réalisée avec succès</h1>
-        <a href="connexion-client.php">Connexion</a>
+        <div class="container">
+          <h1 class="mb-4">Inscription réalisée avec succès</h1>
+          <a href="../produit/index.php" class="btn btn-primary">← Retour à l'accueil</a>
+          <a href="connexion-client.php" class="btn btn-success btn-orange">Se connecter</a>
+        </div>
       <?php
       } else {
       ?>
-        <h1>Échec de l'inscription </h1>
-        <a href="inscription.php">← Retour</a>
+        <div class="container">
+          <h1 class="mb-4">Échec de l'inscription </h1>
+          <a href="inscription.php" class="btn btn-primary">← Retour</a>
+        </div>
       <?php
       }
     } else {
       ?>
-      <h1>Échec de l'inscription </h1>
-      <a href="inscription.php">← Retour</a>
+      <div class="container">
+        <h1 class="mb-4">Échec de l'inscription </h1>
+        <a href="inscription.php" class="btn btn-primary">← Retour</a>
+      </div>
   <?php
     }
   } else {
@@ -52,7 +59,7 @@
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>
   <script src="../../../../js/font-awesome.all.min.js"></script>
-  <script src="../../../../js/validation-form.js"></script>
+  <!-- <script src="../../../../js/validation-form.js"></script> -->
 </body>
 
 </html>

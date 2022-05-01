@@ -77,6 +77,9 @@ class ViewTemplate
               <li class="nav-item">
                 <a class="nav-link" href="../commande/listeCommande.php?page=1">Commandes</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../client/liste.php?page=1">Clients</a>
+              </li>
             </ul>
             <ul class="navbar-nav ml-auto">
               <li><a href="../employe/modifEmploye.php" class="btn btn-outline-warning">Modifier mon profil</a></li>
@@ -105,7 +108,7 @@ class ViewTemplate
             <ul class="navbar-nav ml-auto">
               <li><a href="../../site/produit/index.php" class="btn btn-outline-light">Retour sur le site client</a></li>
               <li>&nbsp;&nbsp;</li>
-              <li><a href="../employe/connexion-employe.php" class="btn btn-outline-success btn-orng">Se connecter</a></li>
+              <li><a href="../employe/connexion-employe.php" class="btn btn-outline-success btn-outline-orange">Se connecter</a></li>
             </ul>
           </div>
         </div>

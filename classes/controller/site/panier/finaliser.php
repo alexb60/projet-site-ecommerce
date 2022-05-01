@@ -19,12 +19,13 @@ if (isset($_SESSION['panier'])) {
   verrouPanier();
 }
 
-if (isset($_SESSION['id']) && estVerrouille()) {
-  ViewPanier::finalisation();
-}
 if (isset($_POST['mode'])) {
   envoi($_POST['mode'], $_POST['transporteur']);
   header('Location: paiement.php');
+}
+
+if (isset($_SESSION['id']) && estVerrouille()) {
+  ViewPanier::finalisation();
 }
 
 ?>
@@ -42,12 +43,11 @@ if (isset($_POST['mode'])) {
 </head>
 
 <body>
-
   <?php
   ViewTemplate::footer();
   ?>
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>
   <script src="../../../../js/font-awesome.all.min.js"></script>
-  <script src="../../../../js/validation-form.js"></script>
+  <!-- <script src="../../../../js/validation-form.js"></script> -->
 </body>
