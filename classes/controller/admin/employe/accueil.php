@@ -27,7 +27,7 @@ if (isset($_SESSION['id_employe'])) {
 
 <body>
   <div class="container">
-    <h1><?php echo $salutation; ?></h1>
+    <h2><?php echo $salutation; ?></h2>
   </div>
   <?php
   ViewTemplate::footer();

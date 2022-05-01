@@ -1,5 +1,8 @@
 <?php
-session_destroy();
+session_start();
+if (isset($_SESSION['id'])) {
+  session_destroy();
+}
 session_start();
 
 require_once "../../../view/admin/ViewEmploye.php";
@@ -7,16 +10,6 @@ require_once "../../../view/admin/ViewTemplate.php";
 require_once "../../../model/ModelEmploye.php";
 
 ViewTemplate::headerInvite();
-
-if (isset($_SESSION['id']) && $_SESSION['role'] === 'admin') {
-  header('Location: admin.php');
-  exit;
-}
-
-if (isset($_SESSION['id']) && $_SESSION['role'] === 'user') {
-  header('Location: accueil.php');
-  exit;
-}
 
 if (isset($_POST['connexion'])) {
   $user = new ModelEmploye();

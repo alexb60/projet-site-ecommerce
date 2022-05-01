@@ -120,7 +120,7 @@ class ViewTemplate
     <br />
     <footer class="footer bg-dark bg-footer mt-auto py-4 text-center h6">
       <div class="container">
-        &copy; <?= date("Y") ?> - <a href="../../site/index.php" class="no-style-footer">Site client</a>
+        &copy; <?= date("Y") ?> - <a href="../../site/produit/index.php" class="no-style-footer">Site client</a>
       </div>
     </footer>
 <?php

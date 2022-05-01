@@ -117,8 +117,8 @@ class ViewEmploye
   // FONCTION AFFICHANT LE FORMULAIRE PERMETTANT À UN EMPLOYÉ DE MODIFIER SES INFORMATIONS
   public static function modifEmploye($id)
   {
-    $modelClient = new ModelClient();
-    $employe = $modelClient->voirClient($id);
+    $modelEmploye = new ModelEmploye();
+    $employe = $modelEmploye->voirEmploye($id);
   ?>
     <div class="container">
       <div class="row">

@@ -1,9 +1,8 @@
 <?php
 session_start();
-require_once "../../../view/site/ViewClient.php";
-require_once "../../../view/site/ViewTemplate.php";
-require_once "../../../model/ModelClient.php";
-
+require_once "../../../view/admin/ViewEmploye.php";
+require_once "../../../view/admin/ViewTemplate.php";
+require_once "../../../model/ModelEmploye.php";
 ?>
 
 <!DOCTYPE html>
@@ -13,39 +12,31 @@ require_once "../../../model/ModelClient.php";
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modifier mes informations</title>
+  <title>Modifier mes informations employé</title>
   <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
   <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/site.css">
+  <link rel="stylesheet" href="../../../../css/admin.css">
 </head>
 
 <body>
   <?php
-  ViewTemplate::headerConnecte();
+  ViewTemplate::menu();
 
-  $modelClient = new ModelClient();
-  if (isset($_SESSION['id'])) {
-    if ($modelClient->voirClient($_SESSION['id'])) {
-      ViewClient::modifClient($_SESSION['id']);
-      echo "var dump if isset";
-      var_dump($_POST);
+  $modelEmploye = new ModelEmploye();
+  if (isset($_SESSION['id_employe'])) {
+    if ($modelEmploye->voirEmploye($_SESSION['id_employe'])) {
+      ViewEmploye::modifEmploye($_SESSION['id_employe']);
     } else {
-      ViewTemplate::alert("danger", "Le profil n'existe pas", "accueil.php");
+      ViewTemplate::alert("danger", "Le profil employé n'existe pas", "accueil.php");
     }
   } else {
-    echo "test else";
-    var_dump($_POST);
-    if (isset($_POST['id']) && $modelClient->voirClient($_POST['id'])) {
-      echo "test modif";
-      if ($modelClient->modifClient($_POST['id'], $_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['tel'], $_POST['adresse'], $_POST['ville'], $_POST['code_post'])) {
-        echo "C'est gagné !";
-        ViewTemplate::alert("success", "Le profil a été modifié avec succès", "accueil.php");
+    if (isset($_POST['id']) && $modelEmploye->voirEmploye($_POST['id'])) {
+      if ($modelEmploye->modifEmploye($_POST['id'], $_POST['nom'], $_POST['prenom'], $_POST['mail'])) {
+        ViewTemplate::alert("success", "Le profil employé a été modifié avec succès", "accueil.php");
       } else {
-        echo "Raté !";
         ViewTemplate::alert("danger", "Échec de la modification", "accueil.php");
       }
     } else {
-      echo "Non !";
       ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "accueil.php");
     }
   }
