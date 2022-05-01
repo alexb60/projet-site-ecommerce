@@ -92,7 +92,7 @@ class ViewCommande
             $qteProduit = 0;
             $total = 0;
           ?>
-            <table class="table">
+            <table class="table table-striped">
               <thead>
                 <tr>
                   <th scope="col">#</th>

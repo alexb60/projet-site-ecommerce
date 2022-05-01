@@ -73,3 +73,7 @@ footer {
 .card-cache {
   visibility: hidden !important;
 }
+
+.nombres {
+  font-size: 4rem !important;
+}

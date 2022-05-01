@@ -13,6 +13,17 @@ class ModelCategorie
     $this->nom = $nom;
   }
 
+  // REQUÊTE SQL PRÉPARÉE COMPTANT LE NOMBRE DE CATÉGORIES
+  public function compteCategorie()
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT COUNT(*) AS nb_categories FROM categorie
+    ");
+    $requete->execute();
+    return $requete->fetch(PDO::FETCH_ASSOC);
+  }
+
   // REQUÊTE SQL PRÉPARÉE LISTANT LES CATÉGORIES
   public function listeCategorie()
   {

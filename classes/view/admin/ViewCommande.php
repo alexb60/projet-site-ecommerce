@@ -12,7 +12,7 @@ class ViewCommande
     <?php
     if (count($liste) > 0) {
     ?>
-      <table class="table">
+      <table class="table table-striped">
         <thead>
           <tr>
             <th scope="col">N° Commande</th>

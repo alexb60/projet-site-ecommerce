@@ -93,7 +93,7 @@ class ModelCommande
     return $requete->fetch(PDO::FETCH_ASSOC);
   }
 
-  // REQUÊTE SQL PRÉPARÉE COMPTANT LE NOMBRE DE COMMANDES DANS LA TABLE COMMANDE
+  // REQUÊTE SQL PRÉPARÉE COMPTANT LE NOMBRE DE COMMANDES TOTAL
   public function compteCommande()
   {
     $idcon = connexion();
@@ -101,6 +101,67 @@ class ModelCommande
     SELECT COUNT(*) AS nb_commandes FROM commande
     ");
     $requete->execute();
+    return $requete->fetch(PDO::FETCH_ASSOC);
+  }
+
+  // REQUÊTE SQL PRÉPARÉE COMPTANT LE NOMBRE DE COMMANDES PASSÉES PAR UN CLIENT
+  public function compteCommandeClient($id_client)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT COUNT(*) AS nb_commandes FROM commande WHERE id_client=:id
+    ");
+    $requete->execute([
+      ':id' => $id_client,
+    ]);
+    return $requete->fetch(PDO::FETCH_ASSOC);
+  }
+
+  // REQUÊTE SQL PRÉPARÉE CALCULANT LE CHIFFRE D'AFFAIRES TOTAL (SOMME DES MONTANTS DE TOUTES LES COMMANDES)
+  public function chiffreAffaires()
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT ROUND(SUM(montant), 2) AS chiffre FROM commande
+    ");
+    $requete->execute();
+    return $requete->fetch(PDO::FETCH_ASSOC);
+  }
+
+  // REQUÊTE SQL PRÉPARÉE CALCULANT LE MONTANT TOTAL DÉPENSÉ PAR LE CLIENT (SOMME DES MONTANTS DE TOUTES LES COMMANDES DU CLIENT)
+  public function depenseClient($id_client)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT ROUND(SUM(montant), 2) AS depense FROM commande WHERE id_client=:id
+    ");
+    $requete->execute([
+      'id' => $id_client,
+    ]);
+    return $requete->fetch(PDO::FETCH_ASSOC);
+  }
+
+  // REQUÊTE SQL PRÉPARÉE CALCULANT LE MONTANT MOYEN D'UNE COMMANDE (MOYENNE DES MONTANTS DE TOUTES LES COMMANDES)
+  public function moyMontant()
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT ROUND(AVG(montant), 2) AS moy_montant FROM commande
+    ");
+    $requete->execute();
+    return $requete->fetch(PDO::FETCH_ASSOC);
+  }
+
+  // REQUÊTE SQL PRÉPARÉE CALCULANT LE MONTANT MOYEN D'UNE COMMANDE D'UN CLIENT (MOYENNE DES MONTANTS DE TOUTES LES COMMANDES DU CLIENT)
+  public function moyMontantClient($id_client)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT ROUND(AVG(montant), 2) AS moy_montant_client FROM commande WHERE id_client=:id
+    ");
+    $requete->execute([
+      'id' => $id_client,
+    ]);
     return $requete->fetch(PDO::FETCH_ASSOC);
   }
 

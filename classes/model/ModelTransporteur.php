@@ -15,6 +15,17 @@ class ModelTransporteur
     $this->logo = $logo;
   }
 
+  // REQUÊTE SQL PRÉPARÉE COMPTANT LE NOMBRE DE TRANSPORTEURS
+  public function compteTransporteur()
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT COUNT(*) AS nb_transporteurs FROM transporteur
+    ");
+    $requete->execute();
+    return $requete->fetch(PDO::FETCH_ASSOC);
+  }
+
   // REQUÊTE SQL PRÉPARÉE LISTANT LES TRANSPORTEURS
   public function listeTransporteur()
   {

@@ -29,6 +29,17 @@ class ModelClient
     $this->token = $token;
   }
 
+  // REQUÊTE SQL PRÉPARÉE COMPTANT LE NOMBRE DE CLIENTS
+  public function compteClient()
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT COUNT(*) AS nb_clients FROM client
+    ");
+    $requete->execute();
+    return $requete->fetch(PDO::FETCH_ASSOC);
+  }
+
   // REQUÊTE SQL PRÉPARÉE PERMETTANT D'AJOUTER UN CLIENT
   public function ajoutClient($nom, $prenom, $mail, $pass)
   {

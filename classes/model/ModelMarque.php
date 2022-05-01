@@ -15,6 +15,17 @@ class ModelMarque
     $this->logo = $logo;
   }
 
+  // REQUÊTE SQL PRÉPARÉE COMPTANT LE NOMBRE DE MARQUES
+  public function compteMarque()
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT COUNT(*) AS nb_marques FROM marque
+    ");
+    $requete->execute();
+    return $requete->fetch(PDO::FETCH_ASSOC);
+  }
+
   // REQUÊTE SQL PRÉPARÉE LISTANT LES MARQUES
   public function listeMarque()
   {
