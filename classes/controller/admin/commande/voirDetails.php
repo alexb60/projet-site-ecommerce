@@ -1,3 +1,12 @@
+<?php
+session_start();
+require_once "../../../view/admin/ViewCommande.php";
+require_once "../../../view/admin/ViewTemplate.php";
+require_once "../../../model/ModelClient.php";
+require_once "../../../model/ModelCommande.php";
+require_once "../../../model/ModelTransporteur.php";
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -14,17 +23,21 @@
 <body>
 
   <?php
-  require_once "../../../view/admin/ViewCommande.php";
-  require_once "../../../view/admin/ViewTemplate.php";
-  require_once "../../../model/ModelClient.php";
-  require_once "../../../model/ModelCommande.php";
-  require_once "../../../model/ModelTransporteur.php";
-
-  $modelCommande = new ModelCommande();
-  $commande = $modelCommande->voirCommande($_GET['id_com']);
-
-  ViewTemplate::menu();
-  ViewCommande::voirDetails($_GET['id_com']);
+  if (isset($_SESSION['id_employe'])) {
+    $modelCommande = new ModelCommande();
+    $commande = $modelCommande->voirCommande($_GET['id_com']);
+    ViewTemplate::menu();
+    ViewCommande::voirDetails($_GET['id_com']);
+  } else {
+    ViewTemplate::headerInvite();
+  ?>
+    <div class="container">
+      <?php
+      ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
+      ?>
+    </div>
+  <?php
+  }
   ViewTemplate::footer();
   ?>
   <script src="../../../../js/jquery.min.js"></script>

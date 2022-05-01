@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+require_once "../../../view/admin/ViewCommande.php";
+require_once "../../../view/admin/ViewTemplate.php";
+require_once "../../../model/ModelCommande.php";
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -13,29 +21,36 @@
 
 <body>
   <?php
-  require_once "../../../view/admin/ViewCommande.php";
-  require_once "../../../view/admin/ViewTemplate.php";
-  require_once "../../../model/ModelCommande.php";
+  if (isset($_SESSION['id_employe'])) {
+    ViewTemplate::menu();
 
-  ViewTemplate::menu();
-
-  $modelCommande = new ModelCommande();
-  if (isset($_GET['id'])) {
-    if ($modelCommande->voirCommande($_GET['id'])) {
-      ViewCommande::modifEtat($_GET['id']);
-    } else {
-      ViewTemplate::alert("danger", "La commande n'existe pas", "listeCommande.php");
-    }
-  } else {
-    if (isset($_POST['id']) && $modelCommande->voirCommande($_POST['id'])) {
-      if (!$modelCommande->modifEtat($_POST['id'], $_POST['etat'])) {
-        ViewTemplate::alert("success", "L'état de la commande a été modifié avec succès", "listeCommande.php");
+    $modelCommande = new ModelCommande();
+    if (isset($_GET['id'])) {
+      if ($modelCommande->voirCommande($_GET['id'])) {
+        ViewCommande::modifEtat($_GET['id']);
       } else {
-        ViewTemplate::alert("danger", "Échec de la modification", "listeCommande.php");
+        ViewTemplate::alert("danger", "La commande n'existe pas", "listeCommande.php");
       }
     } else {
-      ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "listeCommande.php");
+      if (isset($_POST['id']) && $modelCommande->voirCommande($_POST['id'])) {
+        if (!$modelCommande->modifEtat($_POST['id'], $_POST['etat'])) {
+          ViewTemplate::alert("success", "L'état de la commande a été modifié avec succès", "listeCommande.php");
+        } else {
+          ViewTemplate::alert("danger", "Échec de la modification", "listeCommande.php");
+        }
+      } else {
+        ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "listeCommande.php");
+      }
     }
+  } else {
+    ViewTemplate::headerInvite();
+  ?>
+    <div class="container">
+      <?php
+      ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
+      ?>
+    </div>
+  <?php
   }
 
   ViewTemplate::footer();
