@@ -2,8 +2,11 @@
 session_start();
 if (isset($_SESSION['id'])) {
   session_destroy();
+  session_start();
 }
-session_start();
+if (isset($_SESSION['id_employe'])) {
+  header('Location: accueil.php');
+}
 
 require_once "../../../view/admin/ViewEmploye.php";
 require_once "../../../view/admin/ViewTemplate.php";

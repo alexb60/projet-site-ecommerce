@@ -1,3 +1,10 @@
+<?php
+session_start();
+require_once "../../../view/admin/ViewProduit.php";
+require_once "../../../view/admin/ViewTemplate.php";
+require_once "../../../model/ModelProduit.php";
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -13,29 +20,34 @@
 
 <body>
   <?php
-  require_once "../../../view/admin/ViewProduit.php";
-  require_once "../../../view/admin/ViewTemplate.php";
-  require_once "../../../model/ModelProduit.php";
+  if (isset($_SESSION['id_employe'])) {
+    ViewTemplate::menu();
 
-  ViewTemplate::menu();
-
-  if (isset($_GET['id'])) {
-    $modelProduit = new ModelProduit();
-    if ($modelProduit->voirProduit($_GET['id'])) {
-      if ($modelProduit->suppProduit($_GET['id'])) {
-        ViewTemplate::alert("success", "Produit supprimé avec succès", "liste.php");
+    if (isset($_GET['id'])) {
+      $modelProduit = new ModelProduit();
+      if ($modelProduit->voirProduit($_GET['id'])) {
+        if ($modelProduit->suppProduit($_GET['id'])) {
+          ViewTemplate::alert("success", "Produit supprimé avec succès", "liste.php");
+        } else {
+          ViewTemplate::alert("danger", "Échec de la suppression", "liste.php");
+        }
       } else {
-        ViewTemplate::alert("danger", "Échec de la suppression", "liste.php");
+        ViewTemplate::alert("danger", "Le produit n'existe pas", "liste.php");
       }
     } else {
-      ViewTemplate::alert("danger", "Le produit n'existe pas", "liste.php");
+      ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php");
     }
   } else {
-    ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php");
+    ViewTemplate::headerInvite();
+  ?>
+    <div class="container">
+      <?php
+      ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
+      ?>
+    </div>
+  <?php
   }
-
   ViewTemplate::footer();
-
   ?>
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>

@@ -1,3 +1,13 @@
+<?php
+session_start();
+require_once "../../../view/admin/ViewProduit.php";
+require_once "../../../view/admin/ViewTemplate.php";
+require_once "../../../view/admin/ViewMarque.php";
+require_once "../../../view/admin/ViewCategorie.php";
+require_once "../../../view/admin/utils.php";
+require_once "../../../model/ModelProduit.php";
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -13,40 +23,43 @@
 
 <body>
   <?php
-  require_once "../../../view/admin/ViewProduit.php";
-  require_once "../../../view/admin/ViewTemplate.php";
-  require_once "../../../view/admin/ViewMarque.php";
-  require_once "../../../view/admin/ViewCategorie.php";
-  require_once "../../../view/admin/utils.php";
-  require_once "../../../model/ModelProduit.php";
+  if (isset($_SESSION['id_employe'])) {
+    ViewTemplate::menu();
+    if (isset($_POST['ajout'])) {
+      $donnees = [$_POST['nom'], $_POST['ref'], $_POST['quantite'], $_POST['prix']];
+      $types = ["nomProduit", "ref", "quantite", "prix"];
+      $data = Utils::valider($donnees, $types);
 
-  ViewTemplate::menu();
-  if (isset($_POST['ajout'])) {
-    $donnees = [$_POST['nom'], $_POST['ref'], $_POST['quantite'], $_POST['prix']];
-    $types = ["nomProduit", "ref", "quantite", "prix"];
-    $data = Utils::valider($donnees, $types);
+      if ($data) {
+        $extensions = ["jpg", "jpeg", "png", "gif"];
+        $upload = Utils::upload($extensions, "produit", $_FILES['photo']);
+        $modelProduit = new ModelProduit();
 
-    if ($data) {
-      $extensions = ["jpg", "jpeg", "png", "gif"];
-      $upload = Utils::upload($extensions, "produit", $_FILES['photo']);
-      $modelProduit = new ModelProduit();
-
-      if ($upload['uploadOk']) {
-        if ($modelProduit->ajoutProduit($_POST['nom'], $_POST['ref'], $_POST['description'], $_POST['quantite'], $_POST['prix'], $upload['file_name'], $_POST['categorie'], $_POST['marque'])) {
-          ViewTemplate::alert("success", "Le produit a été ajouté avec succès", "liste.php");
+        if ($upload['uploadOk']) {
+          if ($modelProduit->ajoutProduit($_POST['nom'], $_POST['ref'], $_POST['description'], $_POST['quantite'], $_POST['prix'], $upload['file_name'], $_POST['categorie'], $_POST['marque'])) {
+            ViewTemplate::alert("success", "Le produit a été ajouté avec succès", "liste.php");
+          } else {
+            ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
+          }
         } else {
-          ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
+          ViewTemplate::alert("danger", $upload['errors'], "ajout.php");
         }
       } else {
-        ViewTemplate::alert("danger", $upload['errors'], "ajout.php");
+        ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
       }
     } else {
-      ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
+      ViewProduit::ajoutProduit();
     }
   } else {
-    ViewProduit::ajoutProduit();
+    ViewTemplate::headerInvite();
+  ?>
+    <div class="container">
+      <?php
+      ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
+      ?>
+    </div>
+  <?php
   }
-
   ViewTemplate::footer();
   ?>
   <script src="../../../../js/jquery.min.js"></script>
