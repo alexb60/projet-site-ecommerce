@@ -116,7 +116,7 @@ class ModelProduit
     ]);
   }
 
-  // REQUÊTE SQL PRÉPARÉE PERMETTANT DE LISTER LES 9 DERNIERS PRODUITS DE LA TABLE produit
+  // REQUÊTE SQL PRÉPARÉE PERMETTANT DE LISTER LES 8 DERNIERS PRODUITS DE LA TABLE produit
   public function derniersProduit()
   {
     $idcon = connexion();
@@ -148,15 +148,16 @@ class ModelProduit
     SELECT P.*, C.nom nom_categorie, M.nom nom_marque FROM produit P
 INNER JOIN categorie C ON P.id_categorie = C.id
 INNER JOIN marque M ON P.id_marque = M.id
-WHERE P.nom LIKE '%:recherche%';
+WHERE P.nom LIKE '%:recherche:%';
     ");
-    $requete->bindParam(':recherche', $recherche, PDO::PARAM_STR);
+    $requete->bindParam(':recherche:', $recherche, PDO::PARAM_STR);
     $requete->execute();
     return $requete->fetchAll(PDO::FETCH_ASSOC);
   }
 /*[
       ':recherche' => $recherche,
     ]*/
+
   // GETTERS ET SETTERS
   public function getId()
   {

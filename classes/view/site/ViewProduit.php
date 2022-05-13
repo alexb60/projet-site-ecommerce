@@ -189,11 +189,11 @@ class ViewProduit
                       for ($i = ($j * 3); $i < (($j + 1) * 3); $i++) {
                         if (isset($produit[$i]['id'])) {
                         ?>
-                          <div class="card">
+                          <div class="card" style="height: 35rem;">
                             <img src="../../../../images/produit/<?= $produit[$i]['photo'] ?>" alt='Photo du produit "<?= $produit[$i]['nom'] ?>"' class="d-block mx-auto w-100 image-card">
                             <div class="card-body">
                               <h5 class="card-title"><?= $produit[$i]['nom'] ?></h5>
-                              <p class="card-text"><?= $produit[$i]['description'] ?></p>
+                              <p class="card-text"><?= (strlen($produit[$i]['description']) > 100) ? substr($produit[$i]['description'], 0, 100) . " ..." : $produit[$i]['description'] ?></p>
                               <h4 class="card-text text-right"><?= $produit[$i]['prix'] ?> €</h4>
                               <a href="voir.php?id=<?= $produit[$i]['id'] ?>" class="btn btn-primary">Voir les détails</a>
                             </div>
@@ -250,11 +250,11 @@ class ViewProduit
                           for ($i = ($j * 3); $i < (($j + 1) * 3); $i++) {
                             if (isset($liste[$i]['id'])) {
                             ?>
-                              <div class="card">
-                                <img src="../../../../images/produit/<?= $liste[$i]['photo'] ?>" alt='Photo du produit "<?= $liste[$i]['nom'] ?>"' class="d-block mx-auto w-100 image-card">
+                              <div class="card" style="height: 35rem;">
+                                <img src="../../../../images/produit/<?= $liste[$i]['photo'] ?>" alt='Photo du produit "<?= $liste[$i]['nom'] ?>"' class="d-block card-img-top mx-auto w-100 image-card">
                                 <div class="card-body">
                                   <h5 class="card-title"><?= $liste[$i]['nom'] ?></h5>
-                                  <p class="card-text"><?= $liste[$i]['description'] ?></p>
+                                  <p class="card-text"><?= (strlen($liste[$i]['description']) > 100) ? substr($liste[$i]['description'], 0, 100) . " ..." : $liste[$i]['description'] ?></p>
                                   <h4 class="card-text text-right"><?= $liste[$i]['prix'] ?> €</h4>
                                   <a href="voir.php?id=<?= $liste[$i]['id'] ?>" class="btn btn-primary">Voir les détails</a>
                                 </div>
