@@ -29,15 +29,31 @@ class ViewProduit
           ?>
             <tr>
               <th scope="row"><?= $produit['id'] ?></th>
-              <td><?= $produit['nom'] ?></td>
-              <td><?= $produit['nom_categorie'] ?></td>
-              <td><?= $produit['nom_marque'] ?></td>
-              <td><?= $produit['ref'] ?></td>
+              <td>
+                <a class="lien-mort" data-toggle="tooltip" title="<?= $produit['nom'] ?>" data-placement="down">
+                  <?= (strlen($produit['nom']) > 20) ? substr($produit['nom'], 0, 20) . "..." : $produit['nom'] ?>
+                </a>
+              </td>
+              <td>
+                <a class="lien-mort" data-toggle="tooltip" title="<?= $produit['nom_categorie'] ?>" data-placement="down">
+                  <?= (strlen($produit['nom_categorie']) > 12) ? substr($produit['nom_categorie'], 0, 12) . "..." : $produit['nom_categorie'] ?>
+                </a>
+              </td>
+              <td>
+                <a class="lien-mort" data-toggle="tooltip" title="<?= $produit['nom_marque'] ?>" data-placement="down">
+                  <?= (strlen($produit['nom_marque']) > 12) ? substr($produit['nom_marque'], 0, 12) . "..." : $produit['nom_marque'] ?>
+                </a>
+              </td>
+              <td>
+                <a class="lien-mort" data-toggle="tooltip" title="<?= $produit['ref'] ?>" data-placement="down">
+                  <?= (strlen($produit['ref']) > 12) ? substr($produit['ref'], 0, 12) . "..." : $produit['ref'] ?>
+                </a>
+              </td>
               <td><?= $produit['quantite'] ?></td>
               <td>
-                <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary">Voir</a>
-                <a href="modif.php?id=<?= $produit['id'] ?>" class="btn btn-warning">Modifier</a>
-                <a href="supp.php?id=<?= $produit['id'] ?>" class="btn btn-danger">Supprimer</a>
+                <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir</a>
+                <a href="modif.php?id=<?= $produit['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier</a>
+                <a href="supp.php?id=<?= $produit['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Supprimer</a>
               </td>
             </tr>
           <?php
@@ -49,7 +65,7 @@ class ViewProduit
     } else {
     ?>
       <div class="alert alert-danger" role="alert">
-        Aucun produit n'existe dans la liste.
+        <i class="fas fa-exclamation-triangle"></i>&nbsp; Aucun produit n'existe dans la liste.
       </div>
     <?php
     }
@@ -83,15 +99,19 @@ class ViewProduit
                   <p><span class="font-weight-bold">Prix :</span><br /><?= $produit['prix'] ?> €<br /></p>
                   <p><span class="font-weight-bold">Quantité en stock :</span><br /><?= $produit['quantite'] ?><br /></p>
                   </p>
-                  <a href="liste.php?page=1" class="btn btn-primary">← Retour</a>
-                  <a href="modif.php?id=<?= $produit['id'] ?>" class="btn btn-warning">Modifier</a>
-                  <a href="supp.php?id=<?= $produit['id'] ?>" class="btn btn-danger">Supprimer</a>
                 </div>
               </div>
               <div class="col-md-6 d-flex align-items-center justify-content-center">
                 <img src="../../../../images/produit/<?= $produit['photo'] ?>" alt='Photo du produit "<?= $produit['nom'] ?>"' class="img-fluid photo_produit">
               </div>
             </div>
+            <ul class="list-group list-group-flush border-0 mb-2">
+              <li class="list-group-item">
+                <a href="liste.php?page=1" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
+                <a href="modif.php?id=<?= $produit['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier</a>
+                <a href="supp.php?id=<?= $produit['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Supprimer</a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -263,6 +283,8 @@ class ViewProduit
             <input type="submit" class="btn btn-primary" name="ajout" id="valider">
             <input type="reset" class="btn btn-danger">
           </form>
+          <br />
+          <a class="btn btn-primary" href="liste.php"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
         </div>
       </div>
     </div>

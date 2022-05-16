@@ -45,7 +45,7 @@ require_once "../../../model/ModelProduit.php";
           <h2 class="mb-4">Liste des produits</h2>
         </div>
         <div class="col-md-6 d-flex justify-content-end align-items-start">
-          <a href="ajout.php" class="btn btn-outline-success">Ajouter un produit</a>
+          <a href="ajout.php" class="btn btn-outline-success"><i class="fas fa-plus"></i>&nbsp; Ajouter un produit</a>
         </div>
       </div>
       <div class="row">
@@ -88,6 +88,7 @@ require_once "../../../model/ModelProduit.php";
   ViewTemplate::footer();
   ?>
   <script src="../../../../js/jquery.min.js"></script>
+  <script src="../../../../js/popper.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>
   <script src="../../../../js/font-awesome.all.min.js"></script>
 </body>
