@@ -87,10 +87,14 @@ class ViewCategorie
             <div class="card-body">
               <h5 class="card-title"><?= $categorie['id'] . " - " . $categorie['nom']; ?> </h5>
               <p class="card-text"></p>
-              <a href="liste.php" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
-              <a href="modif.php?id=<?= $categorie['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier</a>
-              <a href="supp.php?id=<?= $categorie['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Supprimer</a>
             </div>
+            <ul class="list-group list-group-flush border-0 mb-2">
+              <li class="list-group-item">
+                <a href="liste.php" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
+                <a href="modif.php?id=<?= $categorie['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier</a>
+                <a href="supp.php?id=<?= $categorie['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Supprimer</a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
