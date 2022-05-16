@@ -35,8 +35,8 @@ class ViewClient
                     <td><?= $client['prenom'] ?></td>
                     <td><?= $client['mail'] ?></td>
                     <td>
-                      <a href="voir.php?id=<?= $client['id'] ?>" class="btn btn-primary">Voir</a>
-                      <a href="supp.php?id=<?= $client['id'] ?>" class="btn btn-danger">Supprimer</a>
+                      <a href="voir.php?id=<?= $client['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir</a>
+                      <a href="supp.php?id=<?= $client['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Supprimer</a>
                     </td>
                   </tr>
                 <?php
@@ -52,7 +52,7 @@ class ViewClient
         <div class="row">
           <div class="col-md-12">
             <div class="alert alert-danger" role="alert">
-              Aucun client n'existe dans la liste.
+              <i class="fas fa-exclamation-triangle"></i>&nbsp; Aucun client n'existe dans la liste.
             </div>
           </div>
         </div>
@@ -86,9 +86,13 @@ class ViewClient
                 <span class="font-weight-bold">Adresse postale :</span><br />
                 <?= $client['adresse'] . "<br />" . $client['code_post'] . " " . $client['ville'] ?>
               </p>
-              <a href="supp.php?id=<?= $client['id'] ?>" class="btn btn-danger">Supprimer</a><br><br>
-              <a href="liste.php?page=1" class="btn btn-primary">← Retour</a>
             </div>
+            <ul class="list-group list-group-flush border-0 mb-2">
+              <li class="list-group-item">
+                <a href="liste.php?page=1" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
+                <a href="supp.php?id=<?= $client['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Supprimer</a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
