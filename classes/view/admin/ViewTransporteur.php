@@ -18,7 +18,7 @@ class ViewTransporteur
             <h2 class="mb-4">Liste des transporteurs</h2>
           </div>
           <div class="col-md-6 d-flex justify-content-end align-items-start">
-            <a href="ajout.php" class="btn btn-outline-success">Ajouter un transporteur</a>
+            <a href="ajout.php" class="btn btn-outline-success"><i class="fas fa-plus"></i>&nbsp; Ajouter un transporteur</a>
           </div>
         </div>
         <div class="row">
@@ -39,9 +39,9 @@ class ViewTransporteur
                     <th scope="row"><?= $transporteur['id'] ?></th>
                     <td><?= $transporteur['nom'] ?></td>
                     <td>
-                      <a href="voir.php?id=<?= $transporteur['id'] ?>" class="btn btn-primary">Voir</a>
-                      <a href="modif.php?id=<?= $transporteur['id'] ?>" class="btn btn-warning">Modifier</a>
-                      <a href="supp.php?id=<?= $transporteur['id'] ?>" class="btn btn-danger">Supprimer</a>
+                      <a href="voir.php?id=<?= $transporteur['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir</a>
+                      <a href="modif.php?id=<?= $transporteur['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier</a>
+                      <a href="supp.php?id=<?= $transporteur['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Supprimer</a>
                     </td>
                   </tr>
                 <?php
@@ -57,7 +57,7 @@ class ViewTransporteur
         <div class="row">
           <div class="col-md-12">
             <div class="alert alert-danger" role="alert">
-              Aucun transporteur n'existe dans la liste.
+              <i class="fas fa-exclamation-triangle"></i>&nbsp; Aucun transporteur n'existe dans la liste.
             </div>
           </div>
         </div>
@@ -88,15 +88,19 @@ class ViewTransporteur
                 <div class="card-body">
                   <h5 class="card-title"><?= $transporteur['id'] . " - " . $transporteur['nom']; ?> </h5>
                   <p class="card-text"></p>
-                  <a href="liste.php" class="btn btn-primary">← Retour</a>
-                  <a href="modif.php?id=<?= $transporteur['id'] ?>" class="btn btn-warning">Modifier</a>
-                  <a href="supp.php?id=<?= $transporteur['id'] ?>" class="btn btn-danger">Supprimer</a>
                 </div>
               </div>
               <div class="col-md-6 d-flex align-items-center justify-content-center">
                 <img src="../../../../images/transporteur/<?= $transporteur['logo'] ?>" alt="Logo du transporteur <?= $transporteur['nom'] ?>" class="img-fluid image-logo">
               </div>
             </div>
+            <ul class="list-group list-group-flush border-0 mb-2">
+              <li class="list-group-item">
+                <a href="liste.php" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
+                <a href="modif.php?id=<?= $transporteur['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier</a>
+                <a href="supp.php?id=<?= $transporteur['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Supprimer</a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -166,7 +170,7 @@ class ViewTransporteur
             <button type="reset" class="btn btn-danger">Réinitialiser</button>
           </form>
           <br />
-          <a class="btn btn-primary" href="liste.php">← Retour</a>
+          <a class="btn btn-primary" href="liste.php"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
         </div>
       </div>
     </div>
