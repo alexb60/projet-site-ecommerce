@@ -34,8 +34,8 @@ class ViewTemplate
                   Produits
                 </a>
                 <div class="dropdown-menu" aria-labelledby="produit">
-                  <a class="dropdown-item" href="../produit/liste.php?page=1">Liste des produits</a>
-                  <a class="dropdown-item" href="../produit/ajout.php">Ajouter un produit</a>
+                  <a class="dropdown-item" href="../produit/liste.php?page=1"><i class="fas fa-list"></i>&nbsp; Liste des produits</a>
+                  <a class="dropdown-item" href="../produit/ajout.php"><i class="fas fa-plus"></i>&nbsp; Ajouter un produit</a>
                 </div>
               </li>
               <li class="nav-item dropdown">
@@ -43,8 +43,8 @@ class ViewTemplate
                   Catégories
                 </a>
                 <div class="dropdown-menu" aria-labelledby="categorie">
-                  <a class="dropdown-item" href="../categorie/liste.php">Liste des catégories</a>
-                  <a class="dropdown-item" href="../categorie/ajout.php">Ajouter une catégorie</a>
+                  <a class="dropdown-item" href="../categorie/liste.php"><i class="fas fa-list"></i>&nbsp; Liste des catégories</a>
+                  <a class="dropdown-item" href="../categorie/ajout.php"><i class="fas fa-plus"></i>&nbsp; Ajouter une catégorie</a>
                 </div>
               </li>
               <li class="nav-item dropdown">
@@ -52,8 +52,8 @@ class ViewTemplate
                   Marques
                 </a>
                 <div class="dropdown-menu" aria-labelledby="marque">
-                  <a class="dropdown-item" href="../marque/liste.php">Liste des marques</a>
-                  <a class="dropdown-item" href="../marque/ajout.php">Ajouter une marque</a>
+                  <a class="dropdown-item" href="../marque/liste.php"><i class="fas fa-list"></i>&nbsp; Liste des marques</a>
+                  <a class="dropdown-item" href="../marque/ajout.php"><i class="fas fa-plus"></i>&nbsp; Ajouter une marque</a>
                 </div>
               </li>
               <li class="nav-item dropdown">
@@ -61,8 +61,8 @@ class ViewTemplate
                   Transporteurs
                 </a>
                 <div class="dropdown-menu" aria-labelledby="transporteur">
-                  <a class="dropdown-item" href="../transporteur/liste.php">Liste des transporteurs</a>
-                  <a class="dropdown-item" href="../transporteur/ajout.php">Ajouter un transporteur</a>
+                  <a class="dropdown-item" href="../transporteur/liste.php"><i class="fas fa-list"></i>&nbsp; Liste des transporteurs</a>
+                  <a class="dropdown-item" href="../transporteur/ajout.php"><i class="fas fa-plus"></i>&nbsp; Ajouter un transporteur</a>
                 </div>
               </li>
               <li class="nav-item dropdown">
@@ -70,8 +70,8 @@ class ViewTemplate
                   Rôles
                 </a>
                 <div class="dropdown-menu" aria-labelledby="role">
-                  <a class="dropdown-item" href="../role/liste.php">Liste des rôles</a>
-                  <a class="dropdown-item" href="../role/ajout.php">Ajouter un rôle</a>
+                  <a class="dropdown-item" href="../role/liste.php"><i class="fas fa-list"></i>&nbsp; Liste des rôles</a>
+                  <a class="dropdown-item" href="../role/ajout.php"><i class="fas fa-plus"></i>&nbsp; Ajouter un rôle</a>
                 </div>
               </li>
               <li class="nav-item">
@@ -109,9 +109,9 @@ class ViewTemplate
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-              <li><a href="../../site/produit/index.php" class="btn btn-outline-light">Retour sur le site client</a></li>
+              <li><a href="../../site/produit/index.php" class="btn btn-outline-light"><i class="fas fa-chevron-left"></i>&nbsp; Retour sur le site client</a></li>
               <li>&nbsp;&nbsp;</li>
-              <li><a href="../employe/connexion-employe.php" class="btn btn-outline-success btn-outline-orange">Se connecter</a></li>
+              <li><a href="../employe/connexion-employe.php" class="btn btn-outline-success btn-outline-orange"><i class="fas fa-sign-in-alt"></i>&nbsp; Se connecter</a></li>
             </ul>
           </div>
         </div>
