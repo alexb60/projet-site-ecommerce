@@ -31,7 +31,7 @@ class ViewProduit
               <td><?= $produit['nom_categorie'] ?></td>
               <td><?= $produit['nom_marque'] ?></td>
               <td>
-                <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary">Voir</a>
+                <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i> Voir</a>
               </td>
             </tr>
           <?php
@@ -86,7 +86,7 @@ class ViewProduit
                       </div>
                     </div>
                     <input type="hidden" name="prix" id="prix" class="form-control" value="<?= $produit['prix'] ?>">
-                    <?= (isset($_SESSION['id'])) ? '<button type="submit" class="btn btn-success" name="ajout" id="ajout">Ajouter au panier</button>' : '<div class="alert alert-danger">Vous devez être connecté pour commander</div>' ?>
+                    <?= (isset($_SESSION['id'])) ? '<button type="submit" class="btn btn-success" name="ajout" id="ajout"><i class="fas fa-cart-arrow-down"></i>&nbsp; Ajouter au panier</button>' : '<div class="alert alert-danger">Vous devez être connecté pour commander</div>' ?>
                   </form>
 
                   <br /><br /><a href="liste.php?page=1" class="btn btn-primary">← Retour</a>
@@ -133,7 +133,7 @@ class ViewProduit
               <td><?= $produit['nom_marque'] ?></td>
               <td><?= $produit['prix'] ?></td>
               <td>
-                <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary">Voir</a>
+                <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir</a>
               </td>
             </tr>
           <?php
@@ -145,7 +145,7 @@ class ViewProduit
     } else {
     ?>
       <div class="alert alert-danger" role="alert">
-        Aucun résultat trouvé.
+        <i class="fas fa-times"></i>&nbsp; Aucun résultat trouvé.
       </div>
       <?php
     }
@@ -195,8 +195,10 @@ class ViewProduit
                               <h5 class="card-title"><?= $produit[$i]['nom'] ?></h5>
                               <p class="card-text"><?= (strlen($produit[$i]['description']) > 100) ? substr($produit[$i]['description'], 0, 100) . " ..." : $produit[$i]['description'] ?></p>
                               <h4 class="card-text text-right"><?= $produit[$i]['prix'] ?> €</h4>
-                              <a href="voir.php?id=<?= $produit[$i]['id'] ?>" class="btn btn-primary">Voir les détails</a>
                             </div>
+                            <ul class="list-group list-group-flush border-0 mb-2">
+                              <li class="list-group-item"><a href="voir.php?id=<?= $produit[$i]['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir les détails</a></li>
+                            </ul>
                           </div>
                         <?php
                         } else {
@@ -256,8 +258,10 @@ class ViewProduit
                                   <h5 class="card-title"><?= $liste[$i]['nom'] ?></h5>
                                   <p class="card-text"><?= (strlen($liste[$i]['description']) > 100) ? substr($liste[$i]['description'], 0, 100) . " ..." : $liste[$i]['description'] ?></p>
                                   <h4 class="card-text text-right"><?= $liste[$i]['prix'] ?> €</h4>
-                                  <a href="voir.php?id=<?= $liste[$i]['id'] ?>" class="btn btn-primary">Voir les détails</a>
                                 </div>
+                                <ul class="list-group list-group-flush border-0 mb-2">
+                                  <li class="list-group-item"><a href="voir.php?id=<?= $liste[$i]['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir les détails</a></li>
+                                </ul>
                               </div>
                             <?php
                             } else {

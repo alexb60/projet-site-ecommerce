@@ -34,7 +34,7 @@ class ViewClient
             <div class="form-group">
               <label for="pass">Mot de passe :</label>
               <input type="password" name="pass" id="pass" class="form-control" aria-describedby="passHelp" data-type="pass" data-message="Le mot de passe doit contenir au minimum 8 caractères dont au moins une majuscule, un chiffre et un caractère spécial">
-              <small class="form-text text-muted" id="passHelp"></small>
+              <small class="form-text text-muted" id="passHelp">Le mot de passe doit comporter au minimum 8 caractères dont : une majuscule, un chiffre et un caractère spécial.</small>
             </div>
             <br />
             <button type="submit" name="ajout" id="valider" class="btn btn-primary">Valider</button>

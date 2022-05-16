@@ -19,7 +19,7 @@ class ViewCategorie
             <h2 class="mb-4">Liste des catégories</h2>
           </div>
           <div class="col-md-6 d-flex justify-content-end align-items-start">
-            <a href="ajout.php" class="btn btn-outline-success">Ajouter une catégorie</a>
+            <a href="ajout.php" class="btn btn-outline-success"><i class="fas fa-plus"></i>&nbsp; Ajouter une catégorie</a>
           </div>
         </div>
         <div class="row">
@@ -40,9 +40,9 @@ class ViewCategorie
                     <th scope="row"><?= $categorie['id'] ?></th>
                     <td><?= $categorie['nom'] ?></td>
                     <td>
-                      <a href="voir.php?id=<?= $categorie['id'] ?>" class="btn btn-primary">Voir</a>
-                      <a href="modif.php?id=<?= $categorie['id'] ?>" class="btn btn-warning">Modifier</a>
-                      <a href="supp.php?id=<?= $categorie['id'] ?>" class="btn btn-danger">Supprimer</a>
+                      <a href="voir.php?id=<?= $categorie['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir</a>
+                      <a href="modif.php?id=<?= $categorie['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier</a>
+                      <a href="supp.php?id=<?= $categorie['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Supprimer</a>
                     </td>
                   </tr>
                 <?php
@@ -58,7 +58,7 @@ class ViewCategorie
         <div class="row">
           <div class="col-md-12">
             <div class="alert alert-danger" role="alert">
-              Aucune catégorie n'existe dans la liste.
+              <i class="fas fa-exclamation-triangle"></i>&nbsp; Aucune catégorie n'existe dans la liste.
             </div>
           </div>
         </div>
@@ -87,9 +87,9 @@ class ViewCategorie
             <div class="card-body">
               <h5 class="card-title"><?= $categorie['id'] . " - " . $categorie['nom']; ?> </h5>
               <p class="card-text"></p>
-              <a href="liste.php" class="btn btn-primary">← Retour</a>
-              <a href="modif.php?id=<?= $categorie['id'] ?>" class="btn btn-warning">Modifier</a>
-              <a href="supp.php?id=<?= $categorie['id'] ?>" class="btn btn-danger">Supprimer</a>
+              <a href="liste.php" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
+              <a href="modif.php?id=<?= $categorie['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier</a>
+              <a href="supp.php?id=<?= $categorie['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Supprimer</a>
             </div>
           </div>
         </div>

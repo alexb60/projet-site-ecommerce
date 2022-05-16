@@ -5,7 +5,7 @@ class ViewTemplate
   {
 ?>
     <div class="container alert alert-<?= $type ?>" role="alert">
-      <?= $message ?> <br />
+      <i class="fas <?= ($type === "success") ? 'fa-check' : 'fa-times' ?>"></i>&nbsp; <?= $message ?><br />
       <?php
       if ($lien) { ?>
         Cliquez <a href="<?= $lien ?>" class="alert-link px-2">ici</a> pour continuer la navigation
@@ -85,9 +85,9 @@ class ViewTemplate
               </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-              <li><a href="../employe/modifEmploye.php" class="btn btn-outline-warning">Éditer mon profil</a></li>
+              <li><a href="../employe/modifEmploye.php" class="btn btn-outline-warning"><i class="fas fa-edit"></i>&nbsp; Éditer mon profil</a></li>
               <li>&nbsp;&nbsp;</li>
-              <li><a href="../employe/deconnexion.php" class="btn btn-outline-danger">Déconnexion</a></li>
+              <li><a href="../employe/deconnexion.php" class="btn btn-outline-danger"><i class="fas fa-sign-out-alt"></i>&nbsp; Déconnexion</a></li>
             </ul>
           </div>
         </div>
