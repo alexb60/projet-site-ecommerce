@@ -83,17 +83,22 @@ class ViewClient
         <div class="col-md-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title"><?= $client['prenom'] . " " . $client['nom'] ?></h5>
+              <h5 class="card-title"><i class="fas fa-user"></i>&nbsp; <?= $client['prenom'] . " " . $client['nom'] ?></h5>
               <p class="card-text">
-                <span class="font-weight-bold">Adresse mail :</span> <?= $client['mail'] ?><br />
-                <span class="font-weight-bold">Téléphone :</span> <?= $client['tel'] ?><br />
-                <span class="font-weight-bold">Adresse postale :</span><br />
+                <span class="font-weight-bold"><i class="fas fa-envelope"></i>&nbsp; Adresse mail :</span> <?= $client['mail'] ?><br />
+                <span class="font-weight-bold"><i class="fas fa-phone-alt"></i>&nbsp; Téléphone :</span> <?= $client['tel'] ?><br />
+                <span class="font-weight-bold"><i class="fas fa-map-marker-alt"></i>&nbsp; Adresse postale :</span><br />
                 <?= $client['adresse'] . "<br />" . $client['code_post'] . " " . $client['ville'] ?>
               </p>
-              <a href="modifClient.php" class="btn btn-warning">Modifier</a>
-              <a href="supp.php" class="btn btn-danger">Supprimer</a><br><br>
-              <a href="accueil.php" class="btn btn-primary">← Retour</a>
+
             </div>
+            <ul class="list-group list-group-flush border-0 mb-2">
+              <li class="list-group-item">
+                <a href="accueil.php" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
+                <a href="modifClient.php" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier mes informations</a>
+                <a href="supp.php" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Supprimer mon compte</a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -164,7 +169,7 @@ class ViewClient
             <input type="reset" class="btn btn-danger">
           </form>
           <br />
-          <a href="accueil.php" class="btn btn-primary">← Retour</a>
+          <a href="accueil.php" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
         </div>
       </div>
     </div>

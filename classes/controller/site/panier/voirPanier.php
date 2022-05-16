@@ -40,7 +40,7 @@ if (isset($_SESSION['id'])) {
         <?php
         if (!isset($_SESSION['panier'])) {
         ?>
-          <div class="container alert alert-danger" role="alert">Le panier est vide.</div>
+          <div class="container alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i>&nbsp; Le panier est vide.</div>
       </div>
       <?php
         } else {
@@ -71,8 +71,8 @@ if (isset($_SESSION['id'])) {
                 <td><?= $_SESSION['panier']['quantite'][$i] ?></td>
                 <td><?= (float)$_SESSION['panier']['prix'][$i] * (int)$_SESSION['panier']['quantite'][$i] ?> €</td>
                 <td>
-                  <a href="../produit/voir.php?id=<?= $_SESSION['panier']['id'][$i] ?>" class="btn btn-primary">Modifier la quantité</a>
-                  <a href="supprProduitPanier.php?id=<?= $produit['id'] ?>" class="btn btn-danger">Retirer du panier</a>
+                  <a href="../produit/voir.php?id=<?= $_SESSION['panier']['id'][$i] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier la quantité</a>
+                  <a href="supprProduitPanier.php?id=<?= $produit['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Retirer du panier</a>
                 </td>
               </tr>
             <?php
@@ -105,15 +105,15 @@ if (isset($_SESSION['id'])) {
   </div>
   <div class="row">
     <div class="col-md-12 d-flex justify-content-end">
-      <a href="finaliser.php" class="btn btn-success">Finaliser ma commande</a>
+      <a href="finaliser.php" class="btn btn-success"><i class="fas fa-euro-sign"></i>&nbsp; Finaliser ma commande</a>
       &nbsp;&nbsp;
-      <a href="viderPanier.php" class="btn btn-danger">Vider le panier</a>
+      <a href="viderPanier.php" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Vider le panier</a>
     </div>
   <?php
 
           } else {
   ?>
-    <div class="container alert alert-danger" role="alert">Le panier est vide.</div>
+    <div class="container alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i>&nbsp; Le panier est vide.</div>
 <?php
           }
         }

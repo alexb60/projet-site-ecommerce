@@ -39,7 +39,7 @@ class ViewCommande
               <td><?= $commande['montant'] ?> €</td>
               <td><?= ucfirst($commande['mode']) ?></td>
               <td>
-                <a href="voirDetails.php?id_com=<?= $commande['id'] ?>" class="btn btn-primary">Voir les détails</a>
+                <a href="voirDetails.php?id_com=<?= $commande['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir les détails</a>
               </td>
             </tr>
           <?php
@@ -51,7 +51,7 @@ class ViewCommande
     } else {
     ?>
       <div class="alert alert-danger" role="alert">
-        Aucune commande n'existe dans la liste.
+        <i class="fas fa-exclamation-triangle"></i>&nbsp; Aucune commande n'existe dans la liste.
       </div>
     <?php
     }
@@ -149,12 +149,12 @@ class ViewCommande
           } else {
           ?>
             <div class="alert alert-danger" role="alert">
-              Aucun produit n'existe dans la liste.
+              <i class="fas fa-exclamation-triangle"></i>&nbsp; Aucun produit n'existe dans la liste.
             </div>
           <?php
           }
           ?>
-          <a href="listeCommandeClient.php" class="btn btn-primary">← Retour à la liste des commandes</a>
+          <a href="listeCommandeClient.php" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour à la liste des commandes</a>
         </div>
       </div>
     </div>

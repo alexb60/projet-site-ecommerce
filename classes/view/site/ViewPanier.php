@@ -44,7 +44,7 @@ class ViewPanier
             <input type="submit" id="valider" class="btn btn-success">
             <input type="reset" class="btn btn-danger">
           </form>
-          <a href="debloquePanier.php" class="btn btn-primary">← Retour au panier</a>
+          <a href="debloquePanier.php" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour au panier</a>
         </div>
       </div>
     </div>
@@ -64,9 +64,9 @@ class ViewPanier
         <div class="col-md-12">
           <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post" class="col-md-6 offset-md-3">
             <input type="hidden" name="etat" id="etat" class="form-control" value="Payée">
-            <button type="submit" name="valider" id="valider" class="btn btn-success btn-lg btn-block">Payer</button>
+            <button type="submit" name="valider" id="valider" class="btn btn-success btn-lg btn-block"><i class="fas fa-euro-sign"></i>&nbsp; Payer</button>
           </form>
-          <a href="debloquePanier.php" class="btn btn-primary">← Retour au panier</a>
+          <a href="debloquePanier.php" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour au panier</a>
         </div>
       </div>
     </div>
