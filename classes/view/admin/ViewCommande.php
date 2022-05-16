@@ -31,11 +31,13 @@ class ViewCommande
               <th scope="row"><?= $commande['id'] ?></th>
               <td><?= $commande['id_client'] ?></td>
               <td><?= $commande['date'] ?></td>
-              <td><?= $commande['etat'] ?></td>
+              <td class="<?= ($commande['etat'] === "Payée") ? "bg-danger text-white" : (($commande['etat'] == "En préparation") ? "bg-warning" : (($commande['etat'] == 'Expédiée') ? "bg-info text-light" : "bg-success text-light")) ?>">
+                <?= $commande['etat'] ?>
+              </td>
               <td><?= $commande['montant'] ?> €</td>
               <td>
-                <a href="voirDetails.php?id_com=<?= $commande['id'] ?>&id_cli=<?= $commande['id_client'] ?>" class="btn btn-primary">Voir les détails</a>
-                <a href="modifEtat.php?id=<?= $commande['id'] ?>" class="btn btn-warning">Modifier l'état</a>
+                <a href="voirDetails.php?id_com=<?= $commande['id'] ?>&id_cli=<?= $commande['id_client'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir les détails</a>
+                <a href="modifEtat.php?id=<?= $commande['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier l'état</a>
               </td>
             </tr>
           <?php
@@ -47,7 +49,7 @@ class ViewCommande
     } else {
     ?>
       <div class="alert alert-danger" role="alert">
-        Aucune commande n'existe dans la liste.
+        <i class="fas fa-exclamation-triangle"></i>&nbsp; Aucune commande n'existe dans la liste.
       </div>
     <?php
     }
@@ -146,13 +148,13 @@ class ViewCommande
           } else {
           ?>
             <div class="alert alert-danger" role="alert">
-              Aucun produit n'existe dans la liste.
+              <i class="fas fa-exclamation-triangle"></i>&nbsp; Aucun produit n'existe dans la liste.
             </div>
           <?php
           }
           ?>
-          <a href="listeCommande.php?page=1" class="btn btn-primary">← Retour à la liste des commandes</a>
-          <a href="modifEtat.php?id=<?= $_GET['id_com'] ?>" class="btn btn-warning">Modifier l'état</a>
+          <a href="listeCommande.php?page=1" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour à la liste des commandes</a>
+          <a href="modifEtat.php?id=<?= $_GET['id_com'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier l'état</a>
         </div>
       </div>
     </div>
@@ -191,7 +193,7 @@ class ViewCommande
             <input type="reset" class="btn btn-danger">
           </form>
           <br />
-          <a href="listeCommande.php?page=1" class="btn btn-primary">← Retour à la liste des commandes</a>
+          <a href="listeCommande.php?page=1" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour à la liste des commandes</a>
         </div>
       </div>
     </div>

@@ -72,7 +72,7 @@ class ModelCommande
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    SELECT * FROM commande LIMIT :premier, :parPage
+    SELECT * FROM commande ORDER BY id DESC LIMIT :premier, :parPage
     ");
     $requete->bindValue(':premier', $premier, PDO::PARAM_INT);
     $requete->bindValue(':parPage', $parPage, PDO::PARAM_INT);
