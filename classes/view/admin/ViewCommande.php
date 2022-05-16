@@ -31,7 +31,7 @@ class ViewCommande
               <th scope="row"><?= $commande['id'] ?></th>
               <td><?= $commande['id_client'] ?></td>
               <td><?= $commande['date'] ?></td>
-              <td class="<?= ($commande['etat'] === "Payée") ? "bg-danger text-white" : (($commande['etat'] == "En préparation") ? "bg-warning" : (($commande['etat'] == 'Expédiée') ? "bg-info text-light" : "bg-success text-light")) ?>">
+              <td class="<?= ($commande['etat'] == "Payée") ? "bg-danger text-white" : (($commande['etat'] == "En préparation") ? "bg-warning" : (($commande['etat'] == 'Expédiée') ? "bg-info text-light" : "bg-success text-light")) ?>">
                 <?= $commande['etat'] ?>
               </td>
               <td><?= $commande['montant'] ?> €</td>

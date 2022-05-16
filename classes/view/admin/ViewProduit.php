@@ -49,7 +49,9 @@ class ViewProduit
                   <?= (strlen($produit['ref']) > 12) ? substr($produit['ref'], 0, 12) . "..." : $produit['ref'] ?>
                 </a>
               </td>
-              <td><?= $produit['quantite'] ?></td>
+              <td <?= ($produit['quantite'] == 0) ? 'class="bg-danger text-white"' : (($produit['quantite'] <= 5) ? 'class="bg-warning"' : "") ?>>
+                <?= $produit['quantite'] ?>
+              </td>
               <td>
                 <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir</a>
                 <a href="modif.php?id=<?= $produit['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier</a>
