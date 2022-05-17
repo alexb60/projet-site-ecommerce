@@ -1,13 +1,13 @@
 <?php
 session_start();
 
-require_once "../../../view/site/ViewProduit.php";
-require_once "../../../view/site/ViewTemplate.php";
+require_once "../../../view/admin/ViewProduit.php";
+require_once "../../../view/admin/ViewTemplate.php";
 require_once "../../../model/ModelProduit.php";
 
 $modelProduit = new ModelProduit();
 
-if (isset($_SESSION['id'])) {
+if (isset($_SESSION['id_employe'])) {
   ViewTemplate::headerConnecte();
 } else {
   ViewTemplate::headerInvite();
@@ -27,7 +27,7 @@ if ($_POST['recherche'] == "") {
   <title>Résultats de recherche</title>
   <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
   <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/site.css">
+  <link rel="stylesheet" href="../../../../css/admin.css">
 </head>
 
 <body>

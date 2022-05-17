@@ -290,6 +290,54 @@ class ViewProduit
         </div>
       </div>
     </div>
+    <?php
+  }
+
+  // FONCTION AFFICHANT LES RÉSULTATS DE LA RECHERCHE
+  public static function recherche($recherche)
+  {
+    $produit = new ModelProduit();
+    $liste = $produit->recherche($recherche);
+    if (count($liste) > 0) { ?>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Catégorie</th>
+            <th scope="col">Marque</th>
+            <th scope="col">Prix</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          foreach ($liste as $produit) {
+          ?>
+            <tr>
+              <th scope="row"><?= $produit['id'] ?></th>
+              <td><?= $produit['nom'] ?></td>
+              <td><?= $produit['nom_categorie'] ?></td>
+              <td><?= $produit['nom_marque'] ?></td>
+              <td><?= $produit['prix'] ?></td>
+              <td>
+                <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                <a href="modif.php?id=<?= $produit['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                <a href="supp.php?id=<?= $produit['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+              </td>
+            </tr>
+          <?php
+          }
+          ?>
+        </tbody>
+      </table>
+    <?php
+    } else {
+    ?>
+      <div class="alert alert-danger" role="alert">
+        <i class="fas fa-times"></i>&nbsp; Aucun résultat trouvé.
+      </div>
 <?php
+    }
   }
 }
