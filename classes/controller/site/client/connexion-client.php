@@ -1,9 +1,5 @@
 <?php
 session_start();
-if (isset($_SESSION['id_employe'])) {
-  session_destroy();
-  session_start();
-}
 if (isset($_SESSION['id'])) {
   header('Location: accueil.php');
 }

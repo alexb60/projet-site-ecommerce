@@ -31,7 +31,7 @@ class ViewProduit
               <th scope="row"><?= $produit['id'] ?></th>
               <td>
                 <a class="lien-mort" data-toggle="tooltip" title="<?= $produit['nom'] ?>" data-placement="down">
-                  <?= (strlen($produit['nom']) > 20) ? substr($produit['nom'], 0, 20) . "..." : $produit['nom'] ?>
+                  <?= $produit['nom'] ?>
                 </a>
               </td>
               <td>
@@ -53,9 +53,9 @@ class ViewProduit
                 <?= $produit['quantite'] ?>
               </td>
               <td>
-                <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir</a>
-                <a href="modif.php?id=<?= $produit['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier</a>
-                <a href="supp.php?id=<?= $produit['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Supprimer</a>
+                <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                <a href="modif.php?id=<?= $produit['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                <a href="supp.php?id=<?= $produit['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
               </td>
             </tr>
           <?php

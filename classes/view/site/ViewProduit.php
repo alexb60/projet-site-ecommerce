@@ -109,7 +109,6 @@ class ViewProduit
   {
     $produit = new ModelProduit();
     $liste = $produit->recherche($recherche);
-    var_dump($liste);
     if (count($liste) > 0) { ?>
       <table class="table table-striped">
         <thead>
@@ -151,6 +150,7 @@ class ViewProduit
     }
   }
 
+  // FONCTION AFFICHANT 8 PRODUITS PAR CATÉGORIE
   public static function produitParCategorie()
   {
     $modelProduit = new ModelProduit();
@@ -228,6 +228,7 @@ class ViewProduit
           }
         }
 
+        // FONCTION AFFICHANT LES DERNIERS PRODUITS AJOUTÉS DANS LA BASE
         public static function derniersProduit()
         {
           $produit = new ModelProduit();
