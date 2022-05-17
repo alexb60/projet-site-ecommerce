@@ -8,7 +8,7 @@ require_once "../../../model/ModelProduit.php";
 $modelProduit = new ModelProduit();
 
 if (isset($_SESSION['id_employe'])) {
-  ViewTemplate::headerConnecte();
+  ViewTemplate::menu();
 } else {
   ViewTemplate::headerInvite();
 }

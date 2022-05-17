@@ -88,3 +88,8 @@ footer {
   text-decoration: none !important;
   color: black !important;
 }
+
+/* INPUT DE RECHERCHE DE PRODUIT */
+.recherche {
+  width: 30rem !important;
+}

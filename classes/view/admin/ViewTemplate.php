@@ -85,8 +85,8 @@ class ViewTemplate
               </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-              <li><a href="../employe/modifEmploye.php" class="btn btn-outline-warning"><i class="fas fa-edit"></i>&nbsp; Éditer mon profil</a></li>
-              <li>&nbsp;&nbsp;</li>
+              <li><a href="../employe/modifEmploye.php" class="btn btn-outline-warning"><i class="fas fa-edit"></i>&nbsp; Profil</a></li>
+              <li>&nbsp;</li>
               <li><a href="../employe/deconnexion.php" class="btn btn-outline-danger"><i class="fas fa-sign-out-alt"></i>&nbsp; Déconnexion</a></li>
             </ul>
           </div>

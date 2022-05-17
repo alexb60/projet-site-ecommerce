@@ -40,6 +40,10 @@ require_once "../../../model/ModelProduit.php";
   ?>
     <div class="container">
 
+      <form action="../produit/recherche.php" method="post" class="form-inline d-flex justify-content-center mx-auto mb-4">
+        <input class="form-control mr-sm-2 recherche" type="text" placeholder="Chercher un produit" name="recherche" aria-label="Search" id="recherche">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i>&nbsp; Chercher</button>
+      </form>
       <div class="row">
         <div class="col-md-6">
           <h2 class="mb-4">Liste des produits</h2>

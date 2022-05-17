@@ -307,6 +307,7 @@ class ViewProduit
             <th scope="col">Catégorie</th>
             <th scope="col">Marque</th>
             <th scope="col">Prix</th>
+            <th scope="col">Stock</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -320,6 +321,9 @@ class ViewProduit
               <td><?= $produit['nom_categorie'] ?></td>
               <td><?= $produit['nom_marque'] ?></td>
               <td><?= $produit['prix'] ?></td>
+              <td <?= ($produit['quantite'] == 0) ? 'class="bg-danger text-white"' : (($produit['quantite'] <= 5) ? 'class="bg-warning"' : "") ?>>
+                <?= $produit['quantite'] ?>
+              </td>
               <td>
                 <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                 <a href="modif.php?id=<?= $produit['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i></a>
