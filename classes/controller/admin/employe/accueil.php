@@ -101,7 +101,7 @@ if (isset($_SESSION['id_employe'])) {
       <div class="col mb-4">
         <div class="card">
           <div class="card-body">
-            <h6 class="card-subtitle text-muted"><i class="fas fa-list"></i>&nbsp; Nombre de catégories</h6>
+            <h6 class="card-subtitle text-muted"><i class="fas fa-tag"></i>&nbsp; Nombre de catégories</h6>
             <p class="text-right nombres" id="#nbCategories"><?= $nbCategories['nb_categories'] ?></p>
           </div>
         </div>
