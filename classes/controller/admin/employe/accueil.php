@@ -2,6 +2,7 @@
 session_start();
 
 require_once "../../../view/admin/ViewTemplate.php";
+require_once "../../../model/ModelEmploye.php";
 require_once "../../../model/ModelProduit.php";
 require_once "../../../model/ModelCategorie.php";
 require_once "../../../model/ModelMarque.php";
@@ -10,7 +11,11 @@ require_once "../../../model/ModelCommande.php";
 require_once "../../../model/ModelTransporteur.php";
 
 if (isset($_SESSION['id_employe'])) {
-  $salutation = "Bonjour " . $_SESSION['prenom'] . " " . $_SESSION['nom'] . " et bienvenue sur l'espace employé";
+  $modelEmploye = new ModelEmploye();
+  $prenom = $modelEmploye->voirEmploye($_SESSION['id_employe'])['prenom'];
+  $nom = $modelEmploye->voirEmploye($_SESSION['id_employe'])['nom'];
+  
+  $salutation = "Bonjour " . $prenom . " " . $nom . " et bienvenue sur l'espace employé";
   ViewTemplate::menu();
 } else {
   header('Location: connexion-employe.php');

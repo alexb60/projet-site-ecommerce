@@ -23,7 +23,7 @@ require_once "../../../model/ModelEmploye.php";
   ViewTemplate::menu();
 
   $modelEmploye = new ModelEmploye();
-  if (isset($_SESSION['id_employe'])) {
+  if (isset($_SESSION['id_employe']) && !isset($_POST['id'])) {
     if ($modelEmploye->voirEmploye($_SESSION['id_employe'])) {
       ViewEmploye::modifEmploye($_SESSION['id_employe']);
     } else {

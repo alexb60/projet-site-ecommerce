@@ -15,8 +15,6 @@ if (isset($_POST['connexion'])) {
   $userData = $user->connexionEmploye($_POST['login']);
   if ($userData && password_verify($_POST['pass'], $userData['pass'])) {
     $_SESSION['id_employe'] = $userData['id'];
-    $_SESSION['nom'] = $userData['nom'];
-    $_SESSION['prenom'] = $userData['prenom'];
     header('Location: accueil.php');
   } else {
     echo "Echec d'authentification";
