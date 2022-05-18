@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if ($_POST['recherche'] == "") {
+  header('Location: ../produit/liste.php');
+}
+
 require_once "../../../view/admin/ViewProduit.php";
 require_once "../../../view/admin/ViewTemplate.php";
 require_once "../../../model/ModelProduit.php";
@@ -11,9 +15,6 @@ if (isset($_SESSION['id_employe'])) {
   ViewTemplate::menu();
 } else {
   ViewTemplate::headerInvite();
-}
-if ($_POST['recherche'] == "") {
-  header('Location: ../produit/index.php');
 }
 ?>
 
@@ -32,16 +33,13 @@ if ($_POST['recherche'] == "") {
 
 <body>
   <div class="container">
-    <div class="row">
-      <h1 class="mb-4">Résultats de recherche</h1>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <?php
-        ViewProduit::recherche($_POST['recherche']);
-        ?>
-      </div>
-    </div>
+    <form action="../produit/recherche.php" method="post" class="form-inline d-flex justify-content-center mx-auto mb-4">
+      <input class="form-control mr-sm-2 recherche" type="search" placeholder="Chercher un produit" name="recherche" aria-label="Search" id="recherche">
+      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i>&nbsp; Chercher</button>
+    </form>
+    <?php
+    ViewProduit::recherche($_POST['recherche']);
+    ?>
   </div>
   <?php
   ViewTemplate::footer();

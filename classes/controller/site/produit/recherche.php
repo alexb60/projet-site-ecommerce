@@ -32,16 +32,9 @@ if ($_POST['recherche'] == "") {
 
 <body>
   <div class="container">
-    <div class="row">
-      <h1 class="mb-4">Résultats de recherche</h1>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <?php
-        ViewProduit::recherche($_POST['recherche']);
-        ?>
-      </div>
-    </div>
+    <?php
+    ViewProduit::recherche($_POST['recherche']);
+    ?>
   </div>
   <?php
   ViewTemplate::footer();

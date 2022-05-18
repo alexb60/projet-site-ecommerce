@@ -101,7 +101,7 @@ class ViewProduit
         </div>
       </div>
     </div>
-    <?php
+  <?php
   }
 
   // FONCTION AFFICHANT LES RÉSULTATS DE LA RECHERCHE
@@ -109,45 +109,56 @@ class ViewProduit
   {
     $produit = new ModelProduit();
     $liste = $produit->recherche($recherche);
-    if (count($liste) > 0) { ?>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Catégorie</th>
-            <th scope="col">Marque</th>
-            <th scope="col">Prix</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php
-          foreach ($liste as $produit) {
-          ?>
-            <tr>
-              <th scope="row"><?= $produit['id'] ?></th>
-              <td><?= $produit['nom'] ?></td>
-              <td><?= $produit['nom_categorie'] ?></td>
-              <td><?= $produit['nom_marque'] ?></td>
-              <td><?= $produit['prix'] ?></td>
-              <td>
-                <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir</a>
-              </td>
-            </tr>
-          <?php
-          }
-          ?>
-        </tbody>
-      </table>
-    <?php
-    } else {
-    ?>
-      <div class="alert alert-danger" role="alert">
-        <i class="fas fa-times"></i>&nbsp; Aucun résultat trouvé.
+  ?>
+    <div class="row">
+      <h1 class="mb-4">Résultats de recherche pour "<?= $recherche ?>"</h1>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <?php
+        if (count($liste) > 0) { ?>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Catégorie</th>
+                <th scope="col">Marque</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              foreach ($liste as $produit) {
+              ?>
+                <tr>
+                  <th scope="row"><?= $produit['id'] ?></th>
+                  <td><?= $produit['nom'] ?></td>
+                  <td><?= $produit['nom_categorie'] ?></td>
+                  <td><?= $produit['nom_marque'] ?></td>
+                  <td><?= $produit['prix'] ?></td>
+                  <td>
+                    <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir</a>
+                  </td>
+                </tr>
+              <?php
+              }
+              ?>
+            </tbody>
+          </table>
+        <?php
+        } else {
+        ?>
+          <div class="alert alert-danger" role="alert">
+            <i class="fas fa-times"></i>&nbsp; Aucun résultat trouvé.
+          </div>
+        <?php
+        }
+        ?>
       </div>
-      <?php
-    }
+    </div>
+    <?php
   }
 
   // FONCTION AFFICHANT 8 PRODUITS PAR CATÉGORIE
@@ -169,7 +180,7 @@ class ViewProduit
       }
 
       if ($nbProduit > 0) {
-      ?>
+    ?>
         <h2 class="my-4">Dans la catégorie <?= $categorie['nom'] ?></h2>
         <div id="carouselDerniersProduits" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">

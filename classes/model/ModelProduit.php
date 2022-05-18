@@ -57,7 +57,10 @@ class ModelProduit
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    SELECT P.*, C.nom nom_categorie, M.nom nom_marque FROM produit P INNER JOIN categorie C ON P.id_categorie = C.id INNER JOIN marque M ON P.id_marque = M.id WHERE P.id=:id;
+    SELECT P.*, C.nom nom_categorie, M.nom nom_marque FROM produit P 
+    INNER JOIN categorie C ON P.id_categorie = C.id
+    INNER JOIN marque M ON P.id_marque = M.id
+    WHERE P.id=:id;
     ");
     $requete->execute([
       ':id' => $id,
