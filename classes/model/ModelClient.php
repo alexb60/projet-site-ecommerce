@@ -90,7 +90,7 @@ class ModelClient
       ':tel' => $tel,
       ':adresse' => $adresse,
       ':ville' => $ville,
-      ':code_post' => $code_post
+      ':code_post' => $code_post,
     ]);
   }
 

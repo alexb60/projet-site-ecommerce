@@ -137,12 +137,12 @@ class ViewClient
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h2 class="mb-4">Modifier mes informations</h2>
+          <h1 class="mb-4">Modifier mes informations</h1>
         </div>
       </div>
       <div class="row">
         <div class="col-md-12">
-          <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+          <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" enctype="multipart/form-data">
             <input type="hidden" name="id" id="id" class="form-control" value="<?= $client['id'] ?>">
             <div class="form-group">
               <label for="nom">Nom :</label>

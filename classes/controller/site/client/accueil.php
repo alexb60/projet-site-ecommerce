@@ -2,10 +2,14 @@
 session_start();
 
 require_once "../../../view/site/ViewTemplate.php";
+require_once "../../../model/ModelClient.php";
 require_once "../../../model/ModelCommande.php";
 
 if (isset($_SESSION['id'])) {
-  $salutation = "Bonjour " . $_SESSION['prenom'] . " " . $_SESSION['nom'];
+  $modelClient = new ModelClient();
+  $prenom = $modelClient->voirClient($_SESSION['id'])['prenom'];
+  $nom = $modelClient->voirClient($_SESSION['id'])['nom'];
+  $salutation = "Bonjour " . $prenom . " " . $nom;
   ViewTemplate::headerConnecte();
 } else {
   header('Location: connexion-client.php');
