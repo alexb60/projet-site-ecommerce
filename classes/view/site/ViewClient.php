@@ -36,6 +36,28 @@ class ViewClient
               <input type="password" name="pass" id="pass" class="form-control" aria-describedby="passHelp" data-type="pass" data-message="Le mot de passe doit contenir au minimum 8 caractères dont au moins une majuscule, un chiffre et un caractère spécial">
               <small class="form-text text-muted" id="passHelp">Le mot de passe doit comporter au minimum 8 caractères dont : une majuscule, un chiffre et un caractère spécial.</small>
             </div>
+            <div class="form-group">
+              <label for="tel">Téléphone :</label>
+              <input type="tel" name="tel" id="tel" class="form-control" aria-describedby="telHelp" data-type="tel" data-message="Le format du numéro de téléphone n'est pas correct">
+              <small class="form-text text-muted" id="telHelp"></small>
+            </div>
+            <div class="form-group">
+              <label for="mail">Adresse postale :</label>
+              <input type="text" name="adresse" id="adresse" class="form-control" aria-describedby="adresseHelp" data-type="adresse" data-message="Le format de l'adresse n'est pas correct">
+              <small class="form-text text-muted" id="adresseHelp"></small>
+            </div>
+            <div class="form-row">
+              <div class="col-md-4">
+                <label for="code_post">Code postal :</label>
+                <input type="text" name="code_post" id="code_post" class="form-control" aria-describedby="code_postHelp" data-type="code_post" data-message="Le code postal doit être composé de 5 chiffres">
+                <small class="form-text text-muted" id="code_postHelp"></small>
+              </div>
+              <div class="col-md-8">
+                <label for="ville">Ville :</label>
+                <input type="text" name="ville" id="ville" class="form-control" aria-describedby="villeHelp" data-type="ville" data-message="Le format de la ville n'est pas correct">
+                <small class="form-text text-muted" id="villeHelp"></small>
+              </div>
+            </div>
             <br />
             <button type="submit" name="ajout" id="valider" class="btn btn-primary">Valider</button>
             <button type="reset" name="annuler" class="btn btn-danger">Annuler</button>

@@ -30,17 +30,21 @@ class ModelClient
   }
 
   // REQUÊTE SQL PRÉPARÉE PERMETTANT D'AJOUTER UN CLIENT
-  public function ajoutClient($nom, $prenom, $mail, $pass)
+  public function ajoutClient($nom, $prenom, $mail, $pass, $tel, $adresse, $ville, $code_post)
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    INSERT INTO client (id, nom, prenom, mail, pass) VALUES (null, :nom, :prenom, :mail, :pass)
+    INSERT INTO client (id, nom, prenom, mail, pass, tel, adresse, ville, code_post) VALUES (null, :nom, :prenom, :mail, :pass, :tel, :adresse, :ville, :code_post)
     ");
     return $requete->execute([
       ':nom' => $nom,
       ':prenom' => $prenom,
       ':mail' => $mail,
       ':pass' => $pass,
+      ':tel' => $tel,
+      ':adresse' => $adresse,
+      ':ville' => $ville,
+      ':code_post' => $code_post,
     ]);
   }
 

@@ -94,7 +94,7 @@ class Utils
         }
     }
 
-    $valide === true ? $message = "" : $message = "Le champ $type n'est pas au format demandé.[ctrl serveur]<br/>";
+    $valide === true ? $message = "" : $message = "<div class='alert alert-danger'><i class='fas fa-exclamation-triangle'></i>&nbsp; Le champ $type n'est pas au format demandé. [contrôle serveur]</div>";
 
     $errorsTab = [$str, $message];
     return $errorsTab;
