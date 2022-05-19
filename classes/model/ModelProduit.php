@@ -148,10 +148,23 @@ class ModelProduit
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    SELECT P.*, M.nom nom_marque FROM produit P INNER JOIN marque M ON P.id_marque = M.id WHERE id_categorie=:id_categorie;
+    SELECT P.*, M.nom nom_marque FROM produit P INNER JOIN marque M ON P.id_marque = M.id WHERE P.id_categorie=:id_categorie;
     ");
     $requete->execute([
       ':id_categorie' => $id_categorie,
+    ]);
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  // REQUÊTE SQL PRÉPARÉE LISTANT TOUS LES PRODUITS D'UNE MARQUE
+  public function produitParMarque($id_marque)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT P.*, C.nom nom_categorie FROM produit P INNER JOIN categorie C ON P.id_categorie = C.id WHERE P.id_marque=:id_marque;
+    ");
+    $requete->execute([
+      ':id_marque' => $id_marque,
     ]);
     return $requete->fetchAll(PDO::FETCH_ASSOC);
   }
