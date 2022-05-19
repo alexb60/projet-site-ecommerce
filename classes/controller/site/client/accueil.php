@@ -52,7 +52,7 @@ if (isset($_SESSION['id'])) {
         <div class="card">
           <div class="card-body">
             <h6 class="card-subtitle text-muted">Total dépensé</h6>
-            <p class="text-right nombres" id="#depenseTotale"><?= $depense['depense'] ?> €</p>
+            <p class="text-right nombres" id="#depenseTotale"><?= ($depense['depense'] == NULL) ? 0 : $depense['depense'] ?> €</p>
           </div>
         </div>
       </div>
@@ -60,7 +60,7 @@ if (isset($_SESSION['id'])) {
         <div class="card">
           <div class="card-body">
             <h6 class="card-subtitle text-muted">Montant moyen d'une commande</h6>
-            <p class="text-right nombres" id="#chiffreAffaires"><?= $moyMontantClient['moy_montant_client'] ?> €</p>
+            <p class="text-right nombres" id="#chiffreAffaires"><?= ($moyMontantClient['moy_montant_client'] == NULL) ? 0 : $moyMontantClient['moy_montant_client'] ?> €</p>
           </div>
         </div>
       </div>
