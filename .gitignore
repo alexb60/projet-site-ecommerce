@@ -1,9 +1,16 @@
+# DOSSIER IMAGES
 /images/produit/*.png
 /images/produit/*.jpg
 /images/produit/*.jpeg
+/images/produit/*.gif
+/images/produit/*.svg
 /images/marque/*.png
 /images/marque/*.jpg
 /images/marque/*.jpeg
+/images/marque/*.gif
+/images/marque/*.svg
 /images/transporteur/*.png
 /images/transporteur/*.jpg
 /images/transporteur/*.jpeg
+/images/transporteur/*.gif
+/images/transporteur/*.svg
