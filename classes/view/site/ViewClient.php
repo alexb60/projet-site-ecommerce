@@ -81,6 +81,7 @@ class ViewClient
         <div class="form-group">
           <label for="pass">Mot de passe :</label>
           <input type="password" class="form-control" name="pass" id="pass">
+          <small class="text-align-right"><a href="recupMail.php">Mot de passe oublié</a></small>
         </div>
         <button type="submit" name="connexion" class="btn btn-primary">Connexion</button>
         <button type="reset" name="annuler" class="btn btn-danger">Annuler</button>
@@ -193,6 +194,51 @@ class ViewClient
           <br />
           <a href="accueil.php" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
         </div>
+      </div>
+    </div>
+  <?php
+  }
+
+  // FONCTION AFFICHANT LE FORMULAIRE DE RÉCUPÉRATION DE L'ADRESSE MAIL
+  public static function recupMail()
+  {
+  ?>
+    <div class="container">
+      <h2 class="mb-4">Récupération de l'adresse mail</h2>
+      <div class="container mt-5">
+        <form class="col-md-6 offset-md-3" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="login">Adresse mail :</label>
+            <input type="email" class="form-control" name="mail" id="mail" required>
+          </div>
+          <button type="submit" name="valider" class="btn btn-primary">Envoyer</button>
+          <button type="reset" name="annuler" class="btn btn-danger">Annuler</button>
+        </form>
+      </div>
+    </div>
+<?php
+  }
+
+  // FONCTION AFFICHANT LE FORMULAIRE DE MODIFICATION DU MOT DE PASSE
+  public static function modifPass() {
+    ?>
+    <div class="container">
+      <h2 class="mb-4">Réinitialisation du mot de passe</h2>
+      <div class="container mt-3">
+        <form class="col-md-6 offset-md-3" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="login">Nouveau mot de passe :</label>
+            <input type="password" class="form-control" name="pass" id="pass" required>
+            <small class="form-text text-muted" id="passHelp">Le mot de passe doit comporter au minimum 8 caractères dont : une majuscule, un chiffre et un caractère spécial.</small>
+          </div>
+          <div class="form-group">
+            <label for="login">Confirmez le nouveau mot de passe :</label>
+            <input type="password" class="form-control" name="confirmPass" id="confirmPass" required>
+          </div>
+
+          <button type="submit" name="valider" class="btn btn-primary">Réinitialiser mon mot de passe</button>
+          <button type="reset" name="annuler" class="btn btn-danger">Annuler</button>
+        </form>
       </div>
     </div>
 <?php

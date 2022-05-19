@@ -32,7 +32,7 @@ class Utils
 
     $file_name = substr(md5($fichier['name']), 10) . ".$file_ext";
 
-    while (file_exists("images/$file_name")) {
+    while (file_exists("../../../../images/$dossier/$file_name")) {
       $file_name = substr(md5($file_name), 10) . ".$file_ext";
     }
 

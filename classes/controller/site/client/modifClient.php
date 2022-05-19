@@ -38,7 +38,8 @@ require_once "../../../model/ModelClient.php";
       $data = Utils::valider($donnees, $types);
 
       if ($data) {
-        if ($modelClient->modifClient($_POST['id'], $_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['tel'], $_POST['adresse'], $_POST['ville'], $_POST['code_post'])) {
+        $token = password_hash($_POST['mail'], PASSWORD_DEFAULT);
+        if ($modelClient->modifClient($_POST['id'], $_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['tel'], $_POST['adresse'], $_POST['ville'], $_POST['code_post'], $token)) {
           ViewTemplate::alert("success", "Le profil a été modifié avec succès", "accueil.php");
         } else {
           ViewTemplate::alert("danger", "Échec de la modification", "accueil.php");

@@ -30,11 +30,11 @@ class ModelClient
   }
 
   // REQUÊTE SQL PRÉPARÉE PERMETTANT D'AJOUTER UN CLIENT
-  public function ajoutClient($nom, $prenom, $mail, $pass, $tel, $adresse, $ville, $code_post)
+  public function ajoutClient($nom, $prenom, $mail, $pass, $tel, $adresse, $ville, $code_post, $token)
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    INSERT INTO client (id, nom, prenom, mail, pass, tel, adresse, ville, code_post) VALUES (null, :nom, :prenom, :mail, :pass, :tel, :adresse, :ville, :code_post)
+    INSERT INTO client VALUES (null, :nom, :prenom, :mail, :pass, :tel, :adresse, :ville, :code_post, :token)
     ");
     return $requete->execute([
       ':nom' => $nom,
@@ -45,6 +45,7 @@ class ModelClient
       ':adresse' => $adresse,
       ':ville' => $ville,
       ':code_post' => $code_post,
+      ':token' => $token,
     ]);
   }
 
@@ -76,11 +77,11 @@ class ModelClient
   }
 
   // REQUÊTE SQL PRÉPARÉE PERMETTANT AU CLIENT DE MODIFIER SES INFORMATIONS
-  public function modifClient($id, $nom, $prenom, $mail, $tel, $adresse, $ville, $code_post)
+  public function modifClient($id, $nom, $prenom, $mail, $tel, $adresse, $ville, $code_post, $token)
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    UPDATE client SET nom=:nom, prenom=:prenom, mail=:mail, tel=:tel, adresse=:adresse, ville=:ville, code_post=:code_post WHERE id=:id;
+    UPDATE client SET nom=:nom, prenom=:prenom, mail=:mail, tel=:tel, adresse=:adresse, ville=:ville, code_post=:code_post, token=:token WHERE id=:id;
     ");
     return $requete->execute([
       ':id' => $id,
@@ -91,6 +92,7 @@ class ModelClient
       ':adresse' => $adresse,
       ':ville' => $ville,
       ':code_post' => $code_post,
+      ':token' => $token,
     ]);
   }
 
@@ -128,6 +130,32 @@ class ModelClient
     $requete->bindValue(':parPage', $parPage, PDO::PARAM_INT);
     $requete->execute();
     return $requete->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  // REQUÊTE SQL PRÉPARÉE RÉCUPÉRANT LE TOKEN D'UN CLIENT À PARTIR DE L'ADRESSE MAIL
+  public function recupToken($mail)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT mail, token FROM client WHERE mail=:mail
+    ");
+    $requete->execute([
+      ':mail' => $mail,
+    ]);
+    return $requete->fetch(PDO::FETCH_ASSOC);
+  }
+
+  // REQUÊTE SQL PRÉPARÉE METTANT À JOUR LE MOT DE PASSE D'UN CLIENT
+  public function modifPass($mail, $pass)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    UPDATE client SET pass=:pass WHERE mail=:mail
+    ");
+    return $requete->execute([
+      ':mail' => $mail,
+      ':pass' => $pass,
+    ]);
   }
 
   // GETTERS ET SETTERS

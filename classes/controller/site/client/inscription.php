@@ -30,8 +30,9 @@ require_once "../../../model/ModelClient.php";
 
       if ($data) {
         $pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+        $token = password_hash($_POST['mail'], PASSWORD_DEFAULT);
         $user = new ModelClient();
-        if ($user->ajoutClient($_POST['nom'], $_POST['prenom'], $_POST['mail'], $pass, $_POST['tel'], $_POST['adresse'], $_POST['ville'], $_POST['code_post']) && $data) {
+        if ($user->ajoutClient($_POST['nom'], $_POST['prenom'], $_POST['mail'], $pass, $_POST['tel'], $_POST['adresse'], $_POST['ville'], $_POST['code_post'], $token) && $data) {
     ?>
           <div class="alert alert-success h3"><i class="fas fa-check"></i>&nbsp; Inscription réalisée avec succès</div>
           <a href="../produit/index.php" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour à l'accueil</a>

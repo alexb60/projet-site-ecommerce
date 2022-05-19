@@ -25,6 +25,7 @@ if (isset($_POST['connexion'])) {
   $userData = $user->connexionClient($_POST['login']);
   if ($userData && password_verify($_POST['pass'], $userData['pass'])) {
     $_SESSION['id'] = $userData['id'];
+    $_SESSION['mail_client'] = $userData['mail'];
     header('Location: accueil.php');
   } else {
     echo "Echec d'authentification";
