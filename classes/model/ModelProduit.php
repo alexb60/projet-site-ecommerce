@@ -164,7 +164,7 @@ class ModelProduit
     SELECT P.*, C.nom nom_categorie, M.nom nom_marque FROM produit P
 INNER JOIN categorie C ON P.id_categorie = C.id
 INNER JOIN marque M ON P.id_marque = M.id
-WHERE P.nom LIKE '%".$recherche."%' OR C.nom LIKE '%".$recherche."%' OR M.nom LIKE '%".$recherche."%';
+WHERE P.nom LIKE '%" . $recherche . "%' OR C.nom LIKE '%" . $recherche . "%' OR M.nom LIKE '%" . $recherche . "%';
     ");
     $requete->execute();
     return $requete->fetchAll(PDO::FETCH_ASSOC);
