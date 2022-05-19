@@ -42,7 +42,6 @@ class ViewMarque
                     <td>
                       <a href="voir.php?id=<?= $marque['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir</a>
                       <a href="modif.php?id=<?= $marque['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier</a>
-                      <a href="supp.php?id=<?= $marque['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Supprimer</a>
                     </td>
                   </tr>
                 <?php
