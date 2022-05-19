@@ -170,7 +170,7 @@ class ViewProduit
     $listeCategorie = $modelCategorie->listeCategorie();
 
     foreach ($listeCategorie as $categorie) {
-      $produit = $modelProduit->produitParCategorie($categorie['id']);
+      $produit = $modelProduit->produitParCategorieAccueil($categorie['id']);
       $nbProduit = count($produit); // STOCKAGE DU NOMBRE DE PRODUITS
 
       if (ceil($nbProduit / 3) > 3) {

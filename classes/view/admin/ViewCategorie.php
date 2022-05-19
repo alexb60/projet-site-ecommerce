@@ -1,5 +1,6 @@
 <?php
 require_once 'C:/wamp64/www/projet/classes/model/ModelCategorie.php';
+require_once 'C:/wamp64/www/projet/classes/model/ModelProduit.php';
 
 class ViewCategorie
 {
@@ -74,11 +75,13 @@ class ViewCategorie
   {
     $modelCategorie = new ModelCategorie();
     $categorie = $modelCategorie->voirCategorie($id);
+    $modelProduit = new ModelProduit();
+    $listeProdParCategorie = $modelProduit->produitParCategorie($id);
   ?>
     <div class="container">
       <div class="row mb-4">
         <div class="col-md-12">
-          <h2>Détails de la catégorie <?= $categorie['nom'] ?></h2>
+          <h2>Détails de la catégorie "<?= $categorie['nom'] ?>"</h2>
         </div>
       </div>
       <div class="row">
@@ -92,10 +95,64 @@ class ViewCategorie
               <li class="list-group-item">
                 <a href="liste.php" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
                 <a href="modif.php?id=<?= $categorie['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier</a>
-                <a href="supp.php?id=<?= $categorie['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Supprimer</a>
+                <a href="supp.php?id=<?= $categorie['id'] ?>" <?= (count($listeProdParCategorie) > 0) ? "class='btn btn-danger btn-cache'" : "class='btn btn-danger'" ?>><i class="fas fa-trash-alt"></i>&nbsp; Supprimer</a>
               </li>
             </ul>
           </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="my-4">Liste des produits appartenant à la catégorie "<?= $categorie['nom'] ?>"</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <?php
+          if (count($listeProdParCategorie) > 0) { ?>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Marque</th>
+                  <th scope="col">Prix</th>
+                  <th scope="col">Stock</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                foreach ($listeProdParCategorie as $produit) {
+                ?>
+                  <tr>
+                    <th scope="row"><?= $produit['id'] ?></th>
+                    <td><?= $produit['nom'] ?></td>
+                    <td><?= $produit['nom_marque'] ?></td>
+                    <td><?= $produit['prix'] ?></td>
+                    <td <?= ($produit['quantite'] == 0) ? 'class="bg-danger text-white"' : (($produit['quantite'] <= 5) ? 'class="bg-warning"' : "") ?>>
+                      <?= $produit['quantite'] ?>
+                    </td>
+                    <td>
+                      <a href="../produit/voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                      <a href="../produit/modif.php?id=<?= $produit['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                      <a href="../produit/supp.php?id=<?= $produit['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                  </tr>
+                <?php
+                }
+                ?>
+              </tbody>
+            </table>
+          <?php
+          } else {
+          ?>
+            <div class="alert alert-danger" role="alert">
+              <i class="fas fa-times"></i>&nbsp; Aucun produit n'appartient à la catégorie "<?= $categorie['nom'] ?>".
+            </div>
+          <?php
+          }
+          ?>
         </div>
       </div>
     </div>

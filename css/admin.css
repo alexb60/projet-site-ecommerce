@@ -93,3 +93,8 @@ footer {
 .recherche {
   width: 30rem !important;
 }
+
+/* BOUTON CACHÉ */
+.btn-cache {
+  display: none !important;
+}

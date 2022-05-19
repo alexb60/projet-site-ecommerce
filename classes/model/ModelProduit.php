@@ -119,7 +119,7 @@ class ModelProduit
     ]);
   }
 
-  // REQUÊTE SQL PRÉPARÉE PERMETTANT DE LISTER LES 8 DERNIERS PRODUITS DE LA TABLE produit
+  // REQUÊTE SQL PRÉPARÉE LISTANT LES 8 DERNIERS PRODUITS DE LA TABLE produit
   public function derniersProduit()
   {
     $idcon = connexion();
@@ -130,12 +130,25 @@ class ModelProduit
     return $requete->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  // REQUÊTE SQL PRÉPARÉE LISTANT LES PRODUITS SELON LA CATÉGORIE
+  // REQUÊTE SQL PRÉPARÉE LISTANT LES 8 PREMIERS PRODUITS D'UNE CATÉGORIE
+  public function produitParCategorieAccueil($id_categorie)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT P.* FROM produit P INNER JOIN categorie C ON P.id_categorie = C.id WHERE id_categorie=:id_categorie ORDER BY P.id ASC LIMIT 8;
+    ");
+    $requete->execute([
+      ':id_categorie' => $id_categorie,
+    ]);
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  // REQUÊTE SQL PRÉPARÉE LISTANT TOUS LES PRODUITS D'UNE CATÉGORIE
   public function produitParCategorie($id_categorie)
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    SELECT P.* FROM produit P INNER JOIN categorie C ON P.id_categorie = C.id WHERE id_categorie=:id_categorie ORDER BY P.id ASC;
+    SELECT P.*, M.nom nom_marque FROM produit P INNER JOIN marque M ON P.id_marque = M.id WHERE id_categorie=:id_categorie;
     ");
     $requete->execute([
       ':id_categorie' => $id_categorie,
