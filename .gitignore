@@ -1,1 +1,9 @@
-/images
+/images/produit/*.png
+/images/produit/*.jpg
+/images/produit/*.jpeg
+/images/marque/*.png
+/images/marque/*.jpg
+/images/marque/*.jpeg
+/images/transporteur/*.png
+/images/transporteur/*.jpg
+/images/transporteur/*.jpeg
