@@ -105,6 +105,8 @@ if (isset($_SESSION['id'])) {
   </div>
   <div class="row">
     <div class="col-md-12 d-flex justify-content-end">
+      <a href="javascript:history.back()" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Continuer mes achats</a>
+      &nbsp;&nbsp;
       <a href="finaliser.php" class="btn btn-success"><i class="fas fa-euro-sign"></i>&nbsp; Finaliser ma commande</a>
       &nbsp;&nbsp;
       <a href="viderPanier.php" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Vider le panier</a>

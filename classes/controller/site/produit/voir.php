@@ -6,6 +6,11 @@ require_once "../../../view/site/ViewTemplate.php";
 require_once "../../../model/ModelProduit.php";
 require_once "../panier/panier.php";
 
+if (isset($_POST['id'])) {
+  ajoutPanier($_POST['id'], $_POST['quantite'], $_POST['prix']);
+  header('Location: ../panier/voirPanier.php');
+}
+
 if (isset($_SESSION['id'])) {
   ViewTemplate::headerConnecte();
 } else {
@@ -13,9 +18,7 @@ if (isset($_SESSION['id'])) {
 }
 
 ViewProduit::voirProduit($_GET['id']);
-if (isset($_POST['id'])) {
-  ajoutPanier($_POST['id'], $_POST['quantite'], $_POST['prix']);
-}
+
 ViewTemplate::footer();
 
 ?>

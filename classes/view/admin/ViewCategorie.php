@@ -92,7 +92,7 @@ class ViewCategorie
             </div>
             <ul class="list-group list-group-flush border-0 mb-2">
               <li class="list-group-item">
-                <a href="liste.php" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
+                <a href="javascript:history.back()" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
                 <a href="modif.php?id=<?= $categorie['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier</a>
                 <a href="supp.php?id=<?= $categorie['id'] ?>" <?= (count($listeProdParCategorie) > 0) ? "class='btn btn-danger btn-cache'" : "class='btn btn-danger'" ?>><i class="fas fa-trash-alt"></i>&nbsp; Supprimer</a>
               </li>
@@ -212,7 +212,7 @@ class ViewCategorie
             <button type="reset" class="btn btn-danger">Réinitialiser</button>
           </form>
           <br />
-          <a class="btn btn-primary" href="liste.php"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
+          <a class="btn btn-primary" href="javascript:history.back()"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
         </div>
       </div>
     </div>

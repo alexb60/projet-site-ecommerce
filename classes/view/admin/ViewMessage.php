@@ -69,7 +69,7 @@ class ViewMessage
                 <br />
                 <span class="font-weight-bold">Message :</span><br /><?= $message['message'] ?>
               </p>
-              <a href="liste.php?page=1" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
+              <a href="javascript:history.back()" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
             </div>
           </div>
         </div>

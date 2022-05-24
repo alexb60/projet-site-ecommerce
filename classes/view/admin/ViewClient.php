@@ -89,7 +89,7 @@ class ViewClient
             </div>
             <ul class="list-group list-group-flush border-0 mb-2">
               <li class="list-group-item">
-                <a href="liste.php?page=1" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
+                <a href="javascript:history.back()" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
                 <a href="supp.php?id=<?= $client['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Supprimer</a>
               </li>
             </ul>

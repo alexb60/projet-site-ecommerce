@@ -89,7 +89,7 @@ class ViewProduit
                     <?= (isset($_SESSION['id'])) ? '<button type="submit" class="btn btn-success" name="ajout" id="ajout"><i class="fas fa-cart-arrow-down"></i>&nbsp; Ajouter au panier</button>' : '<div class="alert alert-danger">Vous devez être connecté pour commander</div>' ?>
                   </form>
 
-                  <br /><br /><a href="liste.php?page=1" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
+                  <br /><br /><a href="javascript:history.back()" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
 
                 </div>
               </div>

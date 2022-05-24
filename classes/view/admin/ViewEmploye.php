@@ -103,9 +103,9 @@ class ViewEmploye
               <p class="card-text">
                 <span class="font-weight-bold">Adresse mail :</span> <?= $employe['mail'] ?><br />
               </p>
-              <a href="modifEmploye.php" class="btn btn-warning">Modifier</a>
-              <a href="supp.php" class="btn btn-danger">Supprimer</a><br><br>
-              <a href="accueil.php" class="btn btn-primary">← Retour</a>
+              <a href="modifEmploye.php" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier</a>
+              <a href="supp.php" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Supprimer</a><br><br>
+              <a href="javascript:history.back()" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
             </div>
           </div>
         </div>
@@ -155,7 +155,7 @@ class ViewEmploye
             <input type="reset" class="btn btn-danger">
           </form>
           <br />
-          <a href="accueil.php" class="btn btn-primary">← Retour</a>
+          <a href="javascript:history.back()" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
         </div>
       </div>
     </div>

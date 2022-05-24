@@ -3,7 +3,7 @@ require_once 'C:/wamp64/www/projet/classes/model/ModelCommande.php';
 
 class ViewCommande
 {
-  // FONCTION AFFICHANT LA LISTE DES CATÉGORIES
+  // FONCTION AFFICHANT LA LISTE DES COMMANDES
   public static function listeCommande($premier, $parPage)
   {
     $commandes = new ModelCommande();
@@ -151,7 +151,7 @@ class ViewCommande
           <?php
           }
           ?>
-          <a href="listeCommande.php?page=1" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour à la liste des commandes</a>
+          <a href="javascript:history.back()" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour à la liste des commandes</a>
           <a href="modifEtat.php?id=<?= $_GET['id_com'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier l'état</a>
         </div>
       </div>
@@ -191,7 +191,7 @@ class ViewCommande
             <input type="reset" class="btn btn-danger">
           </form>
           <br />
-          <a href="listeCommande.php?page=1" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour à la liste des commandes</a>
+          <a href="javascript:history.back()" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour à la liste des commandes</a>
         </div>
       </div>
     </div>

@@ -117,7 +117,7 @@ class ViewClient
             </div>
             <ul class="list-group list-group-flush border-0 mb-2">
               <li class="list-group-item">
-                <a href="accueil.php" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
+                <a href="javascript:history.back()" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
                 <a href="modifClient.php" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier mes informations</a>
                 <a href="supp.php" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Supprimer mon compte</a>
               </li>
@@ -192,7 +192,7 @@ class ViewClient
             <input type="reset" class="btn btn-danger">
           </form>
           <br />
-          <a href="accueil.php" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
+          <a href="javascript:history.back()" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
         </div>
       </div>
     </div>

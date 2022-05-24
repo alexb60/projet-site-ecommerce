@@ -154,7 +154,7 @@ class ViewCommande
           <?php
           }
           ?>
-          <a href="listeCommandeClient.php" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour à la liste des commandes</a>
+          <a href="javascript:history.back()" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour à la liste des commandes</a>
         </div>
       </div>
     </div>

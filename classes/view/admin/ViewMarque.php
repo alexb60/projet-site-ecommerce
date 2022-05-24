@@ -226,7 +226,7 @@ class ViewMarque
             <input type="reset" class="btn btn-danger">
           </form>
           <br />
-          <a class="btn btn-primary" href="liste.php"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
+          <a class="btn btn-primary" href="javascript:history.back()"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
         </div>
       </div>
     </div>

@@ -109,7 +109,7 @@ class ViewProduit
             </div>
             <ul class="list-group list-group-flush border-0 mb-2">
               <li class="list-group-item">
-                <a href="liste.php?page=1" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
+                <a href="javascript:history.back()" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
                 <a href="modif.php?id=<?= $produit['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier</a>
                 <a href="supp.php?id=<?= $produit['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Supprimer</a>
               </li>
@@ -286,7 +286,7 @@ class ViewProduit
             <input type="reset" class="btn btn-danger">
           </form>
           <br />
-          <a class="btn btn-primary" href="liste.php"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
+          <a class="btn btn-primary" href="javascript:history.back()"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
         </div>
       </div>
     </div>
