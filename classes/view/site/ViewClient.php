@@ -109,7 +109,7 @@ class ViewClient
               <h5 class="card-title"><i class="fas fa-user"></i>&nbsp; <?= $client['prenom'] . " " . $client['nom'] ?></h5>
               <p class="card-text">
                 <span class="font-weight-bold"><i class="fas fa-envelope"></i>&nbsp; Adresse mail :</span> <?= $client['mail'] ?><br />
-                <span class="font-weight-bold"><i class="fas fa-phone-alt"></i>&nbsp; Téléphone :</span> <?= $client['tel'] ?><br />
+                <span class="font-weight-bold"><i class="fas fa-phone-alt"></i>&nbsp; Téléphone :</span> <?= $client['tel'] ?><br /><br />
                 <span class="font-weight-bold"><i class="fas fa-map-marker-alt"></i>&nbsp; Adresse postale :</span><br />
                 <?= $client['adresse'] . "<br />" . $client['code_post'] . " " . $client['ville'] ?>
               </p>

@@ -2,6 +2,7 @@
 
 class ViewTemplate
 {
+  // FONCTION AFFICHANT UN MESSAGE APRÈS UNE ACTION
   public static function alert($type, $message, $lien = null)
   {
 ?>
@@ -46,7 +47,7 @@ class ViewTemplate
                 <div class="dropdown-menu" aria-labelledby="compte">
                   <a class="dropdown-item btn-home" href="../client/accueil.php"><i class="fas fa-home"></i>&nbsp; Accueil Mon Espace</a>
                   <a class="dropdown-item" href="../client/voirClient.php"><i class="fas fa-user-alt"></i>&nbsp; Mon profil</a>
-                  <a class="dropdown-item" href="../commande/listeCommandeClient.php?page=1"><i class="fas fa-shopping-bag"></i>&nbsp; Mes commandes</a>
+                  <a class="dropdown-item btn-commandes" href="../commande/listeCommandeClient.php?page=1"><i class="fas fa-shopping-bag"></i>&nbsp; Mes commandes</a>
                   <a class="dropdown-item btn-modif" href="../client/modifClient.php"><i class="fas fa-edit"></i>&nbsp; Modifier mon profil</a>
                   <a class="dropdown-item" href="../message/contact.php"><i class="fas fa-envelope"></i>&nbsp; Contact</a>
                   <a class="dropdown-item btn-deco" href="../client/deconnexion.php"><i class="fas fa-sign-out-alt"></i>&nbsp; Déconnexion</a>
@@ -92,6 +93,7 @@ class ViewTemplate
   <?php
   }
 
+  // FOOTER
   public static function footer()
   {
   ?>

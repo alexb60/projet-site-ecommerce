@@ -1,99 +1,132 @@
+/* ========================================================================== */
+/* ERREURS VALIDATION CLIENT */
+
+/* Bordure de l'input invalide */
 .erreurInput {
   border: 2px solid red !important;
 }
 
+/* Texte de l'erreur */
 .erreurMessage {
   color: red !important;
 }
 
+/* ========================================================================== */
+/* AFFICHAGE DU LOGO D'UNE MARQUE OU D'UN TRANSPORTEUR */
 .image-logo {
   width: 50% !important;
   margin: 5% !important;
 }
 
+/* ========================================================================== */
 /* PHOTO DU PRODUIT SUR LA PAGE VOIR PRODUIT */
 .photo-produit {
   width: 30% !important;
   margin: 5% !important;
 }
 
+/* ========================================================================== */
+/* FOOTER */
+
+/* Couleur du texte dans le footer */
+footer {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Arrière-plan du header et du footer */
 .bg-header,
 .bg-footer {
   background-color: #090031 !important;
 }
 
-footer {
-  color: rgba(255, 255, 255, 0.5);
-}
-
+/* Lien dans le footer */
 .no-style-footer {
   text-decoration: none !important;
   color: rgba(255, 255, 255, 0.5);
 }
 
+/* Survol de lien dans le footer */
 .no-style-footer:hover {
   color: orangered !important;
 }
 
+/* ========================================================================== */
 /* BOUTON ORANGE */
+
+/* Bouton */
 .btn-orange {
   color: white !important;
   background: orangered !important;
   border-color: orangered !important;
 }
 
+/* Survol du bouton */
 .btn-orange:hover {
   color: white !important;
   border-color: #be3300 !important;
   background-color: #dd3f05 !important;
 }
 
+/* Contour du bouton au clic */
 .btn-orange:focus {
   box-shadow: 0 0 0 0.2rem rgba(255, 69, 0, 0.5) !important;
 }
 
+/* Clic sur le bouton */
 .btn-orange:active {
   background-color: #be3300 !important;
   border-color: #dd3f05 !important;
   color: white !important;
 }
 
+/* ========================================================================== */
 /* BOUTON OUTLINE ORANGE */
+
+/* Bouton */
 .btn-outline-orange {
   color: orangered !important;
   border-color: orangered !important;
 }
 
+/* Survol du bouton */
 .btn-outline-orange:hover {
   color: white !important;
   border-color: orangered !important;
   background-color: orangered !important;
 }
 
+/* Contour du bouton au clic */
 .btn-outline-orange:focus {
   box-shadow: 0 0 0 0.2rem rgba(255, 69, 0, 0.5) !important;
 }
 
+/* Clic sur le bouton */
 .btn-outline-orange:active {
   background-color: orangered !important;
   color: white !important;
 }
 
+/* ========================================================================== */
+/* AFFICHAGE DES NOMBRES SUR LA PAGE D'ACCUEIL DE L'ESPACE ADMIN */
+
 .nombres {
   font-size: 4rem !important;
 }
 
+/* ========================================================================== */
 /* TOOLTIP */
 .lien-mort {
   text-decoration: none !important;
   color: black !important;
 }
 
+/* ========================================================================== */
 /* INPUT DE RECHERCHE DE PRODUIT */
 .recherche {
   width: 30rem !important;
 }
 
+/* ========================================================================== */
 /* BOUTON CACHÉ */
 .btn-cache {
   display: none !important;

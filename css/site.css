@@ -1,109 +1,163 @@
+/* ========================================================================== */
+/* ERREURS VALIDATION CLIENT */
+
+/* Bordure de l'input invalide */
 .erreurInput {
   border: 2px solid red !important;
 }
 
+/* Texte de l'erreur */
 .erreurMessage {
   color: red !important;
 }
 
+/* ========================================================================== */
+/* BOUTONS DU MENU DÉROULANT "MON COMPTE" */
+
+/* Bouton de déconnexion client */
 .btn-deco:hover {
   background-color: #dc3545 !important;
   color: white;
 }
 
+/* Bouton de modification du profil client */
 .btn-modif:hover {
   background-color: #ffc104 !important;
 }
 
+/* Bouton d'accueil de l'espace client */
 .btn-home:hover {
   background-color: #007bff !important;
   color: white !important;
 }
+
+/* Bouton de la liste des commandes d'un client */
+.btn-commandes:hover {
+  background-color: #28a745 !important;
+  color: white !important;
+}
+
+/* ========================================================================== */
+/* AFFICHAGE DE LA PHOTO D'UN PRODUIT */
 
 .photo-produit {
   width: 40% !important;
   margin: 5% !important;
 }
 
+/* ========================================================================== */
+/* INPUT DE RECHERCHE PRODUIT DANS LE HEADER */
 .input-reduit {
   padding-left: 0% !important;
 }
 
+/* ========================================================================== */
+/* FOOTER */
+
+/* Couleur du texte dans le footer */
 footer {
   color: rgba(255, 255, 255, 0.5);
 }
 
+/* Arrière-plan du header et du footer */
 .bg-header,
 .bg-footer {
   background-color: #090031 !important;
 }
 
+/* Lien dans le footer */
 .no-style-footer {
   text-decoration: none !important;
   color: rgba(255, 255, 255, 0.5);
 }
 
+/* Survol de lien dans le footer */
 .no-style-footer:hover {
   color: orangered !important;
 }
 
+/* ========================================================================== */
 /* BOUTON ORANGE */
+
+/* Bouton */
 .btn-orange {
   color: white !important;
   background: orangered !important;
   border-color: orangered !important;
 }
 
+/* Survol du bouton */
 .btn-orange:hover {
   color: white !important;
   border-color: #be3300 !important;
   background-color: #dd3f05 !important;
 }
 
+/* Contour du bouton au clic */
 .btn-orange:focus {
   box-shadow: 0 0 0 0.2rem rgba(255, 69, 0, 0.5) !important;
 }
 
+/* Clic sur le bouton */
 .btn-orange:active {
   background-color: #be3300 !important;
   border-color: #dd3f05 !important;
   color: white !important;
 }
 
+/* ========================================================================== */
 /* BOUTON OUTLINE ORANGE */
+
+/* Bouton */
 .btn-outline-orange {
   color: orangered !important;
   border-color: orangered !important;
 }
 
+/* Survol du bouton */
 .btn-outline-orange:hover {
   color: white !important;
   border-color: orangered !important;
   background-color: orangered !important;
 }
 
+/* Contour du bouton au clic */
 .btn-outline-orange:focus {
   box-shadow: 0 0 0 0.2rem rgba(255, 69, 0, 0.5) !important;
 }
 
+/* Clic sur le bouton */
 .btn-outline-orange:active {
   background-color: orangered !important;
   color: white !important;
 }
 
+/* ========================================================================== */
 /* INPUT DE RECHERCHE DE PRODUIT */
+
 .recherche {
   width: 25rem !important;
 }
+
+/* ========================================================================== */
+/* TAILLE DE L'IMAGE DANS UNE CARTE */
 
 .image-card {
   width: 50% !important;
 }
 
+/* ========================================================================== */
+/* CARTE CACHÉE SUR LA PAGE D'ACCUEIL */
+
 .card-cache {
   visibility: hidden !important;
 }
 
+/* ========================================================================== */
+/* AFFICHAGE DES NOMBRES SUR LA PAGE D'ACCUEIL DE L'ESPACE CLIENT */
+
 .nombres {
-  font-size: 4rem !important;
+  font-size: 3.8rem !important;
 }
+
+/* ========================================================================== */

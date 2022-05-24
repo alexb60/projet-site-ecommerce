@@ -79,11 +79,11 @@ class ViewClient
         <div class="col-md-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title"><?= $client['prenom'] . " " . $client['nom'] ?></h5>
+              <h5 class="card-title"><i class="fas fa-user"></i>&nbsp; <?= $client['prenom'] . " " . $client['nom'] ?></h5>
               <p class="card-text">
-                <span class="font-weight-bold">Adresse mail :</span> <?= $client['mail'] ?><br />
-                <span class="font-weight-bold">Téléphone :</span> <?= $client['tel'] ?><br />
-                <span class="font-weight-bold">Adresse postale :</span><br />
+                <span class="font-weight-bold"><i class="fas fa-envelope"></i>&nbsp; Adresse mail :</span> <?= $client['mail'] ?><br />
+                <span class="font-weight-bold"><i class="fas fa-phone-alt"></i>&nbsp; Téléphone :</span> <?= $client['tel'] ?><br /><br />
+                <span class="font-weight-bold"><i class="fas fa-map-marker-alt"></i>&nbsp; Adresse postale :</span><br />
                 <?= $client['adresse'] . "<br />" . $client['code_post'] . " " . $client['ville'] ?>
               </p>
             </div>
