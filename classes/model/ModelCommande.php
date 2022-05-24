@@ -188,7 +188,7 @@ WHERE C.id=:id_commande;
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    SELECT * FROM commande WHERE id_client=:id
+    SELECT * FROM commande WHERE id_client=:id ORDER BY id DESC
     ");
     $requete->execute([
       ':id' => $id_client,

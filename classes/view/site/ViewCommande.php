@@ -8,7 +8,7 @@ require_once 'C:/wamp64/www/projet/classes/model/ModelClient.php';
 
 class ViewCommande
 {
-  // FONCTION AFFICHANT LA LISTE DES CATÉGORIES
+  // FONCTION AFFICHANT LA LISTE DES COMMANDES D'UN CLIENT
   public static function listeCommandeClient($id_client)
   {
     $commandes = new ModelCommande();
@@ -32,7 +32,7 @@ class ViewCommande
           <?php
           foreach ($liste as $commande) {
           ?>
-            <tr>
+            <tr class="<?= ($commande['etat'] == "Payée") ? "alert-danger" : (($commande['etat'] == "En préparation") ? "alert-warning" : (($commande['etat'] == 'Expédiée') ? "alert-primary" : "alert-success")) ?>">
               <th scope="row"><?= $commande['id'] ?></th>
               <td><?= $commande['date'] ?></td>
               <td><?= ucfirst($commande['etat'])  ?></td>

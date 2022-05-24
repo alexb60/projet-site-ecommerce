@@ -12,7 +12,7 @@ class ViewCommande
     <?php
     if (count($liste) > 0) {
     ?>
-      <table class="table table-striped">
+      <table class="table">
         <thead>
           <tr>
             <th scope="col">N° Commande</th>
@@ -27,13 +27,11 @@ class ViewCommande
           <?php
           foreach ($liste as $commande) {
           ?>
-            <tr>
+            <tr class="<?= ($commande['etat'] == "Payée") ? "alert-danger" : (($commande['etat'] == "En préparation") ? "alert-warning" : (($commande['etat'] == 'Expédiée') ? "alert-primary" : "alert-success")) ?>">
               <th scope="row"><?= $commande['id'] ?></th>
               <td><?= $commande['id_client'] ?></td>
               <td><?= $commande['date'] ?></td>
-              <td class="<?= ($commande['etat'] == "Payée") ? "bg-danger text-white" : (($commande['etat'] == "En préparation") ? "bg-warning" : (($commande['etat'] == 'Expédiée') ? "bg-info text-light" : "bg-success text-light")) ?>">
-                <?= $commande['etat'] ?>
-              </td>
+              <td><?= $commande['etat'] ?></td>
               <td><?= $commande['montant'] ?> €</td>
               <td>
                 <a href="voirDetails.php?id_com=<?= $commande['id'] ?>&id_cli=<?= $commande['id_client'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir les détails</a>
