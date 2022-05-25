@@ -75,18 +75,18 @@ class ViewProduit
                   <p><span class="font-weight-bold">Référence :</span><br /><?= $produit['ref'] ?><br /></p>
                   <p><span class="font-weight-bold">Description du produit :</span><br /><?= $produit['description'] ?><br /></p>
                   <p><span class="font-weight-bold">Prix :</span><br /><?= $produit['prix'] ?> €<br /></p>
-                  <p><span class="font-weight-bold">En stock :</span><br /><?= $produit['quantite'] ?><br /></p>
+                  <p><span class="font-weight-bold">En stock :</span><br /><?= ($produit['quantite'] == 0) ? "<div class='alert alert-danger'>Produit épuisé</div>" : $produit['quantite'] ?><br /></p>
                   </p>
-                  <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
+                  <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post" <?= ($produit['quantite'] == 0) ? 'class="d-none"' : "" ?>>
                     <input type="hidden" name="id" id="id" class="form-control" value="<?= $produit['id'] ?>">
                     <div class="form-group">
                       <label for="quantite"><span class="font-weight-bold">Quantité :</span></label>
                       <div class="col-3 input-reduit">
-                        <input type="number" name="quantite" id="quantite" class="form-control" min="<?= ($produit['quantite'] == 0) ? "0" : "1" ?>" max="<?= $produit['quantite'] ?>" value="<?= ($produit['quantite'] == 0) ? "0" : "1" ?>" <?= (isset($_SESSION['id'])) ? "" : "disabled" ?>>
+                        <input type="number" name="quantite" id="quantite" class="form-control" min="<?= ($produit['quantite'] == 0) ? "0" : "1" ?>" max="<?= $produit['quantite'] ?>" value="<?= ($produit['quantite'] == 0) ? "0" : "1" ?>" <?= (isset($_SESSION['id']) && ($produit['quantite']) != 0) ? "" : "disabled" ?>>
                       </div>
                     </div>
                     <input type="hidden" name="prix" id="prix" class="form-control" value="<?= $produit['prix'] ?>">
-                    <?= (isset($_SESSION['id'])) ? '<button type="submit" class="btn btn-success" name="ajout" id="ajout"><i class="fas fa-cart-arrow-down"></i>&nbsp; Ajouter au panier</button>' : '<div class="alert alert-danger">Vous devez être connecté pour commander</div>' ?>
+                    <?= (isset($_SESSION['id'])) ? (($produit['quantite'] != 0) ? '<button type="submit" class="btn btn-success" name="ajout" id="ajout"><i class="fas fa-cart-arrow-down"></i>&nbsp; Ajouter au panier</button>' : '') : '<div class="alert alert-danger">Vous devez être connecté pour commander</div>' ?>
                   </form>
 
                   <br /><br /><a href="javascript:history.back()" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
