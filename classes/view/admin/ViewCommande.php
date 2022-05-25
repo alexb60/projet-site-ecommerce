@@ -32,7 +32,7 @@ class ViewCommande
               <td><?= $commande['id_client'] ?></td>
               <td><?= $commande['date'] ?></td>
               <td><?= $commande['etat'] ?></td>
-              <td><?= $commande['montant'] ?> €</td>
+              <td><?= number_format($commande['montant'], 2, ',', ' ') ?> €</td>
               <td>
                 <a href="voirDetails.php?id_com=<?= $commande['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir les détails</a>
                 <a href="modifEtat.php?id=<?= $commande['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier l'état</a>

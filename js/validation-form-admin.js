@@ -1,3 +1,4 @@
+// VALIDATION DE FORMULAIRE CÔTÉ CLIENT, PARTIE ADMIN
 $(document).on("click", "#valider", function (e) {
   e.preventDefault(); // Bloquer le comportement par défaut de l'événement
 

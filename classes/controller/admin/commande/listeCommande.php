@@ -32,7 +32,7 @@ require_once "../../../view/admin/ViewTemplate.php";
 
     $modelCommande = new ModelCommande();
     $nbCommandes = (int) $modelCommande->compteCommande()['nb_commandes']; // STOCKAGE DU NOMBRE DE COMMANDES PASSÉ EN INT DANS $nbCommandes
-    $parPage = 10; // NOMBRE DE CLIENTS PAR PAGE VOULU
+    $parPage = 10; // NOMBRE DE COMMANDES PAR PAGE VOULU
 
     $pages = ceil($nbCommandes / $parPage); // CALCUL DU NOMBRE DE PAGE NÉCESSAIRE ARRONDI À L'ENTIER SUPÉRIEUR
     $premier = ($currentPage * $parPage) - $parPage; // CALCUL DE LA 1ERE COMMANDE DE LA PAGE
