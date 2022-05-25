@@ -187,7 +187,7 @@ class ViewMarque
               <input type="file" name="logo" id="logo" class="form-control-file">
             </div>
 
-            <input type="submit" class="btn btn-primary" name="ajout" id="valider">
+            <input type="submit" class="btn btn-primary" name="ajout" id="valider" />
             <input type="reset" class="btn btn-danger">
           </form>
         </div>

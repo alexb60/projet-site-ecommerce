@@ -32,6 +32,10 @@ $(document).on("click", "#valider", function (e) {
       // TRAITEMENT DES CHAMPS DE TYPE HIDDEN
 
       continue; // Continuer la boucle
+    } else if ($(formElements[i]).attr("type") === "file") {
+      // TRAITEMENT DES CHAMPS DE TYPE FILE
+
+      continue; // Continuer la boucle
     } else if ($(formElements[i]).attr("type") === "radio") {
       // TRAITEMENT DES BOUTONS RADIOS
 
