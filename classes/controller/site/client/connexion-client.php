@@ -28,37 +28,34 @@ if (isset($_POST['connexion'])) {
     $_SESSION['mail_client'] = $userData['mail'];
     header('Location: accueil.php');
   } else {
-    echo "Echec d'authentification";
+    ViewTemplate::alert("danger", "L'adresse mail et le mot de passe ne correspondent pas", "connexion-client.php");
   }
 } else {
+  ViewClient::connexion();
+}
 ?>
-  <!DOCTYPE html>
-  <html lang="fr">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion à l'espace client</title>
-    <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-    <link rel="stylesheet" href="../../../../css/site.css">
-  </head>
+<!DOCTYPE html>
+<html lang="fr">
 
-  <body>
-    <div class="container">
-      <h2 class="mb-4">Connexion à l'espace client</h2>
-      <?php
-      ViewClient::connexion();
-      ?>
-    </div>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion à l'espace client</title>
+  <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="../../../../css/site.css">
+</head>
+
+<body>
+
   <?php
   ViewTemplate::footer();
-}
   ?>
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>
   <script src="../../../../js/font-awesome.all.min.js"></script>
-  </body>
+</body>
 
-  </html>
+</html>

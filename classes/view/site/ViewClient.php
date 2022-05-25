@@ -54,7 +54,7 @@ class ViewClient
             <div class="form-row">
               <div class="col-md-4">
                 <label for="code_post">Code postal :</label>
-                <input type="text" name="code_post" id="code_post" class="form-control" aria-describedby="code_postHelp" data-type="code_post" data-message="Le code postal doit être composé de 5 chiffres">
+                <input type="number" name="code_post" id="code_post" min="01000" max="98999" class="form-control" aria-describedby="code_postHelp" data-type="code_post" data-message="Le code postal doit être composé de 5 chiffres">
                 <small class="form-text text-muted" id="code_postHelp"></small>
               </div>
               <div class="col-md-8">
@@ -77,20 +77,23 @@ class ViewClient
   public static function connexion()
   {
   ?>
-    <div class="container mt-5">
-      <form class="col-md-6 offset-md-3" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" enctype="multipart/form-data">
-        <div class="form-group">
-          <label for="login">Adresse mail :</label>
-          <input type="text" class="form-control" name="login" id="login">
-        </div>
-        <div class="form-group">
-          <label for="pass">Mot de passe :</label>
-          <input type="password" class="form-control" name="pass" id="pass">
-          <small class="text-align-right"><a href="recupMail.php">Mot de passe oublié</a></small>
-        </div>
-        <button type="submit" name="connexion" class="btn btn-primary">Connexion</button>
-        <button type="reset" name="annuler" class="btn btn-danger">Annuler</button>
-      </form>
+    <div class="container">
+      <h2 class="mb-4">Connexion à l'espace client</h2>
+      <div class="container mt-3">
+        <form class="col-md-6 offset-md-3" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="login">Adresse mail :</label>
+            <input type="text" class="form-control" name="login" id="login" required>
+          </div>
+          <div class="form-group">
+            <label for="pass">Mot de passe :</label>
+            <input type="password" class="form-control" name="pass" id="pass" required>
+            <small class="text-align-right"><a href="recupMail.php">Mot de passe oublié</a></small>
+          </div>
+          <button type="submit" name="connexion" class="btn btn-primary">Connexion</button>
+          <button type="reset" name="annuler" class="btn btn-danger">Annuler</button>
+        </form>
+      </div>
     </div>
   <?php
   }
@@ -178,7 +181,7 @@ class ViewClient
             <div class="form-row">
               <div class="col-md-4">
                 <label for="code_post">Code postal :</label>
-                <input type="text" name="code_post" id="code_post" class="form-control" aria-describedby="code_postHelp" data-type="code_post" data-message="Le code postal doit être composé de 5 chiffres" value="<?= $client['code_post'] ?>">
+                <input type="number" name="code_post" id="code_post" class="form-control" aria-describedby="code_postHelp" data-type="code_post" data-message="Le code postal doit être composé de 5 chiffres" value="<?= $client['code_post'] ?>">
                 <small class="form-text text-muted" id="code_postHelp"></small>
               </div>
               <div class="col-md-8">
@@ -208,10 +211,11 @@ class ViewClient
       <div class="container mt-5">
         <form class="col-md-6 offset-md-3" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" enctype="multipart/form-data">
           <div class="form-group">
-            <label for="login">Adresse mail :</label>
-            <input type="email" class="form-control" name="mail" id="mail" required>
+            <label for="mail">Adresse mail :</label>
+            <input type="email" name="mail" id="mail" class="form-control" aria-describedby="mailHelp" data-type="mail" data-message="Le format de l'adresse mail n'est pas correct">
+            <small class="form-text text-muted" id="mailHelp"></small>
           </div>
-          <button type="submit" name="valider" class="btn btn-primary">Envoyer</button>
+          <input type="submit" name="valider" id="valider" class="btn btn-primary" />
           <button type="reset" name="annuler" class="btn btn-danger">Annuler</button>
         </form>
       </div>
@@ -225,19 +229,19 @@ class ViewClient
   ?>
     <div class="container">
       <h2 class="mb-4">Réinitialisation du mot de passe</h2>
-      <div class="container mt-3">
-        <form class="col-md-6 offset-md-3" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" enctype="multipart/form-data">
+      <div class="container mt-5">
+        <form class="col-md-8 mx-auto" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" enctype="multipart/form-data">
           <div class="form-group">
-            <label for="login">Nouveau mot de passe :</label>
-            <input type="password" class="form-control" name="pass" id="pass" required>
-            <small class="form-text text-muted" id="passHelp">Le mot de passe doit comporter au minimum 8 caractères dont : une majuscule, un chiffre et un caractère spécial.</small>
+            <label for="pass">Nouveau mot de passe :</label>
+            <input type="password" class="form-control" name="pass" id="pass" aria-describedby="passHelp" data-type="pass" data-message="Le mot de passe doit contenir au minimum 8 caractères dont au moins une majuscule, un chiffre et un caractère spécial" required>
+            <small class="form-text text-muted" id="passHelp">Le mot de passe doit contenir au minimum 8 caractères dont au moins une majuscule, un chiffre et un caractère spécial.</small>
           </div>
           <div class="form-group">
-            <label for="login">Confirmez le nouveau mot de passe :</label>
-            <input type="password" class="form-control" name="confirmPass" id="confirmPass" required>
+            <label for="pass2">Confirmez le nouveau mot de passe :</label>
+            <input type="password" class="form-control" name="pass2" id="pass2" required>
+            <small class="form-text text-muted" id="pass2Help"></small>
           </div>
-
-          <button type="submit" name="valider" class="btn btn-primary">Réinitialiser mon mot de passe</button>
+          <input type="submit" name="valider" id="valider" class="btn btn-primary" />
           <button type="reset" name="annuler" class="btn btn-danger">Annuler</button>
         </form>
       </div>

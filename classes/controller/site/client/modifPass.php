@@ -12,10 +12,10 @@ ViewTemplate::headerInvite();
 if (isset($_SESSION['mail'])) {
 
   // SI LES CHAMPS PASS ET CONFIRMPASS ONT ÉTÉ ENVOYÉS
-  if (isset($_POST['pass']) && isset($_POST['confirmPass'])) {
+  if (isset($_POST['pass']) && isset($_POST['pass2'])) {
 
     // SI LES 2 MOTS DE PASSE SONT IDENTIQUES
-    if ($_POST['pass'] === $_POST['confirmPass']) {
+    if ($_POST['pass'] === $_POST['pass2']) {
       // VALIDATION SERVEUR
       $donnees = [$_POST['pass']];
       $types = ["pass"];
@@ -46,7 +46,6 @@ if (isset($_SESSION['mail'])) {
 } else {
   ViewTemplate::alert("danger", "Accès interdit", "accueil.php");
 }
-var_dump($_SESSION['mail']);
 ?>
 
 <!DOCTYPE html>
@@ -69,6 +68,7 @@ var_dump($_SESSION['mail']);
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>
   <script src="../../../../js/font-awesome.all.min.js"></script>
+  <script src="../../../../js/validation-form.js"></script>
 </body>
 
 </html>

@@ -81,7 +81,7 @@ $(document).on("click", "#valider", function (e) {
         );
       }
     } else {
-      // TRAITEMENT DES INPUTS TEXTES
+      // TRAITEMENT DES AUTRES INPUTS
 
       $(formElements[i]).removeClass("erreurInput");
       $(formElements[i]).next().html("");

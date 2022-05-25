@@ -40,6 +40,7 @@ require_once "../../../model/ModelClient.php";
       if ($data) {
         $token = password_hash($_POST['mail'], PASSWORD_DEFAULT);
         if ($modelClient->modifClient($_POST['id'], $_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['tel'], $_POST['adresse'], $_POST['ville'], $_POST['code_post'], $token)) {
+          $_SESSION['mail_client'] = $_POST['mail'];
           ViewTemplate::alert("success", "Le profil a été modifié avec succès", "accueil.php");
         } else {
           ViewTemplate::alert("danger", "Échec de la modification", "accueil.php");
