@@ -15,7 +15,7 @@ class ViewClient
       </div>
       <div class="row">
         <div class="col-md-12">
-          <form method="post" action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
+          <form method="post" action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data" id="formCheck">
             <div class="form-group">
               <label for="nom">Nom :</label>
               <input type="text" name="nom" id="nom" class="form-control" aria-describedby="nomHelp" data-type="nom" data-message="Le format du nom n'est pas correct">
@@ -34,7 +34,7 @@ class ViewClient
             <div class="form-group">
               <label for="pass">Mot de passe :</label>
               <input type="password" name="pass" id="pass" class="form-control" aria-describedby="passHelp" data-type="pass" data-message="Le mot de passe doit contenir au minimum 8 caractères dont au moins une majuscule, un chiffre et un caractère spécial">
-              <small class="form-text text-muted" id="passHelp">Le mot de passe doit comporter au minimum 8 caractères dont : une majuscule, un chiffre et un caractère spécial.</small>
+              <small class="form-text text-muted" id="passHelp">Le mot de passe doit comporter au minimum 8 caractères dont au moins une majuscule, un chiffre et un caractère spécial.</small>
             </div>
             <div class="form-group">
               <label for="tel">Téléphone :</label>
@@ -59,7 +59,7 @@ class ViewClient
               </div>
             </div>
             <br />
-            <button type="submit" name="ajout" id="valider" class="btn btn-primary">Valider</button>
+            <input type="submit" name="ajout" id="valider" class="btn btn-primary" />
             <button type="reset" name="annuler" class="btn btn-danger">Annuler</button>
           </form>
         </div>
@@ -160,11 +160,6 @@ class ViewClient
               <input type="email" name="mail" id="mail" class="form-control" aria-describedby="mailHelp" data-type="mail" data-message="Le format de l'adresse mail n'est pas correct" value="<?= $client['mail'] ?>">
               <small class="form-text text-muted" id="mailHelp"></small>
             </div>
-            <!-- <div class="form-group">
-              <label for="pass">Mot de passe :</label>
-              <input type="password" name="pass" id="pass" class="form-control" aria-describedby="passHelp" data-type="pass" data-message="Le mot de passe doit contenir au minimum 8 caractères dont au moins une majuscule, un chiffre et un caractère spécial" value="" disabled>
-              <small class="form-text text-muted" id="passHelp"></small>
-            </div> -->
             <div class="form-group">
               <label for="tel">Téléphone :</label>
               <input type="tel" name="tel" id="tel" class="form-control" aria-describedby="telHelp" data-type="tel" data-message="Le format du numéro de téléphone n'est pas correct" value="<?= $client['tel'] ?>">
@@ -188,7 +183,7 @@ class ViewClient
               </div>
             </div>
             <br />
-            <input type="submit" name="modif" id="valider" class="btn btn-success">
+            <input type="submit" name="modif" id="valider" class="btn btn-success" />
             <input type="reset" class="btn btn-danger">
           </form>
           <br />
@@ -216,12 +211,13 @@ class ViewClient
         </form>
       </div>
     </div>
-<?php
+  <?php
   }
 
   // FONCTION AFFICHANT LE FORMULAIRE DE MODIFICATION DU MOT DE PASSE
-  public static function modifPass() {
-    ?>
+  public static function modifPass()
+  {
+  ?>
     <div class="container">
       <h2 class="mb-4">Réinitialisation du mot de passe</h2>
       <div class="container mt-3">
