@@ -37,6 +37,11 @@ class ViewClient
               <small class="form-text text-muted" id="passHelp">Le mot de passe doit comporter au minimum 8 caractères dont au moins une majuscule, un chiffre et un caractère spécial.</small>
             </div>
             <div class="form-group">
+              <label for="pass2">Confirmation du mot de passe :</label>
+              <input type="password" name="pass2" id="pass2" class="form-control">
+              <small class="form-text text-muted" id="pass2Help"></small>
+            </div>
+            <div class="form-group">
               <label for="tel">Téléphone :</label>
               <input type="tel" name="tel" id="tel" class="form-control" aria-describedby="telHelp" data-type="tel" data-message="Le format du numéro de téléphone n'est pas correct">
               <small class="form-text text-muted" id="telHelp"></small>
