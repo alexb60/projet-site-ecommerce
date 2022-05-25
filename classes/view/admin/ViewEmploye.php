@@ -66,19 +66,22 @@ class ViewEmploye
   public static function connexion()
   {
   ?>
-    <div class="container mt-5">
-      <form class="col-md-6 offset-md-3" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" enctype="multipart/form-data">
-        <div class="form-group">
-          <label for="login">Adresse mail :</label>
-          <input type="text" class="form-control" name="login" id="login">
-        </div>
-        <div class="form-group">
-          <label for="pass">Mot de passe :</label>
-          <input type="password" class="form-control" name="pass" id="pass">
-        </div>
-        <button type="submit" name="connexion" class="btn btn-primary">Connexion</button>
-        <button type="reset" name="annuler" class="btn btn-danger">Annuler</button>
-      </form>
+    <div class="container">
+      <h2 class="mb-4">Connexion à l'espace employé</h2>
+      <div class="container mt-5">
+        <form class="col-md-6 offset-md-3" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="login">Adresse mail :</label>
+            <input type="text" class="form-control" name="login" id="login">
+          </div>
+          <div class="form-group">
+            <label for="pass">Mot de passe :</label>
+            <input type="password" class="form-control" name="pass" id="pass">
+          </div>
+          <button type="submit" name="connexion" class="btn btn-primary">Connexion</button>
+          <button type="reset" name="annuler" class="btn btn-danger">Annuler</button>
+        </form>
+      </div>
     </div>
   <?php
   }

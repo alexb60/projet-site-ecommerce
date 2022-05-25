@@ -14,7 +14,7 @@ if (isset($_SESSION['id_employe'])) {
   $modelEmploye = new ModelEmploye();
   $prenom = $modelEmploye->voirEmploye($_SESSION['id_employe'])['prenom'];
   $nom = $modelEmploye->voirEmploye($_SESSION['id_employe'])['nom'];
-  
+
   $salutation = "Bonjour " . $prenom . " " . $nom . " et bienvenue sur l'espace employé";
   ViewTemplate::menu();
 } else {
@@ -72,24 +72,6 @@ if (isset($_SESSION['id_employe'])) {
       <div class="col mb-4">
         <div class="card">
           <div class="card-body">
-            <h6 class="card-subtitle text-muted"><i class="fas fa-euro-sign"></i>&nbsp; Chiffre d'affaires</h6>
-            <p class="text-right nombres" id="#chiffreAffaires"><?= $chiffreAffaires['chiffre'] ?> €</p>
-          </div>
-        </div>
-      </div>
-      <div class="col mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h6 class="card-subtitle text-muted"><i class="fas fa-euro-sign"></i>&nbsp; Montant moyen d'une commande</h6>
-            <p class="text-right nombres" id="#chiffreAffaires"><?= $moyMontant['moy_montant'] ?> €</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col mb-4">
-        <div class="card">
-          <div class="card-body">
             <h6 class="card-subtitle text-muted"><i class="fas fa-box"></i>&nbsp; Nombre de commandes</h6>
             <p class="text-right nombres" id="#nbCommandes"><?= $nbCommandes['nb_commandes'] ?></p>
           </div>
@@ -103,11 +85,21 @@ if (isset($_SESSION['id_employe'])) {
           </div>
         </div>
       </div>
+    </div>
+    <div class="row">
       <div class="col mb-4">
         <div class="card">
           <div class="card-body">
-            <h6 class="card-subtitle text-muted"><i class="fas fa-tag"></i>&nbsp; Nombre de catégories</h6>
-            <p class="text-right nombres" id="#nbCategories"><?= $nbCategories['nb_categories'] ?></p>
+            <h6 class="card-subtitle text-muted"><i class="fas fa-euro-sign"></i>&nbsp; Chiffre d'affaires</h6>
+            <p class="text-right nombres" id="#chiffreAffaires"><?= number_format($chiffreAffaires['chiffre'], 2, ',', ' ') ?> €</p>
+          </div>
+        </div>
+      </div>
+      <div class="col mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h6 class="card-subtitle text-muted"><i class="fas fa-euro-sign"></i>&nbsp; Montant moyen d'une commande</h6>
+            <p class="text-right nombres" id="#chiffreAffaires"><?= number_format($moyMontant['moy_montant'], 2, ',', ' ') ?> €</p>
           </div>
         </div>
       </div>
@@ -118,6 +110,14 @@ if (isset($_SESSION['id_employe'])) {
           <div class="card-body">
             <h6 class="card-subtitle text-muted"><i class="far fa-registered"></i>&nbsp; Nombre de marques</h6>
             <p class="text-right nombres" id="#nbMarques"><?= $nbMarques['nb_marques'] ?></p>
+          </div>
+        </div>
+      </div>
+      <div class="col mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h6 class="card-subtitle text-muted"><i class="fas fa-tag"></i>&nbsp; Nombre de catégories</h6>
+            <p class="text-right nombres" id="#nbCategories"><?= $nbCategories['nb_categories'] ?></p>
           </div>
         </div>
       </div>
