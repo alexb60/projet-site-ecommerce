@@ -46,7 +46,7 @@ require_once "../../../model/ModelEmploye.php";
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>
   <script src="../../../../js/font-awesome.all.min.js"></script>
-  <!-- <script src="../../../../js/validation-form.js"></script> -->
+  <script src="../../../../js/validation-form-admin.js"></script>
 </body>
 
 </html>

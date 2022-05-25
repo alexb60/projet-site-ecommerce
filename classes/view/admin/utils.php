@@ -116,7 +116,6 @@ class Utils
       echo $erreurs;
       return false;
     }
-    return
-      $donneesValides;
+    return $donneesValides;
   }
 }

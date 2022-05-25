@@ -3,22 +3,22 @@ session_start();
 
 require_once "../../../view/admin/ViewEmploye.php";
 require_once "../../../view/admin/ViewTemplate.php";
-require_once "../../../view/site/ViewTemplate.php";
+require_once "../../../view/admin/ViewTemplate.php";
 require_once "../../../model/ModelEmploye.php";
 
+// Si l'employé est connecté...
 if (isset($_SESSION['id_employe'])) {
+  ViewTemplate::menu();
   $employe = new ModelEmploye();
+  // Si l'employé est bien supprimé...
   if ($employe->suppEmploye($_SESSION['id_employe'])) {
-    session_destroy();
-    ViewTemplate::headerInvite();
-    $message = ["success", "Compte employé supprimé avec succès", "connexion.php"];
+    ViewTemplate::alert("success", "Compte employé supprimé avec succès", "listeEmploye.php"); // Afficher le succès
   } else {
-    ViewTemplate::headerConnecte();
-    $message = ["danger", "Échec de la suppression", "accueil.php"];
+    ViewTemplate::alert("danger", "Échec de la suppression", "accueil.php"); // Message d'erreur
   }
 } else {
-  ViewTemplate::headerInvite();
-  $message = ["danger", "Le profil n'existe pas", "accueil.php"];
+  ViewTemplate::headerInvite(); // Header admin non connecté
+  ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php"); // Message d'erreur
 }
 ?>
 
@@ -37,7 +37,6 @@ if (isset($_SESSION['id_employe'])) {
 
 <body>
   <?php
-  ViewTemplate::alert($message[0], $message[1], $message[2]);
   ViewTemplate::footer();
   ?>
   <script src="../../../../js/jquery.min.js"></script>

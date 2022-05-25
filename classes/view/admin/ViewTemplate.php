@@ -73,6 +73,15 @@ class ViewTemplate
                 <a class="dropdown-item" href="../role/ajout.php"><i class="fas fa-plus"></i>&nbsp; Ajouter un rôle</a>
               </div>
             </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="role" role="button" data-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user-shield"></i>&nbsp; Employés
+              </a>
+              <div class="dropdown-menu" aria-labelledby="role">
+                <a class="dropdown-item" href="../employe/listeEmploye.php"><i class="fas fa-list"></i>&nbsp; Liste des employés</a>
+                <a class="dropdown-item" href="../employe/ajoutEmploye.php"><i class="fas fa-plus"></i>&nbsp; Ajouter un employé</a>
+              </div>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="../commande/listeCommande.php?page=1"><i class="fas fa-shopping-bag"></i>&nbsp; Commandes</a>
             </li>

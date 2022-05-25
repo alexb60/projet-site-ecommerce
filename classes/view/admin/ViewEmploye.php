@@ -21,27 +21,32 @@ class ViewEmploye
           <form method="post" action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
             <div class="form-group">
               <label for="nom">Nom :</label>
-              <input type="text" name="nom" id="nom" class="form-control" aria-describedby="nomHelp" data-type="nom" data-message="Le format du nom n'est pas correct">
+              <input type="text" name="nom" id="nom" class="form-control" aria-describedby="nomHelp" data-type="nom" data-message="Le format du nom n'est pas correct" required>
               <small class="form-text text-muted" id="nomHelp"></small>
             </div>
             <div class="form-group">
               <label for="prenom">Prénom :</label>
-              <input type="text" name="prenom" id="prenom" class="form-control" aria-describedby="prenomHelp" data-type="prenom" data-message="Le format du prénom n'est pas correct">
+              <input type="text" name="prenom" id="prenom" class="form-control" aria-describedby="prenomHelp" data-type="prenom" data-message="Le format du prénom n'est pas correct" required>
               <small class="form-text text-muted" id="prenomHelp"></small>
             </div>
             <div class="form-group">
               <label for="mail">Adresse mail :</label>
-              <input type="email" name="mail" id="mail" class="form-control" aria-describedby="mailHelp" data-type="mail" data-message="Le format de l'adresse mail n'est pas correct">
+              <input type="email" name="mail" id="mail" class="form-control" aria-describedby="mailHelp" data-type="mail" data-message="Le format de l'adresse mail n'est pas correct" required>
               <small class="form-text text-muted" id="mailHelp"></small>
             </div>
             <div class="form-group">
               <label for="pass">Mot de passe :</label>
               <input type="password" name="pass" id="pass" class="form-control" aria-describedby="passHelp" data-type="pass" data-message="Le mot de passe doit contenir au minimum 8 caractères dont au moins une majuscule, un chiffre et un caractère spécial">
-              <small class="form-text text-muted" id="passHelp"></small>
+              <small class="form-text text-muted" id="passHelp">Le mot de passe doit comporter au minimum 8 caractères dont au moins une majuscule, un chiffre et un caractère spécial.</small>
+            </div>
+            <div class="form-group">
+              <label for="pass2">Confirmation du mot de passe :</label>
+              <input type="password" name="pass2" id="pass2" class="form-control">
+              <small class="form-text text-muted" id="pass2Help"></small>
             </div>
             <div class="form-group">
               <label for="role">Rôle :</label>
-              <select name="role" id="role" class="form-control">
+              <select name="role" id="role" class="form-control" aria-describedby="roleHelp" data-type="role" data-message="Veuillez choisir un rôle">
                 <option selected disabled value="">Choisir un rôle...</option>
                 <?php
                 foreach ($listeRole as $role) {
@@ -51,6 +56,7 @@ class ViewEmploye
                 }
                 ?>
               </select>
+              <small class="form-text text-muted" id="roleHelp"></small>
             </div>
             <br />
             <button type="submit" name="ajout" id="valider" class="btn btn-primary">Valider</button>
@@ -148,19 +154,86 @@ class ViewEmploye
               <input type="email" name="mail" id="mail" class="form-control" aria-describedby="mailHelp" data-type="mail" data-message="Le format de l'adresse mail n'est pas correct" value="<?= $employe['mail'] ?>">
               <small class="form-text text-muted" id="mailHelp"></small>
             </div>
-            <!-- <div class="form-group">
-              <label for="pass">Mot de passe :</label>
-              <input type="password" name="pass" id="pass" class="form-control" aria-describedby="passHelp" data-type="pass" data-message="Le mot de passe doit contenir au minimum 8 caractères dont au moins une majuscule, un chiffre et un caractère spécial" value="" disabled>
-              <small class="form-text text-muted" id="passHelp"></small>
-            </div> -->
             <br />
-            <input type="submit" name="modif" id="valider" class="btn btn-success">
+            <input type="submit" name="modif" id="valider" class="btn btn-success" value="Modifier">
             <input type="reset" class="btn btn-danger">
           </form>
           <br />
           <a href="javascript:history.back()" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
         </div>
       </div>
+    </div>
+  <?php
+  }
+
+  // FONCTION AFFICHANT LA LISTE DES EMPLOYÉS
+  public static function listeEmploye()
+  {
+    $modelEmploye = new ModelEmploye();
+    $liste = $modelEmploye->listeEmploye();
+  ?>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h2 class="mb-4">Liste des employés</h2>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end align-items-start">
+          <a href="ajoutEmploye.php" class="btn btn-outline-success"><i class="fas fa-plus"></i>&nbsp; Ajouter un employé</a>
+        </div>
+      </div>
+      <?php
+      if (count($liste) > 0) {
+      ?>
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Prénom</th>
+                  <th scope="col">Adresse mail</th>
+                  <th scope="col">Rôle</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                foreach ($liste as $employe) {
+                ?>
+                  <tr>
+                    <th scope="row"><?= $employe['id'] ?></th>
+                    <td><?= $employe['nom'] ?></td>
+                    <td><?= $employe['prenom'] ?></td>
+                    <td><?= $employe['mail'] ?></td>
+                    <td><?= $employe['role'] ?></td>
+                    <td>
+                      <a href="voirEmploye.php?id=<?= $employe['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir</a>
+                      <a href="supp.php?id=<?= $employe['id'] ?>" class="btn btn-danger <?= (($employe['id'] == $_SESSION['id_employe']) || ($employe['id_role'] == 1)) ? "d-none" : "" ?>">
+                        <i class="fas fa-trash-alt"></i>&nbsp; Supprimer
+                      </a>
+                    </td>
+                  </tr>
+                <?php
+                }
+                ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      <?php
+      } else {
+      ?>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="alert alert-danger" role="alert">
+              <i class="fas fa-exclamation-triangle"></i>&nbsp; Aucun employé n'existe dans la liste.
+            </div>
+          </div>
+        </div>
+      <?php
+      }
+      ?>
     </div>
 <?php
   }

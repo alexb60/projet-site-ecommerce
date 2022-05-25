@@ -37,6 +37,17 @@ class ModelEmploye
     ]);
   }
 
+  // REQUÊTE SQL PRÉPARÉE LISTANT LES EMPLOYÉS
+  public function listeEmploye()
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT E.*, R.nom role FROM employe E INNER JOIN role R ON E.id_role = R.id
+    ");
+    $requete->execute();
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
+  }
+
   // REQUÊTE SQL PRÉPARÉE PERMETTANT DE VOIR LES INFORMATIONS D'UN EMPLOYÉ
   public function voirEmploye($id)
   {
@@ -90,7 +101,6 @@ class ModelEmploye
       ':id' => $id,
     ]);
   }
-
 
   // GETTERS ET SETTERS
   public function getId()
