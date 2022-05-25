@@ -1,5 +1,5 @@
 <?php
-require_once 'C:/wamp64/www/projet/classes/model/ModelMessage.php';
+require_once '../../../model/ModelMessage.php';
 
 class ViewMessage
 {

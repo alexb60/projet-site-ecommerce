@@ -1,6 +1,6 @@
 <?php
-require_once "C:/wamp64/www/projet/classes/model/ModelEmploye.php";
-require_once "C:/wamp64/www/projet/classes/model/ModelRole.php";
+require_once "../../../model/ModelEmploye.php";
+require_once "../../../model/ModelRole.php";
 
 class ViewEmploye
 {

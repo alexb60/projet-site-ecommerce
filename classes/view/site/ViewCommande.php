@@ -1,10 +1,5 @@
 <?php
-require_once 'C:/wamp64/www/projet/classes/model/ModelProduit.php';
-require_once 'C:/wamp64/www/projet/classes/model/ModelMarque.php';
-require_once 'C:/wamp64/www/projet/classes/model/ModelCategorie.php';
-require_once 'C:/wamp64/www/projet/classes/model/ModelTransporteur.php';
-require_once 'C:/wamp64/www/projet/classes/model/ModelCommande.php';
-require_once 'C:/wamp64/www/projet/classes/model/ModelClient.php';
+require_once '../../../model/ModelCommande.php';
 
 class ViewCommande
 {
@@ -63,11 +58,6 @@ class ViewCommande
     $listeDetails = $modelCommande->voirDetails($id_commande);
     $commande = $modelCommande->voirCommande($_GET['id_com']);
 
-    $modelClient = new ModelClient();
-    $client = $modelClient->voirClient($_SESSION['id']);
-
-    $modelTransporteur = new ModelTransporteur();
-    $transporteur = $modelTransporteur->voirTransporteur($commande['id_transporteur']);
     ?>
     <div class="container">
       <div class="row mb-4">
@@ -78,12 +68,12 @@ class ViewCommande
       <div class="row">
         <div class="col-md-12">
           <p>
-            <span class="font-weight-bold">N° client : </span><?= $_SESSION['id'] ?><br />
-            <span class="font-weight-bold">Nom du client : </span><?= $client['prenom'] . " " . $client['nom'] ?><br />
+            <span class="font-weight-bold">N° client : </span><?= $commande['id_client'] ?><br />
+            <span class="font-weight-bold">Nom du client : </span><?= $commande['prenom_client'] . " " . $commande['nom_client'] ?><br />
             <span class="font-weight-bold">Date de commande : </span><?= $commande['date'] ?><br />
             <span class="font-weight-bold">État : </span><?= $commande['etat'] ?><br />
             <span class="font-weight-bold">Mode de livraison : </span>Livraison au <?= $commande['mode'] ?><br />
-            <span class="font-weight-bold">Transporteur : </span><?= $transporteur['nom'] ?><br />
+            <span class="font-weight-bold">Transporteur : </span><?= $commande['nom_transporteur'] ?><br />
             <br />
             <span class="font-weight-bold">Produits commandés :</span>
           </p>

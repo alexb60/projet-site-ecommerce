@@ -1,5 +1,5 @@
 <?php
-require_once 'C:/wamp64/www/projet/classes/model/ModelCategorie.php';
+require_once '../../../model/ModelCategorie.php';
 
 class ViewClient
 {

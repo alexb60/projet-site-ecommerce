@@ -1,6 +1,6 @@
 <?php
-require_once 'C:/wamp64/www/projet/classes/model/ModelCategorie.php';
-require_once 'C:/wamp64/www/projet/classes/model/ModelProduit.php';
+require_once '../../../model/ModelCategorie.php';
+require_once '../../../model/ModelProduit.php';
 
 class ViewCategorie
 {

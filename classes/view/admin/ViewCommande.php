@@ -1,5 +1,5 @@
 <?php
-require_once 'C:/wamp64/www/projet/classes/model/ModelCommande.php';
+require_once '../../../model/ModelCommande.php';
 
 class ViewCommande
 {
@@ -59,12 +59,6 @@ class ViewCommande
     $listeDetails = $modelCommande->voirDetails($id_commande);
     $commande = $modelCommande->voirCommande($_GET['id_com']);
 
-    $modelClient = new ModelClient();
-    $client = $modelClient->voirClient($_GET['id_cli']);
-
-    $modelTransporteur = new ModelTransporteur();
-    $transporteur = $modelTransporteur->voirTransporteur($commande['id_transporteur']);
-
     ?>
     <div class="container">
       <div class="row mb-4">
@@ -76,11 +70,11 @@ class ViewCommande
         <div class="col-md-12">
           <p>
             <span class="font-weight-bold">N° client : </span><?= $_GET['id_cli'] ?><br />
-            <span class="font-weight-bold">Nom du client : </span><?= $client['prenom'] . " " . $client['nom'] ?><br />
+            <span class="font-weight-bold">Nom du client : </span><?= $commande['prenom_client'] . " " . $commande['nom_client'] ?><br />
             <span class="font-weight-bold">Date de commande : </span><?= $commande['date'] ?><br />
             <span class="font-weight-bold">État : </span><?= $commande['etat'] ?><br />
             <span class="font-weight-bold">Mode de livraison : </span>Livraison au <?= $commande['mode'] ?><br />
-            <span class="font-weight-bold">Transporteur : </span><?= $transporteur['nom'] ?><br />
+            <span class="font-weight-bold">Transporteur : </span><?= $commande['nom_transporteur'] ?><br />
             <br />
             <span class="font-weight-bold">Produits commandés :</span>
           </p>

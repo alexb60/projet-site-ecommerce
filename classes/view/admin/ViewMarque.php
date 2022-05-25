@@ -1,6 +1,6 @@
 <?php
-require_once 'C:/wamp64/www/projet/classes/model/ModelMarque.php';
-require_once 'C:/wamp64/www/projet/classes/model/ModelProduit.php';
+require_once '../../../model/ModelMarque.php';
+require_once '../../../model/ModelProduit.php';
 
 class ViewMarque
 {

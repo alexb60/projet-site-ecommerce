@@ -85,7 +85,10 @@ class ModelCommande
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    SELECT * FROM commande WHERE id=:id
+    SELECT Co.*, T.nom nom_transporteur, Cl.nom nom_client, Cl.prenom prenom_client FROM commande Co
+    INNER JOIN transporteur T ON Co.id_transporteur = T.id
+    INNER JOIN client Cl ON Co.id_client = Cl.id
+    WHERE Co.id=:id
     ");
     $requete->execute([
       ':id' => $id_commande,

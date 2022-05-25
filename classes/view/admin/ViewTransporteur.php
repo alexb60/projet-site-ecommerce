@@ -1,5 +1,5 @@
 <?php
-require_once 'C:/wamp64/www/projet/classes/model/ModelTransporteur.php';
+require_once '../../../model/ModelTransporteur.php';
 
 class ViewTransporteur
 {
