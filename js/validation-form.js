@@ -1,5 +1,5 @@
 $(document).on("click", "#valider", function (e) {
-  e.preventDefault();
+  e.preventDefault(); // Bloquer le comportement par défaut de l'événement
 
   // LISTE DES REGEX
   let regexListe = {
@@ -52,6 +52,8 @@ $(document).on("click", "#valider", function (e) {
       // Si le mot de pass n'est pas conforme au pattern...
       if (pattern.test(formElements[i].value) === false) {
         erreur = true;
+
+        // Affichage du message d'erreur et passer les bordures des input au rouge
         $("#pass").addClass("erreurInput");
         $("#pass2").addClass("erreurInput");
         $("#" + $(formElements[i]).attr("aria-describedby")).html(
@@ -62,6 +64,8 @@ $(document).on("click", "#valider", function (e) {
       // Si la valeur du champ "mot de passe" et celle du champ "confirmer le mot de passe" ne sont pas identiques...
       if ($("#pass").val() !== $("#pass2").val()) {
         erreur = true;
+
+        // Affichage du message d'erreur et passer les bordures des inputs au rouge
         $("#pass").addClass("erreurInput");
         $("#pass2").addClass("erreurInput");
         $("#pass2Help").html(`<p class="erreurMessage">Les deux mots de passe doivent être identiques</p>`);
@@ -75,6 +79,8 @@ $(document).on("click", "#valider", function (e) {
       // Si la valeur de l'option choisie est nulle...
       if (formElements[i].value === "") {
         erreur = true;
+
+        // Affichage du message d'erreur et passer les bordures de l'input au rouge
         $(formElements[i]).addClass("erreurInput");
         $("#" + $(formElements[i]).attr("aria-describedby")).html(
           `<p class="erreurMessage">${$(formElements[i]).attr("data-message")}</p>`

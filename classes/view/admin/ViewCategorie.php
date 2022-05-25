@@ -128,7 +128,7 @@ class ViewCategorie
                     <th scope="row"><?= $produit['id'] ?></th>
                     <td><?= $produit['nom'] ?></td>
                     <td><?= $produit['nom_marque'] ?></td>
-                    <td><?= $produit['prix'] ?></td>
+                    <td><?= number_format($produit['prix'], 2, ',', ' ') ?></td>
                     <td <?= ($produit['quantite'] == 0) ? 'class="bg-danger text-white"' : (($produit['quantite'] <= 5) ? 'class="bg-warning"' : "") ?>>
                       <?= $produit['quantite'] ?>
                     </td>
@@ -176,8 +176,7 @@ class ViewCategorie
               <input type="text" name="nom" id="nom" class="form-control" aria-describedby="nomHelp" data-type="nom" data-message="Le format du nom n'est pas correct">
               <small class="form-text text-muted" id="nomHelp"></small>
             </div>
-
-            <button type="submit" class="btn btn-primary" name="ajout" id="valider">Ajouter</button>
+            <input type="submit" class="btn btn-primary" name="valider" id="valider" />
             <button type="reset" class="btn btn-danger">Réinitialiser</button>
           </form>
         </div>

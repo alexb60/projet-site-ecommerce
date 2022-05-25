@@ -23,7 +23,7 @@ require_once "../../../model/ModelCategorie.php";
   <?php
   if (isset($_SESSION['id_employe'])) {
     ViewTemplate::menu();
-    if (isset($_POST['ajout'])) {
+    if (isset($_POST['nom'])) {
       $donnees = [$_POST['nom']];
       $types = ["nom"];
       $data = Utils::valider($donnees, $types);
@@ -45,13 +45,12 @@ require_once "../../../model/ModelCategorie.php";
     ViewTemplate::headerInvite();
     ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
   }
-
-  ViewTemplate::footer();
+var_dump($_POST);
   ?>
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>
   <script src="../../../../js/font-awesome.all.min.js"></script>
-  <!-- <script src="../../../../js/validation-form.js"></script> -->
+  <script src="../../../../js/validation-form-admin.js"></script>
 </body>
 
 </html>
