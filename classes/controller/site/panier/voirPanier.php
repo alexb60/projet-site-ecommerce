@@ -67,9 +67,9 @@ if (isset($_SESSION['id'])) {
               <tr>
                 <th scope="row"><?= $produit['id'] ?></th>
                 <td><?= $produit['nom'] ?></td>
-                <td><?= $produit['prix'] ?> €</td>
+                <td><?= number_format($produit['prix'], 2, ',', ' ') ?> €</td>
                 <td><?= $_SESSION['panier']['quantite'][$i] ?></td>
-                <td><?= (float)$_SESSION['panier']['prix'][$i] * (int)$_SESSION['panier']['quantite'][$i] ?> €</td>
+                <td><?= number_format(((float)$_SESSION['panier']['prix'][$i] * (int)$_SESSION['panier']['quantite'][$i]), 2, ',', ' ') ?> €</td>
                 <td>
                   <a href="../produit/voir.php?id=<?= $_SESSION['panier']['id'][$i] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier la quantité</a>
                   <a href="supprProduitPanier.php?id=<?= $produit['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Retirer du panier</a>
@@ -95,7 +95,7 @@ if (isset($_SESSION['id'])) {
                 <h4><?= (quantiteProduitPanier() <= 1) ? quantiteProduitPanier() . " article" : quantiteProduitPanier() . " articles" ?></h4>
               </td>
               <td>
-                <h4><?= montantPanier() ?> €</h4>
+                <h4><?= number_format(montantPanier(), 2, ',', ' ') ?> €</h4>
               </td>
               <td></td>
             </tr>

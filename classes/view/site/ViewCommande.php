@@ -31,7 +31,7 @@ class ViewCommande
               <th scope="row"><?= $commande['id'] ?></th>
               <td><?= $commande['date'] ?></td>
               <td><?= ucfirst($commande['etat'])  ?></td>
-              <td><?= $commande['montant'] ?> €</td>
+              <td><?= number_format($commande['montant'], 2, ',', ' ') ?> €</td>
               <td><?= ucfirst($commande['mode']) ?></td>
               <td>
                 <a href="voirDetails.php?id_com=<?= $commande['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir les détails</a>
@@ -107,9 +107,9 @@ class ViewCommande
                     <td><?= $detail['ref'] ?></td>
                     <td><?= $detail['nom_marque'] ?></td>
                     <td><?= $detail['nom_categorie'] ?></td>
-                    <td><?= $detail['prix'] ?> €</td>
+                    <td><?= number_format($detail['prix'], 2, ',', ' ') ?> €</td>
                     <td><?= $detail['quantite'] ?></td>
-                    <td><?= (int)$detail['quantite'] * (float)$detail['prix'] ?> €</td>
+                    <td><?= number_format(((int)$detail['quantite'] * (float)$detail['prix']), 2, ',', ' ') ?> €</td>
                   </tr>
                 <?php
                 }
@@ -130,7 +130,7 @@ class ViewCommande
                     <h4><?= ($qteProduit <= 1) ? $qteProduit . " article" : $qteProduit . " articles" ?></h4>
                   </td>
                   <td>
-                    <h4><?= $total ?> €</h4>
+                    <h4><?= number_format($total, 2, ',', ' ') ?> €</h4>
                   </td>
                 </tr>
               </tbody>
@@ -144,7 +144,7 @@ class ViewCommande
           <?php
           }
           ?>
-          <a href="javascript:history.back()" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour à la liste des commandes</a>
+          <a href="listeCommandeClient.php?page=1" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour à la liste des commandes</a>
         </div>
       </div>
     </div>

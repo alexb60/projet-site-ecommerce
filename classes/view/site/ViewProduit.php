@@ -74,7 +74,7 @@ class ViewProduit
                   <p><span class="font-weight-bold">Catégorie :</span><br /><?= $produit['nom_categorie'] ?><br /></p>
                   <p><span class="font-weight-bold">Référence :</span><br /><?= $produit['ref'] ?><br /></p>
                   <p><span class="font-weight-bold">Description du produit :</span><br /><?= $produit['description'] ?><br /></p>
-                  <p><span class="font-weight-bold">Prix :</span><br /><?= $produit['prix'] ?> €<br /></p>
+                  <p><span class="font-weight-bold">Prix :</span><br /><?= number_format($produit['prix'], 2, ',', ' ') ?> €<br /></p>
                   <p><span class="font-weight-bold">En stock :</span><br /><?= ($produit['quantite'] == 0) ? "<div class='alert alert-danger'>Produit épuisé</div>" : $produit['quantite'] ?><br /></p>
                   </p>
                   <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post" <?= ($produit['quantite'] == 0) ? 'class="d-none"' : "" ?>>
@@ -205,7 +205,7 @@ class ViewProduit
                             <div class="card-body">
                               <h5 class="card-title"><?= $produit[$i]['nom'] ?></h5>
                               <p class="card-text"><?= (strlen($produit[$i]['description']) > 100) ? substr($produit[$i]['description'], 0, 100) . " ..." : $produit[$i]['description'] ?></p>
-                              <h4 class="card-text text-right"><?= $produit[$i]['prix'] ?> €</h4>
+                              <h4 class="card-text text-right"><?= number_format($produit[$i]['prix'], 2, ',', ' ') ?> €</h4>
                             </div>
                             <ul class="list-group list-group-flush border-0 mb-2">
                               <li class="list-group-item"><a href="voir.php?id=<?= $produit[$i]['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir les détails</a></li>
@@ -253,23 +253,23 @@ class ViewProduit
                   if ($j == 0) {
                 ?>
                     <div class="carousel-item active">
-                      <div class="card-deck">
+                      <div class="card-deck" style="height: 36rem;">
                       <?php
                     } else {
                       ?>
                         <div class="carousel-item">
-                          <div class="card-deck">
+                          <div class="card-deck" style="height: 36rem;">
                             <?php
                           }
                           for ($i = ($j * 3); $i < (($j + 1) * 3); $i++) {
                             if (isset($liste[$i]['id'])) {
                             ?>
-                              <div class="card" style="height: 35rem;">
-                                <img src="../../../../images/produit/<?= $liste[$i]['photo'] ?>" alt='Photo du produit "<?= $liste[$i]['nom'] ?>"' class="d-block card-img-top mx-auto w-100 image-card">
+                              <div class="card">
+                                <img src="../../../../images/produit/<?= $liste[$i]['photo'] ?>" alt='Photo du produit "<?= $liste[$i]['nom'] ?>"' class="card-img-top mx-auto w-100 image-card">
                                 <div class="card-body">
                                   <h5 class="card-title"><?= $liste[$i]['nom'] ?></h5>
                                   <p class="card-text"><?= (strlen($liste[$i]['description']) > 100) ? substr($liste[$i]['description'], 0, 100) . " ..." : $liste[$i]['description'] ?></p>
-                                  <h4 class="card-text text-right"><?= $liste[$i]['prix'] ?> €</h4>
+                                  <h4 class="card-text text-right"><?= number_format($liste[$i]['prix'], 2, ',', ' ') ?> €</h4>
                                 </div>
                                 <ul class="list-group list-group-flush border-0 mb-2">
                                   <li class="list-group-item"><a href="voir.php?id=<?= $liste[$i]['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir les détails</a></li>
