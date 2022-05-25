@@ -56,7 +56,7 @@ class ViewCommande
   {
     $modelCommande = new ModelCommande();
     $listeDetails = $modelCommande->voirDetails($id_commande);
-    $commande = $modelCommande->voirCommande($_GET['id_com']);
+    $commande = $modelCommande->voirCommande($id_commande);
 
     ?>
     <div class="container">

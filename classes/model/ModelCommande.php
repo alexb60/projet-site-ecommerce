@@ -88,10 +88,23 @@ class ModelCommande
     SELECT Co.*, T.nom nom_transporteur, Cl.nom nom_client, Cl.prenom prenom_client FROM commande Co
     INNER JOIN transporteur T ON Co.id_transporteur = T.id
     INNER JOIN client Cl ON Co.id_client = Cl.id
-    WHERE Co.id=:id
+    WHERE Co.id=:id_commande
     ");
     $requete->execute([
-      ':id' => $id_commande,
+      ':id_commande' => $id_commande,
+    ]);
+    return $requete->fetch(PDO::FETCH_ASSOC);
+  }
+
+  // REQUÊTE SQL PRÉPARÉE PERMETTANT D'OBTENIR L'ID DU CLIENT ASSOCIÉ À LA COMMANDE DONNÉE
+  public function checkIdClient($id_commande)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT id_client FROM commande WHERE id=:id_commande
+    ");
+    $requete->execute([
+      ':id_commande' => $id_commande,
     ]);
     return $requete->fetch(PDO::FETCH_ASSOC);
   }

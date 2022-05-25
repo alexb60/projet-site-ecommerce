@@ -2,10 +2,19 @@
 session_start();
 require_once "../../../view/site/ViewCommande.php";
 require_once "../../../view/site/ViewTemplate.php";
+require_once "../../../model/ModelCommande.php";
 
 if (isset($_SESSION['id'])) {
   ViewTemplate::headerConnecte();
-  ViewCommande::voirDetailsClient($_GET['id_com']);
+
+  $modelCommande = new ModelCommande();
+  $commande = $modelCommande->checkIdClient($_GET['id_com']);
+
+  if ($commande['id_client'] == $_SESSION['id']) {
+    ViewCommande::voirDetailsClient($_GET['id_com']);
+  } else {
+    ViewTemplate::alert("danger", "La commande n'existe pas", "javascript:history.back()");
+  }
 } else {
   ViewTemplate::headerInvite();
   ViewTemplate::alert("danger", "Vous devez être connecté pour accéder à cette page", "../client/connexion-client.php");

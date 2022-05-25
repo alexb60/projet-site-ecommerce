@@ -34,7 +34,7 @@ class ViewCommande
               <td><?= $commande['etat'] ?></td>
               <td><?= $commande['montant'] ?> €</td>
               <td>
-                <a href="voirDetails.php?id_com=<?= $commande['id'] ?>&id_cli=<?= $commande['id_client'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir les détails</a>
+                <a href="voirDetails.php?id_com=<?= $commande['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir les détails</a>
                 <a href="modifEtat.php?id=<?= $commande['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier l'état</a>
               </td>
             </tr>
@@ -69,7 +69,7 @@ class ViewCommande
       <div class="row">
         <div class="col-md-12">
           <p>
-            <span class="font-weight-bold">N° client : </span><?= $_GET['id_cli'] ?><br />
+            <span class="font-weight-bold">N° client : </span><?= $commande['id_client'] ?><br />
             <span class="font-weight-bold">Nom du client : </span><?= $commande['prenom_client'] . " " . $commande['nom_client'] ?><br />
             <span class="font-weight-bold">Date de commande : </span><?= $commande['date'] ?><br />
             <span class="font-weight-bold">État : </span><?= $commande['etat'] ?><br />
