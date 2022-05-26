@@ -121,7 +121,7 @@ class ViewRole
               <small class="form-text text-muted" id="nomHelp"></small>
             </div>
 
-            <button type="submit" class="btn btn-primary" name="ajout" id="valider">Ajouter</button>
+            <input type="submit" class="btn btn-primary" name="ajout" id="valider" value="Ajouter">
             <button type="reset" class="btn btn-danger">Réinitialiser</button>
           </form>
         </div>
@@ -152,7 +152,7 @@ class ViewRole
               <small class="form-text text-muted" id="nomHelp"></small>
             </div>
 
-            <button type="submit" class="btn btn-success" name="modif" id="valider">Modifier</button>
+            <input type="submit" class="btn btn-success" name="modif" id="valider" value="Ajouter">
             <button type="reset" class="btn btn-danger">Réinitialiser</button>
           </form>
           <br />
