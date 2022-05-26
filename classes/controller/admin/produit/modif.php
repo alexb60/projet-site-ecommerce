@@ -34,8 +34,8 @@ require_once "../../../model/ModelProduit.php";
         ViewTemplate::alert("danger", "Le transporteur n'existe pas", "liste.php");
       }
     } else {
-      $donnees = [$_POST['nom'], $_POST['ref'], $_POST['quantite'], $_POST['prix']];
-      $types = ["nomProduit", "ref", "quantite", "prix"];
+      $donnees = [$_POST['produit'], $_POST['ref'], $_POST['quantite'], $_POST['prix']];
+      $types = ["produit", "ref", "quantite", "prix"];
       $data = Utils::valider($donnees, $types);
 
       if ($data) {
@@ -45,13 +45,13 @@ require_once "../../../model/ModelProduit.php";
 
           if ($_FILES['photo']['size'] === 0) { // SI PAS DE FICHIER ENVOYÉ
             $fichier = $modelProduit->voirProduit($_POST['id'])['photo']; // RÉCUPÉRATION DU NOM DU FICHIER DÉJÀ PRÉSENT EN BASE
-            if ($modelProduit->modifProduit($_POST['id'], $_POST['nom'], $_POST['ref'], $_POST['description'], $_POST['quantite'], $_POST['prix'], $fichier, $_POST['categorie'], $_POST['marque'])) {
+            if ($modelProduit->modifProduit($_POST['id'], $_POST['produit'], $_POST['ref'], $_POST['description'], $_POST['quantite'], $_POST['prix'], $fichier, $_POST['categorie'], $_POST['marque'])) {
               ViewTemplate::alert("success", "Le produit a été modifié avec succès", "liste.php");
             } else {
               ViewTemplate::alert("danger", "Erreur de modification", "liste.php");
             }
           } elseif ($upload['uploadOk']) { // SINON SI FICHIER ENVOYÉ
-            if ($modelProduit->modifProduit($_POST['id'], $_POST['nom'], $_POST['ref'], $_POST['description'], $_POST['quantite'], $_POST['prix'], $upload['file_name'], $_POST['categorie'], $_POST['marque'])) {
+            if ($modelProduit->modifProduit($_POST['id'], $_POST['produit'], $_POST['ref'], $_POST['description'], $_POST['quantite'], $_POST['prix'], $upload['file_name'], $_POST['categorie'], $_POST['marque'])) {
               ViewTemplate::alert("success", "Le produit a été modifié avec succès", "liste.php");
             } else {
               ViewTemplate::alert("danger", "Erreur de modification", "liste.php");
@@ -81,7 +81,7 @@ require_once "../../../model/ModelProduit.php";
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>
   <script src="../../../../js/font-awesome.all.min.js"></script>
-  <!-- <script src="../../../../js/validation-form.js"></script> -->
+  <script src="../../../../js/validation-form-admin.js"></script>
 </body>
 
 </html>

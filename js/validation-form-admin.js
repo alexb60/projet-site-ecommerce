@@ -13,9 +13,10 @@ $(document).on("click", "#valider", function (e) {
     ville: /^[\p{L}\s\-]{1,}$/u,
     tel: /^[\d]{10,}$/,
     prix: /^\d{1,}(\.\d{2}){0,1}$/,
-    ref: /^[a-zA-Z0-9]{1,}$/,
+    ref: /^[a-zA-Z0-9\_\-]{1,}$/,
     quantite: /^\d{1,}$/,
     description: /^[\p{L}\s\-\d]{1,}$/u,
+    produit: /^[\p{L}\s\-\d\(\)!'"_?,.]{1,}$/u,
   };
 
   // SUPPRESSION DU TEXTE CONTENU DANS TOUS LES ÉLÉMENTS SMALL
@@ -91,6 +92,10 @@ $(document).on("click", "#valider", function (e) {
           `<p class="erreurMessage">${$(formElements[i]).attr("data-message")}</p>`
         );
       }
+    } else if ($(formElements[i]).prop("tagName").toLowerCase() === "textarea") {
+      // TRAITEMENT DE LA TEXTAREA
+
+      continue; // Continuer la boucle
     } else {
       // TRAITEMENT DES AUTRES INPUTS
 

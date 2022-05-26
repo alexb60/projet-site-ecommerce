@@ -140,9 +140,9 @@ class ViewProduit
         <div class="col-md-12">
           <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
             <div class="form-group">
-              <label for="nom">Nom :</label>
-              <input type="text" name="nom" id="nom" class="form-control" aria-describedby="nomHelp" data-type="nom" data-message="Le format du nom n'est pas correct">
-              <small class="form-text text-muted" id="nomHelp"></small>
+              <label for="produit">Nom :</label>
+              <input type="text" name="produit" id="produit" class="form-control" aria-describedby="produitHelp" data-type="produit" data-message="Le format du nom du produit n'est pas correct">
+              <small class="form-text text-muted" id="produitHelp"></small>
             </div>
             <div class="form-group">
               <label for="ref">Référence :</label>
@@ -155,7 +155,7 @@ class ViewProduit
             </div>
             <div class="form-group">
               <label for="quantite">Quantité :</label>
-              <input type="number" name="quantite" id="quantite" min="0" class="form-control" aria-describedby="quantiteHelp" data-type="quantite" data-message="La quantité doit être un nombre entier">
+              <input type="number" name="quantite" id="quantite" min="0" class="form-control" aria-describedby="quantiteHelp" data-type="quantite" data-message="La quantité doit être un nombre entier positif">
               <small class="form-text text-muted" id="quantiteHelp"></small>
             </div>
             <div class="form-group">
@@ -194,7 +194,7 @@ class ViewProduit
               <input type="file" name="photo" id="photo" class="form-control-file">
             </div>
             <br />
-            <input type="submit" class="btn btn-primary" name="ajout" id="valider">
+            <input type="submit" class="btn btn-primary" name="ajout" id="valider" value="Ajouter">
             <input type="reset" class="btn btn-danger">
           </form>
         </div>
@@ -228,9 +228,9 @@ class ViewProduit
           <form action="modif.php" method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
             <input type="hidden" name="id" id="id" class="form-control" value="<?= $produit['id'] ?>">
             <div class="form-group">
-              <label for="nom">Nom :</label>
-              <input type="text" name="nom" id="nom" class="form-control" value="<?= $produit['nom'] ?>" aria-describedby="nomHelp" data-type="nom" data-message="Le format du nom n'est pas correct">
-              <small class="form-text text-muted" id="nomHelp"></small>
+              <label for="produit">Nom :</label>
+              <input type="text" name="produit" id="produit" class="form-control" value="<?= $produit['nom'] ?>" aria-describedby="produitHelp" data-type="produit" data-message="Le format du nom du produit n'est pas correct">
+              <small class="form-text text-muted" id="produitHelp"></small>
             </div>
             <div class="form-group">
               <label for="ref">Référence :</label>
@@ -243,7 +243,7 @@ class ViewProduit
             </div>
             <div class="form-group">
               <label for="quantite">Quantité :</label>
-              <input type="number" name="quantite" id="quantite" min="0" class="form-control" value="<?= $produit['quantite'] ?>" aria-describedby="quantiteHelp" data-type="quantite" data-message="La quantité doit être un nombre entier">
+              <input type="number" name="quantite" id="quantite" min="0" class="form-control" value="<?= $produit['quantite'] ?>" aria-describedby="quantiteHelp" data-type="quantite" data-message="La quantité doit être un nombre entier positif">
               <small class="form-text text-muted" id="quantiteHelp"></small>
             </div>
             <div class="form-group">
@@ -282,7 +282,7 @@ class ViewProduit
               <input type="file" name="photo" id="photo" class="form-control-file" value="<?= $produit['photo'] ?>">
             </div>
             <br />
-            <input type="submit" class="btn btn-primary" name="ajout" id="valider">
+            <input type="submit" class="btn btn-primary" name="ajout" id="valider" value="Modifier">
             <input type="reset" class="btn btn-danger">
           </form>
           <br />

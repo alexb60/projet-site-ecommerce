@@ -71,7 +71,7 @@ class Utils
       "ref" => "/^[a-zA-Z0-9]{1,}$/",
       "quantite" => "/^\d{1,}$/",
       "description" => "/^[\p{L}\s\-\d\?\!\;\,\.\_]{1,}$/u",
-      "nomProduit" => "/^[\p{L}\s\-\d\.\,]{1,}$/u"
+      "produit" => "/^[\p{L}\s\-\d\(\)!'\"_?,.]{1,}$/u",
     ];
 
     //https://www.php.net/manual/fr/filter.filters.validate.php

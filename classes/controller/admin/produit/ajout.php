@@ -25,9 +25,9 @@ require_once "../../../model/ModelProduit.php";
   <?php
   if (isset($_SESSION['id_employe'])) {
     ViewTemplate::menu();
-    if (isset($_POST['ajout'])) {
-      $donnees = [$_POST['nom'], $_POST['ref'], $_POST['quantite'], $_POST['prix']];
-      $types = ["nomProduit", "ref", "quantite", "prix"];
+    if (isset($_POST['produit'])) {
+      $donnees = [$_POST['produit'], $_POST['ref'], $_POST['quantite'], $_POST['prix']];
+      $types = ["produit", "ref", "quantite", "prix"];
       $data = Utils::valider($donnees, $types);
 
       if ($data) {
@@ -36,7 +36,7 @@ require_once "../../../model/ModelProduit.php";
         $modelProduit = new ModelProduit();
 
         if ($upload['uploadOk']) {
-          if ($modelProduit->ajoutProduit($_POST['nom'], $_POST['ref'], $_POST['description'], $_POST['quantite'], $_POST['prix'], $upload['file_name'], $_POST['categorie'], $_POST['marque'])) {
+          if ($modelProduit->ajoutProduit($_POST['produit'], $_POST['ref'], $_POST['description'], $_POST['quantite'], $_POST['prix'], $upload['file_name'], $_POST['categorie'], $_POST['marque'])) {
             ViewTemplate::alert("success", "Le produit a été ajouté avec succès", "liste.php");
           } else {
             ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
@@ -65,7 +65,7 @@ require_once "../../../model/ModelProduit.php";
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>
   <script src="../../../../js/font-awesome.all.min.js"></script>
-  <!-- <script src="../../../../js/validation-form.js"></script> -->
+  <script src="../../../../js/validation-form-admin.js"></script>
 </body>
 
 </html>

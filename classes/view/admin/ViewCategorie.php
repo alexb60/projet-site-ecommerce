@@ -176,7 +176,7 @@ class ViewCategorie
               <input type="text" name="nom" id="nom" class="form-control" aria-describedby="nomHelp" data-type="nom" data-message="Le format du nom n'est pas correct">
               <small class="form-text text-muted" id="nomHelp"></small>
             </div>
-            <input type="submit" class="btn btn-primary" name="valider" id="valider" />
+            <input type="submit" class="btn btn-primary" name="valider" id="valider" value="Ajouter">
             <button type="reset" class="btn btn-danger">Réinitialiser</button>
           </form>
         </div>
