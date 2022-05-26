@@ -53,6 +53,7 @@ class ViewCommande
     }
   }
 
+  // FONCTION AFFICHANT LES DÉTAILS D'UNE COMMANDE
   public static function voirDetails($id_commande)
   {
     $modelCommande = new ModelCommande();
@@ -108,9 +109,9 @@ class ViewCommande
                     <td><?= $detail['ref'] ?></td>
                     <td><?= $detail['nom_marque'] ?></td>
                     <td><?= $detail['nom_categorie'] ?></td>
-                    <td><?= $detail['prix'] ?> €</td>
+                    <td><?= number_format($detail['prix'], 2, ',', ' ') ?> €</td>
                     <td><?= $detail['quantite'] ?></td>
-                    <td><?= (int)$detail['quantite'] * (float)$detail['prix'] ?> €</td>
+                    <td><?= number_format(((int)$detail['quantite'] * (float)$detail['prix']), 2, ',', ' ') ?> €</td>
                   </tr>
                 <?php
                 }
@@ -131,7 +132,7 @@ class ViewCommande
                     <h4><?= ($qteProduit <= 1) ? $qteProduit . " article" : $qteProduit . " articles" ?></h4>
                   </td>
                   <td>
-                    <h4><?= $total ?> €</h4>
+                    <h4><?= number_format($total, 2, ',', ' ') ?> €</h4>
                   </td>
                 </tr>
               </tbody>

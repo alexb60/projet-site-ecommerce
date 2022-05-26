@@ -98,7 +98,7 @@ class ViewProduit
                   <p><span class="font-weight-bold">Catégorie :</span><br /><?= $produit['nom_categorie'] ?><br /></p>
                   <p><span class="font-weight-bold">Référence :</span><br /><?= $produit['ref'] ?><br /></p>
                   <p><span class="font-weight-bold">Description du produit :</span><br /><?= $produit['description'] ?><br /></p>
-                  <p><span class="font-weight-bold">Prix :</span><br /><?= $produit['prix'] ?> €<br /></p>
+                  <p><span class="font-weight-bold">Prix :</span><br /><?= number_format($produit['prix'], 2, ',', ' ') ?> €<br /></p>
                   <p><span class="font-weight-bold">Quantité en stock :</span><br /><?= $produit['quantite'] ?><br /></p>
                   </p>
                 </div>

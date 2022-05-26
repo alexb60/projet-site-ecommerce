@@ -106,7 +106,8 @@ class ViewMarque
             </ul>
           </div>
         </div>
-      </div><div class="row">
+      </div>
+      <div class="row">
         <div class="col-md-12">
           <h2 class="my-4">Liste des produits appartenant à la marque "<?= $marque['nom'] ?>"</h2>
         </div>
@@ -134,7 +135,7 @@ class ViewMarque
                     <th scope="row"><?= $produit['id'] ?></th>
                     <td><?= $produit['nom'] ?></td>
                     <td><?= $produit['nom_categorie'] ?></td>
-                    <td><?= $produit['prix'] ?></td>
+                    <td><?= number_format($produit['prix'], 2, ',', ' ') ?> €</td>
                     <td <?= ($produit['quantite'] == 0) ? 'class="bg-danger text-white"' : (($produit['quantite'] <= 5) ? 'class="bg-warning"' : "") ?>>
                       <?= $produit['quantite'] ?>
                     </td>
