@@ -2,6 +2,7 @@
 session_start();
 require_once "../../../view/admin/ViewEmploye.php";
 require_once "../../../view/admin/ViewTemplate.php";
+require_once "../../../view/admin/utils.php";
 require_once "../../../model/ModelEmploye.php";
 ?>
 
@@ -20,25 +21,46 @@ require_once "../../../model/ModelEmploye.php";
 
 <body>
   <?php
-  ViewTemplate::menu();
+  // Si l'employé est connecté...
+  if (isset($_SESSION['id_employe'])) {
+    ViewTemplate::menu(); // Affichage du menu
 
-  $modelEmploye = new ModelEmploye();
-  if (isset($_SESSION['id_employe']) && !isset($_POST['id'])) {
-    if ($modelEmploye->voirEmploye($_SESSION['id_employe'])) {
-      ViewEmploye::modifEmploye($_SESSION['id_employe']);
-    } else {
-      ViewTemplate::alert("danger", "Le profil employé n'existe pas", "accueil.php");
-    }
-  } else {
-    if (isset($_POST['id']) && $modelEmploye->voirEmploye($_POST['id'])) {
-      if ($modelEmploye->modifEmploye($_POST['id'], $_POST['nom'], $_POST['prenom'], $_POST['mail'])) {
-        ViewTemplate::alert("success", "Le profil employé a été modifié avec succès", "accueil.php");
+    $modelEmploye = new ModelEmploye();
+
+    // Si l'id de l'employé n'est pas passé en POST
+    if (!isset($_POST['id'])) {
+
+      // Si la requête pour voir les infos d'un employé renvoie des données...
+      if ($modelEmploye->voirEmploye($_SESSION['id_employe'])) {
+        ViewEmploye::modifEmploye($_SESSION['id_employe']); // Afficher le formulaire de modification avec les données de l'employé
       } else {
-        ViewTemplate::alert("danger", "Échec de la modification", "accueil.php");
+        ViewTemplate::alert("danger", "Le profil employé n'existe pas", "accueil.php"); // Message d'erreur
       }
     } else {
-      ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "accueil.php");
+      // Si l'id de l'employé est passé en POST et si la requête pour voir une catégorie renvoie des données...
+      if (isset($_POST['id']) && $modelEmploye->voirEmploye($_POST['id'])) {
+        $donnees = [$_POST['nom'], $_POST['prenom'], $_POST['mail']]; // Tableau contenant les données à vérifier
+        $types = ["nom", "prenom", "email"]; // Tableau des types de données à vérifier
+        $data = Utils::valider($donnees, $types); // Vérification des données
+
+        // Si les données sont conformes...
+        if ($data) {
+          // Si la modification est effectuée..
+          if ($modelEmploye->modifEmploye($_POST['id'], $_POST['nom'], $_POST['prenom'], $_POST['mail'])) {
+            ViewTemplate::alert("success", "Le profil employé a été modifié avec succès", "accueil.php"); // Afficher le succès
+          } else {
+            ViewTemplate::alert("danger", "Échec de la modification", "accueil.php"); // Message d'erreur
+          }
+        } else {
+          ViewTemplate::alert("danger", "Échec de la modification, les données ne sont pas conformes", "accueil.php"); // Message d'erreur
+        }
+      } else {
+        ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "accueil.php"); // Message d'erreur
+      }
     }
+  } else {
+    ViewTemplate::headerInvite(); // Navbar invité
+    ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
   }
 
   ViewTemplate::footer();
