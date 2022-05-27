@@ -3,6 +3,7 @@ session_start();
 
 require_once "../../../view/admin/ViewCategorie.php";
 require_once "../../../view/admin/ViewTemplate.php";
+require_once "../../../view/admin/utils.php";
 require_once "../../../model/ModelCategorie.php";
 ?>
 
@@ -21,32 +22,48 @@ require_once "../../../model/ModelCategorie.php";
 
 <body>
   <?php
+  // Si l'employé est connecté...
   if (isset($_SESSION['id_employe'])) {
-    ViewTemplate::menu();
+    ViewTemplate::menu(); // Affichage du menu
 
     $modelCategorie = new ModelCategorie();
+
+    // Si l'id de la catégorie est passé en GET
     if (isset($_GET['id'])) {
+
+      // Si la requête pour voir une catégorie renvoie des données...
       if ($modelCategorie->voirCategorie($_GET['id'])) {
-        ViewCategorie::modifCategorie($_GET['id']);
+        ViewCategorie::modifCategorie($_GET['id']); // Afficher le formulaire avec les données de la catégorie à modifier
       } else {
-        ViewTemplate::alert("danger", "La catégorie n'existe pas", "liste.php");
+        ViewTemplate::alert("danger", "La catégorie n'existe pas", "liste.php"); // Message d'erreur
       }
     } else {
+      // Si l'id de la catéogire est passé en POST et si la requête pour voir une catégorie renvoie des données...
       if (isset($_POST['id']) && $modelCategorie->voirCategorie($_POST['id'])) {
-        if ($modelCategorie->modifCategorie($_POST['id'], $_POST['nom'])) {
-          ViewTemplate::alert("success", "La catégorie a été modifiée avec succès", "liste.php");
+        $donnees = [$_POST['nom']]; // Tableau contenant les données à vérifier
+        $types = ["nom"]; // Tableau des types de données à vérifier
+        $data = Utils::valider($donnees, $types); // Vérification des données
+
+        // Si les données sont conformes...
+        if ($data) {
+          // Si la modification de la catégorie se fait...
+          if ($modelCategorie->modifCategorie($_POST['id'], $_POST['nom'])) {
+            ViewTemplate::alert("success", "La catégorie a été modifiée avec succès", "liste.php"); // Afficher le succès
+          } else {
+            ViewTemplate::alert("danger", "Échec de la modification", "liste.php"); // Message d'erreur
+          }
         } else {
-          ViewTemplate::alert("danger", "Échec de la modification", "liste.php");
+          ViewTemplate::alert("danger", "Échec de la modification, les données ne sont pas conformes", "liste.php"); // Message d'erreur
         }
       } else {
-        ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php");
+        ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php"); // Message d'erreur
       }
     }
   } else {
-    ViewTemplate::headerInvite();
-    ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
+    ViewTemplate::headerInvite(); // Navbar invité
+    ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php"); // Message d'erreur
   }
-  ViewTemplate::footer();
+  ViewTemplate::footer(); // Footer
   ?>
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>
