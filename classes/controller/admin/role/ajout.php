@@ -24,36 +24,35 @@ require_once "../../../model/ModelRole.php";
   if (isset($_SESSION['id_employe'])) {
     ViewTemplate::menu();
 
-    if (isset($_POST['nom'])) {
-      $donnees = [$_POST['nom']];
-      $types = ["nom"];
-      $data = Utils::valider($donnees, $types);
+    // Si le rôle permet d'accéder à cette section...
+    if ($_SESSION['perm']['Catégories'] == "oui") {
+      if (isset($_POST['nom'])) {
+        $donnees = [$_POST['nom']];
+        $types = ["nom"];
+        $data = Utils::valider($donnees, $types);
 
-      $tabPerm = array("Produits" => $_POST['produit'], "Catégories" => $_POST['categorie'], "Marques" => $_POST['marque'], "Transporteurs" => $_POST['transporteur'], "Rôles" => $_POST['role'], "Employés" => $_POST['employe'], "Commandes" => $_POST['commande'], "Clients" => $_POST['client'], "Messages" => $_POST['message']);
-      $perm = json_encode($tabPerm);
+        $tabPerm = array("Produits" => $_POST['produit'], "Catégories" => $_POST['categorie'], "Marques" => $_POST['marque'], "Transporteurs" => $_POST['transporteur'], "Rôles" => $_POST['role'], "Employés" => $_POST['employe'], "Commandes" => $_POST['commande'], "Clients" => $_POST['client'], "Messages" => $_POST['message']);
+        $perm = json_encode($tabPerm);
 
-      if ($data) {
-        $role = new ModelRole();
-        if ($role->ajoutRole($_POST['nom'], $perm)) {
-          ViewTemplate::alert("success", "Rôle ajouté avec succès", "liste.php");
+        if ($data) {
+          $role = new ModelRole();
+          if ($role->ajoutRole($_POST['nom'], $perm)) {
+            ViewTemplate::alert("success", "Rôle ajouté avec succès", "liste.php");
+          } else {
+            ViewTemplate::alert("danger", "Erreur d'ajout", "ajout.php");
+          }
         } else {
-          ViewTemplate::alert("danger", "Erreur d'ajout", "ajout.php");
+          ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
         }
       } else {
-        ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
+        ViewRole::ajoutRole();
       }
     } else {
-      ViewRole::ajoutRole();
+      ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur
     }
   } else {
     ViewTemplate::headerInvite();
-  ?>
-    <div class="container">
-      <?php
-      ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
-      ?>
-    </div>
-  <?php
+    ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
   }
   ViewTemplate::footer();
   ?>

@@ -20,16 +20,15 @@ require_once "../../../view/admin/ViewTemplate.php";
   <?php
   if (isset($_SESSION['id_employe'])) {
     ViewTemplate::menu();
-    ViewTransporteur::listeTransporteur();
+    // Si le rôle permet d'accéder à cette section...
+    if ($_SESSION['perm']['Catégories'] == "oui") {
+      ViewTransporteur::listeTransporteur();
+    } else {
+      ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur
+    }
   } else {
     ViewTemplate::headerInvite();
-  ?>
-    <div class="container">
-      <?php
-      ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
-      ?>
-    </div>
-  <?php
+    ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
   }
   ViewTemplate::footer();
   ?>

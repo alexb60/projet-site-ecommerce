@@ -22,30 +22,28 @@ require_once "../../../model/ModelRole.php";
   <?php
   if (isset($_SESSION['id_employe'])) {
     ViewTemplate::menu();
-
-    if (isset($_GET['id'])) {
-      $modelRole = new ModelRole();
-      if ($modelRole->voirRole($_GET['id'])) {
-        if ($modelRole->suppRole($_GET['id'])) {
-          ViewTemplate::alert("success", "Rôle supprimé avec succès", "liste.php");
+    // Si le rôle permet d'accéder à cette section...
+    if ($_SESSION['perm']['Catégories'] == "oui") {
+      if (isset($_GET['id'])) {
+        $modelRole = new ModelRole();
+        if ($modelRole->voirRole($_GET['id'])) {
+          if ($modelRole->suppRole($_GET['id'])) {
+            ViewTemplate::alert("success", "Rôle supprimé avec succès", "liste.php");
+          } else {
+            ViewTemplate::alert("danger", "Échec de la suppression", "liste.php");
+          }
         } else {
-          ViewTemplate::alert("danger", "Échec de la suppression", "liste.php");
+          ViewTemplate::alert("danger", "La catégorie n'existe pas", "liste.php");
         }
       } else {
-        ViewTemplate::alert("danger", "La catégorie n'existe pas", "liste.php");
+        ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php");
       }
     } else {
-      ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php");
+      ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur
     }
   } else {
     ViewTemplate::headerInvite();
-  ?>
-    <div class="container">
-      <?php
-      ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
-      ?>
-    </div>
-  <?php
+    ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
   }
   ViewTemplate::footer();
   ?>

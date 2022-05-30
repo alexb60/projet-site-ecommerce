@@ -22,30 +22,28 @@ require_once "../../../model/ModelTransporteur.php";
   <?php
   if (isset($_SESSION['id_employe'])) {
     ViewTemplate::menu();
-
-    if (isset($_GET['id'])) {
-      $modelTransporteur = new ModelTransporteur();
-      if ($modelTransporteur->voirTransporteur($_GET['id'])) {
-        if ($modelTransporteur->suppTransporteur($_GET['id'])) {
-          ViewTemplate::alert("success", "Transporteur supprimé avec succès", "liste.php");
+    // Si le rôle permet d'accéder à cette section...
+    if ($_SESSION['perm']['Catégories'] == "oui") {
+      if (isset($_GET['id'])) {
+        $modelTransporteur = new ModelTransporteur();
+        if ($modelTransporteur->voirTransporteur($_GET['id'])) {
+          if ($modelTransporteur->suppTransporteur($_GET['id'])) {
+            ViewTemplate::alert("success", "Transporteur supprimé avec succès", "liste.php");
+          } else {
+            ViewTemplate::alert("danger", "Échec de la suppression", "liste.php");
+          }
         } else {
-          ViewTemplate::alert("danger", "Échec de la suppression", "liste.php");
+          ViewTemplate::alert("danger", "Le transporteur n'existe pas", "liste.php");
         }
       } else {
-        ViewTemplate::alert("danger", "Le transporteur n'existe pas", "liste.php");
+        ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php");
       }
     } else {
-      ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php");
+      ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur
     }
   } else {
     ViewTemplate::headerInvite();
-  ?>
-    <div class="container">
-      <?php
-      ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
-      ?>
-    </div>
-  <?php
+    ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
   }
   ViewTemplate::footer();
   ?>
