@@ -235,6 +235,8 @@ class ViewRole
   {
     $modelRole = new ModelRole();
     $role = $modelRole->voirRole($id);
+    $perm = json_decode($role['perm'], true); // Décodage du JSON contenant les permissions en tableau associatif PHP
+
   ?>
     <div class="container">
       <div class="row mb-4">
@@ -252,7 +254,106 @@ class ViewRole
               <small class="form-text text-muted" id="nomHelp"></small>
             </div>
 
-            <input type="submit" class="btn btn-success" name="modif" id="valider" value="Ajouter">
+            <div class="form-group">
+              <legend class="col-form-label">Peut accéder aux produits :</legend>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="produit" id="produitOui" value="oui" <?= $perm['Produits'] == "oui" ? "checked" : "" ?>>
+                <label for="produitOui">oui</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="produit" id="produitNon" value="non" <?= $perm['Produits'] == "non" ? "checked" : "" ?>>
+                <label for="produitNon">non</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <legend class="col-form-label">Peut accéder aux catégories :</legend>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="categorie" id="categorieOui" value="oui" <?= $perm['Catégories'] == "oui" ? "checked" : "" ?>>
+                <label for="categorieOui">oui</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="categorie" id="categorieNon" value="non" <?= $perm['Catégories'] == "non" ? "checked" : "" ?>>
+                <label for="categorieNon">non</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <legend class="col-form-label">Peut accéder aux marques :</legend>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="marque" id="marqueOui" value="oui" <?= $perm['Marques'] == "oui" ? "checked" : "" ?>>
+                <label for="marqueOui">oui</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="marque" id="marqueNon" value="non" <?= $perm['Marques'] == "non" ? "checked" : "" ?>>
+                <label for="marqueNon">non</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <legend class="col-form-label">Peut accéder aux transporteurs :</legend>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="transporteur" id="transporteurOui" value="oui" <?= $perm['Transporteurs'] == "oui" ? "checked" : "" ?>>
+                <label for="transporteurOui">oui</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="transporteur" id="transporteurNon" value="non" <?= $perm['Transporteurs'] == "non" ? "checked" : "" ?>>
+                <label for="transporteurNon">non</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <legend class="col-form-label">Peut accéder aux rôles :</legend>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="role" id="roleOui" value="oui" <?= $perm['Rôles'] == "oui" ? "checked" : "" ?>>
+                <label for="roleOui">oui</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="role" id="roleNon" value="non" <?= $perm['Rôles'] == "non" ? "checked" : "" ?>>
+                <label for="roleNon">non</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <legend class="col-form-label">Peut accéder aux employés :</legend>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="employe" id="employeOui" value="oui" <?= $perm['Employés'] == "oui" ? "checked" : "" ?>>
+                <label for="employeOui">oui</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="employe" id="employeNon" value="non" <?= $perm['Employés'] == "non" ? "checked" : "" ?>>
+                <label for="employeNon">non</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <legend class="col-form-label">Peut accéder aux commandes :</legend>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="commande" id="commandeOui" value="oui" <?= $perm['Commandes'] == "oui" ? "checked" : "" ?>>
+                <label for="commandeOui">oui</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="commande" id="commandeNon" value="non" <?= $perm['Commandes'] == "non" ? "checked" : "" ?>>
+                <label for="commandeNon">non</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <legend class="col-form-label">Peut accéder aux clients :</legend>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="client" id="clientOui" value="oui" <?= $perm['Clients'] == "oui" ? "checked" : "" ?>>
+                <label for="clientOui">oui</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="client" id="clientNon" value="non" <?= $perm['Clients'] == "non" ? "checked" : "" ?>>
+                <label for="clientNon">non</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <legend class="col-form-label">Peut accéder aux messages :</legend>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="message" id="messageOui" value="oui" <?= $perm['Messages'] == "oui" ? "checked" : "" ?>>
+                <label for="messageOui">oui</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="message" id="messageNon" value="non" <?= $perm['Messages'] == "non" ? "checked" : "" ?>>
+                <label for="messageNon">non</label>
+              </div>
+            </div>
+            <input type="submit" class="btn btn-success" name="modif" id="valider" value="Modifier">
             <button type="reset" class="btn btn-danger">Réinitialiser</button>
           </form>
           <br />

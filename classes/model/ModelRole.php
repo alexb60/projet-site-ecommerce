@@ -65,15 +65,16 @@ class ModelRole
   }
 
   // REQUÊTE SQL PRÉPARÉE PERMETTANT DE MODIFIER UN RÔLE
-  public function modifRole($id, $nom)
+  public function modifRole($id, $nom, $perm)
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    UPDATE role SET nom=:nom WHERE id=:id;
+    UPDATE role SET nom=:nom, perm=:perm WHERE id=:id;
     ");
     return $requete->execute([
       ':id' => $id,
-      ':nom' => $nom
+      ':nom' => $nom,
+      ':perm' => $perm,
     ]);
   }
 

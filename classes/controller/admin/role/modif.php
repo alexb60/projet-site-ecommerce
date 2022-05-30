@@ -37,9 +37,14 @@ require_once "../../../model/ModelRole.php";
     } else {
       // Si l'id du rôle est passé en POST et si la requête pour voir un rôle renvoie des données...
       if (isset($_POST['id']) && $modelRole->voirRole($_POST['id'])) {
+
+        // Création d'un tableau associatif contenant les valeurs des boutons radios
+        $tabPerm = array("Produits" => $_POST['produit'], "Catégories" => $_POST['categorie'], "Marques" => $_POST['marque'], "Transporteurs" => $_POST['transporteur'], "Rôles" => $_POST['role'], "Employés" => $_POST['employe'], "Commandes" => $_POST['commande'], "Clients" => $_POST['client'], "Messages" => $_POST['message']);
+        $perm = json_encode($tabPerm); // Encodage du tableau associatif en objet JSON
+
         // Si la modification du rôle se fait
-        if ($modelRole->modifRole($_POST['id'], $_POST['nom'])) {
-          ViewTemplate::alert("success", "Le rôle a été modifié avec succès", "liste.php"); // Afficher le succès
+        if ($modelRole->modifRole($_POST['id'], $_POST['nom'], $perm)) {
+          ViewTemplate::alert("success", "Le rôle a été modifié avec succès", "javascript:history.go(-2)"); // Afficher le succès
         } else {
           ViewTemplate::alert("danger", "Échec de la modification", "liste.php"); // Message d'erreur
         }
