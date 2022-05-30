@@ -25,7 +25,7 @@ require_once "../../../model/ModelMarque.php";
     ViewTemplate::menu();
 
     // Si le rôle permet d'accéder à cette section...
-    if ($_SESSION['perm']['Catégories'] == "oui") {
+    if ($_SESSION['perm']['Marques'] == "oui") {
       $modelMarque = new ModelMarque();
       if (isset($_GET['id'])) {
         if ($modelMarque->voirMarque($_GET['id'])) {

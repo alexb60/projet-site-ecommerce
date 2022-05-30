@@ -26,7 +26,7 @@ require_once "../../../model/ModelTransporteur.php";
     ViewTemplate::menu();
     
     // Si le rôle permet d'accéder à cette section...
-    if ($_SESSION['perm']['Catégories'] == "oui") {
+    if ($_SESSION['perm']['Commandes'] == "oui") {
       $modelCommande = new ModelCommande();
       $commande = $modelCommande->voirCommande($_GET['id_com']);
       ViewCommande::voirDetails($_GET['id_com']);

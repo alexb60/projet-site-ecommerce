@@ -27,7 +27,7 @@ require_once "../../../model/ModelProduit.php";
     ViewTemplate::menu();
 
     // Si le rôle permet d'accéder à cette section...
-    if ($_SESSION['perm']['Catégories'] == "oui") {
+    if ($_SESSION['perm']['Produits'] == "oui") {
       $modelProduit = new ModelProduit();
       if (isset($_GET['id'])) {
         if ($modelProduit->voirProduit($_GET['id'])) {

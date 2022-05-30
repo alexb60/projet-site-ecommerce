@@ -26,7 +26,7 @@ require_once "../../../model/ModelProduit.php";
   if (isset($_SESSION['id_employe'])) {
     ViewTemplate::menu();
     // Si le rôle permet d'accéder à cette section...
-    if ($_SESSION['perm']['Catégories'] == "oui") {
+    if ($_SESSION['perm']['Produits'] == "oui") {
       if (isset($_POST['produit'])) {
         $donnees = [$_POST['produit'], $_POST['ref'], $_POST['quantite'], $_POST['prix']];
         $types = ["produit", "ref", "quantite", "prix"];

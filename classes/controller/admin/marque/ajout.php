@@ -25,7 +25,7 @@ require_once "../../../model/ModelMarque.php";
   if (isset($_SESSION['id_employe'])) {
     ViewTemplate::menu();
     // Si le rôle permet d'accéder à cette section...
-    if ($_SESSION['perm']['Catégories'] == "oui") {
+    if ($_SESSION['perm']['Marques'] == "oui") {
       if (isset($_POST['nom'])) {
         $donnees = [$_POST['nom']];
         $types = ["nom"];

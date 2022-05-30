@@ -24,7 +24,7 @@ require_once "../../../model/ModelTransporteur.php";
   if (isset($_SESSION['id_employe'])) {
     ViewTemplate::menu();
     // Si le rôle permet d'accéder à cette section...
-    if ($_SESSION['perm']['Catégories'] == "oui") {
+    if ($_SESSION['perm']['Transporteurs'] == "oui") {
       $modelTransporteur = new ModelTransporteur();
       if (isset($_GET['id'])) {
         if ($modelTransporteur->voirTransporteur($_GET['id'])) {

@@ -30,7 +30,7 @@ if ($_POST['recherche'] == "") {
     ViewTemplate::menu();
     
     // Si le rôle permet d'accéder à cette section...
-    if ($_SESSION['perm']['Catégories'] == "oui") {
+    if ($_SESSION['perm']['Produits'] == "oui") {
 
       $modelProduit = new ModelProduit();
   ?>

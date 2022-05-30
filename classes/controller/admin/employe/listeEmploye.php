@@ -22,7 +22,7 @@ require_once "../../../view/admin/ViewTemplate.php";
   if (isset($_SESSION['id_employe'])) {
     ViewTemplate::menu();
     // Si le rôle permet d'accéder à cette section...
-    if ($_SESSION['perm']['Catégories'] == "oui") {
+    if ($_SESSION['perm']['Employés'] == "oui") {
       ViewEmploye::listeEmploye();
     } else {
       ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur

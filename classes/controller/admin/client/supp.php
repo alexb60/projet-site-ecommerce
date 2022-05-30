@@ -10,7 +10,7 @@ if (isset($_SESSION['id_employe'])) {
 
   ViewTemplate::menu();
   // Si le rôle permet d'accéder à cette section...
-  if ($_SESSION['perm']['Catégories'] == "oui") {
+  if ($_SESSION['perm']['Clients'] == "oui") {
     // Si l'id est passé en GET...
     if (isset($_GET['id'])) {
       $client = new ModelClient();

@@ -23,7 +23,7 @@ require_once "../../../model/ModelMessage.php";
   if (isset($_SESSION['id_employe'])) {
     ViewTemplate::menu();
     // Si le rôle permet d'accéder à cette section...
-    if ($_SESSION['perm']['Catégories'] == "oui") {
+    if ($_SESSION['perm']['Messages'] == "oui") {
       // PAGINATION
       if (isset($_GET['page']) && !empty($_GET['page'])) {
         $currentPage = (int) strip_tags($_GET['page']);

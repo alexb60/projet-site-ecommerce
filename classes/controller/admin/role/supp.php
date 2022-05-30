@@ -23,7 +23,7 @@ require_once "../../../model/ModelRole.php";
   if (isset($_SESSION['id_employe'])) {
     ViewTemplate::menu();
     // Si le rôle permet d'accéder à cette section...
-    if ($_SESSION['perm']['Catégories'] == "oui") {
+    if ($_SESSION['perm']['Rôles'] == "oui") {
       if (isset($_GET['id'])) {
         $modelRole = new ModelRole();
         if ($modelRole->voirRole($_GET['id'])) {

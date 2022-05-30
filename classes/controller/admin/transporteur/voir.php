@@ -23,7 +23,7 @@ require_once "../../../model/ModelTransporteur.php";
   if (isset($_SESSION['id_employe'])) {
     ViewTemplate::menu();
     // Si le rôle permet d'accéder à cette section...
-    if ($_SESSION['perm']['Catégories'] == "oui") {
+    if ($_SESSION['perm']['Transporteurs'] == "oui") {
       ViewTransporteur::voirTransporteur($_GET['id']);
     } else {
       ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur

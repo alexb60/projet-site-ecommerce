@@ -24,7 +24,7 @@ require_once "../../../model/ModelProduit.php";
     ViewTemplate::menu();
 
     // Si le rôle permet d'accéder à cette section...
-    if ($_SESSION['perm']['Catégories'] == "oui") {
+    if ($_SESSION['perm']['Produits'] == "oui") {
       // PAGINATION
       if (isset($_GET['page']) && !empty($_GET['page'])) {
         $currentPage = (int) strip_tags($_GET['page']);

@@ -10,7 +10,7 @@ require_once "../../../model/ModelEmploye.php";
 if (isset($_SESSION['id_employe'])) {
   ViewTemplate::menu();
   // Si le rôle permet d'accéder à cette section...
-  if ($_SESSION['perm']['Catégories'] == "oui") {
+  if ($_SESSION['perm']['Employés'] == "oui") {
     $employe = new ModelEmploye();
     // Si l'employé est bien supprimé...
     if ($employe->suppEmploye($_SESSION['id_employe'])) {

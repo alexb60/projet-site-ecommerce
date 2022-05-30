@@ -31,7 +31,7 @@ if (isset($_SESSION['id_employe'])) {
   <div class="container">
     <?php
     // Si le rôle permet d'accéder à cette section...
-    if ($_SESSION['perm']['Catégories'] == "oui") {
+    if ($_SESSION['perm']['Employés'] == "oui") {
       // Si le nom existe dans POST (le formulaire a été envoyé)...
       if (isset($_POST['nom'])) {
         $donnees = [$_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['pass']]; // Tableau des données à vérifier
