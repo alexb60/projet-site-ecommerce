@@ -121,6 +121,106 @@ class ViewRole
               <small class="form-text text-muted" id="nomHelp"></small>
             </div>
 
+            <div class="form-group">
+              <legend class="col-form-label">Peut accéder aux produits :</legend>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="produit" id="produitOui" value="oui">
+                <label for="produitOui">oui</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="produit" id="produitNon" value="non" checked>
+                <label for="produitNon">non</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <legend class="col-form-label">Peut accéder aux catégories :</legend>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="categorie" id="categorieOui" value="oui">
+                <label for="categorieOui">oui</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="categorie" id="categorieNon" value="non" checked>
+                <label for="categorieNon">non</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <legend class="col-form-label">Peut accéder aux marques :</legend>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="marque" id="marqueOui" value="oui">
+                <label for="marqueOui">oui</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="marque" id="marqueNon" value="non" checked>
+                <label for="marqueNon">non</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <legend class="col-form-label">Peut accéder aux transporteurs :</legend>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="transporteur" id="transporteurOui" value="oui">
+                <label for="transporteurOui">oui</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="transporteur" id="transporteurNon" value="non" checked>
+                <label for="transporteurNon">non</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <legend class="col-form-label">Peut accéder aux rôles :</legend>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="role" id="roleOui" value="oui">
+                <label for="roleOui">oui</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="role" id="roleNon" value="non" checked>
+                <label for="roleNon">non</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <legend class="col-form-label">Peut accéder aux employés :</legend>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="employe" id="employeOui" value="oui">
+                <label for="employeOui">oui</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="employe" id="employeNon" value="non" checked>
+                <label for="employeNon">non</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <legend class="col-form-label">Peut accéder aux commandes :</legend>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="commande" id="commandeOui" value="oui">
+                <label for="commandeOui">oui</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="commande" id="commandeNon" value="non" checked>
+                <label for="commandeNon">non</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <legend class="col-form-label">Peut accéder aux clients :</legend>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="client" id="clientOui" value="oui">
+                <label for="clientOui">oui</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="client" id="clientNon" value="non" checked>
+                <label for="clientNon">non</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <legend class="col-form-label">Peut accéder aux messages :</legend>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="message" id="messageOui" value="oui">
+                <label for="messageOui">oui</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="message" id="messageNon" value="non" checked>
+                <label for="messageNon">non</label>
+              </div>
+            </div>
+
             <input type="submit" class="btn btn-primary" name="ajout" id="valider" value="Ajouter">
             <button type="reset" class="btn btn-danger">Réinitialiser</button>
           </form>

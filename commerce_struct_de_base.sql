@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 30 mai 2022 à 08:57
+-- Généré le : dim. 01 mai 2022 à 14:59
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -160,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `produit` (
   `ref` varchar(50) NOT NULL,
   `description` text NOT NULL,
   `quantite` int(5) NOT NULL,
-  `prix` float(7,2) NOT NULL,
+  `prix` float NOT NULL,
   `photo` varchar(100) NOT NULL,
   `id_categorie` int(11) NOT NULL,
   `id_marque` int(11) NOT NULL,
@@ -179,7 +179,6 @@ DROP TABLE IF EXISTS `role`;
 CREATE TABLE IF NOT EXISTS `role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) NOT NULL,
-  `perm` json DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

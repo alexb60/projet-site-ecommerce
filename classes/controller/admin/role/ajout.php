@@ -29,9 +29,12 @@ require_once "../../../model/ModelRole.php";
       $types = ["nom"];
       $data = Utils::valider($donnees, $types);
 
+      $tabPerm = array("Produits" => $_POST['produit'], "Catégories" => $_POST['categorie'], "Marques" => $_POST['marque'], "Transporteurs" => $_POST['transporteur'], "Rôles" => $_POST['role'], "Employés" => $_POST['employe'], "Commandes" => $_POST['commande'], "Clients" => $_POST['client'], "Messages" => $_POST['message']);
+      $perm = json_encode($tabPerm);
+
       if ($data) {
         $role = new ModelRole();
-        if ($role->ajoutRole($_POST['nom'])) {
+        if ($role->ajoutRole($_POST['nom'], $perm)) {
           ViewTemplate::alert("success", "Rôle ajouté avec succès", "liste.php");
         } else {
           ViewTemplate::alert("danger", "Erreur d'ajout", "ajout.php");

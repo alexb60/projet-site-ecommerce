@@ -5,12 +5,14 @@ class ModelRole
 {
   private $id;
   private $nom;
+  private $perm;
 
   // CONSTRUCTEUR
-  public function __construct($id = null, $nom = null)
+  public function __construct($id = null, $nom = null, $perm = null)
   {
     $this->id = $id;
     $this->nom = $nom;
+    $this->perm = $perm;
   }
 
   // REQUÊTE SQL PRÉPARÉE LISTANT LES RÔLES
@@ -38,14 +40,15 @@ class ModelRole
   }
 
   // REQUÊTE SQL PRÉPARÉE PERMETTANT D'AJOUTER UN RÔLE
-  public function ajoutRole($nom)
+  public function ajoutRole($nom, $perm)
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    INSERT INTO role VALUES (null, :nom);
+    INSERT INTO role VALUES (null, :nom, :perm);
     ");
     return $requete->execute([
       ':nom' => $nom,
+      ':perm' => $perm,
     ]);
   }
 
@@ -83,6 +86,10 @@ class ModelRole
   {
     return $this->nom;
   }
+  public function getPerm()
+  {
+    return $this->perm;
+  }
   public function setId($id)
   {
     $this->id = $id;
@@ -91,6 +98,11 @@ class ModelRole
   public function setNom($nom)
   {
     $this->nom = $nom;
+    return $this;
+  }
+  public function setPerm($perm)
+  {
+    $this->perm = $perm;
     return $this;
   }
 }
