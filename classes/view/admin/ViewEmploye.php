@@ -4,7 +4,7 @@ require_once "../../../model/ModelRole.php";
 
 class ViewEmploye
 {
-  // FONCTION AFFICHANT LE FORMULAIRE QUI PERMET À UN EMPLOYÉ DE S'INSCRIRE
+  // FONCTION AFFICHANT LE FORMULAIRE QUI PERMET D'AJOUTER UN EMPLOYÉ
   public static function ajoutEmploye()
   {
     $modelRole = new ModelRole();
@@ -18,7 +18,7 @@ class ViewEmploye
       </div>
       <div class="row">
         <div class="col-md-12">
-          <form method="post" action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
+          <form method="post" action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data" class="col-md-8 offset-md-2">
             <div class="form-group">
               <label for="nom">Nom :</label>
               <input type="text" name="nom" id="nom" class="form-control" aria-describedby="nomHelp" data-type="nom" data-message="Le format du nom n'est pas correct" required>
@@ -101,7 +101,7 @@ class ViewEmploye
     <div class="container">
       <div class="row mb-4">
         <div class="col-md-12">
-          <h2>Mes informations</h2>
+          <h2>Informations de l'employé <?= $employe['prenom'] . " " . $employe['nom'] ?></h2>
         </div>
       </div>
       <div class="row">
@@ -111,10 +111,11 @@ class ViewEmploye
               <h5 class="card-title"><?= $employe['id'] . " - " . $employe['prenom'] . " " . $employe['nom'] ?></h5>
               <p class="card-text">
                 <span class="font-weight-bold">Adresse mail :</span> <?= $employe['mail'] ?><br />
+                <span class="font-weight-bold">Rôle :</span> <?= $employe['nom_role'] ?><br />
               </p>
-              <a href="modifEmploye.php" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier</a>
-              <a href="supp.php" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Supprimer</a><br><br>
               <a href="javascript:history.back()" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
+              <a href="modifEmploye.php?id=<?= $employe['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier</a>
+              <a href="supp.php" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Supprimer</a>
             </div>
           </div>
         </div>
@@ -123,8 +124,68 @@ class ViewEmploye
   <?php
   }
 
-  // FONCTION AFFICHANT LE FORMULAIRE PERMETTANT À UN EMPLOYÉ DE MODIFIER SES INFORMATIONS
+  // FONCTION AFFICHANT LE FORMULAIRE PERMETTANT DE MODIFIER LES INFORMATIONS D'UN EMPLOYÉ
   public static function modifEmploye($id)
+  {
+    $modelEmploye = new ModelEmploye();
+    $employe = $modelEmploye->voirEmploye($id);
+
+    $modelRole = new ModelRole();
+    $listeRole = $modelRole->listeRole();
+  ?>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="mb-4">Modifier mes informations</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" class="col-md-8 offset-md-2">
+            <input type="hidden" name="id" id="id" class="form-control" value="<?= $employe['id'] ?>">
+            <div class="form-group">
+              <label for="nom">Nom :</label>
+              <input type="text" name="nom" id="nom" class="form-control" aria-describedby="nomHelp" data-type="nom" data-message="Le format du nom n'est pas correct" value="<?= $employe['nom'] ?>">
+              <small class="form-text text-muted" id="nomHelp"></small>
+            </div>
+            <div class="form-group">
+              <label for="prenom">Prénom :</label>
+              <input type="text" name="prenom" id="prenom" class="form-control" aria-describedby="prenomHelp" data-type="prenom" data-message="Le format du prénom n'est pas correct" value="<?= $employe['prenom'] ?>">
+              <small class="form-text text-muted" id="prenomHelp"></small>
+            </div>
+            <div class="form-group">
+              <label for="mail">Adresse mail :</label>
+              <input type="email" name="mail" id="mail" class="form-control" aria-describedby="mailHelp" data-type="mail" data-message="Le format de l'adresse mail n'est pas correct" value="<?= $employe['mail'] ?>">
+              <small class="form-text text-muted" id="mailHelp"></small>
+            </div>
+            <div class="form-group">
+              <label for="role">Rôle :</label>
+              <select name="role" id="role" class="form-control" aria-describedby="roleHelp" data-type="role" data-message="Veuillez choisir un rôle">
+                <option selected disabled value="">Choisir un rôle...</option>
+                <?php
+                foreach ($listeRole as $role) {
+                ?>
+                  <option value="<?= $role['id'] ?>" <?= $role['id'] == $employe['id_role'] ? "selected" : "" ?>><?= $role['nom'] ?></option>
+                <?php
+                }
+                ?>
+              </select>
+              <small class="form-text text-muted" id="roleHelp"></small>
+            </div>
+            <br />
+            <input type="submit" name="modif" id="valider" class="btn btn-success" value="Modifier">
+            <input type="reset" class="btn btn-danger">
+          </form>
+          <br />
+          <a href="javascript:history.back()" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
+        </div>
+      </div>
+    </div>
+  <?php
+  }
+
+  // FONCTION AFFICHANT LE FORMULAIRE PERMETTANT À UN EMPLOYÉ DE MODIFIER SES INFORMATIONS
+  public static function modifEmployePerso($id)
   {
     $modelEmploye = new ModelEmploye();
     $employe = $modelEmploye->voirEmploye($id);
@@ -137,7 +198,7 @@ class ViewEmploye
       </div>
       <div class="row">
         <div class="col-md-12">
-          <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+          <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" class="col-md-8 offset-md-2">
             <input type="hidden" name="id" id="id" class="form-control" value="<?= $employe['id'] ?>">
             <div class="form-group">
               <label for="nom">Nom :</label>

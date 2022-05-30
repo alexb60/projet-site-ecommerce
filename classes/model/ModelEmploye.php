@@ -53,7 +53,7 @@ class ModelEmploye
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    SELECT * FROM employe WHERE id=:id;
+    SELECT E.*, R.nom nom_role FROM employe E INNER JOIN role R ON E.id_role = R.id WHERE E.id=:id;
     ");
     $requete->execute([
       ':id' => $id,
@@ -66,7 +66,7 @@ class ModelEmploye
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    SELECT E.*, R.perm perm FROM employe E INNER JOIN role R ON E.id_role = R.id WHERE mail=:mail
+    SELECT E.*, R.perm perm FROM employe E INNER JOIN role R ON E.id_role = R.id WHERE E.mail=:mail
     ");
 
     $requete->execute([
@@ -75,8 +75,24 @@ class ModelEmploye
     return $requete->fetch(PDO::FETCH_ASSOC);
   }
 
+  // REQUÊTE SQL PRÉPARÉE PERMETTANT DE MODIFIER LES INFORMATIONS D'UN EMPLOYÉ
+  public function modifEmploye($id, $nom, $prenom, $mail, $id_role)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    UPDATE employe SET nom=:nom, prenom=:prenom, mail=:mail, id_role=:id_role WHERE id=:id;
+    ");
+    return $requete->execute([
+      ':id' => $id,
+      ':nom' => $nom,
+      ':prenom' => $prenom,
+      ':mail' => $mail,
+      ':id_role' => $id_role,
+    ]);
+  }
+
   // REQUÊTE SQL PRÉPARÉE PERMETTANT À L'EMPLOYÉ DE MODIFIER SES INFORMATIONS
-  public function modifEmploye($id, $nom, $prenom, $mail)
+  public function modifEmployePerso($id, $nom, $prenom, $mail)
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
@@ -100,6 +116,19 @@ class ModelEmploye
     return $requete->execute([
       ':id' => $id,
     ]);
+  }
+
+  // REQUÊTE SQL PRÉPARÉE LISTANT LES EMPLOYÉS APPARTENANT À UN RÔLE DONNÉ
+  public function listeEmployeParRole($id_role)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT * FROM employe WHERE id_role=:id_role
+    ");
+    $requete->execute([
+      ':id_role' => $id_role,
+    ]);
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
   }
 
   // GETTERS ET SETTERS

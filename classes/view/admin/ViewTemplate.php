@@ -99,7 +99,7 @@ class ViewTemplate
               </li>
               <li class="nav-item">&nbsp;</li>
               <li class="nav-item">
-                <a href="../employe/modifEmploye.php" class="btn btn-outline-warning"><i class="fas fa-edit"></i>&nbsp; Profil</a>
+                <a href="../employe/modifEmployePerso.php" class="btn btn-outline-warning"><i class="fas fa-edit"></i>&nbsp; Profil</a>
               </li>
               <li class="nav-item">&nbsp;</li>
               <li class="nav-item">

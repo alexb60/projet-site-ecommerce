@@ -1,9 +1,9 @@
 <?php
 require_once '../../../model/ModelRole.php';
+require_once '../../../model/ModelEmploye.php';
 
 class ViewRole
 {
-
   // FONCTION AFFICHANT LA LISTE DES RÔLES
   public static function listeRole()
   {
@@ -75,6 +75,9 @@ class ViewRole
     $modelRole = new ModelRole();
     $role = $modelRole->voirRole($id);
     $listPerm = json_decode($role['perm'], true); // Décodage du JSON contenant les permissions en tableau associatif PHP
+
+    $modelEmploye = new ModelEmploye();
+    $liste = $modelEmploye->listeEmployeParRole($id);
   ?>
     <div class="container">
       <div class="row mb-4">
@@ -86,7 +89,7 @@ class ViewRole
         <div class="col-md-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title"><?= $role['id'] . " - " . $role['nom']; ?> </h5>
+              <h5 class="card-title"><?= $role['id'] . " - " . $role['nom'] ?></h5>
               <p class="card-text">
                 <?php
                 foreach ($listPerm as $perm => $value) {
@@ -105,6 +108,56 @@ class ViewRole
               </li>
             </ul>
           </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="my-4">Liste des personnes ayant le rôle "<?= $role['nom'] ?>"</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <?php
+          if (count($liste) > 0) { ?>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Prénom</th>
+                  <th scope="col">Adresse mail</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                foreach ($liste as $employe) {
+                ?>
+                  <tr>
+                    <th scope="row"><?= $employe['id'] ?></th>
+                    <td><?= $employe['nom'] ?></td>
+                    <td><?= $employe['prenom'] ?></td>
+                    <td><?= $employe['mail'] ?></td>
+                    <td>
+                      <a href="../employe/voirEmploye.php?id=<?= $employe['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                      <a href="../employe/modifEmploye.php?id=<?= $employe['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                      <a href="../employe/supp.php?id=<?= $employe['id'] ?>" class="btn btn-danger <?= $role['id'] == 1 ? "d-none" : "" ?>"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                  </tr>
+                <?php
+                }
+                ?>
+              </tbody>
+            </table>
+          <?php
+          } else {
+          ?>
+            <div class="alert alert-danger" role="alert">
+              <i class="fas fa-times"></i>&nbsp; Aucun employé ne possède le rôle "<?= $role['nom'] ?>".
+            </div>
+          <?php
+          }
+          ?>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 30 mai 2022 à 08:57
+-- Généré le : lun. 30 mai 2022 à 13:54
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `client` (
   `token` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `mail` (`mail`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `commande` (
   PRIMARY KEY (`id`),
   KEY `commande_client_FK` (`id_client`),
   KEY `commande_transporteur0_FK` (`id_transporteur`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -112,7 +112,14 @@ CREATE TABLE IF NOT EXISTS `employe` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `mail` (`mail`),
   KEY `employe_role_FK` (`id_role`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `employe`
+--
+
+INSERT INTO `employe` (`id`, `nom`, `prenom`, `mail`, `pass`, `id_role`) VALUES
+(1, 'Bertrand', 'Alexandre', 'admin@mailinator.com', '$2y$10$/uzdLoWk3CkpcpSckGTUVe2TS87ot2yUAgFzV/CCpdpH2JiOe7eda', 1),
 
 -- --------------------------------------------------------
 
@@ -126,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `marque` (
   `nom` varchar(50) NOT NULL,
   `logo` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -145,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   PRIMARY KEY (`id`),
   KEY `message_client_FK` (`id_client`),
   KEY `message_employe0_FK` (`id_employe`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -167,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `produit` (
   PRIMARY KEY (`id`),
   KEY `produit_categorie_FK` (`id_categorie`),
   KEY `produit_marque0_FK` (`id_marque`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -181,7 +188,14 @@ CREATE TABLE IF NOT EXISTS `role` (
   `nom` varchar(50) NOT NULL,
   `perm` json DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `role`
+--
+
+INSERT INTO `role` (`id`, `nom`, `perm`) VALUES
+(1, 'Super administrateur', '{\"Rôles\": \"oui\", \"Clients\": \"oui\", \"Marques\": \"oui\", \"Messages\": \"oui\", \"Produits\": \"oui\", \"Commandes\": \"oui\", \"Employés\": \"oui\", \"Catégories\": \"non\", \"Transporteurs\": \"oui\"}'),
 
 -- --------------------------------------------------------
 
@@ -195,7 +209,7 @@ CREATE TABLE IF NOT EXISTS `transporteur` (
   `nom` varchar(50) NOT NULL,
   `logo` varchar(150) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Contraintes pour les tables déchargées
