@@ -24,27 +24,32 @@ require_once "../../../model/ModelCategorie.php";
   // Si l'employé est connecté...
   if (isset($_SESSION['id_employe'])) {
     ViewTemplate::menu(); // Affichage du menu
-    // Si le nom de la catégorie existe dans POST
-    if (isset($_POST['nom'])) {
-      $donnees = [$_POST['nom']]; // Tableau contenant les données à vérifier
-      $types = ["nom"]; // Tableau des types de données à vérifier
-      $data = Utils::valider($donnees, $types); // Vérification des données
+    // Si le rôle permet d'accéder à cette section...
+    if ($_SESSION['perm']['Catégories'] == "oui") {
+      // Si le nom de la catégorie existe dans POST
+      if (isset($_POST['nom'])) {
+        $donnees = [$_POST['nom']]; // Tableau contenant les données à vérifier
+        $types = ["nom"]; // Tableau des types de données à vérifier
+        $data = Utils::valider($donnees, $types); // Vérification des données
 
-      // Si les données sont conformes...
-      if ($data) {
-        $categorie = new ModelCategorie();
+        // Si les données sont conformes...
+        if ($data) {
+          $categorie = new ModelCategorie();
 
-        // Si l'ajout de la catégorie se fait...
-        if ($categorie->ajoutCategorie($_POST['nom'])) {
-          ViewTemplate::alert("success", "Catégorie ajoutée avec succès", "liste.php"); // Afficher le succès
+          // Si l'ajout de la catégorie se fait...
+          if ($categorie->ajoutCategorie($_POST['nom'])) {
+            ViewTemplate::alert("success", "Catégorie ajoutée avec succès", "liste.php"); // Afficher le succès
+          } else {
+            ViewTemplate::alert("danger", "Erreur d'ajout", "ajout.php"); // Message d'erreur
+          }
         } else {
-          ViewTemplate::alert("danger", "Erreur d'ajout", "ajout.php"); // Message d'erreur
+          ViewTemplate::alert("danger", "Erreur d'ajout, les données ne sont pas conformes", "liste.php"); // Message d'erreur
         }
       } else {
-        ViewTemplate::alert("danger", "Erreur d'ajout, les données ne sont pas conformes", "liste.php"); // Message d'erreur
+        ViewCategorie::ajoutCategorie(); // Afficher le formulaire d'ajout de catégorie
       }
     } else {
-      ViewCategorie::ajoutCategorie(); // Afficher le formulaire d'ajout de catégorie
+      ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php"); // Message d'erreur
     }
   } else {
     ViewTemplate::headerInvite(); // Navbar invité

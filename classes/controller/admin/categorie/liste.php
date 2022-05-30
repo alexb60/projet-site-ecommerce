@@ -22,7 +22,13 @@ require_once "../../../view/admin/ViewTemplate.php";
 
   if (isset($_SESSION['id_employe'])) {
     ViewTemplate::menu();
-    ViewCategorie::listeCategorie();
+
+    // Si le rôle permet d'accéder à cette section...
+    if ($_SESSION['perm']['Catégories'] == "oui") {
+      ViewCategorie::listeCategorie();
+    } else {
+      ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php"); // Message d'erreur
+    }
   } else {
     ViewTemplate::headerInvite();
     ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");

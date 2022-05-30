@@ -1,26 +1,33 @@
 <?php
 session_start();
+
+// Si l'id de l'employé existe...
 if (isset($_SESSION['id_employe'])) {
-  header('Location: accueil.php');
+  header('Location: accueil.php'); // Redirection vers l'accueil de l'espace employé
 }
 
 require_once "../../../view/admin/ViewEmploye.php";
 require_once "../../../view/admin/ViewTemplate.php";
 require_once "../../../model/ModelEmploye.php";
 
-ViewTemplate::headerInvite();
+ViewTemplate::headerInvite(); // Navbar admin invité
 
+// Si les données ont été envoyées en POST
 if (isset($_POST['connexion'])) {
   $user = new ModelEmploye();
-  $userData = $user->connexionEmploye($_POST['login']);
+  $userData = $user->connexionEmploye($_POST['login']); // Stockage des informations de l'utilisateur dans la variable $userData
+
+  // S'il y a des données dans $userData et si le mot de passe correspond à celui enregistré dans la base de données...
   if ($userData && password_verify($_POST['pass'], $userData['pass'])) {
-    $_SESSION['id_employe'] = $userData['id'];
-    header('Location: accueil.php');
+    $_SESSION['id_employe'] = $userData['id']; // Stockage de l'id de l'employé dans la variable $_SESSION
+    // Décodage de l'objet JSON contenant les permissions en tableau associatif PHP et stockage dans la variable $_SESSION
+    $_SESSION['perm'] = json_decode($userData['perm'], true);
+    header('Location: accueil.php'); // Redirection vers l'accueil de l'espace employé
   } else {
-    ViewTemplate::alert("danger", "L'adresse mail et le mot de passe ne correspondent pas", "connexion-employe.php");
+    ViewTemplate::alert("danger", "L'adresse mail et le mot de passe ne correspondent pas", "connexion-employe.php"); // Message d'erreur
   }
 } else {
-  ViewEmploye::connexion();
+  ViewEmploye::connexion(); // Affichage du formulaire de connexion
 }
 ?>
 <!DOCTYPE html>
@@ -37,9 +44,8 @@ if (isset($_POST['connexion'])) {
 </head>
 
 <body>
-
   <?php
-  ViewTemplate::footer();
+  ViewTemplate::footer(); // Footer
   ?>
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>

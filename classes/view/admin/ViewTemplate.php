@@ -37,7 +37,7 @@ class ViewTemplate
                 <a class="dropdown-item" href="../produit/ajout.php"><i class="fas fa-plus"></i>&nbsp; Ajouter un produit</a>
               </div>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown <?= $_SESSION['perm']['Catégories'] == "non" ? "d-none" : "" ?>">
               <a class="nav-link dropdown-toggle" href="#" id="categorie" role="button" data-toggle="dropdown" aria-expanded="false">
                 <i class="fas fa-tag"></i>&nbsp; Catégories
               </a>

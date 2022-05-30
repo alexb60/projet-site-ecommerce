@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-require_once "../../../view/admin/ViewClient.php";
+require_once "../../../view/admin/ViewEmploye.php";
 require_once "../../../view/admin/ViewTemplate.php";
-require_once "../../../model/ModelClient.php";
+require_once "../../../model/ModelEmploye.php";
 
 if (isset($_SESSION['id_employe'])) {
   ViewTemplate::menu();
@@ -20,7 +20,7 @@ if (isset($_SESSION['id_employe'])) {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mes informations employé</title>
+  <title>Informations d'un employé</title>
   <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
   <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
   <link rel="stylesheet" href="../../../../css/admin.css">

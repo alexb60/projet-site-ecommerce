@@ -66,7 +66,7 @@ class ModelEmploye
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    SELECT * FROM employe WHERE mail=:mail
+    SELECT E.*, R.perm perm FROM employe E INNER JOIN role R ON E.id_role = R.id WHERE mail=:mail
     ");
 
     $requete->execute([
