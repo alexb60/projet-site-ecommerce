@@ -74,6 +74,7 @@ class ViewRole
   {
     $modelRole = new ModelRole();
     $role = $modelRole->voirRole($id);
+    $listPerm = json_decode($role['perm'], true); // Décodage du JSON contenant les permissions en tableau associatif PHP
   ?>
     <div class="container">
       <div class="row mb-4">
@@ -86,7 +87,15 @@ class ViewRole
           <div class="card">
             <div class="card-body">
               <h5 class="card-title"><?= $role['id'] . " - " . $role['nom']; ?> </h5>
-              <p class="card-text"></p>
+              <p class="card-text">
+                <?php
+                foreach ($listPerm as $perm => $value) {
+                ?>
+                  Peut accéder aux <?= $perm ?> : <span class="font-weight-bold"><?= $value ?></span><br />
+                <?php
+                }
+                ?>
+              </p>
             </div>
             <ul class="list-group list-group-flush border-0 mb-2">
               <li class="list-group-item">
