@@ -23,34 +23,32 @@ require_once "../../../model/ModelCommande.php";
   <?php
   if (isset($_SESSION['id_employe'])) {
     ViewTemplate::menu();
-
-    $modelCommande = new ModelCommande();
-    if (isset($_GET['id'])) {
-      if ($modelCommande->voirCommande($_GET['id'])) {
-        ViewCommande::modifEtat($_GET['id']);
-      } else {
-        ViewTemplate::alert("danger", "La commande n'existe pas", "listeCommande.php");
-      }
-    } else {
-      if (isset($_POST['id']) && $modelCommande->voirCommande($_POST['id'])) {
-        if (!$modelCommande->modifEtat($_POST['id'], $_POST['etat'])) {
-          ViewTemplate::alert("success", "L'état de la commande a été modifié avec succès", "listeCommande.php");
+    // Si le rôle permet d'accéder à cette section...
+    if ($_SESSION['perm']['Catégories'] == "oui") {
+      $modelCommande = new ModelCommande();
+      if (isset($_GET['id'])) {
+        if ($modelCommande->voirCommande($_GET['id'])) {
+          ViewCommande::modifEtat($_GET['id']);
         } else {
-          ViewTemplate::alert("danger", "Échec de la modification", "listeCommande.php");
+          ViewTemplate::alert("danger", "La commande n'existe pas", "listeCommande.php");
         }
       } else {
-        ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "listeCommande.php");
+        if (isset($_POST['id']) && $modelCommande->voirCommande($_POST['id'])) {
+          if (!$modelCommande->modifEtat($_POST['id'], $_POST['etat'])) {
+            ViewTemplate::alert("success", "L'état de la commande a été modifié avec succès", "listeCommande.php");
+          } else {
+            ViewTemplate::alert("danger", "Échec de la modification", "listeCommande.php");
+          }
+        } else {
+          ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "listeCommande.php");
+        }
       }
+    } else {
+      ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur
     }
   } else {
     ViewTemplate::headerInvite();
-  ?>
-    <div class="container">
-      <?php
-      ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
-      ?>
-    </div>
-  <?php
+    ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
   }
 
   ViewTemplate::footer();

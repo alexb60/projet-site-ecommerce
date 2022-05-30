@@ -9,12 +9,17 @@ require_once "../../../model/ModelEmploye.php";
 // Si l'employé est connecté...
 if (isset($_SESSION['id_employe'])) {
   ViewTemplate::menu();
-  $employe = new ModelEmploye();
-  // Si l'employé est bien supprimé...
-  if ($employe->suppEmploye($_SESSION['id_employe'])) {
-    ViewTemplate::alert("success", "Compte employé supprimé avec succès", "listeEmploye.php"); // Afficher le succès
+  // Si le rôle permet d'accéder à cette section...
+  if ($_SESSION['perm']['Catégories'] == "oui") {
+    $employe = new ModelEmploye();
+    // Si l'employé est bien supprimé...
+    if ($employe->suppEmploye($_SESSION['id_employe'])) {
+      ViewTemplate::alert("success", "Compte employé supprimé avec succès", "listeEmploye.php"); // Afficher le succès
+    } else {
+      ViewTemplate::alert("danger", "Échec de la suppression", "accueil.php"); // Message d'erreur
+    }
   } else {
-    ViewTemplate::alert("danger", "Échec de la suppression", "accueil.php"); // Message d'erreur
+    ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur
   }
 } else {
   ViewTemplate::headerInvite(); // Header admin non connecté

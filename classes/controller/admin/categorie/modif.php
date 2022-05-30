@@ -62,7 +62,7 @@ require_once "../../../model/ModelCategorie.php";
         }
       }
     } else {
-      ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php"); // Message d'erreur
+      ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur
     }
   } else {
     ViewTemplate::headerInvite(); // Navbar invité

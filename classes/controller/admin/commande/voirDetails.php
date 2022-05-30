@@ -21,22 +21,21 @@ require_once "../../../model/ModelTransporteur.php";
 </head>
 
 <body>
-
   <?php
   if (isset($_SESSION['id_employe'])) {
-    $modelCommande = new ModelCommande();
-    $commande = $modelCommande->voirCommande($_GET['id_com']);
     ViewTemplate::menu();
-    ViewCommande::voirDetails($_GET['id_com']);
+    
+    // Si le rôle permet d'accéder à cette section...
+    if ($_SESSION['perm']['Catégories'] == "oui") {
+      $modelCommande = new ModelCommande();
+      $commande = $modelCommande->voirCommande($_GET['id_com']);
+      ViewCommande::voirDetails($_GET['id_com']);
+    } else {
+      ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur
+    }
   } else {
     ViewTemplate::headerInvite();
-  ?>
-    <div class="container">
-      <?php
-      ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
-      ?>
-    </div>
-  <?php
+    ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
   }
   ViewTemplate::footer();
   ?>
