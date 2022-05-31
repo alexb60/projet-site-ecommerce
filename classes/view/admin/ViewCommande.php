@@ -12,7 +12,7 @@ class ViewCommande
     <?php
     if (count($liste) > 0) {
     ?>
-      <table class="table">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th scope="col">N° Commande</th>
@@ -27,7 +27,7 @@ class ViewCommande
           <?php
           foreach ($liste as $commande) {
           ?>
-            <tr class="<?= ($commande['etat'] == "Payée") ? "alert-danger" : (($commande['etat'] == "En préparation") ? "alert-warning" : (($commande['etat'] == 'Expédiée') ? "alert-primary" : "alert-success")) ?>">
+            <tr class="<?= ($commande['etat'] == "Payée") ? "table-danger" : (($commande['etat'] == "En préparation") ? "table-warning" : (($commande['etat'] == 'Expédiée') ? "table-primary" : "table-success")) ?>">
               <th scope="row"><?= $commande['id'] ?></th>
               <td><?= $commande['id_client'] ?></td>
               <td><?= $commande['date'] ?></td>
