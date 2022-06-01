@@ -219,7 +219,7 @@ WHERE C.id=:id_commande;
     $requete = $idcon->prepare("
     UPDATE commande SET etat=:etat WHERE id=:id_commande;
     ");
-    $requete->execute([
+    return $requete->execute([
       ':id_commande' => $id_commande,
       ':etat' => $etat,
     ]);

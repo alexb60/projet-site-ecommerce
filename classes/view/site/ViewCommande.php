@@ -9,47 +9,68 @@ class ViewCommande
     $commandes = new ModelCommande();
     $liste = $commandes->listeCommandeClient($id_client);
 ?>
-    <?php
-    if (count($liste) > 0) {
-    ?>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">N° Commande</th>
-            <th scope="col">Date</th>
-            <th scope="col">État</th>
-            <th scope="col">Montant</th>
-            <th scope="col">Lieu de livraison</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="mb-4">Liste des commandes passées</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
           <?php
-          foreach ($liste as $commande) {
+          if (count($liste) > 0) {
           ?>
-            <tr class="<?= ($commande['etat'] == "Payée") ? "alert-danger" : (($commande['etat'] == "En préparation") ? "alert-warning" : (($commande['etat'] == 'Expédiée') ? "alert-primary" : "alert-success")) ?>">
-              <th scope="row"><?= $commande['id'] ?></th>
-              <td><?= $commande['date'] ?></td>
-              <td><?= ucfirst($commande['etat'])  ?></td>
-              <td><?= number_format($commande['montant'], 2, ',', ' ') ?> €</td>
-              <td><?= ucfirst($commande['mode']) ?></td>
-              <td>
-                <a href="voirDetails.php?id_com=<?= $commande['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir les détails</a>
-              </td>
-            </tr>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">N° Commande</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">État</th>
+                  <th scope="col">Montant</th>
+                  <th scope="col">Lieu de livraison</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                foreach ($liste as $commande) {
+                ?>
+                  <form action="retour.php" method="post">
+                    <tr class="<?= ($commande['etat'] == "Payée") ? "alert-danger" : (($commande['etat'] == "En préparation") ? "alert-warning" : (($commande['etat'] == 'Livrée') ? "alert-success" : (($commande['etat'] == 'Expédiée') ? "alert-primary" : "alert-dark"))) ?>">
+                      <th scope="row"><?= $commande['id'] ?></th>
+                      <td><?= $commande['date'] ?></td>
+                      <td><?= ucfirst($commande['etat'])  ?></td>
+                      <td><?= number_format($commande['montant'], 2, ',', ' ') ?> €</td>
+                      <td><?= ucfirst($commande['mode']) ?></td>
+                      <td>
+                        <a href="voirDetails.php?id_com=<?= $commande['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir</a>
+                        <input type="hidden" name="id" id="id" value="<?= $commande['id'] ?>">
+                        <input type="hidden" name="date" id="date" value="<?= $commande['date'] ?>">
+                        <input type="hidden" name="montant" id="montant" value="<?= $commande['montant'] ?>">
+                        <button type="submit" class="btn btn-primary btn-violet <?= $commande['etat'] == "Retournée" ? "d-none" : "" ?>">
+                          <i class="fas fa-undo"></i>&nbsp; Retourner
+                        </button>
+                      </td>
+                    </tr>
+                  </form>
+                <?php
+                }
+                ?>
+              </tbody>
+            </table>
+          <?php
+          } else {
+          ?>
+            <div class="alert alert-danger" role="alert">
+              <i class="fas fa-exclamation-triangle"></i>&nbsp; Aucune commande n'existe dans la liste.
+            </div>
           <?php
           }
           ?>
-        </tbody>
-      </table>
-    <?php
-    } else {
-    ?>
-      <div class="alert alert-danger" role="alert">
-        <i class="fas fa-exclamation-triangle"></i>&nbsp; Aucune commande n'existe dans la liste.
+        </div>
       </div>
-    <?php
-    }
+    </div>
+  <?php
   }
 
   public static function voirDetailsClient($id_commande)
@@ -58,7 +79,7 @@ class ViewCommande
     $listeDetails = $modelCommande->voirDetails($id_commande);
     $commande = $modelCommande->voirCommande($id_commande);
 
-    ?>
+  ?>
     <div class="container">
       <div class="row mb-4">
         <div class="col-md-12">
@@ -145,6 +166,36 @@ class ViewCommande
           }
           ?>
           <a href="listeCommandeClient.php?page=1" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour à la liste des commandes</a>
+        </div>
+      </div>
+    </div>
+  <?php
+  }
+
+  public static function retour()
+  {
+  ?>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="mb-4">Retourner la commande suivante ?</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <p>
+            <span class="font-weight-bold">N° de commande : </span><?= $_POST['id'] ?><br />
+            <span class="font-weight-bold">Date : </span><?= $_POST['date'] ?><br />
+            <span class="font-weight-bold">Montant : </span><?= number_format($_POST['montant'], 2, ',', ' ') ?> €
+          </p>
+
+          <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="id_com" value="<?= $_POST['id'] ?>">
+            <input type="hidden" name="etat" value="Retournée">
+
+            <input type="submit" value="Oui" class="btn btn-primary">
+            <button type="reset" class="btn btn-danger" id="nonRetour">Non</button>
+          </form>
         </div>
       </div>
     </div>

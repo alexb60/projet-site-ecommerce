@@ -168,3 +168,40 @@ footer {
 }
 
 /* ========================================================================== */
+/* BOUTON VIOLET */
+
+/* Bouton */
+.btn-violet {
+  color: white !important;
+  background: purple !important;
+  border-color: purple !important;
+}
+
+/* Survol du bouton */
+.btn-violet:hover {
+  color: white !important;
+  border-color: rgb(103, 0, 103) !important;
+  background-color: rgb(112, 2, 112) !important;
+}
+
+/* Contour du bouton au clic */
+.btn-violet:focus {
+  box-shadow: 0 0 0 0.2rem rgb(128, 0, 128, 0.5) !important;
+}
+
+/* Clic sur le bouton */
+.btn-violet:active {
+  background-color: rgb(103, 0, 103) !important;
+  border-color: rgb(112, 2, 112) !important;
+  color: white !important;
+}
+
+/* ========================================================================== */
+/* ALERTE VIOLETTE */
+
+.alert-violet {
+  background-color: #F1B4F1 !important;
+  color: purple !important;
+}
+
+/* ========================================================================== */
