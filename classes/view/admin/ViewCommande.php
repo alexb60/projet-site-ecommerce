@@ -12,7 +12,7 @@ class ViewCommande
     <?php
     if (count($liste) > 0) {
     ?>
-      <table class="table table-hover">
+      <table class="table">
         <thead>
           <tr>
             <th scope="col">N° Commande</th>
@@ -27,7 +27,7 @@ class ViewCommande
           <?php
           foreach ($liste as $commande) {
           ?>
-            <tr class="<?= ($commande['etat'] == "Payée") ? "table-danger" : (($commande['etat'] == "En préparation") ? "table-warning" : (($commande['etat'] == 'Expédiée') ? "table-primary" : "table-success")) ?>">
+            <tr class="<?= ($commande['etat'] == "Payée") ? "alert-danger" : (($commande['etat'] == "En préparation") ? "alert-warning" : (($commande['etat'] == 'Livrée') ? "alert-success" : (($commande['etat'] == 'Expédiée') ? "alert-primary" : "alert-dark"))) ?>">
               <th scope="row"><?= $commande['id'] ?></th>
               <td><?= $commande['id_client'] ?></td>
               <td><?= $commande['date'] ?></td>
@@ -178,6 +178,7 @@ class ViewCommande
                 <option value="En préparation" <?= ($commande['etat'] == "En préparation") ? "selected" : "" ?>>En préparation</option>
                 <option value="Expédiée" <?= ($commande['etat'] == "Expédiée") ? "selected" : "" ?>>Expédiée</option>
                 <option value="Livrée" <?= ($commande['etat'] == "Livrée") ? "selected" : "" ?>>Livrée</option>
+                <option value="Retounée" <?= ($commande['etat'] == "Retournée") ? "selected" : "" ?>>Retounée</option>
               </select>
               <small id="etatHelp" class="form-text text-muted"></small>
             </div>

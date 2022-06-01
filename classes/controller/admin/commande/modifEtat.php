@@ -34,7 +34,7 @@ require_once "../../../model/ModelCommande.php";
         }
       } else {
         if (isset($_POST['id']) && $modelCommande->voirCommande($_POST['id'])) {
-          if (!$modelCommande->modifEtat($_POST['id'], $_POST['etat'])) {
+          if ($modelCommande->modifEtat($_POST['id'], $_POST['etat'])) {
             ViewTemplate::alert("success", "L'état de la commande a été modifié avec succès", "listeCommande.php");
           } else {
             ViewTemplate::alert("danger", "Échec de la modification", "listeCommande.php");
