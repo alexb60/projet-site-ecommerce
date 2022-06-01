@@ -95,6 +95,7 @@ class ViewCommande
             <span class="font-weight-bold">État : </span><?= $commande['etat'] ?><br />
             <span class="font-weight-bold">Mode de livraison : </span>Livraison au <?= $commande['mode'] ?><br />
             <span class="font-weight-bold">Transporteur : </span><?= $commande['nom_transporteur'] ?><br />
+            <?= $commande['etat'] == "Retournée" ? "<br /><span class='font-weight-bold'>Motif de retour : </span>" . $commande['motifRetour'] . "<br />" : "" ?>
             <br />
             <span class="font-weight-bold">Produits commandés :</span>
           </p>
@@ -192,8 +193,20 @@ class ViewCommande
           <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" enctype="multipart/form-data">
             <input type="hidden" name="id_com" value="<?= $_POST['id'] ?>">
             <input type="hidden" name="etat" value="Retournée">
+            <div class="form-row">
+              <div class="col-5">
+                <label for="motifRetour">Motif de retour</label>
+                <select name="motifRetour" id="motifRetour" class="form-control" aria-describedby="motifRetourHelp" data-type="motifRetourSelect" data-message="Veuillez choisir un motif de retour.">
+                  <option value="" selected disabled>Choisir un motif de retour...</option>
+                  <option value="Produit(s) non conforme(s)">Produit(s) non conforme(s)</option>
+                  <option value="Produit(s) en panne">Produit(s) en panne à la livraison</option>
+                  <option value="Produit(s) endommagé(s)">Produit(s) endommagé(s) à la livraison</option>
+                </select>
+                <small id="motifRetourHelp" class="form-text text-muted"></small>
+              </div>
+            </div>
 
-            <input type="submit" value="Oui" class="btn btn-primary">
+            <input type="submit" class="btn btn-primary" id="valider" value="Oui">
             <button type="reset" class="btn btn-danger" id="nonRetour">Non</button>
           </form>
         </div>

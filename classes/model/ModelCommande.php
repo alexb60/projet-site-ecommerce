@@ -7,16 +7,20 @@ class ModelCommande
   private $date;
   private $etat;
   private $mode;
+  private $montant;
+  private $motifRetour;
   private $id_client;
   private $id_transporteur;
 
   // CONSTRUCTEUR
-  public function __construct($id = null, $date = null, $etat = null, $mode = null, $id_client = null, $id_transporteur = null)
+  public function __construct($id = null, $date = null, $etat = null, $mode = null, $montant = null, $motifRetour = null, $id_client = null, $id_transporteur = null)
   {
     $this->id = $id;
     $this->date = $date;
     $this->etat = $etat;
     $this->mode = $mode;
+    $this->montant = $montant;
+    $this->motifRetour = $motifRetour;
     $this->id_client = $id_client;
     $this->id_transporteur = $id_transporteur;
   }
@@ -26,7 +30,7 @@ class ModelCommande
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    INSERT INTO commande VALUES (null, :date, :etat, :mode, :montant, :id_client, :id_transporteur);
+    INSERT INTO commande VALUES (null, :date, :etat, :mode, :montant, null, :id_client, :id_transporteur);
     ");
     $requete->execute([
       ':date' => $date,
@@ -225,6 +229,20 @@ WHERE C.id=:id_commande;
     ]);
   }
 
+  // REQUÊTE SQL PRÉPARÉE PERMETTANT DE MODIFIER L'ÉTAT ET D'AJOUTER LE MOTIF DE RETOUR D'UNE COMMANDE
+  public function retourCommande($id_commande, $etat, $motifRetour)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    UPDATE commande SET etat=:etat, motifRetour=:motifRetour WHERE id=:id_commande;
+    ");
+    return $requete->execute([
+      ':id_commande' => $id_commande,
+      ':etat' => $etat,
+      ':motifRetour' => $motifRetour,
+    ]);
+  }
+
   // GETTERS ET SETTERS
   public function getId()
   {
@@ -241,6 +259,14 @@ WHERE C.id=:id_commande;
   public function getMode()
   {
     return $this->mode;
+  }
+  public function getMontant()
+  {
+    return $this->montant;
+  }
+  public function getMotifRetour()
+  {
+    return $this->motifRetour;
   }
   public function getId_client()
   {
@@ -268,6 +294,16 @@ WHERE C.id=:id_commande;
   public function setMode($mode)
   {
     $this->mode = $mode;
+    return $this;
+  }
+  public function setMontant($montant)
+  {
+    $this->montant = $montant;
+    return $this;
+  }
+  public function setMotifRetour($motifRetour)
+  {
+    $this->motifRetour = $motifRetour;
     return $this;
   }
   public function setId_client($id_client)

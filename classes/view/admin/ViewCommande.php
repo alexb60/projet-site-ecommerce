@@ -76,6 +76,7 @@ class ViewCommande
             <span class="font-weight-bold">État : </span><?= $commande['etat'] ?><br />
             <span class="font-weight-bold">Mode de livraison : </span>Livraison au <?= $commande['mode'] ?><br />
             <span class="font-weight-bold">Transporteur : </span><?= $commande['nom_transporteur'] ?><br />
+            <?= $commande['etat'] == "Retournée" ? "<br /><span class='font-weight-bold'>Motif de retour : </span>" . $commande['motifRetour'] . "<br />" : "" ?>
             <br />
             <span class="font-weight-bold">Produits commandés :</span>
           </p>
