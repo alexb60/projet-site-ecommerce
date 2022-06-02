@@ -22,6 +22,8 @@ class ViewMessage
                 <option value="Réclamation">Réclamation</option>
                 <option value="Suggestion">Suggestion</option>
                 <option value="Question">Poser une question</option>
+                <option value="Problème">Signaler un problème</option>
+                <option value="Autre">Autre (précisez dans le message)</option>
               </select>
             </div>
             <div class="form-group">
