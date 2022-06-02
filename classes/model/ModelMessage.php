@@ -5,16 +5,18 @@ class ModelMessage
 {
 	private $id;
 	private $type;
+	private $date;
 	private $message;
 	private $precedent_id;
 	private $id_client;
 	private $id_employe;
 
 	// CONSTRUCTEUR
-	public function __construct($id = null, $type = null, $message = null, $precedent_id = null, $id_client = null, $id_employe = null)
+	public function __construct($id = null, $type = null, $date = null, $message = null, $precedent_id = null, $id_client = null, $id_employe = null)
 	{
 		$this->id = $id;
 		$this->type = $type;
+		$this->date = $date;
 		$this->message = $message;
 		$this->precedent_id = $precedent_id;
 		$this->id_client = $id_client;
@@ -39,20 +41,21 @@ LIMIT :premier, :parPage
 	}
 
 	// REQUÊTE SQL PRÉPARÉE PERMETTANT À UN CLIENT D'ENVOYER UN MESSAGE
-	public function ajoutMessageClient($type, $message, $id_client)
+	public function ajoutMessageClient($type, $date, $message, $id_client)
 	{
 		$idcon = connexion();
 		$requete = $idcon->prepare("
-		INSERT INTO message VALUES (null, :type, :message, null, :id_client, null)
+		INSERT INTO message VALUES (null, :type, :date, :message, null, :id_client, null)
 		");
-		$requete->execute([
+		return $requete->execute([
 			':type' => $type,
+			':date' => $date,
 			':message' => $message,
 			':id_client' => $id_client,
 		]);
 	}
 
-	// REQUÊTE SQL PRÉPARÉE COMPTANT LE NOMBRE DE PRODUITS DANS LA TABLE PRODUIT
+	// REQUÊTE SQL PRÉPARÉE COMPTANT LE NOMBRE DE MESSAGES ENVOYÉS PAR LES CLIENTS
 	public function compteMessage()
 	{
 		$idcon = connexion();
@@ -86,6 +89,10 @@ WHERE M.id=:id
 	{
 		return $this->id_client;
 	}
+	public function getDate()
+	{
+		return $this->date;
+	}
 	public function getIdEmploye()
 	{
 		return $this->id_employe;
@@ -110,6 +117,11 @@ WHERE M.id=:id
 	public function setIdClient($id_client)
 	{
 		$this->id_client = $id_client;
+		return $this;
+	}
+	public function setDate($date)
+	{
+		$this->date = $date;
 		return $this;
 	}
 	public function setIdEmploye($id_employe)

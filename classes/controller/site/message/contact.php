@@ -30,7 +30,9 @@ require_once "../../../model/ModelMessage.php";
 
       if ($data) {
         $message = new ModelMessage();
-        if (!$message->ajoutMessageClient($_POST['motif'], $_POST['message'], $_SESSION['id'])) {
+        // La date et l'heure seront basés sur celles de Paris en France
+        date_default_timezone_set('Europe/Paris');
+        if ($message->ajoutMessageClient($_POST['motif'], date("Y-m-d H:i:s"), $_POST['message'], $_SESSION['id'])) {
           ViewTemplate::alert("success", "Message envoyé avec succès", "../client/accueil.php");
         } else {
           ViewTemplate::alert("danger", "Erreur d'envoi", "contact.php");
