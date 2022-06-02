@@ -15,6 +15,7 @@ class ViewMessage
             <th scope="col">Nom du client</th>
             <th scope="col">Prénom du client</th>
             <th scope="col">Adresse mail</th>
+            <th scope="col">Date</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -27,8 +28,9 @@ class ViewMessage
               <td><?= $message['nom_client'] ?></td>
               <td><?= $message['prenom_client'] ?></td>
               <td><?= $message['mail'] ?></td>
+              <td><?= $message['date'] ?></td>
               <td>
-                <a href="voir.php?id=<?= $message['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir le message</a>
+                <a href="voir.php?id=<?= $message['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir</a>
               </td>
             </tr>
           <?php
@@ -65,6 +67,7 @@ class ViewMessage
               <h5 class="card-title"><?= $message['id_client'] . " - " . $message['prenom_client'] . " " . $message['nom_client'] ?></h5>
               <p class="card-text">
                 <span class="font-weight-bold">Adresse mail :</span> <?= $message['mail'] ?><br />
+                <span class="font-weight-bold">Date :</span> <?= $message['date'] ?><br />
                 <span class="font-weight-bold">Motif de contact :</span> <?= $message['type'] ?><br />
                 <br />
                 <span class="font-weight-bold">Message :</span><br /><?= $message['message'] ?>
