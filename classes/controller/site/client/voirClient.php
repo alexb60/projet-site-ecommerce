@@ -4,14 +4,6 @@ session_start();
 require_once "../../../view/site/ViewClient.php";
 require_once "../../../view/site/ViewTemplate.php";
 require_once "../../../model/ModelClient.php";
-
-if (isset($_SESSION['id'])) {
-  ViewTemplate::headerConnecte();
-  ViewClient::voirClient($_SESSION['id']);
-} else {
-  ViewTemplate::alert("danger", "Erreur, le profil n'existe pas", "accueil.php");
-}
-ViewTemplate::footer();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -26,7 +18,17 @@ ViewTemplate::footer();
   <link rel="stylesheet" href="../../../../css/site.css">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
+  <?php
+  // Si l'utilisateur est connecté...
+  if (isset($_SESSION['id'])) {
+    ViewTemplate::headerConnecte(); // Header client connecté
+    ViewClient::voirClient($_SESSION['id']); // Affichage du profil du client
+  } else {
+    ViewTemplate::alert("danger", "Erreur, le profil n'existe pas", "accueil.php"); // Message d'erreur
+  }
+  ViewTemplate::footer(); // Footer
+  ?>
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>
   <script src="../../../../js/font-awesome.all.min.js"></script>

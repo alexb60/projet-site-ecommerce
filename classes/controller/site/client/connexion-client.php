@@ -26,7 +26,7 @@ if (isset($_POST['connexion'])) {
   if ($userData && password_verify($_POST['pass'], $userData['pass'])) {
     $_SESSION['id'] = $userData['id'];
     $_SESSION['mail_client'] = $userData['mail'];
-    header('Location: accueil.php');
+    header('Location: ../produit/index.php');
   } else {
     ViewTemplate::alert("danger", "L'adresse mail et le mot de passe ne correspondent pas", "connexion-client.php");
   }
@@ -48,7 +48,7 @@ if (isset($_POST['connexion'])) {
   <link rel="stylesheet" href="../../../../css/site.css">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
   <?php
   ViewTemplate::footer();

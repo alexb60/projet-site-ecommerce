@@ -34,7 +34,7 @@ if (isset($_SESSION['id'])) {
   <link rel="stylesheet" href="../../../../css/site.css">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
   <?php
   ViewTemplate::alert($message[0], $message[1], $message[2]);
   ViewTemplate::footer();

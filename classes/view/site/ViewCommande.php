@@ -193,7 +193,7 @@ class ViewCommande
           <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" enctype="multipart/form-data">
             <input type="hidden" name="id_com" value="<?= $_POST['id'] ?>">
             <input type="hidden" name="etat" value="Retournée">
-            <div class="form-row">
+            <div class="form-row mb-4">
               <div class="col-5">
                 <label for="motifRetour">Motif de retour</label>
                 <select name="motifRetour" id="motifRetour" class="form-control" aria-describedby="motifRetourHelp" data-type="motifRetourSelect" data-message="Veuillez choisir un motif de retour.">

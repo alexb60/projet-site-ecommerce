@@ -53,7 +53,7 @@ if (isset($_POST['mail'])) {
   <link rel="stylesheet" href="../../../../css/site.css">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
   <?php
   ViewTemplate::footer(); // Footer
   ?>

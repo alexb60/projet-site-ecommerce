@@ -10,17 +10,6 @@ if (isset($_POST['id'])) {
   ajoutPanier($_POST['id'], $_POST['quantite'], $_POST['prix']);
   header('Location: ../panier/voirPanier.php');
 }
-
-if (isset($_SESSION['id'])) {
-  ViewTemplate::headerConnecte();
-} else {
-  ViewTemplate::headerInvite();
-}
-
-ViewProduit::voirProduit($_GET['id']);
-
-ViewTemplate::footer();
-
 ?>
 
 <!DOCTYPE html>
@@ -36,9 +25,16 @@ ViewTemplate::footer();
   <link rel="stylesheet" href="../../../../css/site.css">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
   <?php
+  if (isset($_SESSION['id'])) {
+    ViewTemplate::headerConnecte();
+  } else {
+    ViewTemplate::headerInvite();
+  }
 
+  ViewProduit::voirProduit($_GET['id']);
+  ViewTemplate::footer();
   ?>
   <script src="../../../../js/jquery.min.js"></script>
   <script src="../../../../js/bootstrap.bundle.min.js"></script>
