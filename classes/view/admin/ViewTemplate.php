@@ -1,6 +1,7 @@
 <?php
 class ViewTemplate
 {
+  // FONCTION AFFICHANT UN MESSAGE APRÈS UNE ACTION
   public static function alert($type, $message, $lien = null)
   {
 ?>
@@ -16,6 +17,7 @@ class ViewTemplate
   <?php
   }
 
+  // HEADER D'UN ADMIN CONNECTÉ
   public static function menu()
   {
   ?>
@@ -113,6 +115,7 @@ class ViewTemplate
   <?php
   }
 
+  // HEADER D'UN ADMIN NON CONNECTÉ
   public static function headerInvite()
   {
   ?>
@@ -137,6 +140,7 @@ class ViewTemplate
   <?php
   }
 
+  // FOOTER
   public static function footer()
   {
   ?>

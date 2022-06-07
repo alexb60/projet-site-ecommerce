@@ -28,9 +28,10 @@
 /* ========================================================================== */
 /* FOOTER */
 
-/* Couleur du texte dans le footer */
+/* Couleur du texte dans le footer et margin-bottom */
 footer {
   color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 0 !important;
 }
 
 /* Arrière-plan du header et du footer */
@@ -48,6 +49,10 @@ footer {
 /* Survol de lien dans le footer */
 .no-style-footer:hover {
   color: orangered !important;
+}
+
+.minh {
+  min-height: 100vmax !important;
 }
 
 /* ========================================================================== */

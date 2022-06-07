@@ -18,7 +18,7 @@ require_once "../../../model/ModelClient.php";
   <link rel="stylesheet" href="../../../../css/admin.css">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
   <?php
   // Si l'employé est connecté...
   if (isset($_SESSION['id_employe'])) {

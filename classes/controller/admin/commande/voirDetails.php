@@ -20,11 +20,11 @@ require_once "../../../model/ModelTransporteur.php";
   <link rel="stylesheet" href="../../../../css/admin.css">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
   <?php
   if (isset($_SESSION['id_employe'])) {
     ViewTemplate::menu();
-    
+
     // Si le rôle permet d'accéder à cette section...
     if ($_SESSION['perm']['Commandes'] == "oui") {
       $modelCommande = new ModelCommande();

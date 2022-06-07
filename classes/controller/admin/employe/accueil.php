@@ -36,7 +36,7 @@ if (isset($_SESSION['id_employe'])) {
   <link rel="stylesheet" href="../../../../css/admin.css">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
   <?php
   $modelProduit = new ModelProduit();
   $nbProduits = $modelProduit->compteProduit();

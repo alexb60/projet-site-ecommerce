@@ -6,7 +6,7 @@ require_once "../../../model/ModelMessage.php";
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="h-100">
 
 <head>
   <meta charset="UTF-8">
@@ -18,7 +18,7 @@ require_once "../../../model/ModelMessage.php";
   <link rel="stylesheet" href="../../../../css/admin.css">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
   <?php
   if (isset($_SESSION['id_employe'])) {
     ViewTemplate::menu();

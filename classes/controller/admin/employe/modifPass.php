@@ -60,7 +60,7 @@ if (isset($_SESSION['mail'])) {
   <link rel="stylesheet" href="../../../../css/admin.css">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
   <?php
   ViewTemplate::footer(); // Footer
   ?>

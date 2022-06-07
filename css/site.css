@@ -54,9 +54,10 @@
 /* ========================================================================== */
 /* FOOTER */
 
-/* Couleur du texte dans le footer */
+/* Couleur du texte dans le footer et margin-bottom */
 footer {
   color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 0 !important;
 }
 
 /* Arrière-plan du header et du footer */
@@ -200,7 +201,7 @@ footer {
 /* ALERTE VIOLETTE */
 
 .alert-violet {
-  background-color: #F1B4F1 !important;
+  background-color: #f1b4f1 !important;
   color: purple !important;
 }
 
