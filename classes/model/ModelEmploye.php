@@ -136,6 +136,32 @@ class ModelEmploye
     return $requete->fetchAll(PDO::FETCH_ASSOC);
   }
 
+  // REQUÊTE SQL PRÉPARÉE RÉCUPÉRANT LE TOKEN D'UN EMPLOYÉ À PARTIR DE L'ADRESSE MAIL
+  public function recupToken($mail)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT mail, token FROM employe WHERE mail=:mail
+    ");
+    $requete->execute([
+      ':mail' => $mail,
+    ]);
+    return $requete->fetch(PDO::FETCH_ASSOC);
+  }
+
+  // REQUÊTE SQL PRÉPARÉE METTANT À JOUR LE MOT DE PASSE D'UN EMPLOYÉ
+  public function modifPass($mail, $pass)
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    UPDATE employe SET pass=:pass WHERE mail=:mail
+    ");
+    return $requete->execute([
+      ':mail' => $mail,
+      ':pass' => $pass,
+    ]);
+  }
+
   // GETTERS ET SETTERS
   public function getId()
   {

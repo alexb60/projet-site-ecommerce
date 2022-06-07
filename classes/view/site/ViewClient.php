@@ -88,7 +88,7 @@ class ViewClient
           <div class="form-group">
             <label for="pass">Mot de passe :</label>
             <input type="password" class="form-control" name="pass" id="pass" required>
-            <small class="text-align-right"><a href="recupMail.php">Mot de passe oublié</a></small>
+            <small class="text-align-right"><a href="recupMail.php">Mot de passe oublié ?</a></small>
           </div>
           <button type="submit" name="connexion" class="btn btn-primary">Connexion</button>
           <button type="reset" name="annuler" class="btn btn-danger">Annuler</button>

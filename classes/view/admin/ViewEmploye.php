@@ -83,6 +83,7 @@ class ViewEmploye
           <div class="form-group">
             <label for="pass">Mot de passe :</label>
             <input type="password" class="form-control" name="pass" id="pass">
+            <small class="text-align-right"><a href="recupMail.php">Mot de passe oublié ?</a></small>
           </div>
           <button type="submit" name="connexion" class="btn btn-primary">Connexion</button>
           <button type="reset" name="annuler" class="btn btn-danger">Annuler</button>
@@ -295,6 +296,53 @@ class ViewEmploye
       <?php
       }
       ?>
+    </div>
+  <?php
+  }
+
+  // FONCTION AFFICHANT LE FORMULAIRE DE RÉCUPÉRATION DE L'ADRESSE MAIL
+  public static function recupMail()
+  {
+  ?>
+    <div class="container">
+      <h2 class="mb-4">Récupération de l'adresse mail</h2>
+      <div class="container mt-5">
+        <form class="col-md-6 offset-md-3" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="mail">Adresse mail :</label>
+            <input type="email" name="mail" id="mail" class="form-control" aria-describedby="mailHelp" data-type="mail" data-message="Le format de l'adresse mail n'est pas correct">
+            <small class="form-text text-muted" id="mailHelp"></small>
+          </div>
+          <input type="submit" name="valider" id="valider" class="btn btn-primary" />
+          <button type="reset" name="annuler" class="btn btn-danger">Annuler</button>
+        </form>
+      </div>
+    </div>
+  <?php
+  }
+
+  // FONCTION AFFICHANT LE FORMULAIRE DE MODIFICATION DU MOT DE PASSE
+  public static function modifPass()
+  {
+  ?>
+    <div class="container">
+      <h2 class="mb-4">Réinitialisation du mot de passe</h2>
+      <div class="container mt-5">
+        <form class="col-md-8 mx-auto" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="pass">Nouveau mot de passe :</label>
+            <input type="password" class="form-control" name="pass" id="pass" aria-describedby="passHelp" data-type="pass" data-message="Le mot de passe doit contenir au minimum 8 caractères dont au moins une majuscule, un chiffre et un caractère spécial" required>
+            <small class="form-text text-muted" id="passHelp">Le mot de passe doit contenir au minimum 8 caractères dont au moins une majuscule, un chiffre et un caractère spécial.</small>
+          </div>
+          <div class="form-group">
+            <label for="pass2">Confirmez le nouveau mot de passe :</label>
+            <input type="password" class="form-control" name="pass2" id="pass2" required>
+            <small class="form-text text-muted" id="pass2Help"></small>
+          </div>
+          <input type="submit" name="valider" id="valider" class="btn btn-primary" />
+          <button type="reset" name="annuler" class="btn btn-danger">Annuler</button>
+        </form>
+      </div>
     </div>
 <?php
   }
