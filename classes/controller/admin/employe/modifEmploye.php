@@ -47,8 +47,10 @@ require_once "../../../model/ModelEmploye.php";
 
           // Si les données sont conformes...
           if ($data) {
+            $token = password_hash($_POST['mail'], PASSWORD_DEFAULT); // Création du token de récupération du mot de passe par hashage de l'adresse mail
+
             // Si la modification est effectuée..
-            if ($modelEmploye->modifEmploye($_POST['id'], $_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['role'])) {
+            if ($modelEmploye->modifEmploye($_POST['id'], $_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['role'], $token)) {
               ViewTemplate::alert("success", "Le profil employé a été modifié avec succès", "javascript:history.go(-2)"); // Afficher le succès
             } else {
               ViewTemplate::alert("danger", "Échec de la modification", "javascript:history.back()"); // Message d'erreur

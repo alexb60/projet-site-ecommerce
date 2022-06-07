@@ -41,10 +41,11 @@ if (isset($_SESSION['id_employe'])) {
         // Si les données ont été validées
         if ($data) {
           $pass = password_hash($_POST['pass'], PASSWORD_DEFAULT); // Hashage du mot de passe
+          $token = password_hash($_POST['mail'], PASSWORD_DEFAULT); // Création du token de récupération du mot de passe par hashage de l'adresse mail
           $user = new ModelEmploye();
 
           // Si l'ajout de l'employé est fait...
-          if ($user->ajoutEmploye($_POST['nom'], $_POST['prenom'], $_POST['mail'], $pass, $_POST['role']) && $data) {
+          if ($user->ajoutEmploye($_POST['nom'], $_POST['prenom'], $_POST['mail'], $pass, $_POST['role'], $token) && $data) {
             ViewTemplate::alert("success", "Employé ajouté avec succès", "listeEmploye.php"); // Afficher le succès
           } else {
             ViewTemplate::alert("danger", "Échec lors de l'ajout de l'employé", "ajoutEmploye.php"); // Afficher l'échec

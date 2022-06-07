@@ -55,6 +55,21 @@ LIMIT :premier, :parPage
 		]);
 	}
 
+	// REQUÊTE SQL PRÉPARÉE PERMETTANT À UN EMPLOYÉ DE RÉPONDRE À UN MESSAGE
+	public function reponseEmploye($date, $message, $precedent_id, $id_employe)
+	{
+		$idcon = connexion();
+		$requete = $idcon->prepare("
+		INSERT INTO message VALUES(null, null, :date, :message, :precedent_id, null, :id_employe)
+		");
+		return $requete->execute([
+			':date' => $date,
+			':message' => $message,
+			':precedent_id' => $precedent_id,
+			':id_employe' => $id_employe,
+		]);
+	}
+
 	// REQUÊTE SQL PRÉPARÉE COMPTANT LE NOMBRE DE MESSAGES ENVOYÉS PAR LES CLIENTS
 	public function compteMessage()
 	{
@@ -63,6 +78,19 @@ LIMIT :premier, :parPage
     SELECT COUNT(*) AS nb_messages_client FROM message WHERE id_employe IS NULL
     ");
 		$requete->execute();
+		return $requete->fetch(PDO::FETCH_ASSOC);
+	}
+
+	// REQUÊTE SQL PRÉPARÉE PERMETTANT DE VOIR LE CONTENU DU MESSAGE PRÉCÉDANT
+	public function precedentMessage($precedent_id)
+	{
+		$idcon = connexion();
+		$requete = $idcon->prepare("
+		SELECT * FROM message WHERE precedent_id = :precedent_id
+		");
+		$requete->execute([
+			':precedent_id' => $precedent_id,
+		]);
 		return $requete->fetch(PDO::FETCH_ASSOC);
 	}
 
