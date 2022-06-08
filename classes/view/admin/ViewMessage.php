@@ -31,7 +31,6 @@ class ViewMessage
               <td><?= $message['date'] ?></td>
               <td>
                 <a href="voir.php?id=<?= $message['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir</a>
-                <a href="reponse.php?rep=<?= $message['id'] ?>" class="btn btn-info"><i class="fas fa-reply"></i>&nbsp; Répondre</a>
               </td>
             </tr>
           <?php
@@ -82,8 +81,10 @@ class ViewMessage
   <?php
   }
 
-  public static function reponse()
+  public static function reponse($rep)
   {
+    $modelMessage = new ModelMessage();
+    $id = $rep;
   ?>
     <div class="container">
       <div class="row mb-4">
@@ -93,7 +94,7 @@ class ViewMessage
       </div>
       <div class="row">
         <div class="col-md-12">
-          <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="col-md-6 offset-md-3">
+          <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="col-md-6 offset-md-3 mb-4">
             <div class="form-group">
               <label for="message">Message :</label>
               <textarea name="message" id="message" class="form-control" cols="30" rows="4"></textarea>
@@ -102,6 +103,33 @@ class ViewMessage
             <button type="submit" class="btn btn-primary" name="ajout" id="valider">Envoyer</button>
             <button type="reset" class="btn btn-danger">Réinitialiser</button>
           </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <legend>Message(s) précédant(s)</legend>
+          <?php
+          while ($id != null) {
+            $message = $modelMessage->precedentMessage($id);
+          ?>
+          <div class="mb-2">
+            <p>
+              <span class="font-weight-bold">Auteur : </span><?= ($message['id_client'] == "") ? "" : $message['id_client'] ?><br />
+              <span class="font-weight-bold">Date : </span><?= $message['date'] ?><br />
+              <span class="<?= $message['motif'] == "" ? "d-none" : "" ?>"><span class="font-weight-bold">">Motif : </span><?= $message['motif'] ?></span><br />
+            </p>
+            <p><?= $message['message'] ?></p>
+            <!-- 
+              auteur : si id client vide afficher id employe et inversement, modifier la requête avec jointure nom = concat_ws(nom et prénom)
+              date : la date
+              motif : si motif afficher sinon rien
+              message :
+             -->
+          </div>
+          <?php
+            $id = $message['precedent_id'];
+          }
+          ?>
         </div>
       </div>
     </div>
