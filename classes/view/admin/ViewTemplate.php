@@ -175,7 +175,7 @@ class ViewTemplate
   }
 
   // SCRIPTS JS ET FERMETURE DU BODY ET DE HTML
-  public static function bodyHtml($form = null)
+  public static function bodyHtml($form = false)
   {
     ?>
       <script src="../../../../js/jquery.min.js"></script>

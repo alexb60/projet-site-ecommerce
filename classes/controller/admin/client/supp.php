@@ -5,6 +5,9 @@ require_once "../../../view/admin/ViewClient.php";
 require_once "../../../view/admin/ViewTemplate.php";
 require_once "../../../model/ModelClient.php";
 
+// head HTML et ouverture de body
+ViewTemplate::headHtml("Suppression du compte d'un client");
+
 // Si l'employé est connecté...
 if (isset($_SESSION['id_employe'])) {
 
@@ -30,28 +33,7 @@ if (isset($_SESSION['id_employe'])) {
   ViewTemplate::headerInvite(); // Navbar admin invité
   ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php"); // Message d'erreur
 }
-?>
 
-<!DOCTYPE html>
-<html lang="fr">
+ViewTemplate::footer(); // Footer
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Suppression du compte client</title>
-  <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/admin.css">
-</head>
-
-<body class="d-flex flex-column min-vh-100">
-  <?php
-  ViewTemplate::footer();
-  ?>
-  <script src="../../../../js/jquery.min.js"></script>
-  <script src="../../../../js/bootstrap.bundle.min.js"></script>
-  <script src="../../../../js/font-awesome.all.min.js"></script>
-</body>
-
-</html>
+ViewTemplate::bodyHtml(); // Scripts JS et fermeture du body et de html
