@@ -1,55 +1,46 @@
 <?php
 session_start();
+
 require_once "../../../view/admin/ViewTransporteur.php";
 require_once "../../../view/admin/ViewTemplate.php";
 require_once "../../../model/ModelTransporteur.php";
-?>
 
-<!DOCTYPE html>
-<html lang="fr">
+// head HTML et ouverture de body
+ViewTemplate::headHtml("Suppression d'un transporteur");
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Suppression d'un transporteur</title>
-  <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/admin.css">
-</head>
+// Si l'employé est connecté...
+if (isset($_SESSION['id_employe'])) {
+  ViewTemplate::menu(); // Header admin connecté
 
-<body class="d-flex flex-column min-vh-100">
-  <?php
-  if (isset($_SESSION['id_employe'])) {
-    ViewTemplate::menu();
-    // Si le rôle permet d'accéder à cette section...
-    if ($_SESSION['perm']['Transporteurs'] == "oui") {
-      if (isset($_GET['id'])) {
-        $modelTransporteur = new ModelTransporteur();
-        if ($modelTransporteur->voirTransporteur($_GET['id'])) {
-          if ($modelTransporteur->suppTransporteur($_GET['id'])) {
-            ViewTemplate::alert("success", "Transporteur supprimé avec succès", "liste.php");
-          } else {
-            ViewTemplate::alert("danger", "Échec de la suppression", "liste.php");
-          }
+  // Si le rôle permet d'accéder à cette section...
+  if ($_SESSION['perm']['Transporteurs'] == "oui") {
+
+    // Si l'id est passé en GET
+    if (isset($_GET['id'])) {
+      $modelTransporteur = new ModelTransporteur();
+
+      // Si le transporteur existe dans la base de données...
+      if ($modelTransporteur->voirTransporteur($_GET['id'])) {
+
+        // Si la suppression se fait...
+        if ($modelTransporteur->suppTransporteur($_GET['id'])) {
+          ViewTemplate::alert("success", "Transporteur supprimé avec succès", "liste.php"); // Afficher le succès
         } else {
-          ViewTemplate::alert("danger", "Le transporteur n'existe pas", "liste.php");
+          ViewTemplate::alert("danger", "Échec de la suppression", "liste.php"); // Message d'erreur
         }
       } else {
-        ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php");
+        ViewTemplate::alert("danger", "Le transporteur n'existe pas", "liste.php"); // Message d'erreur
       }
     } else {
-      ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur
+      ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php"); // Message d'erreur
     }
   } else {
-    ViewTemplate::headerInvite();
-    ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
+    ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur
   }
-  ViewTemplate::footer();
-  ?>
-  <script src="../../../../js/jquery.min.js"></script>
-  <script src="../../../../js/bootstrap.bundle.min.js"></script>
-  <script src="../../../../js/font-awesome.all.min.js"></script>
-</body>
+} else {
+  ViewTemplate::headerInvite(); // Header invité
+  ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php"); // Message d'erreur
+}
+ViewTemplate::footer(); // Footer
 
-</html>
+ViewTemplate::bodyHtml(); // Scripts JS et fermeture du body et de html

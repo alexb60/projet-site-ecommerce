@@ -1,68 +1,58 @@
 <?php
 session_start();
+
 require_once "../../../view/admin/ViewTransporteur.php";
 require_once "../../../view/admin/ViewTemplate.php";
 require_once "../../../view/admin/utils.php";
 require_once "../../../model/ModelTransporteur.php";
-?>
 
-<!DOCTYPE html>
-<html lang="fr">
+// head HTML et ouverture de body
+ViewTemplate::headHtml("Ajout d'un transporteur");
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ajout d'un transporteur</title>
-  <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/admin.css">
-</head>
+// Si l'employé est connecté...
+if (isset($_SESSION['id_employe'])) {
+  ViewTemplate::menu(); // Header admin connecté
 
-<body class="d-flex flex-column min-vh-100">
-  <?php
-  if (isset($_SESSION['id_employe'])) {
-    ViewTemplate::menu();
-    // Si le rôle permet d'accéder à cette section...
-    if ($_SESSION['perm']['Transporteurs'] == "oui") {
-      if (isset($_POST['nom'])) {
-        $donnees = [$_POST['nom']];
-        $types = ["nom"];
-        $data = Utils::valider($donnees, $types);
+  // Si le rôle permet d'accéder à cette section...
+  if ($_SESSION['perm']['Transporteurs'] == "oui") {
 
-        if ($data) {
-          $extensions = ["jpg", "jpeg", "png", "gif"];
-          $upload = Utils::upload($extensions, "transporteur", $_FILES['logo']);
-          $modelTransporteur = new ModelTransporteur();
+    // Si le formulaire est envoyé...
+    if (isset($_POST['nom'])) {
+      $donnees = [$_POST['nom']]; // Tableau des données à vérifier
+      $types = ["nom"]; // Tableau des types de données à vérifier
+      $data = Utils::valider($donnees, $types); // Vérification des données
 
-          if ($upload['uploadOk']) {
-            if ($modelTransporteur->ajoutTransporteur($_POST['nom'], $upload['file_name'])) {
-              ViewTemplate::alert("success", "Le transporteur a été ajouté avec succès", "liste.php");
-            } else {
-              ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
-            }
+      // Si les données sont conformes...
+      if ($data) {
+        $extensions = ["jpg", "jpeg", "png", "gif"]; // Tableau des extensions de fichiers autorisées
+        $upload = Utils::upload($extensions, "transporteur", $_FILES['logo']); // Upload du logo du transporteur
+        $modelTransporteur = new ModelTransporteur();
+
+        // Si le logo est uploadé...
+        if ($upload['uploadOk']) {
+
+          // Si le transporteur est ajouté...
+          if ($modelTransporteur->ajoutTransporteur($_POST['nom'], $upload['file_name'])) {
+            ViewTemplate::alert("success", "Le transporteur a été ajouté avec succès", "liste.php"); // Afficher le succès
           } else {
-            ViewTemplate::alert("danger", $upload['errors'], "ajout.php");
+            ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php"); // Message d'erreur
           }
         } else {
-          ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
+          ViewTemplate::alert("danger", $upload['errors'], "ajout.php"); // Afficher les messages d'erreurs de l'upload
         }
       } else {
-        ViewTransporteur::ajoutTransporteur();
+        ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php"); // Message d'erreur
       }
     } else {
-      ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur
+      ViewTransporteur::ajoutTransporteur(); // Afficher le formulaire d'ajout de transporteur
     }
   } else {
-    ViewTemplate::headerInvite();
-    ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
+    ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur
   }
-  ViewTemplate::footer();
-  ?>
-  <script src="../../../../js/jquery.min.js"></script>
-  <script src="../../../../js/bootstrap.bundle.min.js"></script>
-  <script src="../../../../js/font-awesome.all.min.js"></script>
-  <script src="../../../../js/validation-form-admin.js"></script>
-</body>
+} else {
+  ViewTemplate::headerInvite(); // Header invité
+  ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php"); // Message d'erreur
+}
+ViewTemplate::footer(); // Footer
 
-</html>
+ViewTemplate::bodyHtml(true); // Scripts JS et fermeture du body et de html
