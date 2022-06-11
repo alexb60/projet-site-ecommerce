@@ -4,60 +4,48 @@ session_start();
 require_once "../../../view/admin/ViewCommande.php";
 require_once "../../../view/admin/ViewTemplate.php";
 require_once "../../../model/ModelCommande.php";
-?>
 
-<!DOCTYPE html>
-<html lang="fr">
+// head HTML et ouverture de body
+ViewTemplate::headHtml("Changement d'état d'une commande");
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Changement d'état d'une commande</title>
-  <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/admin.css">
-</head>
+if (isset($_SESSION['id_employe'])) {
+  ViewTemplate::menu(); // Header admin connecté
 
-<body class="d-flex flex-column min-vh-100">
-  <?php
-  if (isset($_SESSION['id_employe'])) {
-    ViewTemplate::menu();
-    // Si le rôle permet d'accéder à cette section...
-    if ($_SESSION['perm']['Commandes'] == "oui") {
-      $modelCommande = new ModelCommande();
-      if (isset($_GET['id'])) {
-        if ($modelCommande->voirCommande($_GET['id'])) {
-          ViewCommande::modifEtat($_GET['id']);
-        } else {
-          ViewTemplate::alert("danger", "La commande n'existe pas", "listeCommande.php");
-        }
+  // Si le rôle permet d'accéder à cette section...
+  if ($_SESSION['perm']['Commandes'] == "oui") {
+    $modelCommande = new ModelCommande();
+
+    // Si l'id de la comande est passé en GET...
+    if (isset($_GET['id'])) {
+
+      // Si la commande existe dans la base de données...
+      if ($modelCommande->voirCommande($_GET['id'])) {
+        ViewCommande::modifEtat($_GET['id']); // Afficher le formulaire de modification d'état
       } else {
-        if (isset($_POST['id']) && $modelCommande->voirCommande($_POST['id'])) {
-          if ($modelCommande->modifEtat($_POST['id'], $_POST['etat'])) {
-            ViewTemplate::alert("success", "L'état de la commande a été modifié avec succès", "listeCommande.php");
-          } else {
-            ViewTemplate::alert("danger", "Échec de la modification", "listeCommande.php");
-          }
-        } else {
-          ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "listeCommande.php");
-        }
+        ViewTemplate::alert("danger", "La commande n'existe pas", "listeCommande.php"); // Message d'erreur
       }
     } else {
-      ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur
+      // Si le formulaire est envoyé et si l'id envoyé correspond à une commande dans la base de données...
+      if (isset($_POST['id']) && $modelCommande->voirCommande($_POST['id'])) {
+
+        // Si la modification se fait...
+        if ($modelCommande->modifEtat($_POST['id'], $_POST['etat'])) {
+          ViewTemplate::alert("success", "L'état de la commande a été modifié avec succès", "listeCommande.php"); // Afficher le succès
+        } else {
+          ViewTemplate::alert("danger", "Échec de la modification", "listeCommande.php"); // Message d'erreur
+        }
+      } else {
+        ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "listeCommande.php"); // Message d'erreur
+      }
     }
   } else {
-    ViewTemplate::headerInvite();
-    ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
+    ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur
   }
+} else {
+  ViewTemplate::headerInvite(); // Header invité
+  ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php"); // Message d'erreur
+}
 
-  ViewTemplate::footer();
-  ?>
-  <script src="../../../../js/jquery.min.js"></script>
-  <script src="../../../../js/bootstrap.bundle.min.js"></script>
-  <script src="../../../../js/font-awesome.all.min.js"></script>
-  <script src="../../../../js/validation-form-admin.js"></script>
+ViewTemplate::footer(); // Footer
 
-</body>
-
-</html>
+ViewTemplate::bodyHtml(true); // Scripts JS et fermeture du body et de html

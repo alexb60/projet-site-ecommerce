@@ -9,52 +9,50 @@ class ViewClient
     $modelClient = new ModelClient();
     $liste = $modelClient->listeClient($premier, $parPage);
 ?>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h2 class="mb-4">Liste des clients</h2>
-        </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="mb-4">Liste des clients</h2>
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <?php
-          if (count($liste) > 0) {
-          ?>
-            <table class="table table-striped">
-              <thead>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <?php
+        if (count($liste) > 0) {
+        ?>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Adresse mail</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              foreach ($liste as $client) {
+              ?>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Nom</th>
-                  <th scope="col">Prénom</th>
-                  <th scope="col">Adresse mail</th>
-                  <th scope="col">Actions</th>
+                  <th scope="row"><?= $client['id'] ?></th>
+                  <td><?= $client['nom'] ?></td>
+                  <td><?= $client['prenom'] ?></td>
+                  <td><?= $client['mail'] ?></td>
+                  <td>
+                    <a href="voir.php?id=<?= $client['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir</a>
+                    <a href="supp.php?id=<?= $client['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Supprimer</a>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                <?php
-                foreach ($liste as $client) {
-                ?>
-                  <tr>
-                    <th scope="row"><?= $client['id'] ?></th>
-                    <td><?= $client['nom'] ?></td>
-                    <td><?= $client['prenom'] ?></td>
-                    <td><?= $client['mail'] ?></td>
-                    <td>
-                      <a href="voir.php?id=<?= $client['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir</a>
-                      <a href="supp.php?id=<?= $client['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Supprimer</a>
-                    </td>
-                  </tr>
-                <?php
-                }
-                ?>
-              </tbody>
-            </table>
-          <?php
-          } else {
-            ViewTemplate::alert("danger", "Aucun client n'existe dans la liste.");
-          }
-          ?>
-        </div>
+              <?php
+              }
+              ?>
+            </tbody>
+          </table>
+        <?php
+        } else {
+          ViewTemplate::alert("danger", "Aucun client n'existe dans la liste.");
+        }
+        ?>
       </div>
     </div>
   <?php
