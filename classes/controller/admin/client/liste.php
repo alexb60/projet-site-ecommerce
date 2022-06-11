@@ -32,35 +32,33 @@ if (isset($_SESSION['id_employe'])) {
 
 ?>
     <div class="container">
-      
+
+      <?php
+      ViewClient::listeClient($premier, $parPage); // Affichage de la liste des clients
+      ?>
+      <nav>
+        <ul class="pagination justify-content-center">
+          <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
+          <li class="page-item <?= ($pageActuelle == 1) ? "disabled" : "" ?>">
+            <a href="liste.php?page=<?= $pageActuelle - 1 ?>" class="page-link">Précédent</a>
+          </li>
           <?php
-          ViewClient::listeClient($premier, $parPage); // Affichage de la liste des clients
+          // Pour chaque page allant de 1 au nombre total de pages - 1 en incrémentant de 1
+          for ($page = 1; $page <= $pages; $page++) {
           ?>
-          <nav>
-            <ul class="pagination justify-content-center">
-              <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
-              <li class="page-item <?= ($pageActuelle == 1) ? "disabled" : "" ?>">
-                <a href="liste.php?page=<?= $pageActuelle - 1 ?>" class="page-link">Précédent</a>
-              </li>
-              <?php
-              // Pour chaque page allant de 1 au nombre total de pages - 1 en incrémentant de 1
-              for ($page = 1; $page <= $pages; $page++) {
-              ?>
-                <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
-                <li class="page-item <?= ($pageActuelle == $page) ? "active" : "" ?>">
-                  <a href="liste.php?page=<?= $page ?>" class="page-link"><?= $page ?></a>
-                </li>
-              <?php
-              }
-              ?>
-              <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
-              <li class="page-item <?= ($pageActuelle == $pages) ? "disabled" : "" ?>">
-                <a href="liste.php?page=<?= $pageActuelle + 1 ?>" class="page-link">Suivant</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
+            <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
+            <li class="page-item <?= ($pageActuelle == $page) ? "active" : "" ?>">
+              <a href="liste.php?page=<?= $page ?>" class="page-link"><?= $page ?></a>
+            </li>
+          <?php
+          }
+          ?>
+          <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
+          <li class="page-item <?= ($pageActuelle == $pages) ? "disabled" : "" ?>">
+            <a href="liste.php?page=<?= $pageActuelle + 1 ?>" class="page-link">Suivant</a>
+          </li>
+        </ul>
+      </nav>
     </div>
 <?php
   } else {
