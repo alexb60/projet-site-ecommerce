@@ -1,86 +1,77 @@
 <?php
 session_start();
+
 require_once "../../../view/admin/ViewProduit.php";
 require_once "../../../view/admin/ViewTemplate.php";
-require_once "../../../view/admin/ViewMarque.php";
-require_once "../../../view/admin/ViewCategorie.php";
 require_once "../../../view/admin/utils.php";
 require_once "../../../model/ModelProduit.php";
-?>
 
-<!DOCTYPE html>
-<html lang="fr">
+// head HTML et ouverture de body
+ViewTemplate::headHtml("Modifier un produit");
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modification d'un produit</title>
-  <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/admin.css">
-</head>
+// Si l'employé est connecté...
+if (isset($_SESSION['id_employe'])) {
+  ViewTemplate::menu();
 
-<body class="d-flex flex-column min-vh-100">
-  <?php
-  if (isset($_SESSION['id_employe'])) {
-    ViewTemplate::menu();
+  // Si le rôle permet d'accéder à cette section...
+  if ($_SESSION['perm']['Produits'] == "oui") {
+    $modelProduit = new ModelProduit();
 
-    // Si le rôle permet d'accéder à cette section...
-    if ($_SESSION['perm']['Produits'] == "oui") {
-      $modelProduit = new ModelProduit();
-      if (isset($_GET['id'])) {
-        if ($modelProduit->voirProduit($_GET['id'])) {
-          ViewProduit::modifProduit($_GET['id']);
-        } else {
-          ViewTemplate::alert("danger", "Le transporteur n'existe pas", "liste.php");
-        }
+    // Si l'id du produit est passé en GET...
+    if (isset($_GET['id'])) {
+
+      // Si le produit existe dans la base de données...
+      if ($modelProduit->voirProduit($_GET['id'])) {
+        ViewProduit::modifProduit($_GET['id']); // Afficher le formulaire de modification du produit
       } else {
-        $donnees = [$_POST['produit'], $_POST['ref'], $_POST['quantite'], $_POST['prix']];
-        $types = ["produit", "ref", "quantite", "prix"];
-        $data = Utils::valider($donnees, $types);
-
-        if ($data) {
-          if (isset($_POST['id']) && $modelProduit->voirProduit($_POST['id'])) {
-            $extensions = ["jpg", "jpeg", "png", "gif"];
-            $upload = Utils::upload($extensions, "produit", $_FILES['photo']);
-
-            if ($_FILES['photo']['size'] === 0) { // SI PAS DE FICHIER ENVOYÉ
-              $fichier = $modelProduit->voirProduit($_POST['id'])['photo']; // RÉCUPÉRATION DU NOM DU FICHIER DÉJÀ PRÉSENT EN BASE
-              if ($modelProduit->modifProduit($_POST['id'], $_POST['produit'], $_POST['ref'], $_POST['description'], $_POST['quantite'], $_POST['prix'], $fichier, $_POST['categorie'], $_POST['marque'])) {
-                ViewTemplate::alert("success", "Le produit a été modifié avec succès", "liste.php");
-              } else {
-                ViewTemplate::alert("danger", "Erreur de modification", "liste.php");
-              }
-            } elseif ($upload['uploadOk']) { // SINON SI FICHIER ENVOYÉ
-              if ($modelProduit->modifProduit($_POST['id'], $_POST['produit'], $_POST['ref'], $_POST['description'], $_POST['quantite'], $_POST['prix'], $upload['file_name'], $_POST['categorie'], $_POST['marque'])) {
-                ViewTemplate::alert("success", "Le produit a été modifié avec succès", "liste.php");
-              } else {
-                ViewTemplate::alert("danger", "Erreur de modification", "liste.php");
-              }
-            } else {
-              ViewTemplate::alert("danger", $upload['errors'], "liste.php");
-            }
-          } else {
-            ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
-          }
-        } else {
-          ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php");
-        }
+        ViewTemplate::alert("danger", "Le produit n'existe pas", "liste.php");
       }
     } else {
-      ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur
+      $donnees = [$_POST['produit'], $_POST['ref'], $_POST['quantite'], $_POST['prix']]; // Tableau des données à vérifier
+      $types = ["produit", "ref", "quantite", "prix"]; // Tableau des types de données à vérifier
+      $data = Utils::valider($donnees, $types); // Validation des données
+
+      // Si les données sont conformes...
+      if ($data) {
+
+        // Si le formulaire est envoyé et si l'id envoyé dans le formulaire existe dans la base de données...
+        if (isset($_POST['id']) && $modelProduit->voirProduit($_POST['id'])) {
+          $extensions = ["jpg", "jpeg", "png", "gif"]; // Tableau des extensions de fichiers autorisés
+          $upload = Utils::upload($extensions, "produit", $_FILES['photo']); // Upload de la photo
+
+          // Si aucun fichier n'est envoyé...
+          if ($_FILES['photo']['size'] === 0) {
+            $fichier = $modelProduit->voirProduit($_POST['id'])['photo']; // Récupération du nom du fichier déjà présent en base
+
+            // Si la modification se fait...
+            if ($modelProduit->modifProduit($_POST['id'], $_POST['produit'], $_POST['ref'], $_POST['description'], $_POST['quantite'], $_POST['prix'], $fichier, $_POST['categorie'], $_POST['marque'])) {
+              ViewTemplate::alert("success", "Le produit a été modifié avec succès", "liste.php"); // Afficher le succès
+            } else {
+              ViewTemplate::alert("danger", "Erreur de modification", "liste.php"); // Message d'erreur
+            }
+          } elseif ($upload['uploadOk']) { // Sinon si un fichier est uploadé...
+            if ($modelProduit->modifProduit($_POST['id'], $_POST['produit'], $_POST['ref'], $_POST['description'], $_POST['quantite'], $_POST['prix'], $upload['file_name'], $_POST['categorie'], $_POST['marque'])) {
+              ViewTemplate::alert("success", "Le produit a été modifié avec succès", "liste.php"); // Afficher le succès
+            } else {
+              ViewTemplate::alert("danger", "Erreur de modification", "liste.php"); // Message d'erreur
+            }
+          } else {
+            ViewTemplate::alert("danger", $upload['errors'], "liste.php"); // Afficher les messages d'erreurs de l'upload
+          }
+        } else {
+          ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php"); // Message d'erreur
+        }
+      } else {
+        ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php");  // Message d'erreur
+      }
     }
   } else {
-    ViewTemplate::headerInvite();
-    ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
+    ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur
   }
-  ViewTemplate::footer();
-  ?>
-  <script src="../../../../js/jquery.min.js"></script>
-  <script src="../../../../js/bootstrap.bundle.min.js"></script>
-  <script src="../../../../js/font-awesome.all.min.js"></script>
-  <script src="../../../../js/validation-form-admin.js"></script>
-</body>
+} else {
+  ViewTemplate::headerInvite(); // Header invité
+  ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php"); // Message d'erreur
+}
+ViewTemplate::footer(); // Footer
 
-</html>
+ViewTemplate::bodyHtml(true); // Scripts JS et fermeture du body et de html

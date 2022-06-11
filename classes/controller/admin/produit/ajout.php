@@ -1,70 +1,58 @@
 <?php
 session_start();
+
 require_once "../../../view/admin/ViewProduit.php";
 require_once "../../../view/admin/ViewTemplate.php";
-require_once "../../../view/admin/ViewMarque.php";
-require_once "../../../view/admin/ViewCategorie.php";
 require_once "../../../view/admin/utils.php";
 require_once "../../../model/ModelProduit.php";
-?>
 
-<!DOCTYPE html>
-<html lang="fr">
+// head HTML et ouverture de body
+ViewTemplate::headHtml("Ajout d'un produit");
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ajout d'un produit</title>
-  <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/admin.css">
-</head>
+// Si l'employé est connecté...
+if (isset($_SESSION['id_employe'])) {
+  ViewTemplate::menu(); // Header admin connecté
 
-<body class="d-flex flex-column min-vh-100">
-  <?php
-  if (isset($_SESSION['id_employe'])) {
-    ViewTemplate::menu();
-    // Si le rôle permet d'accéder à cette section...
-    if ($_SESSION['perm']['Produits'] == "oui") {
-      if (isset($_POST['produit'])) {
-        $donnees = [$_POST['produit'], $_POST['ref'], $_POST['quantite'], $_POST['prix']];
-        $types = ["produit", "ref", "quantite", "prix"];
-        $data = Utils::valider($donnees, $types);
+  // Si le rôle permet d'accéder à cette section...
+  if ($_SESSION['perm']['Produits'] == "oui") {
 
-        if ($data) {
-          $extensions = ["jpg", "jpeg", "png", "gif"];
-          $upload = Utils::upload($extensions, "produit", $_FILES['photo']);
-          $modelProduit = new ModelProduit();
+    // Si le formulaire est envoyé...
+    if (isset($_POST['produit'])) {
+      $donnees = [$_POST['produit'], $_POST['ref'], $_POST['quantite'], $_POST['prix']]; // Tableau des données à vérifier
+      $types = ["produit", "ref", "quantite", "prix"]; // Tableau des types de données à vérifier
+      $data = Utils::valider($donnees, $types); // Validation des données
 
-          if ($upload['uploadOk']) {
-            if ($modelProduit->ajoutProduit($_POST['produit'], $_POST['ref'], $_POST['description'], $_POST['quantite'], $_POST['prix'], $upload['file_name'], $_POST['categorie'], $_POST['marque'])) {
-              ViewTemplate::alert("success", "Le produit a été ajouté avec succès", "liste.php");
-            } else {
-              ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
-            }
+      // Si les données sont conformes...
+      if ($data) {
+        $extensions = ["jpg", "jpeg", "png", "gif"]; // Tableau des extensions de fichiers autorisées
+        $upload = Utils::upload($extensions, "produit", $_FILES['photo']); // Upload de la photo du produit
+        $modelProduit = new ModelProduit();
+
+        // Si la photo du produit est uploadé...
+        if ($upload['uploadOk']) {
+
+          // Si l'ajout du produit se fait...
+          if ($modelProduit->ajoutProduit($_POST['produit'], $_POST['ref'], $_POST['description'], $_POST['quantite'], $_POST['prix'], $upload['file_name'], $_POST['categorie'], $_POST['marque'])) {
+            ViewTemplate::alert("success", "Le produit a été ajouté avec succès", "liste.php"); // Afficher le succès
           } else {
-            ViewTemplate::alert("danger", $upload['errors'], "ajout.php");
+            ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php"); // Message d'erreur
           }
         } else {
-          ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php");
+          ViewTemplate::alert("danger", $upload['errors'], "ajout.php"); // Afficher les messages d'erreurs de l'upload
         }
       } else {
-        ViewProduit::ajoutProduit();
+        ViewTemplate::alert("danger", "Erreur d'ajout", "liste.php"); // Message d'erreur
       }
     } else {
-      ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur
+      ViewProduit::ajoutProduit(); // Afficher le formulaire d'ajout de produit
     }
   } else {
-    ViewTemplate::headerInvite();
-    ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
+    ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur
   }
-  ViewTemplate::footer();
-  ?>
-  <script src="../../../../js/jquery.min.js"></script>
-  <script src="../../../../js/bootstrap.bundle.min.js"></script>
-  <script src="../../../../js/font-awesome.all.min.js"></script>
-  <script src="../../../../js/validation-form-admin.js"></script>
-</body>
+} else {
+  ViewTemplate::headerInvite(); // Header invité
+  ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php"); // Message d'erreur
+}
+ViewTemplate::footer(); // Footer
 
-</html>
+ViewTemplate::bodyHtml(true); // Scripts JS et fermeture du body et de html

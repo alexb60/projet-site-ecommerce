@@ -6,7 +6,7 @@ require_once "../../../view/admin/ViewTemplate.php";
 require_once "../../../model/ModelMessage.php";
 
 // head HTML et ouverture de body
-ViewTemplate::headHtml("Détails d'une marque");
+ViewTemplate::headHtml("Message d'un client");
 
 // Si l'employé est connecté...
 if (isset($_SESSION['id_employe'])) {

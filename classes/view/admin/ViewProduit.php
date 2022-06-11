@@ -10,67 +10,83 @@ class ViewProduit
   {
     $produit = new ModelProduit();
     $liste = $produit->listeProduit($premier, $parPage);
-    if (count($liste) > 0) { ?>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Catégorie</th>
-            <th scope="col">Marque</th>
-            <th scope="col">Réf.</th>
-            <th scope="col">Stock</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php
-          foreach ($liste as $produit) {
-          ?>
-            <tr>
-              <th scope="row"><?= $produit['id'] ?></th>
-              <td>
-                <a class="lien-mort" data-toggle="tooltip" title="<?= $produit['nom'] ?>" data-placement="down">
-                  <?= $produit['nom'] ?>
-                </a>
-              </td>
-              <td>
-                <a class="lien-mort" data-toggle="tooltip" title="<?= $produit['nom_categorie'] ?>" data-placement="down">
-                  <?= (strlen($produit['nom_categorie']) > 12) ? substr($produit['nom_categorie'], 0, 12) . "..." : $produit['nom_categorie'] ?>
-                </a>
-              </td>
-              <td>
-                <a class="lien-mort" data-toggle="tooltip" title="<?= $produit['nom_marque'] ?>" data-placement="down">
-                  <?= (strlen($produit['nom_marque']) > 12) ? substr($produit['nom_marque'], 0, 12) . "..." : $produit['nom_marque'] ?>
-                </a>
-              </td>
-              <td>
-                <a class="lien-mort" data-toggle="tooltip" title="<?= $produit['ref'] ?>" data-placement="down">
-                  <?= (strlen($produit['ref']) > 12) ? substr($produit['ref'], 0, 12) . "..." : $produit['ref'] ?>
-                </a>
-              </td>
-              <td <?= ($produit['quantite'] == 0) ? 'class="bg-danger text-white"' : (($produit['quantite'] <= 5) ? 'class="bg-warning"' : "") ?>>
-                <?= $produit['quantite'] ?>
-              </td>
-              <td>
-                <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i></a>
-                <a href="modif.php?id=<?= $produit['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                <a href="supp.php?id=<?= $produit['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-              </td>
-            </tr>
-          <?php
-          }
-          ?>
-        </tbody>
-      </table>
-    <?php
-    } else {
-    ?>
-      <div class="alert alert-danger" role="alert">
-        <i class="fas fa-exclamation-triangle"></i>&nbsp; Aucun produit n'existe dans la liste.
+?>
+    <form action="../produit/recherche.php" method="post" class="form-inline d-flex justify-content-center mx-auto mb-4">
+      <input class="form-control mr-sm-2 recherche" type="text" placeholder="Chercher un produit" name="recherche" aria-label="Search" id="recherche">
+      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i>&nbsp; Chercher</button>
+    </form>
+    <div class="row">
+      <div class="col-md-6">
+        <h2 class="mb-4">Liste des produits</h2>
       </div>
-    <?php
-    }
+      <div class="col-md-6 d-flex justify-content-end align-items-start">
+        <a href="ajout.php" class="btn btn-outline-success"><i class="fas fa-plus"></i>&nbsp; Ajouter un produit</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <?php
+        if (count($liste) > 0) { ?>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Catégorie</th>
+                <th scope="col">Marque</th>
+                <th scope="col">Réf.</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              foreach ($liste as $produit) {
+              ?>
+                <tr>
+                  <th scope="row"><?= $produit['id'] ?></th>
+                  <td>
+                    <a class="lien-mort" data-toggle="tooltip" title="<?= $produit['nom'] ?>" data-placement="down">
+                      <?= $produit['nom'] ?>
+                    </a>
+                  </td>
+                  <td>
+                    <a class="lien-mort" data-toggle="tooltip" title="<?= $produit['nom_categorie'] ?>" data-placement="down">
+                      <?= (strlen($produit['nom_categorie']) > 12) ? substr($produit['nom_categorie'], 0, 12) . "..." : $produit['nom_categorie'] ?>
+                    </a>
+                  </td>
+                  <td>
+                    <a class="lien-mort" data-toggle="tooltip" title="<?= $produit['nom_marque'] ?>" data-placement="down">
+                      <?= (strlen($produit['nom_marque']) > 12) ? substr($produit['nom_marque'], 0, 12) . "..." : $produit['nom_marque'] ?>
+                    </a>
+                  </td>
+                  <td>
+                    <a class="lien-mort" data-toggle="tooltip" title="<?= $produit['ref'] ?>" data-placement="down">
+                      <?= (strlen($produit['ref']) > 12) ? substr($produit['ref'], 0, 12) . "..." : $produit['ref'] ?>
+                    </a>
+                  </td>
+                  <td <?= ($produit['quantite'] == 0) ? 'class="bg-danger text-white"' : (($produit['quantite'] <= 5) ? 'class="bg-warning"' : "") ?>>
+                    <?= $produit['quantite'] ?>
+                  </td>
+                  <td>
+                    <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                    <a href="modif.php?id=<?= $produit['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                    <a href="supp.php?id=<?= $produit['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                  </td>
+                </tr>
+              <?php
+              }
+              ?>
+            </tbody>
+          </table>
+        <?php
+        } else {
+          ViewTemplate::alert("danger", "Aucun produit n'existe dans la liste.");
+        }
+        ?>
+      </div>
+    </div>
+  <?php
   }
 
   // FONCTION AFFICHANT LES DÉTAILS D'UN PRODUIT
@@ -78,7 +94,7 @@ class ViewProduit
   {
     $modelProduit = new ModelProduit();
     $produit = $modelProduit->voirProduit($id);
-    ?>
+  ?>
     <div class="container">
       <div class="row mb-4">
         <div class="col-md-12">
@@ -299,58 +315,64 @@ class ViewProduit
     $produit = new ModelProduit();
     $liste = $produit->recherche($recherche);
   ?>
-    <div class="row">
-      <h1 class="mb-4">Résultats de recherche pour "<?php echo $recherche; ?>"</h1>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <?php
-        if (count($liste) > 0) { ?>
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Catégorie</th>
-                <th scope="col">Marque</th>
-                <th scope="col">Prix</th>
-                <th scope="col">Stock</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              foreach ($liste as $produit) {
-              ?>
+    <div class="container">
+      <form action="../produit/recherche.php" method="post" class="form-inline d-flex justify-content-center mx-auto mb-4">
+        <input class="form-control mr-sm-2 recherche" type="search" placeholder="Chercher un produit" name="recherche" aria-label="Search" id="recherche">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i>&nbsp; Chercher</button>
+      </form>
+      <div class="row">
+        <h2 class="mb-4">Résultats de recherche pour "<?= $recherche ?>"</h2>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <?php
+          if (count($liste) > 0) { ?>
+            <table class="table table-striped">
+              <thead>
                 <tr>
-                  <th scope="row"><?= $produit['id'] ?></th>
-                  <td><?= $produit['nom'] ?></td>
-                  <td><?= $produit['nom_categorie'] ?></td>
-                  <td><?= $produit['nom_marque'] ?></td>
-                  <td><?= $produit['prix'] ?></td>
-                  <td <?= ($produit['quantite'] == 0) ? 'class="bg-danger text-white"' : (($produit['quantite'] <= 5) ? 'class="bg-warning"' : "") ?>>
-                    <?= $produit['quantite'] ?>
-                  </td>
-                  <td>
-                    <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i></a>
-                    <a href="modif.php?id=<?= $produit['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                    <a href="supp.php?id=<?= $produit['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                  </td>
+                  <th scope="col">#</th>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Catégorie</th>
+                  <th scope="col">Marque</th>
+                  <th scope="col">Prix</th>
+                  <th scope="col">Stock</th>
+                  <th scope="col">Actions</th>
                 </tr>
-              <?php
-              }
-              ?>
-            </tbody>
-          </table>
-        <?php
-        } else {
-        ?>
-          <div class="alert alert-danger" role="alert">
-            <i class="fas fa-times"></i>&nbsp; Aucun résultat trouvé.
-          </div>
-        <?php
-        }
-        ?>
+              </thead>
+              <tbody>
+                <?php
+                foreach ($liste as $produit) {
+                ?>
+                  <tr>
+                    <th scope="row"><?= $produit['id'] ?></th>
+                    <td><?= $produit['nom'] ?></td>
+                    <td><?= $produit['nom_categorie'] ?></td>
+                    <td><?= $produit['nom_marque'] ?></td>
+                    <td><?= $produit['prix'] ?></td>
+                    <td <?= ($produit['quantite'] == 0) ? 'class="bg-danger text-white"' : (($produit['quantite'] <= 5) ? 'class="bg-warning"' : "") ?>>
+                      <?= $produit['quantite'] ?>
+                    </td>
+                    <td>
+                      <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                      <a href="modif.php?id=<?= $produit['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                      <a href="supp.php?id=<?= $produit['id'] ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                  </tr>
+                <?php
+                }
+                ?>
+              </tbody>
+            </table>
+          <?php
+          } else {
+          ?>
+            <div class="alert alert-danger" role="alert">
+              <i class="fas fa-times"></i>&nbsp; Aucun résultat trouvé.
+            </div>
+          <?php
+          }
+          ?>
+        </div>
       </div>
     </div>
 <?php

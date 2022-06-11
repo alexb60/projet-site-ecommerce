@@ -1,55 +1,46 @@
 <?php
 session_start();
+
 require_once "../../../view/admin/ViewProduit.php";
 require_once "../../../view/admin/ViewTemplate.php";
 require_once "../../../model/ModelProduit.php";
-?>
 
-<!DOCTYPE html>
-<html lang="fr">
+// head HTML et ouverture de body
+ViewTemplate::headHtml("Suppression d'un produit");
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Suppression d'un produit</title>
-  <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/admin.css">
-</head>
+// Si l'employé est connecté...
+if (isset($_SESSION['id_employe'])) {
+  ViewTemplate::menu(); // Header admin connecté
 
-<body class="d-flex flex-column min-vh-100">
-  <?php
-  if (isset($_SESSION['id_employe'])) {
-    ViewTemplate::menu();
-    // Si le rôle permet d'accéder à cette section...
-    if ($_SESSION['perm']['Produits'] == "oui") {
-      if (isset($_GET['id'])) {
-        $modelProduit = new ModelProduit();
-        if ($modelProduit->voirProduit($_GET['id'])) {
-          if ($modelProduit->suppProduit($_GET['id'])) {
-            ViewTemplate::alert("success", "Produit supprimé avec succès", "liste.php");
-          } else {
-            ViewTemplate::alert("danger", "Échec de la suppression", "liste.php");
-          }
+  // Si le rôle permet d'accéder à cette section...
+  if ($_SESSION['perm']['Produits'] == "oui") {
+
+    // Si l'id du produit est passé en GET
+    if (isset($_GET['id'])) {
+      $modelProduit = new ModelProduit();
+
+      // Si le produit existe dans la base de données...
+      if ($modelProduit->voirProduit($_GET['id'])) {
+
+        // Si la suppression du produit se fait...
+        if ($modelProduit->suppProduit($_GET['id'])) {
+          ViewTemplate::alert("success", "Produit supprimé avec succès", "liste.php"); // Afficher le succès
         } else {
-          ViewTemplate::alert("danger", "Le produit n'existe pas", "liste.php");
+          ViewTemplate::alert("danger", "Échec de la suppression", "liste.php"); // Message d'erreur
         }
       } else {
-        ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php");
+        ViewTemplate::alert("danger", "Le produit n'existe pas", "liste.php"); // Message d'erreur
       }
     } else {
-      ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur
+      ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php"); // Message d'erreur
     }
   } else {
-    ViewTemplate::headerInvite();
-    ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
+    ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur
   }
-  ViewTemplate::footer();
-  ?>
-  <script src="../../../../js/jquery.min.js"></script>
-  <script src="../../../../js/bootstrap.bundle.min.js"></script>
-  <script src="../../../../js/font-awesome.all.min.js"></script>
-</body>
+} else {
+  ViewTemplate::headerInvite(); // Header invité
+  ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php"); // Message d'erreur
+}
+ViewTemplate::footer(); // Footer
 
-</html>
+ViewTemplate::bodyHtml(); // Scripts JS et fermeture du body et de html
