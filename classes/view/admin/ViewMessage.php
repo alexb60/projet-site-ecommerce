@@ -7,45 +7,54 @@ class ViewMessage
   {
     $message = new ModelMessage();
     $liste = $message->listeMessageClient($premier, $parPage);
-    if (count($liste) > 0) { ?>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">N° client</th>
-            <th scope="col">Nom du client</th>
-            <th scope="col">Prénom du client</th>
-            <th scope="col">Adresse mail</th>
-            <th scope="col">Date</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php
-          foreach ($liste as $message) {
-          ?>
-            <tr>
-              <th scope="row"><?= $message['id_client'] ?></th>
-              <td><?= $message['nom_client'] ?></td>
-              <td><?= $message['prenom_client'] ?></td>
-              <td><?= $message['mail'] ?></td>
-              <td><?= $message['date'] ?></td>
-              <td>
-                <a href="voir.php?id=<?= $message['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir</a>
-              </td>
-            </tr>
-          <?php
-          }
-          ?>
-        </tbody>
-      </table>
-    <?php
-    } else {
-    ?>
-      <div class="alert alert-danger" role="alert">
-        Aucun message dans la liste.
+?>
+    <div class="row">
+      <div class="col-md-6">
+        <h2 class="mb-4">Liste des messages reçus</h2>
       </div>
-    <?php
-    }
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <?php
+        if (count($liste) > 0) { ?>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">N° client</th>
+                <th scope="col">Nom du client</th>
+                <th scope="col">Prénom du client</th>
+                <th scope="col">Adresse mail</th>
+                <th scope="col">Date</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              foreach ($liste as $message) {
+              ?>
+                <tr>
+                  <th scope="row"><?= $message['id_client'] ?></th>
+                  <td><?= $message['nom_client'] ?></td>
+                  <td><?= $message['prenom_client'] ?></td>
+                  <td><?= $message['mail'] ?></td>
+                  <td><?= $message['date'] ?></td>
+                  <td>
+                    <a href="voir.php?id=<?= $message['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir</a>
+                  </td>
+                </tr>
+              <?php
+              }
+              ?>
+            </tbody>
+          </table>
+        <?php
+        } else {
+          ViewTemplate::alert("danger", "Aucun message dans la liste.");
+        }
+        ?>
+      </div>
+    </div>
+  <?php
   }
 
   // FONCTION AFFICHANT LE MESSAGE ENVOYÉ PAR UN CLIENT
@@ -53,7 +62,7 @@ class ViewMessage
   {
     $modelMessage = new ModelMessage();
     $message = $modelMessage->voirMessageClient($id);
-    ?>
+  ?>
     <div class="container">
       <div class="row mb-4">
         <div class="col-md-12">
@@ -112,20 +121,20 @@ class ViewMessage
           while ($id != null) {
             $message = $modelMessage->precedentMessage($id);
           ?>
-          <div class="mb-2">
-            <p>
-              <span class="font-weight-bold">Auteur : </span><?= ($message['id_client'] == "") ? "" : $message['id_client'] ?><br />
-              <span class="font-weight-bold">Date : </span><?= $message['date'] ?><br />
-              <span class="<?= $message['motif'] == "" ? "d-none" : "" ?>"><span class="font-weight-bold">">Motif : </span><?= $message['motif'] ?></span><br />
-            </p>
-            <p><?= $message['message'] ?></p>
-            <!-- 
+            <div class="mb-2">
+              <p>
+                <span class="font-weight-bold">Auteur : </span><?= ($message['id_client'] == "") ? "" : $message['id_client'] ?><br />
+                <span class="font-weight-bold">Date : </span><?= $message['date'] ?><br />
+                <span class="<?= $message['motif'] == "" ? "d-none" : "" ?>"><span class="font-weight-bold">">Motif : </span><?= $message['motif'] ?></span><br />
+              </p>
+              <p><?= $message['message'] ?></p>
+              <!-- 
               auteur : si id client vide afficher id employe et inversement, modifier la requête avec jointure nom = concat_ws(nom et prénom)
               date : la date
               motif : si motif afficher sinon rien
               message :
              -->
-          </div>
+            </div>
           <?php
             $id = $message['precedent_id'];
           }

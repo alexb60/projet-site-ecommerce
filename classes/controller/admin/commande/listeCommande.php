@@ -32,7 +32,7 @@ if (isset($_SESSION['id_employe'])) {
 ?>
     <div class="container">
       <?php
-      ViewCommande::listeCommande($premier, $parPage);
+      ViewCommande::listeCommande($premier, $parPage); // Afficher la liste des commandes
       ?>
       <nav>
         <ul class="pagination justify-content-center">
@@ -40,12 +40,17 @@ if (isset($_SESSION['id_employe'])) {
           <li class="page-item <?= ($pageActuelle == 1) ? "disabled" : "" ?>">
             <a href="listeCommande.php?page=<?= $pageActuelle - 1 ?>" class="page-link">Précédent</a>
           </li>
-          <?php for ($page = 1; $page <= $pages; $page++) : ?>
+          <?php
+          // Pour chaque page allant de 1 au nombre total de pages - 1 en incrémentant de 1
+          for ($page = 1; $page <= $pages; $page++) {
+          ?>
             <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
             <li class="page-item <?= ($pageActuelle == $page) ? "active" : "" ?>">
               <a href="listeCommande.php?page=<?= $page ?>" class="page-link"><?= $page ?></a>
             </li>
-          <?php endfor ?>
+          <?php
+          }
+          ?>
           <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
           <li class="page-item <?= ($pageActuelle == $pages) ? "disabled" : "" ?>">
             <a href="listeCommande.php?page=<?= $pageActuelle + 1 ?>" class="page-link">Suivant</a>
