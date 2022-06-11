@@ -10,11 +10,16 @@ class ViewClient
     $liste = $modelClient->listeClient($premier, $parPage);
 ?>
     <div class="container">
-      <?php
-      if (count($liste) > 0) {
-      ?>
-        <div class="row">
-          <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="mb-4">Liste des clients</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <?php
+          if (count($liste) > 0) {
+          ?>
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -44,21 +49,13 @@ class ViewClient
                 ?>
               </tbody>
             </table>
-          </div>
+          <?php
+          } else {
+            ViewTemplate::alert("danger", "Aucun client n'existe dans la liste.");
+          }
+          ?>
         </div>
-      <?php
-      } else {
-      ?>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="alert alert-danger" role="alert">
-              <i class="fas fa-exclamation-triangle"></i>&nbsp; Aucun client n'existe dans la liste.
-            </div>
-          </div>
-        </div>
-      <?php
-      }
-      ?>
+      </div>
     </div>
   <?php
   }

@@ -32,13 +32,7 @@ if (isset($_SESSION['id_employe'])) {
 
 ?>
     <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h2 class="mb-4">Liste des clients</h2>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
+      
           <?php
           ViewClient::listeClient($premier, $parPage); // Affichage de la liste des clients
           ?>
