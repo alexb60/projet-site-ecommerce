@@ -9,48 +9,55 @@ class ViewCommande
     $commandes = new ModelCommande();
     $liste = $commandes->listeCommande($premier, $parPage);
 ?>
-    <?php
-    if (count($liste) > 0) {
-    ?>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">N° Commande</th>
-            <th scope="col">N° Client</th>
-            <th scope="col">Date</th>
-            <th scope="col">État</th>
-            <th scope="col">Montant</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php
-          foreach ($liste as $commande) {
-          ?>
-            <tr class="<?= ($commande['etat'] == "Payée") ? "alert-danger" : (($commande['etat'] == "En préparation") ? "alert-warning" : (($commande['etat'] == 'Livrée') ? "alert-success" : (($commande['etat'] == 'Expédiée') ? "alert-primary" : "alert-dark"))) ?>">
-              <th scope="row"><?= $commande['id'] ?></th>
-              <td><?= $commande['id_client'] ?></td>
-              <td><?= $commande['date'] ?></td>
-              <td><?= $commande['etat'] ?></td>
-              <td><?= number_format($commande['montant'], 2, ',', ' ') ?> €</td>
-              <td>
-                <a href="voirDetails.php?id_com=<?= $commande['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir les détails</a>
-                <a href="modifEtat.php?id=<?= $commande['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier l'état</a>
-              </td>
-            </tr>
-          <?php
-          }
-          ?>
-        </tbody>
-      </table>
-    <?php
-    } else {
-    ?>
-      <div class="alert alert-danger" role="alert">
-        <i class="fas fa-exclamation-triangle"></i>&nbsp; Aucune commande n'existe dans la liste.
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="mb-4">Liste des commandes</h2>
       </div>
-    <?php
-    }
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <?php
+        if (count($liste) > 0) {
+        ?>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">N° Commande</th>
+                <th scope="col">N° Client</th>
+                <th scope="col">Date</th>
+                <th scope="col">État</th>
+                <th scope="col">Montant</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              foreach ($liste as $commande) {
+              ?>
+                <tr class="<?= ($commande['etat'] == "Payée") ? "alert-danger" : (($commande['etat'] == "En préparation") ? "alert-warning" : (($commande['etat'] == 'Livrée') ? "alert-success" : (($commande['etat'] == 'Expédiée') ? "alert-primary" : "alert-dark"))) ?>">
+                  <th scope="row"><?= $commande['id'] ?></th>
+                  <td><?= $commande['id_client'] ?></td>
+                  <td><?= $commande['date'] ?></td>
+                  <td><?= $commande['etat'] ?></td>
+                  <td><?= number_format($commande['montant'], 2, ',', ' ') ?> €</td>
+                  <td>
+                    <a href="voirDetails.php?id_com=<?= $commande['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir les détails</a>
+                    <a href="modifEtat.php?id=<?= $commande['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier l'état</a>
+                  </td>
+                </tr>
+              <?php
+              }
+              ?>
+            </tbody>
+          </table>
+        <?php
+        } else {
+          ViewTemplate::alert("danger", "Aucune commande n'existe dans la liste.");
+        }
+        ?>
+      </div>
+    </div>
+  <?php
   }
 
   // FONCTION AFFICHANT LES DÉTAILS D'UNE COMMANDE
@@ -59,8 +66,7 @@ class ViewCommande
     $modelCommande = new ModelCommande();
     $listeDetails = $modelCommande->voirDetails($id_commande);
     $commande = $modelCommande->voirCommande($_GET['id_com']);
-
-    ?>
+  ?>
     <div class="container">
       <div class="row mb-4">
         <div class="col-md-12">
