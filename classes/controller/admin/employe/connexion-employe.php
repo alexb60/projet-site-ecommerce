@@ -1,16 +1,19 @@
 <?php
 session_start();
 
-// Si l'id de l'employé existe...
-if (isset($_SESSION['id_employe'])) {
-  header('Location: accueil.php'); // Redirection vers l'accueil de l'espace employé
-}
-
 require_once "../../../view/admin/ViewEmploye.php";
 require_once "../../../view/admin/ViewTemplate.php";
 require_once "../../../model/ModelEmploye.php";
 
+// head HTML et ouverture de body
+ViewTemplate::headHtml("Connexion à l'espace employé");
+
 ViewTemplate::headerInvite(); // Navbar admin invité
+
+// Si l'id de l'employé existe dans la session...
+if (isset($_SESSION['id_employe'])) {
+  header('Location: accueil.php'); // Redirection vers l'accueil de l'espace employé
+}
 
 // Si les données ont été envoyées en POST
 if (isset($_POST['connexion'])) {
@@ -30,27 +33,6 @@ if (isset($_POST['connexion'])) {
 } else {
   ViewEmploye::connexion(); // Affichage du formulaire de connexion
 }
-?>
-<!DOCTYPE html>
-<html lang="fr">
+ViewTemplate::footer(); // Footer
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Connexion à l'espace employé</title>
-  <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/admin.css">
-</head>
-
-<body class="d-flex flex-column min-vh-100">
-  <?php
-  ViewTemplate::footer(); // Footer
-  ?>
-  <script src="../../../../js/jquery.min.js"></script>
-  <script src="../../../../js/bootstrap.bundle.min.js"></script>
-  <script src="../../../../js/font-awesome.all.min.js"></script>
-</body>
-
-</html>
+ViewTemplate::bodyHtml(); // Scripts JS et fermeture du body et de html

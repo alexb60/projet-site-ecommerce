@@ -115,8 +115,12 @@ class ViewEmploye
                 <span class="font-weight-bold">Rôle :</span> <?= $employe['nom_role'] ?><br />
               </p>
               <a href="javascript:history.back()" class="btn btn-primary"><i class="fas fa-chevron-left"></i>&nbsp; Retour</a>
-              <a href="modifEmploye.php?id=<?= $employe['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp; Modifier</a>
-              <a href="supp.php" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp; Supprimer</a>
+              <a href="modifEmploye.php?id=<?= $employe['id'] ?>" class="btn btn-warning <?= (($employe['id'] == $_SESSION['id_employe']) || ($employe['id_role'] == 1)) ? "d-none" : "" ?>">
+                <i class="fas fa-edit"></i>&nbsp; Modifier
+              </a>
+              <a href="supp.php?id=<?= $employe['id'] ?>" class="btn btn-danger <?= (($employe['id'] == $_SESSION['id_employe']) || ($employe['id_role'] == 1)) ? "d-none" : "" ?>">
+                <i class="fas fa-trash-alt"></i>&nbsp; Supprimer
+              </a>
             </div>
           </div>
         </div>
@@ -137,7 +141,7 @@ class ViewEmploye
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h2 class="mb-4">Modifier mes informations</h2>
+          <h2 class="mb-4">Modifier le profil d'un employé</h2>
         </div>
       </div>
       <div class="row">
@@ -270,9 +274,12 @@ class ViewEmploye
                     <td><?= $employe['mail'] ?></td>
                     <td><?= $employe['role'] ?></td>
                     <td>
-                      <a href="voirEmploye.php?id=<?= $employe['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir</a>
+                      <a href="voirEmploye.php?id=<?= $employe['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                      <a href="modifEmploye.php?id=<?= $employe['id'] ?>" class="btn btn-warning <?= (($employe['id'] == $_SESSION['id_employe']) || ($employe['id_role'] == 1)) ? "d-none" : "" ?>">
+                        <i class="fas fa-edit"></i>
+                      </a>
                       <a href="supp.php?id=<?= $employe['id'] ?>" class="btn btn-danger <?= (($employe['id'] == $_SESSION['id_employe']) || ($employe['id_role'] == 1)) ? "d-none" : "" ?>">
-                        <i class="fas fa-trash-alt"></i>&nbsp; Supprimer
+                        <i class="fas fa-trash-alt"></i>
                       </a>
                     </td>
                   </tr>

@@ -6,6 +6,9 @@ require_once "../../../view/admin/ViewEmploye.php";
 require_once "../../../view/admin/ViewTemplate.php";
 require_once "../../../model/ModelEmploye.php";
 
+// head HTML et ouverture de body
+ViewTemplate::headHtml("Modifier mon profil employé");
+
 ViewTemplate::headerInvite(); // Header invité
 
 // Si l'adresse mail existe dans $_SESSION...
@@ -45,29 +48,6 @@ if (isset($_SESSION['mail'])) {
 } else {
   ViewTemplate::alert("danger", "Accès interdit", "accueil.php"); // Message d'erreur
 }
-?>
+ViewTemplate::footer(); // Footer
 
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Réinitialisation du mot de passe employé</title>
-  <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/admin.css">
-</head>
-
-<body class="d-flex flex-column min-vh-100">
-  <?php
-  ViewTemplate::footer(); // Footer
-  ?>
-  <script src="../../../../js/jquery.min.js"></script>
-  <script src="../../../../js/bootstrap.bundle.min.js"></script>
-  <script src="../../../../js/font-awesome.all.min.js"></script>
-  <script src="../../../../js/validation-form-admin.js"></script>
-</body>
-
-</html>
+ViewTemplate::bodyHtml(true); // Scripts JS et fermeture du body et de html
