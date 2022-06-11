@@ -348,7 +348,7 @@ class ViewProduit
                     <td><?= $produit['nom'] ?></td>
                     <td><?= $produit['nom_categorie'] ?></td>
                     <td><?= $produit['nom_marque'] ?></td>
-                    <td><?= $produit['prix'] ?></td>
+                    <td><?= number_format($produit['prix'], 2, ',', ' ') ?> €</td>
                     <td <?= ($produit['quantite'] == 0) ? 'class="bg-danger text-white"' : (($produit['quantite'] <= 5) ? 'class="bg-warning"' : "") ?>>
                       <?= $produit['quantite'] ?>
                     </td>
