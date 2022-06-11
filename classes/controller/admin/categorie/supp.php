@@ -4,55 +4,44 @@ session_start();
 require_once "../../../view/admin/ViewCategorie.php";
 require_once "../../../view/admin/ViewTemplate.php";
 require_once "../../../model/ModelCategorie.php";
-?>
 
-<!DOCTYPE html>
-<html lang="fr">
+// head HTML et ouverture de body
+ViewTemplate::headHtml("Suppression d'une catégorie");
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Suppression d'une catégorie</title>
-  <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/admin.css">
-</head>
+// Si l'employé est connecté...
+if (isset($_SESSION['id_employe'])) {
+  ViewTemplate::menu(); // Header admin connecté
 
-<body class="d-flex flex-column min-vh-100">
-  <?php
-  if (isset($_SESSION['id_employe'])) {
-    ViewTemplate::menu();
+  // Si le rôle permet d'accéder à cette section...
+  if ($_SESSION['perm']['Catégories'] == "oui") {
 
-    // Si le rôle permet d'accéder à cette section...
-    if ($_SESSION['perm']['Catégories'] == "oui") {
-      if (isset($_GET['id'])) {
-        $modelCategorie = new ModelCategorie();
-        if ($modelCategorie->voirCategorie($_GET['id'])) {
-          if ($modelCategorie->suppCategorie($_GET['id'])) {
-            ViewTemplate::alert("success", "Catégorie supprimée avec succès", "liste.php");
-          } else {
-            ViewTemplate::alert("danger", "Échec de la suppression", "liste.php");
-          }
+    // Si l'id de la catégorie est passé en GET
+    if (isset($_GET['id'])) {
+      $modelCategorie = new ModelCategorie();
+
+      // Si l'id renvoie vers une catégorie existante...
+      if ($modelCategorie->voirCategorie($_GET['id'])) {
+
+        // Si la suppression se fait
+        if ($modelCategorie->suppCategorie($_GET['id'])) {
+          ViewTemplate::alert("success", "Catégorie supprimée avec succès", "liste.php"); // Afficher le succès
         } else {
-          ViewTemplate::alert("danger", "La catégorie n'existe pas", "liste.php");
+          ViewTemplate::alert("danger", "Échec de la suppression", "liste.php"); // Message d'erreur
         }
       } else {
-        ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php");
+        ViewTemplate::alert("danger", "La catégorie n'existe pas", "liste.php"); // Message d'erreur
       }
     } else {
-      ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur
+      ViewTemplate::alert("danger", "Aucune donnée n'a été transmise", "liste.php"); // Message d'erreur
     }
   } else {
-    ViewTemplate::headerInvite();
-    ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php");
+    ViewTemplate::alert("danger", "Accès interdit, vous n'avez pas la permission pour accéder à cette page", "../employe/accueil.php"); // Message d'erreur
   }
+} else {
+  ViewTemplate::headerInvite(); // Header invité
+  ViewTemplate::alert("danger", "Accès interdit", "../employe/connexion-employe.php"); // Message d'erreur
+}
 
-  ViewTemplate::footer();
-  ?>
-  <script src="../../../../js/jquery.min.js"></script>
-  <script src="../../../../js/bootstrap.bundle.min.js"></script>
-  <script src="../../../../js/font-awesome.all.min.js"></script>
-</body>
+ViewTemplate::footer(); // Footer
 
-</html>
+ViewTemplate::bodyHtml(); // Scripts JS et fermeture du body et de html

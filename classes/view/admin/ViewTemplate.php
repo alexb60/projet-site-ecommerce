@@ -150,6 +150,47 @@ class ViewTemplate
         &copy; <?= date("Y") ?> - <a href="../../site/produit/index.php" class="no-style-footer">Site client</a>
       </div>
     </footer>
+  <?php
+  }
+
+  // OUVERTURE DU HTML, HEAD ET OUVERTURE DE BODY
+  public static function headHtml($titre)
+  {
+  ?>
+    <!DOCTYPE html>
+    <html lang="fr">
+
+    <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title><?= $titre ?></title>
+      <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
+      <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
+      <link rel="stylesheet" href="../../../../css/admin.css">
+    </head>
+
+    <body class="d-flex flex-column min-vh-100">
+    <?php
+  }
+
+  // SCRIPTS JS ET FERMETURE DU BODY ET DE HTML
+  public static function bodyHtml($form = null)
+  {
+    ?>
+      <script src="../../../../js/jquery.min.js"></script>
+      <script src="../../../../js/bootstrap.bundle.min.js"></script>
+      <script src="../../../../js/font-awesome.all.min.js"></script>
+      <?php
+      if ($form) {
+      ?>
+        <script src="../../../../js/validation-form-admin.js"></script>
+      <?php
+      }
+      ?>
+    </body>
+
+    </html>
 <?php
   }
 }
