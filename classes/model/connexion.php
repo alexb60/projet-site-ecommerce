@@ -1,5 +1,4 @@
 <?php
-
 function connexion()
 {
   $servername = "localhost";

@@ -3,19 +3,18 @@ class Utils
 {
   public static function upload($extensions, $dossier, $fichier)
   {
-    // ctrl sur le nom ==> regex (pas de caract speciaux)
-    // ctrl sur les extensions autorisees
-    // ctrl sur la taille
-    // ne pas ecraser un fichier existant
-
+    // contrôle sur le nom ==> regex (pas de caractères spéciaux)
+    // contrôle sur les extensions autorisées
+    // contrôle sur la taille
+    // ne pas écraser un fichier existant
 
     $file_name = $fichier['name'];
     $file_size = $fichier['size'];
     $file_tmp = $fichier['tmp_name'];
     $file_ext = strtolower(pathinfo($fichier['name'], PATHINFO_EXTENSION));
 
-    $uploadOk = false; // par defaut false avant que je fasse les controles
-    $errors = ""; // chaine contient les messages d'erreurs s'il y en a
+    $uploadOk = false; // par défaut false avant que je fasse les contrôles
+    $errors = ""; // chaîne contenant les messages d'erreurs s'il y en a
 
     $pattern = "/^[\p{L}\w\s\-\.\(\)\_]{3,}$/";
     if (!preg_match($pattern, $file_name)) {
@@ -112,7 +111,6 @@ class Utils
       $donneesValides[] = $tab[0];
     }
     if ($erreurs) {
-      //ViewTemplate::alert($erreurs, "danger", null);
       echo $erreurs;
       return false;
     }
