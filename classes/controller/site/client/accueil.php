@@ -5,73 +5,55 @@ require_once "../../../view/site/ViewTemplate.php";
 require_once "../../../model/ModelClient.php";
 require_once "../../../model/ModelCommande.php";
 
+// Si le client est connecté...
 if (isset($_SESSION['id'])) {
   $modelClient = new ModelClient();
-  $prenom = $modelClient->voirClient($_SESSION['id'])['prenom'];
-  $nom = $modelClient->voirClient($_SESSION['id'])['nom'];
-  $salutation = "Bonjour " . $prenom . " " . $nom;
-  ViewTemplate::headerConnecte();
+  $prenom = $modelClient->voirClient($_SESSION['id'])['prenom']; // Stockage du prénom du client
+  $nom = $modelClient->voirClient($_SESSION['id'])['nom']; // Stockage du nom du client
+  $salutation = "Bonjour " . $prenom . " " . $nom; // Création du message de salutation
+  ViewTemplate::headerConnecte(); // Header client connecté
 } else {
-  header('Location: connexion-client.php');
-  exit;
+  header('Location: connexion-client.php'); // Redirection vers la page de connexion client
 }
+
+// head HTML et ouverture de body
+ViewTemplate::headHtml("Accueil espace client");
+
+$modelCommande = new ModelCommande();
+$nbCommandes = $modelCommande->compteCommandeClient($_SESSION['id']); // Stockage du nombre de commandes passées par le client
+$depense = $modelCommande->depenseClient($_SESSION['id']); // Stockage du montant total dépensé par le client
+$moyMontantClient = $modelCommande->moyMontantClient($_SESSION['id']); // Stockage du montant moyen d'une commande du client
 ?>
-
-<!doctype html>
-<html lang="fr">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Accueil</title>
-  <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/site.css">
-</head>
-
-<body class="d-flex flex-column min-vh-100">
-  <?php
-  $modelCommande = new ModelCommande();
-  $nbCommandes = $modelCommande->compteCommandeClient($_SESSION['id']);
-  $depense = $modelCommande->depenseClient($_SESSION['id']);
-  $moyMontantClient = $modelCommande->moyMontantClient($_SESSION['id']);
-  ?>
-  <div class="container">
-    <h1 class="mb-4"><?php echo $salutation; ?></h1>
-    <div class="row">
-      <div class="col mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h6 class="card-subtitle text-muted">Nombre de commandes passées</h6>
-            <p class="text-right nombres" id="#nbCommandes"><?= $nbCommandes['nb_commandes'] ?></p>
-          </div>
+<div class="container">
+  <h1 class="mb-4"><?= $salutation ?></h1>
+  <div class="row">
+    <div class="col mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-subtitle text-muted">Nombre de commandes passées</h6>
+          <p class="text-right nombres" id="#nbCommandes"><?= $nbCommandes['nb_commandes'] ?></p>
         </div>
       </div>
-      <div class="col mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h6 class="card-subtitle text-muted">Total dépensé</h6>
-            <p class="text-right nombres" id="#depenseTotale"><?= ($depense['depense'] == NULL) ? 0 : $depense['depense'] ?> €</p>
-          </div>
+    </div>
+    <div class="col mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-subtitle text-muted">Total dépensé</h6>
+          <p class="text-right nombres" id="#depenseTotale"><?= ($depense['depense'] == NULL) ? 0 : $depense['depense'] ?> €</p>
         </div>
       </div>
-      <div class="col mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h6 class="card-subtitle text-muted">Montant moyen d'une commande</h6>
-            <p class="text-right nombres" id="#chiffreAffaires"><?= ($moyMontantClient['moy_montant_client'] == NULL) ? 0 : $moyMontantClient['moy_montant_client'] ?> €</p>
-          </div>
+    </div>
+    <div class="col mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-subtitle text-muted">Montant moyen d'une commande</h6>
+          <p class="text-right nombres" id="#chiffreAffaires"><?= ($moyMontantClient['moy_montant_client'] == NULL) ? 0 : $moyMontantClient['moy_montant_client'] ?> €</p>
         </div>
       </div>
     </div>
   </div>
-  <?php
-  ViewTemplate::footer();
-  ?>
-  <script src="../../../../js/jquery.min.js"></script>
-  <script src="../../../../js/bootstrap.bundle.min.js"></script>
-  <script src="../../../../js/font-awesome.all.min.js"></script>
-</body>
+</div>
+<?php
+ViewTemplate::footer(); // Footer
 
-</html>
+ViewTemplate::bodyHtml(); // Scripts JS et fermeture du body et de html

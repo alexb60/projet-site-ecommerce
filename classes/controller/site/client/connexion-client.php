@@ -1,61 +1,37 @@
 <?php
 session_start();
-if (isset($_SESSION['id'])) {
-  header('Location: accueil.php');
-}
 
 require_once "../../../view/site/ViewClient.php";
 require_once "../../../view/site/ViewTemplate.php";
 require_once "../../../model/ModelClient.php";
 
-ViewTemplate::headerInvite();
-
-if (isset($_SESSION['id']) && $_SESSION['role'] === 'admin') {
-  header('Location: admin.php');
-  exit;
+// Si le client est déjà connecté...
+if (isset($_SESSION['id'])) {
+  header('Location: accueil.php'); // Redirection vers la page d'accueil de l'espace client
 }
 
-if (isset($_SESSION['id']) && $_SESSION['role'] === 'user') {
-  header('Location: accueil.php');
-  exit;
-}
+ViewTemplate::headerInvite(); // Header invité
 
+// Si le formulaire de connexion est envoyé...
 if (isset($_POST['connexion'])) {
   $user = new ModelClient();
-  $userData = $user->connexionClient($_POST['login']);
+  $userData = $user->connexionClient($_POST['login']); // Récupération des informations du client selon son adresse mail
+
+  // Si le client existe dans la base de données et si le mot de passe est correct...
   if ($userData && password_verify($_POST['pass'], $userData['pass'])) {
-    $_SESSION['id'] = $userData['id'];
-    $_SESSION['mail_client'] = $userData['mail'];
-    header('Location: ../produit/index.php');
+    $_SESSION['id'] = $userData['id']; // Stockage de l'id du client dans la session
+    $_SESSION['mail_client'] = $userData['mail']; // Stockage de l'adresse mail du client dans la session
+    header('Location: ../produit/index.php'); // Redirection vers la page d'accueil du site
   } else {
-    ViewTemplate::alert("danger", "L'adresse mail et le mot de passe ne correspondent pas", "connexion-client.php");
+    ViewTemplate::alert("danger", "L'adresse mail et le mot de passe ne correspondent pas", "connexion-client.php"); // Message d'erreur
   }
 } else {
-  ViewClient::connexion();
+  ViewClient::connexion(); // Afficher le formulaire de connexion à l'espace client
 }
-?>
 
-<!DOCTYPE html>
-<html lang="fr">
+// head HTML et ouverture de body
+ViewTemplate::headHtml("Connexion à l'espace client");
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Connexion à l'espace client</title>
-  <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/site.css">
-</head>
+ViewTemplate::footer(); // Footer
 
-<body class="d-flex flex-column min-vh-100">
-
-  <?php
-  ViewTemplate::footer();
-  ?>
-  <script src="../../../../js/jquery.min.js"></script>
-  <script src="../../../../js/bootstrap.bundle.min.js"></script>
-  <script src="../../../../js/font-awesome.all.min.js"></script>
-</body>
-
-</html>
+ViewTemplate::bodyHtml(); // Scripts JS et fermeture du body et de html

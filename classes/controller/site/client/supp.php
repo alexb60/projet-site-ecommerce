@@ -5,43 +5,26 @@ require_once "../../../view/site/ViewClient.php";
 require_once "../../../view/site/ViewTemplate.php";
 require_once "../../../model/ModelClient.php";
 
+// head HTML et ouverture de body
+ViewTemplate::headHtml("Suppression du compte client");
+
+// Si le client est connecté...
 if (isset($_SESSION['id'])) {
   $client = new ModelClient();
+
+  // Si la suppression se fait...
   if ($client->suppClient($_SESSION['id'])) {
-    session_destroy();
-    ViewTemplate::headerInvite();
-    $message = ["success", "Compte supprimé avec succès", "inscription.php"];
+    session_destroy(); // Destruction de la session
+    ViewTemplate::headerInvite(); // Header invité
+    ViewTemplate::alert("success", "Compte supprimé avec succès", "inscription.php"); // Afficher le succès
   } else {
-    ViewTemplate::headerConnecte();
-    $message = ["danger", "Échec de la suppression", "accueil.php"];
+    ViewTemplate::headerConnecte(); // Header client connecté
+    ViewTemplate::alert("danger", "Échec de la suppression", "accueil.php"); // Message d'erreur
   }
 } else {
-  ViewTemplate::headerInvite();
-  $message = ["danger", "Le profil n'existe pas", "accueil.php"];
+  ViewTemplate::headerInvite(); // Header invité
+  ViewTemplate::alert("danger", "Vous ne pouvez pas accéder à cette page", "../index.php");
 }
-?>
+ViewTemplate::footer(); // Footer
 
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Suppression du compte client</title>
-  <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/site.css">
-</head>
-
-<body class="d-flex flex-column min-vh-100">
-  <?php
-  ViewTemplate::alert($message[0], $message[1], $message[2]);
-  ViewTemplate::footer();
-  ?>
-  <script src="../../../../js/jquery.min.js"></script>
-  <script src="../../../../js/bootstrap.bundle.min.js"></script>
-  <script src="../../../../js/font-awesome.all.min.js"></script>
-</body>
-
-</html>
+ViewTemplate::bodyHtml(); // Scripts JS et fermeture du body et de html

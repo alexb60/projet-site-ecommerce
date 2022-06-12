@@ -15,7 +15,7 @@ class ViewClient
       </div>
       <div class="row">
         <div class="col-md-12">
-          <form method="post" action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data" id="formCheck">
+          <form method="post" action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data" class="col-md-8 offset-md-2">
             <div class="form-group">
               <label for="nom">Nom :</label>
               <input type="text" name="nom" id="nom" class="form-control" aria-describedby="nomHelp" data-type="nom" data-message="Le format du nom n'est pas correct">
