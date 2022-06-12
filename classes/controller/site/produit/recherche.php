@@ -3,41 +3,23 @@ session_start();
 
 require_once "../../../view/site/ViewProduit.php";
 require_once "../../../view/site/ViewTemplate.php";
-require_once "../../../model/ModelProduit.php";
 
-$modelProduit = new ModelProduit();
-
-if (isset($_SESSION['id'])) {
-  ViewTemplate::headerConnecte();
-} else {
-  ViewTemplate::headerInvite();
-}
+// Si le champ de recherche est vide...
 if ($_POST['recherche'] == "") {
-  header('Location: ../produit/index.php');
+  header('Location: ../produit/index.php'); // Redirection vers la page d'accueil
 }
-?>
 
-<!DOCTYPE html>
-<html lang="fr">
+// head HTML et ouverture de body
+ViewTemplate::headHtml("Résultats de recherche");
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Résultats de recherche</title>
-  <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/site.css">
-</head>
+// Si le client est connecté...
+if (isset($_SESSION['id'])) {
+  ViewTemplate::headerConnecte(); // Header client connecté
+} else {
+  ViewTemplate::headerInvite(); // Header invité
+}
 
-<body class="d-flex flex-column min-vh-100">
-  <?php
-  ViewProduit::recherche($_POST['recherche']);
-  ViewTemplate::footer();
-  ?>
-  <script src="../../../../js/jquery.min.js"></script>
-  <script src="../../../../js/bootstrap.bundle.min.js"></script>
-  <script src="../../../../js/font-awesome.all.min.js"></script>
-</body>
+ViewProduit::recherche($_POST['recherche']); // Résultats de recherche
+ViewTemplate::footer(); // Footer
 
-</html>
+ViewTemplate::bodyHtml(); // Scripts JS et fermeture du body et de html

@@ -5,40 +5,24 @@ require_once "../../../view/site/ViewProduit.php";
 require_once "../../../view/site/ViewTemplate.php";
 require_once "../../../model/ModelCategorie.php";
 require_once "../../../model/ModelProduit.php";
+
+// head HTML et ouverture de body
+ViewTemplate::headHtml("Accueil");
+
+// Si le client est connecté...
+if (isset($_SESSION['id'])) {
+  ViewTemplate::headerConnecte(); // Header client connecté
+} else {
+  ViewTemplate::headerInvite(); // Header invité
+}
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Accueil</title>
-  <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/site.css">
-</head>
-
-<body class="d-flex flex-column min-vh-100">
+<div class="container">
   <?php
-  if (isset($_SESSION['id'])) {
-    ViewTemplate::headerConnecte();
-  } else {
-    ViewTemplate::headerInvite();
-  }
+  ViewProduit::derniersProduit(); // Afficher les derniers produits ajoutés
+  ViewProduit::produitParCategorie(); // Afficher les produits par catégories
   ?>
-  <div class="container">
-    <?php
-    ViewProduit::derniersProduit();
-    ViewProduit::produitParCategorie();
-    ?>
-  </div>
-  <?php
-  ViewTemplate::footer();
-  ?>
-  <script src="../../../../js/jquery.min.js"></script>
-  <script src="../../../../js/bootstrap.bundle.min.js"></script>
-  <script src="../../../../js/font-awesome.all.min.js"></script>
-</body>
+</div>
+<?php
+ViewTemplate::footer(); // Footer
 
-</html>
+ViewTemplate::bodyHtml(); // Scripts JS et fermeture du body et de html

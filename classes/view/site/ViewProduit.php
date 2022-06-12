@@ -10,43 +10,57 @@ class ViewProduit
   {
     $produit = new ModelProduit();
     $liste = $produit->listeProduit($premier, $parPage);
-    if (count($liste) > 0) { ?>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Catégorie</th>
-            <th scope="col">Marque</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php
-          foreach ($liste as $produit) {
-          ?>
-            <tr>
-              <th scope="row"><?= $produit['id'] ?></th>
-              <td><?= $produit['nom'] ?></td>
-              <td><?= $produit['nom_categorie'] ?></td>
-              <td><?= $produit['nom_marque'] ?></td>
-              <td>
-                <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i> Voir</a>
-              </td>
-            </tr>
-          <?php
-          }
-          ?>
-        </tbody>
-      </table>
-    <?php
-    } else {
-    ?>
-      <div class="alert alert-danger" role="alert">
-        <i class="fas fa-exclamation-triangle"></i>&nbsp; Aucun produit n'existe dans la liste.
+?>
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="mb-4">Liste des produits</h2>
       </div>
-    <?php
-    }
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <?php
+        if (count($liste) > 0) {
+        ?>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Catégorie</th>
+                <th scope="col">Marque</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              foreach ($liste as $produit) {
+              ?>
+                <tr>
+                  <th scope="row"><?= $produit['id'] ?></th>
+                  <td><?= $produit['nom'] ?></td>
+                  <td><?= $produit['nom_categorie'] ?></td>
+                  <td><?= $produit['nom_marque'] ?></td>
+                  <td>
+                    <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i> Voir</a>
+                  </td>
+                </tr>
+              <?php
+              }
+              ?>
+            </tbody>
+          </table>
+        <?php
+        } else {
+        ?>
+          <div class="alert alert-danger" role="alert">
+            <i class="fas fa-exclamation-triangle"></i>&nbsp; Aucun produit n'existe dans la liste.
+          </div>
+        <?php
+        }
+        ?>
+      </div>
+    </div>
+  <?php
   }
 
   // FONCTION AFFICHANT LES DÉTAILS D'UN PRODUIT
@@ -54,7 +68,7 @@ class ViewProduit
   {
     $modelProduit = new ModelProduit();
     $produit = $modelProduit->voirProduit($id);
-    ?>
+  ?>
     <div class="container">
       <div class="row mb-4">
         <div class="col-md-12">
@@ -230,22 +244,16 @@ class ViewProduit
                   </div>
                 </div>
                 <br />
-              <?php
-            } else {
-              ?>
-                <h2 class="my-4">Dans la catégorie <?= $categorie['nom'] ?></h2>
-                <div class="alert alert-danger">Aucun produit dans cette catégorie.</div>
-                <br />
             <?php
-            }
           }
         }
+      }
 
-        // FONCTION AFFICHANT LES DERNIERS PRODUITS AJOUTÉS DANS LA BASE
-        public static function derniersProduit()
-        {
-          $produit = new ModelProduit();
-          $liste = $produit->derniersProduit();
+      // FONCTION AFFICHANT LES DERNIERS PRODUITS AJOUTÉS DANS LA BASE
+      public static function derniersProduit()
+      {
+        $produit = new ModelProduit();
+        $liste = $produit->derniersProduit();
             ?>
             <h2 class="mb-4">Nouveaux produits</h2>
             <div id="carouselDerniersProduits" class="carousel slide" data-ride="carousel">
