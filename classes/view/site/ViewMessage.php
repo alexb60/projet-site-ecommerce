@@ -17,7 +17,7 @@ class ViewMessage
           <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="col-md-6 offset-md-3">
             <div class="form-group">
               <label for="motif">Motif :</label>
-              <select name="motif" id="motif" class="form-control">
+              <select name="motif" id="motif" class="form-control" aria-describedby="motifHelp" data-type="motifSelect" data-message="Veuillez choisir un motif de contact.">
                 <option value="" selected disabled>Choisissez un motif de contact</option>
                 <option value="Réclamation">Réclamation</option>
                 <option value="Suggestion">Suggestion</option>
@@ -25,6 +25,7 @@ class ViewMessage
                 <option value="Problème">Signaler un problème</option>
                 <option value="Autre">Autre (précisez dans le message)</option>
               </select>
+              <small id="motifHelp" class="form-text text-muted"></small>
             </div>
             <div class="form-group">
               <label for="message">Message :</label>
