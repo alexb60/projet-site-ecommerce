@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 require_once "../../../view/site/ViewMessage.php";
 require_once "../../../view/site/ViewTemplate.php";
 require_once "../../../view/site/utils.php";
@@ -42,4 +43,4 @@ if (isset($_SESSION['id'])) {
 
 ViewTemplate::footer(); // Footer
 
-ViewTemplate::bodyHtml(); // Scripts JS et fermeture du body et de html
+ViewTemplate::bodyHtml(true); // Scripts JS et fermeture du body et de html

@@ -8,36 +8,18 @@ require_once "../../../model/ModelTransporteur.php";
 require_once "../../../model/ModelCommande.php";
 require_once "../panier/panier.php";
 
+// head HTML et ouverture de body
+ViewTemplate::headHtml("Paiement");
+
 // Si le client est connecté...
 if (isset($_SESSION['id'])) {
-  ViewTemplate::headerConnecte();
-} else {
-  ViewTemplate::headerInvite();
-  session_destroy();
-  ViewTemplate::alert("danger", "Vous devez être connecté pour accéder à cette page", "../client/connexion-client.php");
-}
-?>
-<!DOCTYPE html>
-<html lang="fr">
+  ViewTemplate::headerConnecte(); // Header client connecté
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paiement</title>
-  <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/site.css">
-</head>
-
-<body class="d-flex flex-column min-vh-100">
-  <?php
   // Si le panier et le mode d'envoi existent...
   if (isset($_SESSION['panier']) && isset($_SESSION['envoi'])) {
 
     // Si l'état existe dans POST...
     if (isset($_POST['etat'])) {
-
       $modelCommande = new ModelCommande();
 
       // Stockage du nombre de produits différents
@@ -65,17 +47,16 @@ if (isset($_SESSION['id'])) {
 
       // Afficher le succès
       ViewTemplate::alert("success", "Commande validée !<br />Merci pour votre achat !", "../commande/voirDetails.php?id_com=" . $dernierId);
-    } else { // Sinon afficher le formulaire de paiement
-      ViewPanier::paiement();
+    } else {
+      ViewPanier::paiement(); // Afficher le formulaire de paiement
     }
   } else {
-    ViewTemplate::alert("danger", "Aucune donnée disponible", "../panier/voirPanier.php");
+    ViewTemplate::alert("danger", "Aucune donnée disponible", "../panier/voirPanier.php"); // Message d'erreur
   }
-  ViewTemplate::footer();
-  ?>
-  <script src="../../../../js/jquery.min.js"></script>
-  <script src="../../../../js/bootstrap.bundle.min.js"></script>
-  <script src="../../../../js/font-awesome.all.min.js"></script>
-</body>
+} else {
+  ViewTemplate::headerInvite(); // Header invité
+  ViewTemplate::alert("danger", "Vous devez être connecté pour accéder à cette page", "../client/connexion-client.php"); // Message d'erreur
+}
+ViewTemplate::footer(); // Footer
 
-</html>
+ViewTemplate::bodyHtml(); // Scripts JS et fermeture du body et de html

@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 require_once "../../../view/site/ViewProduit.php";
 require_once "../../../view/site/ViewTemplate.php";
 require_once "../../../view/site/ViewPanier.php";
@@ -7,47 +8,33 @@ require_once "../../../model/ModelProduit.php";
 require_once "../../../model/ModelTransporteur.php";
 require_once "panier.php";
 
+// head HTML et ouverture de body
+ViewTemplate::headHtml("Finalisation de la commande");
+
+// Si le client est connecté...
 if (isset($_SESSION['id'])) {
-  ViewTemplate::headerConnecte();
+  ViewTemplate::headerConnecte(); // Header client connecté
 } else {
-  ViewTemplate::headerInvite();
-  session_destroy();
-  ViewTemplate::alert("danger", "Vous devez être connecté pour accéder à cette page", "../client/connexion-client.php");
+  ViewTemplate::headerInvite(); // Header invité
+  ViewTemplate::alert("danger", "Vous devez être connecté pour accéder à cette page", "../client/connexion-client.php"); // Message d'erreur
 }
 
+// Si le panier existe...
 if (isset($_SESSION['panier'])) {
-  verrouPanier();
+  verrouPanier(); // Verrouillage du panier
 }
 
+// Si le formulaire a été envoyé...
 if (isset($_POST['mode'])) {
-  envoi($_POST['mode'], $_POST['transporteur']);
-  header('Location: paiement.php');
+  envoi($_POST['mode'], $_POST['transporteur']); // Stocker les données
+  header('Location: paiement.php'); // Redirection vers la page de paiement
 }
 
+// Si le client est connecté et si le panier est verrouillé...
 if (isset($_SESSION['id']) && estVerrouille()) {
-  ViewPanier::finalisation();
+  ViewPanier::finalisation(); // Afficher le formulaire du choix du mode et du lieu de livraison
 }
 
-?>
-<!DOCTYPE html>
-<html lang="fr">
+ViewTemplate::footer(); // Footer
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Finalisation de la commande</title>
-  <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/site.css">
-</head>
-
-<body class="d-flex flex-column min-vh-100">
-  <?php
-  ViewTemplate::footer();
-  ?>
-  <script src="../../../../js/jquery.min.js"></script>
-  <script src="../../../../js/bootstrap.bundle.min.js"></script>
-  <script src="../../../../js/font-awesome.all.min.js"></script>
-  <script src="../../../../js/validation-form.js"></script>
-</body>
+ViewTemplate::bodyHtml(true); // Scripts JS et fermeture du body et de html

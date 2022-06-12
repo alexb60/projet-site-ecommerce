@@ -1,58 +1,72 @@
 <?php
 
+// FONCTION DE CRÉATION DU PANIER
 function creerPanier()
 {
-  $_SESSION['panier'] = array();
-  $_SESSION['panier']['id'] = array();
-  $_SESSION['panier']['quantite'] = array();
-  $_SESSION['panier']['prix'] = array();
-  $_SESSION['panier']['verrou'] = false;
+  $_SESSION['panier'] = array(); // Création du panier
+  $_SESSION['panier']['id'] = array(); // Stockage de l'id du produit
+  $_SESSION['panier']['quantite'] = array(); // Stockage de la quantité voulue
+  $_SESSION['panier']['prix'] = array(); // Stockage du prix
+  $_SESSION['panier']['verrou'] = false; // Verrou du panier, par défaut à false (déverrouillé)
 }
 
-// AJOUTE UN PRODUIT DANS LE PANIER
+// AJOUTER UN PRODUIT DANS LE PANIER
 function ajoutPanier($id_produit, $quantiteProduit, $prix)
 {
-  $ajout = false;
+  $ajout = false; // Booléen confirmant l'ajout du produit au panier, par défaut à false (produit non ajouté)
+
+  // Si le panier n'existe pas...
   if (!isset($_SESSION['panier'])) {
-    creerPanier();
-    array_push($_SESSION['panier']['id'], $id_produit);
-    array_push($_SESSION['panier']['quantite'], $quantiteProduit);
-    array_push($_SESSION['panier']['prix'], $prix);
-    $ajout = true;
-  } elseif (!isset($_SESSION['panier']['verrou']) || !estVerrouille()) {
+    creerPanier(); // Créer le panier
+    array_push($_SESSION['panier']['id'], $id_produit); // Stocker l'id du produit dans le panier
+    array_push($_SESSION['panier']['quantite'], $quantiteProduit); // Stocker le prix du produit dans le panier
+    array_push($_SESSION['panier']['prix'], $prix); // Stocker la quantité du produit dans le panier
+    $ajout = true; // Produit ajouté
+  } elseif (!isset($_SESSION['panier']['verrou']) || !estVerrouille()) { // Sinon si le panier n'est pas verrouillé...
+
+    // Si le produit n'est pas déjà présent dans le panier...
     if (!verifPanier($id_produit)) {
-      array_push($_SESSION['panier']['id'], $id_produit);
-      array_push($_SESSION['panier']['quantite'], $quantiteProduit);
-      array_push($_SESSION['panier']['prix'], $prix);
-      $ajout = true;
+      array_push($_SESSION['panier']['id'], $id_produit); // Stocker l'id du produit dans le panier
+      array_push($_SESSION['panier']['quantite'], $quantiteProduit); // Stocker la quantité du produit dans le panier
+      array_push($_SESSION['panier']['prix'], $prix); // Stocker le prix du produit dans le panier
+      $ajout = true; // Produit ajouté
     } else {
+      // Sinon modifier la quantité du produit déjà présent
       $ajout = modifQuantite($id_produit, $quantiteProduit);
     }
   }
-  return $ajout;
+  return $ajout; // Retourner si le produit a été ajouté ou non
 }
 
-// MODIFIE LA QUANTITÉ D'UN PRODUIT DANS LE PANIER
+// MODIFIER LA QUANTITÉ D'UN PRODUIT DANS LE PANIER
 function modifQuantite($id_produit, $quantite)
 {
-  $modifie = false;
+  $modifie = false; // Variable de retour confirmant la modification de la quantié du produit
+
+  // Si le panier n'est pas verrouillé...
   if (!isset($_SESSION['panier']['verrou']) || !estVerrouille()) {
+
+    // Si la quantité du produit existe et si elle est différente de celle envoyée...
     if (nombreProduit($id_produit) != false && $quantite != nombreProduit($id_produit)) {
 
       // ON COMPTE LE NOMBRE DE PRODUITS DIFFÉRENTS DANS LE TABLEAU
       $nbProduit = count($_SESSION['panier']['id']);
 
-      // ON PARCOURT LE TABLEAU POUR MODIFIER LE PRODUIT VOULU
+      // Parcours du tableau panier pour modifier le produit voulu
       for ($i = 0; $i < $nbProduit; $i++) {
+
+        // Si l'id du produit que l'on souhaite modifier est égal à l'id du produit dans le tableau...
         if ($id_produit == $_SESSION['panier']['id'][$i]) {
-          $_SESSION['panier']['quantite'][$i] = $quantite;
-          $modifie = true;
+          $_SESSION['panier']['quantite'][$i] = $quantite; // Quantité du produit = quantité donnée en paramètre
+          $modifie = true; // Quantité modifiée
         }
       }
     } else {
+      // Si l'article n'est pas présent dans le panier...
       if (nombreProduit($id_produit) != false) {
         $modifie = "absent";
       }
+      // Si la quantité donnée est la même
       if ($quantite != nombreProduit($id_produit)) {
         $modifie = "quantite_ok";
       }
@@ -61,7 +75,7 @@ function modifQuantite($id_produit, $quantite)
   return $modifie;
 }
 
-// SUPPRIME UN PRODUIT DU PANIER
+// SUPPRIMER UN PRODUIT DU PANIER
 function supprimerProduit($id_produit)
 {
   $suppression = false;
@@ -69,15 +83,15 @@ function supprimerProduit($id_produit)
 
     $aCleSuppr = array_keys($_SESSION['panier']['id'], $id_produit);
 
-    /* sortie la clé a été trouvée */
+    // Sortie la clé a été trouvée
     if (!empty($aCleSuppr)) {
-      /* on traverse le panier pour supprimer ce qui doit l'être */
-      foreach ($_SESSION['panier'] as $k => $v) {
-        foreach ($aCleSuppr as $v1) {
-          unset($_SESSION['panier'][$k][$v1]);    // remplace la ligne foireuse
+      // On traverse le panier pour supprimer ce qui doit l'être
+      foreach ($_SESSION['panier'] as $cle => $valeur) {
+        foreach ($aCleSuppr as $valeur1) {
+          unset($_SESSION['panier'][$cle][$valeur1]); // remplace la ligne problématique
         }
         // Réindexation des clés du panier
-        $_SESSION['panier'][$k] = array_values($_SESSION['panier'][$k]);
+        $_SESSION['panier'][$cle] = array_values($_SESSION['panier'][$cle]);
         $suppression = true;
       }
     } else {
@@ -88,7 +102,7 @@ function supprimerProduit($id_produit)
   return $suppression;
 }
 
-// VÉRIFIE LA PRÉSENCE D'UN PRODUIT DANS LE PANIER
+// VÉRIFIER LA PRÉSENCE D'UN PRODUIT DANS LE PANIER
 function verifPanier($id_produit)
 {
   $present = false;
@@ -98,7 +112,7 @@ function verifPanier($id_produit)
   return $present;
 }
 
-// VÉRIFIE LA QUANTITÉ ENREGISTRÉE D'UN PRODUIT DANS LE PANIER
+// VÉRIFIER LA QUANTITÉ ENREGISTRÉE D'UN PRODUIT DANS LE PANIER
 function nombreProduit($id_produit)
 {
   $nombre = false;
@@ -113,7 +127,7 @@ function nombreProduit($id_produit)
   return $nombre;
 }
 
-// CALCULE LE MONTANT DU PANIER
+// CALCULER LE MONTANT DU PANIER
 function montantPanier()
 {
   $montant = 0;
@@ -124,8 +138,8 @@ function montantPanier()
   return $montant;
 }
 
-// CALCULE LE NOMBRE TOTAL DE PRODUITS COMMANDÉS
-function quantiteProduitPanier()
+// CALCULER LE NOMBRE TOTAL DE PRODUITS COMMANDÉS
+function quantiteTotale()
 {
   $quantite = 0;
   $nbProduit = count($_SESSION['panier']['id']);
@@ -135,7 +149,7 @@ function quantiteProduitPanier()
   return $quantite;
 }
 
-// VÉRIFIE SI LE PANIER EST VERROUILLÉ
+// VÉRIFIER SI LE PANIER EST VERROUILLÉ
 function estVerrouille()
 {
   if (isset($_SESSION['panier']) && $_SESSION['panier']['verrou']) {
@@ -145,13 +159,13 @@ function estVerrouille()
   }
 }
 
-// VERROUILLAGE DU PANIER POUR LA PRÉPARATION DU PAIEMENT
+// VERROUILLER LE PANIER POUR LA PRÉPARATION DU PAIEMENT
 function verrouPanier()
 {
   $_SESSION['panier']['verrou'] = true;
 }
 
-// DÉVEROUILLAGE DU PANIER POUR LE RETOUR EN ARRIÈRE
+// DÉVEROUILLER LE PANIER POUR LE RETOUR EN ARRIÈRE
 function deverrouillagePanier()
 {
   $_SESSION['panier']['verrou'] = false;

@@ -88,7 +88,7 @@ if (isset($_SESSION['id'])) {
                 <tr>
                   <td colspan="3"></td>
                   <td>
-                    <h4><?= (quantiteProduitPanier() <= 1) ? quantiteProduitPanier() . " article" : quantiteProduitPanier() . " articles" ?></h4>
+                    <h4><?= (quantiteTotale() <= 1) ? quantiteTotale() . " article" : quantiteTotale() . " articles" ?></h4>
                   </td>
                   <td>
                     <h4><?= number_format(montantPanier(), 2, ',', ' ') ?> €</h4>
