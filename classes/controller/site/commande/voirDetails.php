@@ -1,46 +1,30 @@
 <?php
 session_start();
+
 require_once "../../../view/site/ViewCommande.php";
 require_once "../../../view/site/ViewTemplate.php";
 require_once "../../../model/ModelCommande.php";
 
+// head HTML et ouverture de body
+ViewTemplate::headHtml("Retour de commande");
+
+// Si le client est connecté...
 if (isset($_SESSION['id'])) {
-  ViewTemplate::headerConnecte();
+  ViewTemplate::headerConnecte(); // Heaer client connecté
 
   $modelCommande = new ModelCommande();
-  $commande = $modelCommande->checkIdClient($_GET['id_com']);
+  $commande = $modelCommande->checkIdClient($_GET['id_com']); // Stockage de l'id du client associé à la commande dont l'id est passsé en GET
 
+  // Si l'id du client de la commande correspond à l'id du client connecté...
   if ($commande['id_client'] == $_SESSION['id']) {
-    ViewCommande::voirDetailsClient($_GET['id_com']);
+    ViewCommande::voirDetailsClient($_GET['id_com']); // Afficher les détails de la commande
   } else {
-    ViewTemplate::alert("danger", "La commande n'existe pas", "javascript:history.back()");
+    ViewTemplate::alert("danger", "La commande n'existe pas", "javascript:history.back()"); // Message d'erreur
   }
 } else {
-  ViewTemplate::headerInvite();
-  ViewTemplate::alert("danger", "Vous devez être connecté pour accéder à cette page", "../client/connexion-client.php");
+  ViewTemplate::headerInvite(); // Header invité
+  ViewTemplate::alert("danger", "Vous devez être connecté pour accéder à cette page", "../client/connexion-client.php"); // Message d'erreur
 }
-?>
+ViewTemplate::footer(); // Footer
 
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Détails de la commande</title>
-  <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/site.css">
-</head>
-
-<body class="d-flex flex-column min-vh-100">
-  <?php
-  ViewTemplate::footer();
-  ?>
-  <script src="../../../../js/jquery.min.js"></script>
-  <script src="../../../../js/bootstrap.bundle.min.js"></script>
-  <script src="../../../../js/font-awesome.all.min.js"></script>
-</body>
-
-</html>
+ViewTemplate::bodyHtml(); // Scripts JS et fermeture du body et de html

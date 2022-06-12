@@ -3,35 +3,17 @@ session_start();
 require_once "../../../view/site/ViewCommande.php";
 require_once "../../../view/site/ViewTemplate.php";
 
+// head HTML et ouverture de body
+ViewTemplate::headHtml("Liste des commandes passées");
+
+// Si le client est connecté...
 if (isset($_SESSION['id'])) {
-  ViewTemplate::headerConnecte();
-  ViewCommande::listeCommandeClient($_SESSION['id']);
+  ViewTemplate::headerConnecte(); // Header client connecté
+  ViewCommande::listeCommandeClient($_SESSION['id']); // Afficher la liste des commandes passées par le client
 } else {
-  ViewTemplate::headerInvite();
-  ViewTemplate::alert("danger", "Vous devez être connecté pour accéder à cette page", "../client/connexion-client.php");
+  ViewTemplate::headerInvite(); // Header invité
+  ViewTemplate::alert("danger", "Vous devez être connecté pour accéder à cette page", "../client/connexion-client.php"); // Message d'erreur
 }
-?>
+ViewTemplate::footer(); // Footer
 
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Liste des commandes passées</title>
-  <link rel="stylesheet" href="../../../../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../../../css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../../../../css/site.css">
-</head>
-
-<body class="d-flex flex-column min-vh-100">
-  <?php
-  ViewTemplate::footer();
-  ?>
-  <script src="../../../../js/jquery.min.js"></script>
-  <script src="../../../../js/bootstrap.bundle.min.js"></script>
-  <script src="../../../../js/font-awesome.all.min.js"></script>
-</body>
-
-</html>
+ViewTemplate::bodyHtml(); // Scripts JS et fermeture du body et de html

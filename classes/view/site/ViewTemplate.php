@@ -138,6 +138,7 @@ class ViewTemplate
       if ($form) {
       ?>
         <script src="../../../../js/validation-form.js"></script>
+        <script src="../../../../js/main.js"></script>
       <?php
       }
       ?>
