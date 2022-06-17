@@ -11,10 +11,12 @@ ViewTemplate::headHtml("Ajout d'une catégorie");
 
 // Si l'employé est connecté...
 if (isset($_SESSION['id_employe'])) {
-  ViewTemplate::menu(); // Affichage du menu
+  ViewTemplate::menu(); // Affichage du menu admin connecté
+
   // Si le rôle permet d'accéder à cette section...
   if ($_SESSION['perm']['Catégories'] == "oui") {
-    // Si le nom de la catégorie existe dans POST
+
+    // Si le formulaire est envoyé...
     if (isset($_POST['nom'])) {
       $donnees = [$_POST['nom']]; // Tableau contenant les données à vérifier
       $types = ["nom"]; // Tableau des types de données à vérifier

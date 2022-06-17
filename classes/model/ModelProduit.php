@@ -71,10 +71,10 @@ class ModelProduit
   // REQUÊTE SQL PRÉPARÉE PERMETTANT D'AJOUTER UN PRODUIT
   public function ajoutProduit($nom, $ref, $description, $quantite, $prix, $photo, $id_categorie, $id_marque)
   {
-    $idcon = connexion();
+    $idcon = connexion(); // Connexion à la base de données
     $requete = $idcon->prepare("
     INSERT INTO produit VALUES (null, :nom, :ref, :description, :quantite, :prix, :photo, :id_categorie, :id_marque)
-    ");
+    "); // Requête SQL à trous
     return $requete->execute([
       ':nom' => $nom,
       ':ref' => $ref,
@@ -84,7 +84,7 @@ class ModelProduit
       ':photo' => $photo,
       ':id_categorie' => $id_categorie,
       ':id_marque' => $id_marque
-    ]);
+    ]); // Marqueurs
   }
 
   // REQUÊTE SQL PRÉPARÉE PERMETTANT DE SUPPRIMER UN PRODUIT
@@ -104,7 +104,9 @@ class ModelProduit
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    UPDATE produit SET nom=:nom, ref=:ref, description=:description, quantite=:quantite, prix=:prix, photo=:photo, id_categorie=:id_categorie, id_marque=:id_marque WHERE id=:id
+    UPDATE produit 
+    SET nom=:nom, ref=:ref, description=:description, quantite=:quantite, prix=:prix, photo=:photo, id_categorie=:id_categorie, id_marque=:id_marque 
+    WHERE id=:id
     ");
     return $requete->execute([
       ':id' => $id,
@@ -161,7 +163,9 @@ class ModelProduit
   {
     $idcon = connexion();
     $requete = $idcon->prepare("
-    SELECT P.*, C.nom nom_categorie FROM produit P INNER JOIN categorie C ON P.id_categorie = C.id WHERE P.id_marque=:id_marque;
+    SELECT P.*, C.nom nom_categorie FROM produit P
+    INNER JOIN categorie C ON P.id_categorie = C.id
+    WHERE P.id_marque=:id_marque;
     ");
     $requete->execute([
       ':id_marque' => $id_marque,
@@ -178,6 +182,20 @@ class ModelProduit
 INNER JOIN categorie C ON P.id_categorie = C.id
 INNER JOIN marque M ON P.id_marque = M.id
 WHERE P.nom LIKE '%" . $recherche . "%' OR C.nom LIKE '%" . $recherche . "%' OR M.nom LIKE '%" . $recherche . "%';
+    ");
+    $requete->execute();
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  // REQUÊTE SQL PRÉPARÉE LISTANT LES PRODUITS
+  public function liste()
+  {
+    $idcon = connexion();
+    $requete = $idcon->prepare("
+    SELECT P.*, C.nom nom_categorie, M.nom nom_marque FROM produit P
+    INNER JOIN categorie C ON P.id_categorie = C.id
+    INNER JOIN marque M ON P.id_marque = M.id
+    ORDER BY P.id ASC;
     ");
     $requete->execute();
     return $requete->fetchAll(PDO::FETCH_ASSOC);

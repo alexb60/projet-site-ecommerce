@@ -152,7 +152,7 @@ class ViewProduit
                     <td><?= $produit['nom'] ?></td>
                     <td><?= $produit['nom_categorie'] ?></td>
                     <td><?= $produit['nom_marque'] ?></td>
-                    <td><?= $produit['prix'] ?></td>
+                    <td><?= number_format($produit['prix'], 2, ",", " ") ?> €</td>
                     <td>
                       <a href="voir.php?id=<?= $produit['id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i>&nbsp; Voir</a>
                     </td>
